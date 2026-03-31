@@ -59,13 +59,13 @@ body {
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff6a3d;        /* Keep orange text */
-  background: transparent; /* Remove orange background */
-  padding: 0;              /* Remove padding */
-  margin: 0;
-  border-radius: 0;        /* Remove rounded corners */
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #1d1d1f, #86868b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .logo span {
   background: linear-gradient(135deg, #e63946, #ff6a3d);
@@ -2674,36 +2674,4 @@ body.admin-mode .recharge-icon {
   .hero-fireworks {
     padding: 50px 20px;
   }
-}
-
-/* Flash screen / Loading screen background */
-body {
-  background-color: #ffffff;
-}
-
-/* Optional: Smooth transition when content loads */
-.page {
-  transition: opacity 0.3s ease;
-}
-
-/* Prevent orange flash during page load */
-html {
-  background-color: #ffffff;
-}
-
-/* Prevent orange background flash */
-:root {
-  background-color: #ffffff;
-}
-
-html, body {
-  background-color: #ffffff;
-  margin: 0;
-  padding: 0;
-}
-
-/* If your header has orange background, change it */
-.header {
-  background-color: #ffffff;
-  /* or keep if it's meant to be orange */
 }
