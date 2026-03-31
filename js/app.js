@@ -7,10 +7,11 @@ let searchQuery = "";
 let currentPage = "home";
 let currentUser = null;
 let isAdminMode = false;
+let xcoinBalance = 0;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxPKAACA0WmuqCrJvz1-b7dBMfIOxFzX0r0NrWhqUovFiJ0eCw5vKQ04KmLAvW3Px93/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxWtcEqjq3-uTYkflJqei4i-X-K31fzouZ7qR4RtVrToTdWMj6uMW8lU-bwoVVY-v8p/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -68,6 +69,20 @@ function openProfileModal() {
   document.getElementById("profilePhone").innerText = currentUser.phone;
   document.getElementById("profileJoined").innerText = currentUser.joined || new Date().toLocaleDateString();
   document.getElementById("profileBalance").innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
+  
+  // Add XCoin balance to profile
+  const profileInfo = document.querySelector('.profile-info');
+  let xcoinRow = document.querySelector('.xcoin-profile-row');
+  if (!xcoinRow) {
+    xcoinRow = document.createElement('div');
+    xcoinRow.className = 'info-row xcoin-profile-row';
+    xcoinRow.innerHTML = `
+      <span class="info-label"><i class="fas fa-chart-line"></i> XCoin Balance:</span>
+      <span class="info-value" id="profileXCoinBalance">0 XCoin</span>
+    `;
+    profileInfo.appendChild(xcoinRow);
+  }
+  document.getElementById("profileXCoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
   
   const modal = document.getElementById("profileModal");
   modal.classList.add("show");
@@ -133,6 +148,9 @@ async function handleLogin(event) {
         balance: user.balance || 0,
         joined: new Date().toLocaleDateString()
       };
+      
+      // Load XCoin balance
+      await loadXCoinBalance();
       
       // Log successful login
       const logData = new URLSearchParams();
@@ -219,6 +237,9 @@ async function handleRegister(event) {
         joined: joinedDate
       };
       
+      // Initialize XCoin balance to 0
+      await updateXCoinBalance(0);
+      
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
       showToast(`✅ Account created successfully!\n\nWelcome, ${name}!\nYour Account ID: ${accountId}`, 4000);
@@ -239,6 +260,7 @@ async function handleRegister(event) {
 
 function logout() {
   currentUser = null;
+  xcoinBalance = 0;
   localStorage.removeItem("nova_user");
   document.getElementById("userNameDisplay").innerText = "";
   closeProfileModal();
@@ -291,6 +313,728 @@ async function addUserCredit(amount) {
     console.error("Credit error:", error);
     showToast("Failed to add credit. Please try again.", 1500);
     return 0;
+  }
+}
+
+// ========================================
+// XCOIN FUNCTIONS
+// ========================================
+
+async function loadXCoinBalance() {
+  if (!currentUser) return 0;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserXCoinBalance");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      xcoinBalance = result.balance || 0;
+      return xcoinBalance;
+    }
+    return 0;
+  } catch (error) {
+    console.error("Load XCoin balance error:", error);
+    return 0;
+  }
+}
+
+async function updateXCoinBalance(newBalance) {
+  if (!currentUser) return false;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateXCoinBalance");
+    formData.append("phone", currentUser.phone);
+    formData.append("accountId", currentUser.id);
+    formData.append("fullName", currentUser.name);
+    formData.append("balance", newBalance);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      xcoinBalance = result.balance;
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Update XCoin balance error:", error);
+    return false;
+  }
+}
+
+async function convertPesoToXCoin() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const pesoAmount = parseFloat(document.getElementById("pesoToXCoin").value);
+  
+  if (isNaN(pesoAmount) || pesoAmount < 1000) {
+    showToast("Minimum conversion is ₱1,000", 1500);
+    return;
+  }
+  
+  if (pesoAmount > currentUser.balance) {
+    showToast("Insufficient balance", 1500);
+    return;
+  }
+  
+  const xcoinAmount = pesoAmount / 1000;
+  
+  const confirmMsg = confirm(`Convert ₱${pesoAmount.toLocaleString()} to ${xcoinAmount} XCoin?`);
+  if (!confirmMsg) return;
+  
+  const convertBtn = document.querySelector('#marketPage .conversion-box button');
+  const originalText = convertBtn?.innerHTML;
+  if (convertBtn) {
+    convertBtn.disabled = true;
+    convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+  }
+  
+  try {
+    // Deduct peso balance
+    const deductData = new URLSearchParams();
+    deductData.append("action", "updateBalance");
+    deductData.append("phone", currentUser.phone);
+    deductData.append("amount", pesoAmount);
+    deductData.append("operation", "deduct");
+    
+    const deductResponse = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: deductData });
+    const deductResult = await deductResponse.json();
+    
+    if (!deductResult.success) {
+      showToast(deductResult.message || "Failed to convert", 1500);
+      return;
+    }
+    
+    // Add XCoin balance
+    const newXCoinBalance = xcoinBalance + xcoinAmount;
+    await updateXCoinBalance(newXCoinBalance);
+    
+    // Update user balance
+    currentUser.balance = deductResult.newBalance;
+    localStorage.setItem("nova_user", JSON.stringify(currentUser));
+    
+    // Log conversion
+    const logData = new URLSearchParams();
+    logData.append("action", "addXCoinConversion");
+    logData.append("timestamp", new Date().toISOString());
+    logData.append("accountId", currentUser.id);
+    logData.append("fullName", currentUser.name);
+    logData.append("phone", currentUser.phone);
+    logData.append("type", "Peso to XCoin");
+    logData.append("pesoAmount", pesoAmount);
+    logData.append("xcoinAmount", xcoinAmount);
+    logData.append("balanceAfter", newXCoinBalance);
+    
+    fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData }).catch(err => console.error("Log error:", err));
+    
+    showToast(`✅ Converted ₱${pesoAmount.toLocaleString()} to ${xcoinAmount} XCoin!`, 3000);
+    document.getElementById("pesoToXCoin").value = "";
+    
+    // Update displays
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    if (document.getElementById("profileXCoinBalance")) {
+      document.getElementById("profileXCoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    }
+    
+  } catch (error) {
+    console.error("Conversion error:", error);
+    showToast("Conversion failed. Please try again.", 1500);
+  } finally {
+    if (convertBtn) {
+      convertBtn.disabled = false;
+      convertBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function convertXCoinToPeso() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const xcoinAmount = parseFloat(document.getElementById("xcoinToPeso").value);
+  
+  if (isNaN(xcoinAmount) || xcoinAmount < 1) {
+    showToast("Minimum conversion is 1 XCoin", 1500);
+    return;
+  }
+  
+  if (xcoinAmount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const pesoAmount = xcoinAmount * 1000;
+  
+  const confirmMsg = confirm(`Convert ${xcoinAmount} XCoin to ₱${pesoAmount.toLocaleString()}?`);
+  if (!confirmMsg) return;
+  
+  const convertBtn = document.querySelectorAll('#marketPage .conversion-box button')[1];
+  const originalText = convertBtn?.innerHTML;
+  if (convertBtn) {
+    convertBtn.disabled = true;
+    convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+  }
+  
+  try {
+    // Add peso balance
+    const addData = new URLSearchParams();
+    addData.append("action", "updateBalance");
+    addData.append("phone", currentUser.phone);
+    addData.append("amount", pesoAmount);
+    addData.append("operation", "add");
+    
+    const addResponse = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: addData });
+    const addResult = await addResponse.json();
+    
+    if (!addResult.success) {
+      showToast(addResult.message || "Failed to convert", 1500);
+      return;
+    }
+    
+    // Deduct XCoin balance
+    const newXCoinBalance = xcoinBalance - xcoinAmount;
+    await updateXCoinBalance(newXCoinBalance);
+    
+    // Update user balance
+    currentUser.balance = addResult.newBalance;
+    localStorage.setItem("nova_user", JSON.stringify(currentUser));
+    
+    // Log conversion
+    const logData = new URLSearchParams();
+    logData.append("action", "addXCoinConversion");
+    logData.append("timestamp", new Date().toISOString());
+    logData.append("accountId", currentUser.id);
+    logData.append("fullName", currentUser.name);
+    logData.append("phone", currentUser.phone);
+    logData.append("type", "XCoin to Peso");
+    logData.append("pesoAmount", pesoAmount);
+    logData.append("xcoinAmount", xcoinAmount);
+    logData.append("balanceAfter", newXCoinBalance);
+    
+    fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData }).catch(err => console.error("Log error:", err));
+    
+    showToast(`✅ Converted ${xcoinAmount} XCoin to ₱${pesoAmount.toLocaleString()}!`, 3000);
+    document.getElementById("xcoinToPeso").value = "";
+    
+    // Update displays
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    if (document.getElementById("profileXCoinBalance")) {
+      document.getElementById("profileXCoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    }
+    
+  } catch (error) {
+    console.error("Conversion error:", error);
+    showToast("Conversion failed. Please try again.", 1500);
+  } finally {
+    if (convertBtn) {
+      convertBtn.disabled = false;
+      convertBtn.innerHTML = originalText;
+    }
+  }
+}
+
+// ========================================
+// INVESTMENT FUNCTIONS
+// ========================================
+
+async function recordInvestment(investmentType, amount, expectedReturn, payoutDate) {
+  if (!currentUser) return false;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addXCoinInvestment");
+    formData.append("timestamp", new Date().toISOString());
+    formData.append("accountId", currentUser.id);
+    formData.append("fullName", currentUser.name);
+    formData.append("phone", currentUser.phone);
+    formData.append("investmentType", investmentType);
+    formData.append("amount", amount);
+    formData.append("expectedReturn", expectedReturn);
+    formData.append("payoutDate", payoutDate);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    return result.success;
+  } catch (error) {
+    console.error("Record investment error:", error);
+    return false;
+  }
+}
+
+async function investInBond() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("bondAmount").value);
+  
+  if (isNaN(amount) || amount < 10) {
+    showToast("Minimum investment is 10 XCoin", 1500);
+    return;
+  }
+  
+  if (amount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const duration = prompt("Select bond duration:\n1. 6 months (8% return)\n2. 12 months (12% return)\n3. 24 months (15% return)", "12");
+  let returnRate = 0.12;
+  let months = 12;
+  
+  if (duration === "1" || duration === "6") {
+    returnRate = 0.08;
+    months = 6;
+  } else if (duration === "2" || duration === "12") {
+    returnRate = 0.12;
+    months = 12;
+  } else if (duration === "3" || duration === "24") {
+    returnRate = 0.15;
+    months = 24;
+  } else {
+    showToast("Invalid selection", 1500);
+    return;
+  }
+  
+  const expectedReturn = amount * returnRate;
+  const payoutDate = new Date();
+  payoutDate.setMonth(payoutDate.getMonth() + months);
+  
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Bond Investment?\nReturn: ${returnRate * 100}%\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nPayout Date: ${payoutDate.toLocaleDateString()}`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#bondAmount').parentElement.querySelector('button');
+  const originalText = investBtn?.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - amount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("Bond Investment", amount, `${expectedReturn.toFixed(2)} XCoin (${returnRate * 100}%)`, payoutDate.toISOString());
+    
+    showToast(`✅ Invested ${amount} XCoin in Bond Investment! Expected return: ${expectedReturn.toFixed(2)} XCoin`, 3000);
+    document.getElementById("bondAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function investInRevenuePool() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("revenueAmount").value);
+  
+  if (isNaN(amount) || amount < 50) {
+    showToast("Minimum investment is 50 XCoin", 1500);
+    return;
+  }
+  
+  if (amount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const expectedReturn = amount * 0.1; // 10% return
+  const payoutDate = new Date();
+  payoutDate.setMonth(payoutDate.getMonth() + 1);
+  
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Revenue Sharing Pool?\nExpected Return: 10%\nPayout: Monthly\nFirst Payout: ${payoutDate.toLocaleDateString()}`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#revenueAmount').parentElement.querySelector('button');
+  const originalText = investBtn?.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - amount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("Revenue Sharing Pool", amount, `${expectedReturn.toFixed(2)} XCoin (10% monthly)`, payoutDate.toISOString());
+    
+    showToast(`✅ Invested ${amount} XCoin in Revenue Sharing Pool!`, 3000);
+    document.getElementById("revenueAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function investInCommodity() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("commodityAmount").value);
+  
+  if (isNaN(amount) || amount < 100) {
+    showToast("Minimum investment is 100 XCoin", 1500);
+    return;
+  }
+  
+  if (amount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const duration = prompt("Select duration:\n1. 3 months (5% return)\n2. 6 months (10% return)", "3");
+  let returnRate = 0.05;
+  let months = 3;
+  
+  if (duration === "1" || duration === "3") {
+    returnRate = 0.05;
+    months = 3;
+  } else if (duration === "2" || duration === "6") {
+    returnRate = 0.10;
+    months = 6;
+  } else {
+    showToast("Invalid selection", 1500);
+    return;
+  }
+  
+  const expectedReturn = amount * returnRate;
+  const payoutDate = new Date();
+  payoutDate.setMonth(payoutDate.getMonth() + months);
+  
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Commodity-Backed Investment?\nReturn: ${returnRate * 100}%\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nPayout Date: ${payoutDate.toLocaleDateString()}`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#commodityAmount').parentElement.querySelector('button');
+  const originalText = investBtn?.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - amount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("Commodity-Backed Investment", amount, `${expectedReturn.toFixed(2)} XCoin (${returnRate * 100}%)`, payoutDate.toISOString());
+    
+    showToast(`✅ Invested ${amount} XCoin in Commodity-Backed Investment!`, 3000);
+    document.getElementById("commodityAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function investInInventory() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("inventoryAmount").value);
+  
+  if (isNaN(amount) || amount < 200) {
+    showToast("Minimum investment is 200 XCoin", 1500);
+    return;
+  }
+  
+  if (amount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const expectedReturn = amount * 0.15; // 15% return
+  const payoutDate = new Date();
+  payoutDate.setDate(payoutDate.getDate() + 60);
+  
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Inventory Financing?\nExpected Return: 15%\nDuration: 60 days\nPayout Date: ${payoutDate.toLocaleDateString()}`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#inventoryAmount').parentElement.querySelector('button');
+  const originalText = investBtn?.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - amount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("Inventory Financing", amount, `${expectedReturn.toFixed(2)} XCoin (15%)`, payoutDate.toISOString());
+    
+    showToast(`✅ Invested ${amount} XCoin in Inventory Financing!`, 3000);
+    document.getElementById("inventoryAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+// ========================================
+// TRADING FUNCTIONS
+// ========================================
+
+async function buyJLFTokens() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const xcoinAmount = parseFloat(document.getElementById("jlfTokenAmount").value);
+  
+  if (isNaN(xcoinAmount) || xcoinAmount < 0.05) {
+    showToast("Minimum purchase is 0.05 XCoin (₱50)", 1500);
+    return;
+  }
+  
+  if (xcoinAmount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const tokenAmount = xcoinAmount / 0.05;
+  
+  const confirmMsg = confirm(`Buy ${tokenAmount.toFixed(2)} JLF Tokens for ${xcoinAmount} XCoin?`);
+  if (!confirmMsg) return;
+  
+  const tradeBtn = document.querySelector('#jlfTokenAmount').parentElement.querySelector('button');
+  const originalText = tradeBtn?.innerHTML;
+  if (tradeBtn) {
+    tradeBtn.disabled = true;
+    tradeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - xcoinAmount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("JLF Token Purchase", xcoinAmount, `${tokenAmount.toFixed(2)} JLF Tokens`, new Date().toISOString());
+    
+    showToast(`✅ Purchased ${tokenAmount.toFixed(2)} JLF Tokens!`, 3000);
+    document.getElementById("jlfTokenAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Trade error:", error);
+    showToast("Purchase failed. Please try again.", 1500);
+  } finally {
+    if (tradeBtn) {
+      tradeBtn.disabled = false;
+      tradeBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function buyFWXTokens() {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const xcoinAmount = parseFloat(document.getElementById("fwxAmount").value);
+  
+  if (isNaN(xcoinAmount) || xcoinAmount < 0.025) {
+    showToast("Minimum purchase is 0.025 XCoin (₱25)", 1500);
+    return;
+  }
+  
+  if (xcoinAmount > xcoinBalance) {
+    showToast("Insufficient XCoin balance", 1500);
+    return;
+  }
+  
+  const tokenAmount = xcoinAmount / 0.025;
+  
+  const confirmMsg = confirm(`Buy ${tokenAmount.toFixed(2)} FWX Tokens for ${xcoinAmount} XCoin?`);
+  if (!confirmMsg) return;
+  
+  const tradeBtn = document.querySelector('#fwxAmount').parentElement.querySelector('button');
+  const originalText = tradeBtn?.innerHTML;
+  if (tradeBtn) {
+    tradeBtn.disabled = true;
+    tradeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const newBalance = xcoinBalance - xcoinAmount;
+    await updateXCoinBalance(newBalance);
+    
+    await recordInvestment("FWX Token Purchase", xcoinAmount, `${tokenAmount.toFixed(2)} FWX Tokens`, new Date().toISOString());
+    
+    showToast(`✅ Purchased ${tokenAmount.toFixed(2)} FWX Tokens!`, 3000);
+    document.getElementById("fwxAmount").value = "";
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+    
+    await loadInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Trade error:", error);
+    showToast("Purchase failed. Please try again.", 1500);
+  } finally {
+    if (tradeBtn) {
+      tradeBtn.disabled = false;
+      tradeBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function loadInvestmentHistory() {
+  if (!currentUser) return;
+  
+  const container = document.getElementById("investmentHistoryContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserInvestments");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const investments = await response.json();
+    
+    if (!investments || investments.length === 0) {
+      container.innerHTML = '<div class="empty-state">No investments yet. Start investing with XCoin!</div>';
+      return;
+    }
+    
+    container.innerHTML = investments.map(inv => {
+      let statusClass = '';
+      switch(inv.status?.toLowerCase()) {
+        case 'active': statusClass = 'status-approved'; break;
+        case 'completed': statusClass = 'status-completed'; break;
+        default: statusClass = 'status-pending';
+      }
+      
+      return `
+        <div class="investment-item">
+          <div class="investment-header">
+            <span class="investment-type">${inv.investmentType}</span>
+            <span class="investment-status ${statusClass}">${inv.status}</span>
+          </div>
+          <div class="investment-details">
+            <div>📅 ${new Date(inv.timestamp).toLocaleDateString()}</div>
+            <div>💰 Amount: ${parseFloat(inv.amount).toLocaleString()} XCoin</div>
+            <div>📈 Expected Return: ${inv.expectedReturn}</div>
+            ${inv.payoutDate ? `<div>📅 Payout: ${new Date(inv.payoutDate).toLocaleDateString()}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Load investments error:", error);
+    container.innerHTML = '<div class="empty-state">Failed to load investments. Please try again.</div>';
+  }
+}
+
+// ========================================
+// ADMIN CONVERSION FUNCTIONS
+// ========================================
+
+async function loadAdminConversions() {
+  const container = document.getElementById("adminConversionsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllConversions`);
+    const conversions = await response.json();
+    
+    if (!conversions || conversions.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin conversions found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th></tr></thead><tbody>';
+    
+    conversions.forEach(conv => {
+      html += `
+        <tr>
+          <td>${new Date(conv.timestamp).toLocaleString()}</td>
+          <td>${conv.accountId || '-'}</td>
+          <td>${conv.fullName || '-'}</td>
+          <td>${conv.phone || '-'}</td>
+          <td>${conv.type || '-'}</td>
+          <td>₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}</td>
+          <td>${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin</td>
+          <td>${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin</td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin conversions error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load conversions.</div>';
   }
 }
 
@@ -469,6 +1213,11 @@ function switchPage(pageName) {
     loadUserOrders();
     loadAllRechargeHistory();
   }
+  else if (pageName === 'market') {
+    loadXCoinBalance();
+    loadInvestmentHistory();
+    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
+  }
   else if (pageName === 'admin') loadAdminData();
 }
 
@@ -535,7 +1284,7 @@ function renderCartUI() {
   const totalSpan = document.getElementById("cartTotalPrice");
   if (!cartListDiv) return;
   if (cart.length === 0) {
-    cartListDiv.innerHTML = `<div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks! 🎆</div>`;
+    cartListDiv.innerHTML = `<div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks!</div>`;
     if (totalSpan) totalSpan.innerText = "₱0.00";
     return;
   }
@@ -990,6 +1739,7 @@ function switchAdminTab(tabName) {
   else if (tabName === 'users') loadAdminUsers();
   else if (tabName === 'redemptions') loadAdminRedemptions();
   else if (tabName === 'recharges') loadAdminRecharges();
+  else if (tabName === 'conversions') loadAdminConversions();
 }
 
 async function loadAdminData() {
@@ -998,6 +1748,7 @@ async function loadAdminData() {
   loadAdminUsers();
   loadAdminRedemptions();
   loadAdminRecharges();
+  loadAdminConversions();
 }
 
 async function loadAdminOrders() {
@@ -1076,10 +1827,10 @@ async function loadAdminLogs() {
     let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th></tr></thead><tbody>';
     
     logs.forEach(log => {
-      html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
+      html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1103,13 +1854,13 @@ async function loadAdminUsers() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead> <tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr> </thead><tbody>';
     
     users.forEach(user => {
       html += `<tr><td>${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td>₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1133,13 +1884,13 @@ async function loadAdminRedemptions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr> </thead><tbody>';
     
     redemptions.forEach(redemption => {
       html += `<tr><td>${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1163,7 +1914,7 @@ async function loadAdminRecharges() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr> </thead><tbody>';
     
     recharges.forEach(recharge => {
       let statusClass = '';
@@ -1196,7 +1947,7 @@ async function loadAdminRecharges() {
       `;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1275,7 +2026,7 @@ function refreshAdminRedemptions() { loadAdminRedemptions(); }
 // HELP PAGE FUNCTIONS
 // ========================================
 function startChat() { showToast("Connecting to live chat... (demo)", 1500); }
-function sendEmail() { window.location.href = "mailto:jlf1010@gmail.com"; }
+function sendEmail() { window.location.href = "mailto:jlfworks.official@gmail.com"; }
 function toggleFAQ(element) {
   const faqItem = element.closest('.faq-item-apple');
   faqItem.classList.toggle('active');
@@ -1362,6 +2113,23 @@ function initRechargeIcon() {
 }
 
 // ========================================
+// XCOIN ICON
+// ========================================
+function initXCoinIcon() {
+  const xcoinIcon = document.getElementById('xcoinIcon');
+  if (xcoinIcon) {
+    xcoinIcon.addEventListener('click', () => { 
+      if (!currentUser) {
+        showToast("Please login first", 1500);
+        openAccountModal();
+        return;
+      }
+      switchPage('market'); 
+    });
+  }
+}
+
+// ========================================
 // INITIALIZATION
 // ========================================
 function init() {
@@ -1372,6 +2140,7 @@ function init() {
     try {
       currentUser = JSON.parse(savedUser);
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+      loadXCoinBalance();
     } catch(e) { currentUser = null; }
   }
   
@@ -1387,6 +2156,7 @@ function init() {
   
   initAdminIcon();
   initRechargeIcon();
+  initXCoinIcon();
   
   switchPage('home');
   initFilters();
@@ -1421,10 +2191,19 @@ function init() {
   window.refreshAdminUsers = refreshAdminUsers;
   window.refreshAdminRedemptions = refreshAdminRedemptions;
   window.loadAdminRecharges = loadAdminRecharges;
+  window.loadAdminConversions = loadAdminConversions;
   window.loadUserOrders = loadUserOrders;
   window.toggleAdminMode = toggleAdminMode;
   window.enterAdminMode = enterAdminMode;
   window.exitAdminMode = exitAdminMode;
+  window.convertPesoToXCoin = convertPesoToXCoin;
+  window.convertXCoinToPeso = convertXCoinToPeso;
+  window.investInBond = investInBond;
+  window.investInRevenuePool = investInRevenuePool;
+  window.investInCommodity = investInCommodity;
+  window.investInInventory = investInInventory;
+  window.buyJLFTokens = buyJLFTokens;
+  window.buyFWXTokens = buyFWXTokens;
 }
 
 document.addEventListener('DOMContentLoaded', init);

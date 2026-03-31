@@ -3151,3 +3151,745 @@ body.admin-mode .recharge-icon {
   border-radius: 12px;
   font-size: 0.75rem;
 }
+
+/* ========================================
+   XCOIN MARKET PAGE STYLES
+   ======================================== */
+
+/* XCoin Balance Card */
+.xcoin-balance-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 28px;
+  padding: 30px;
+  margin: 30px 0 40px;
+  color: white;
+  text-align: center;
+}
+
+.xcoin-balance-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.xcoin-balance-header i {
+  font-size: 2rem;
+  color: #ffd700;
+}
+
+.xcoin-balance-header h3 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.xcoin-balance-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 25px;
+  color: #ffd700;
+}
+
+.xcoin-conversion {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.conversion-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.conversion-box p {
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.conversion-box input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.conversion-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.conversion-box input:focus {
+  border-color: #ffd700;
+}
+
+.conversion-rate {
+  font-size: 0.8rem;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* Investment Section */
+.investment-section,
+.trading-section {
+  margin: 50px 0;
+}
+
+.investment-section h2,
+.trading-section h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #1d1d1f;
+}
+
+.investment-section h2 i,
+.trading-section h2 i {
+  color: #e63946;
+}
+
+.investment-grid,
+.trading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Investment Cards */
+.investment-card,
+.trading-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid #e9e9ef;
+  position: relative;
+  overflow: hidden;
+}
+
+.investment-card:hover,
+.trading-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  border-color: #e63946;
+}
+
+.investment-icon,
+.trading-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.investment-card h3,
+.trading-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.investment-card p,
+.trading-card p {
+  color: #86868b;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.investment-details,
+.trading-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid #e9e9ef;
+  border-bottom: 1px solid #e9e9ef;
+  margin-bottom: 15px;
+}
+
+.investment-details span,
+.trading-details span {
+  font-size: 0.8rem;
+  color: #e63946;
+  font-weight: 500;
+}
+
+.investment-input,
+.trading-input {
+  display: flex;
+  gap: 10px;
+}
+
+.investment-input input,
+.trading-input input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #e9e9ef;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.investment-input input:focus,
+.trading-input input:focus {
+  border-color: #e63946;
+}
+
+.investment-input button,
+.trading-input button {
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+/* Token Price */
+.token-price {
+  margin-bottom: 12px !important;
+}
+
+.token-price strong {
+  color: #e63946;
+  font-size: 1rem;
+}
+
+/* Investment History Section */
+.investment-history-section {
+  margin: 50px 0;
+}
+
+.investment-history-section h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #1d1d1f;
+}
+
+.investment-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.investment-item {
+  background: white;
+  border-radius: 20px;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+  border: 1px solid #e9e9ef;
+}
+
+.investment-item:hover {
+  transform: translateX(4px);
+  border-color: #e63946;
+}
+
+.investment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.investment-type {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1d1d1f;
+}
+
+.investment-status {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.investment-status.status-approved,
+.investment-status.status-active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.investment-status.status-completed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.investment-status.status-pending {
+  background: #fff3e0;
+  color: #ed6c02;
+}
+
+.investment-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #5e5e5e;
+  padding-top: 8px;
+  border-top: 1px solid #e9e9ef;
+  margin-top: 8px;
+}
+
+.investment-details div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========================================
+   ADMIN CONVERSIONS TAB STYLES
+   ======================================== */
+
+.admin-conversions-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.admin-conversions-container .admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.admin-conversions-container .admin-table th,
+.admin-conversions-container .admin-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e9e9ef;
+}
+
+.admin-conversions-container .admin-table th {
+  background: #f5f5f7;
+  font-weight: 600;
+  color: #1d1d1f;
+  position: sticky;
+  top: 0;
+}
+
+.admin-conversions-container .admin-table tr:hover {
+  background: #fafafc;
+}
+
+/* ========================================
+   XCOIN PROFILE ROW STYLES
+   ======================================== */
+
+.xcoin-profile-row {
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.05), rgba(255, 106, 61, 0.05));
+  border-radius: 12px;
+  margin-top: 5px;
+}
+
+.xcoin-profile-row .info-label i {
+  color: #ffd700;
+}
+
+.xcoin-profile-row .info-value {
+  color: #e63946;
+  font-weight: 700;
+}
+
+/* ========================================
+   EMPTY STATE STYLES
+   ======================================== */
+
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e9e9ef;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #c0c0c0;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.empty-state p {
+  color: #86868b;
+  font-size: 0.9rem;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #86868b;
+}
+
+.loading-state i {
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+/* ========================================
+   RECHARGE HISTORY STYLES
+   ======================================== */
+
+.recharge-history-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e9e9ef;
+}
+
+.recharge-history-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1d1d1f;
+}
+
+.recharge-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.recharge-item {
+  background: white;
+  border-radius: 20px;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+  border: 1px solid #e9e9ef;
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+}
+
+.recharge-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-color: #e63946;
+}
+
+.recharge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recharge-method {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #f5f5f7;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.recharge-status {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.recharge-status.status-pending {
+  background: #fff3e0;
+  color: #ed6c02;
+}
+
+.recharge-status.status-approved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.recharge-status.status-cancelled {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.recharge-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.recharge-details div {
+  font-size: 0.85rem;
+  color: #5e5e5e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recharge-details div i {
+  width: 20px;
+  color: #e63946;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   XCOIN ICON STYLES
+   ======================================== */
+
+.xcoin-icon {
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #1d1d1f;
+  transition: 0.2s;
+  position: relative;
+}
+
+.xcoin-icon:hover {
+  color: #ffd700;
+  transform: scale(1.05);
+}
+
+.xcoin-icon i {
+  transition: 0.2s;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   SCROLLBAR STYLES
+   ======================================== */
+
+.recharge-history-list::-webkit-scrollbar,
+.investment-history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recharge-history-list::-webkit-scrollbar-track,
+.investment-history-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb,
+.investment-history-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb:hover,
+.investment-history-list::-webkit-scrollbar-thumb:hover {
+  background: #e63946;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .xcoin-balance-amount {
+    font-size: 2rem;
+  }
+  
+  .xcoin-conversion {
+    grid-template-columns: 1fr;
+  }
+  
+  .investment-grid,
+  .trading-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .investment-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .investment-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .investment-input,
+  .trading-input {
+    flex-direction: column;
+  }
+  
+  .investment-input button,
+  .trading-input button {
+    width: 100%;
+  }
+  
+  .recharge-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .recharge-details div {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  .admin-conversions-container {
+    overflow-x: scroll;
+  }
+  
+  .admin-conversions-container .admin-table {
+    min-width: 800px;
+  }
+}
+
+/* ========================================
+   INVESTMENT CARD SPECIAL STYLES
+   ======================================== */
+
+.investment-card:has(.investment-icon[style*="📈"]),
+.trading-card:has(.trading-icon[style*="🚀"]) {
+  border-top: 3px solid #e63946;
+}
+
+/* Tooltip for reference numbers */
+.recharge-ref {
+  cursor: help;
+  transition: all 0.2s;
+}
+
+.recharge-ref:hover {
+  background: #e63946;
+  color: white;
+}
+
+/* Status Timeline Dot */
+.recharge-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #e9e9ef;
+  transition: all 0.3s;
+}
+
+.recharge-item.status-pending::before {
+  background: #ed6c02;
+}
+
+.recharge-item.status-approved::before {
+  background: #2e7d32;
+}
+
+.recharge-item.status-cancelled::before {
+  background: #d32f2f;
+}
+
+.recharge-item:hover::before {
+  width: 4px;
+}
+
+/* Amount Highlight */
+.recharge-amount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e63946;
+}
+
+/* Method Icons */
+.recharge-method i {
+  font-size: 0.9rem;
+}
+
+/* Date Styling */
+.recharge-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f5f5f7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+/* XCoin Balance Card Animation */
+.xcoin-balance-card {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects for Conversion Boxes */
+.conversion-box:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Button Styles for Market Page */
+.xcoin-balance-card .btn-primary-apple {
+  background: #ffd700;
+  color: #1a1a2e;
+  border: none;
+}
+
+.xcoin-balance-card .btn-primary-apple:hover {
+  background: #ffed4e;
+  transform: scale(1.02);
+}
+
+/* Investment Card Input Focus Effects */
+.investment-card input:focus,
+.trading-card input:focus {
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}
+
+/* Success Animation for Conversion */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.success-animation {
+  animation: pulse 0.5s ease;
+}
