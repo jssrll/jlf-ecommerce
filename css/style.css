@@ -59,13 +59,13 @@ body {
 }
 
 .logo {
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #1d1d1f, #86868b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6a3d;        /* Keep orange text */
+  background: transparent; /* Remove orange background */
+  padding: 0;              /* Remove padding */
+  margin: 0;
+  border-radius: 0;        /* Remove rounded corners */
 }
 .logo span {
   background: linear-gradient(135deg, #e63946, #ff6a3d);
