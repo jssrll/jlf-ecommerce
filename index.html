@@ -211,7 +211,7 @@
     
     <!-- Recharge History Section -->
     <div class="recharge-history-section" style="margin-top: 40px;">
-      <h2><i class="fas fa-history"></i> Recharge History</h2>
+      <h2>Recharge History</h2>
       <div id="rechargeHistoryOrdersContainer" class="recharge-history-list"></div>
     </div>
   </div>
@@ -313,7 +313,6 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined Date:</span><span class="info-value" id="profileJoined">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
       </div>
-      <button class="btn-primary-apple recharge-profile-btn" onclick="openRechargeModal()" style="margin-bottom: 10px;"><i class="fas fa-wallet"></i> Recharge Balance</button>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
   </div>
@@ -335,8 +334,8 @@
       <!-- GCash Payment -->
       <div id="gcashTab" class="recharge-tab active">
         <div class="qr-container">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCash:09951234567" alt="GCash QR Code" class="qr-code">
-          <p class="qr-instruction">Scan QR code or send to GCash number: <strong>0995 123 4567</strong></p>
+          <img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code">
+          <p class="qr-instruction">Scan QR code or send to GCash number & name: <br> <strong>0963 386 3860  JE*****L C.</strong></p>
         </div>
         <div class="recharge-form">
           <div class="form-group">
@@ -362,9 +361,9 @@
       <!-- Cash Payment -->
       <div id="cashTab" class="recharge-tab">
         <div class="cash-info">
-          <p><i class="fas fa-store"></i> You can pay cash at our physical store:</p>
-          <p><strong>📍 JLF Fireworks Store</strong><br>Brgy. San Juan, Mexico, Pampanga</p>
-          <p><i class="fas fa-clock"></i> Store Hours: 9:00 AM - 8:00 PM</p>
+          <p><i class="fas fa-store"></i> Pay cash at our physical store:</p>
+          <p><strong>JLF Fireworks Store</strong><br>Brgy. Camansihan, Calapan City, Oriental Mindoro</p>
+          <p>8:00 AM - 6:00 PM</p>
         </div>
         <div class="recharge-form">
           <div class="form-group">
@@ -399,13 +398,6 @@
           <li>Balance will be added automatically</li>
         </ol>
       </div>
-      
-      <div class="transaction-history">
-        <h3><i class="fas fa-history"></i> Transaction History</h3>
-        <div id="rechargeHistoryContainer" class="recharge-history-list">
-          <div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -414,7 +406,7 @@
 <div id="cartOverlay" class="cart-overlay"></div>
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-header"><span>Shopping Cart</span><button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button></div>
-  <div id="cartItemsList" class="cart-items-list"><div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks! 🎆</div></div>
+  <div id="cartItemsList" class="cart-items-list"><div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks!</div></div>
   <div class="cart-footer"><div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div><button class="checkout-btn" id="checkoutBtn">Checkout →</button></div>
 </div>
 <div id="toastMsg" class="toast-msg">Item added to cart</div>

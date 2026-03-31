@@ -2844,3 +2844,310 @@ body.admin-mode .recharge-icon {
 .recharge-profile-btn:hover {
   background: #ff6a3d !important;
 }
+
+/* ========================================
+   RECHARGE HISTORY STYLES
+   ======================================== */
+
+/* Recharge History Section */
+.recharge-history-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e9e9ef;
+}
+
+.recharge-history-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1d1d1f;
+}
+
+.recharge-history-section h2::before {
+  content: "💰";
+  font-size: 1.5rem;
+}
+
+/* Recharge History List Container */
+.recharge-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+/* Recharge History Item */
+.recharge-item {
+  background: white;
+  border-radius: 20px;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+  border: 1px solid #e9e9ef;
+  position: relative;
+  overflow: hidden;
+}
+
+.recharge-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-color: #e63946;
+}
+
+/* Recharge Header */
+.recharge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recharge-method {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #f5f5f7;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.recharge-method:has(.fa-phone) {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.recharge-method:has(.fa-qrcode) {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Recharge Status Badges */
+.recharge-status {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.recharge-status.status-pending {
+  background: #fff3e0;
+  color: #ed6c02;
+}
+
+.recharge-status.status-approved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.recharge-status.status-cancelled {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+/* Recharge Details */
+.recharge-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.recharge-details div {
+  font-size: 0.85rem;
+  color: #5e5e5e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recharge-details div i {
+  width: 20px;
+  color: #e63946;
+  font-size: 0.9rem;
+}
+
+.recharge-details .recharge-amount {
+  font-weight: 600;
+  color: #e63946;
+  font-size: 1rem;
+}
+
+.recharge-details .recharge-ref {
+  font-family: monospace;
+  background: #f5f5f7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Empty State */
+.recharge-history-list .empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e9e9ef;
+}
+
+.recharge-history-list .empty-state i {
+  font-size: 3rem;
+  color: #c0c0c0;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.recharge-history-list .empty-state p {
+  color: #86868b;
+  font-size: 0.9rem;
+}
+
+/* Loading State */
+.recharge-history-list .loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #86868b;
+}
+
+.recharge-history-list .loading-state i {
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Order History Page - Recharge Section Integration */
+.orders-container + .recharge-history-section {
+  margin-top: 40px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .recharge-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .recharge-item {
+    padding: 14px 16px;
+  }
+  
+  .recharge-details div {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  .recharge-history-section h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Animation for new items */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recharge-item {
+  animation: slideIn 0.3s ease;
+}
+
+/* Custom scrollbar for recharge history */
+.recharge-history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recharge-history-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb:hover {
+  background: #e63946;
+}
+
+/* Tooltip for reference number */
+.recharge-ref {
+  cursor: help;
+  transition: all 0.2s;
+}
+
+.recharge-ref:hover {
+  background: #e63946;
+  color: white;
+}
+
+/* Status Timeline Dot */
+.recharge-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #e9e9ef;
+  transition: all 0.3s;
+}
+
+.recharge-item.status-pending::before {
+  background: #ed6c02;
+}
+
+.recharge-item.status-approved::before {
+  background: #2e7d32;
+}
+
+.recharge-item.status-cancelled::before {
+  background: #d32f2f;
+}
+
+.recharge-item:hover::before {
+  width: 4px;
+}
+
+/* Amount Highlight */
+.recharge-amount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e63946;
+}
+
+/* Method Icons */
+.recharge-method i {
+  font-size: 0.9rem;
+}
+
+/* Date Styling */
+.recharge-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f5f5f7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
