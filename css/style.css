@@ -2675,3 +2675,35 @@ body.admin-mode .recharge-icon {
     padding: 50px 20px;
   }
 }
+
+/* Flash screen / Loading screen background */
+body {
+  background-color: #ffffff;
+}
+
+/* Optional: Smooth transition when content loads */
+.page {
+  transition: opacity 0.3s ease;
+}
+
+/* Prevent orange flash during page load */
+html {
+  background-color: #ffffff;
+}
+
+/* Prevent orange background flash */
+:root {
+  background-color: #ffffff;
+}
+
+html, body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* If your header has orange background, change it */
+.header {
+  background-color: #ffffff;
+  /* or keep if it's meant to be orange */
+}

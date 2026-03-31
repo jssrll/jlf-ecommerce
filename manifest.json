@@ -4,8 +4,8 @@
   "description": "Premium fireworks and pyrotechnics for unforgettable celebrations",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ff6a3d",
-  "theme_color": "#ff6a3d",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "orientation": "portrait",
   "scope": "/",
   "icons": [
