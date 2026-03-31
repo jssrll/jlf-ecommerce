@@ -2675,31 +2675,3 @@ body.admin-mode .recharge-icon {
     padding: 50px 20px;
   }
 }
-
-/* Admin Access Button - Smaller version of logout button */
-.admin-access-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-  width: auto;
-  justify-content: center;
-}
-
-.admin-access-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.admin-access-btn i {
-  font-size: 0.9rem;
-}
