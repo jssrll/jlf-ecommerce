@@ -2675,3 +2675,172 @@ body.admin-mode .recharge-icon {
     padding: 50px 20px;
   }
 }
+
+/* Recharge Modal Styles */
+.recharge-modal {
+  max-width: 550px;
+}
+
+.recharge-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  border-bottom: 1px solid #e9e9ef;
+}
+
+.recharge-tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #86868b;
+  transition: 0.2s;
+  position: relative;
+}
+
+.recharge-tab-btn.active {
+  color: #e63946;
+}
+
+.recharge-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e63946;
+}
+
+.recharge-tab {
+  display: none;
+  padding: 24px;
+}
+
+.recharge-tab.active {
+  display: block;
+}
+
+.qr-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.qr-code {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #e9e9ef;
+  border-radius: 16px;
+  padding: 10px;
+  background: white;
+}
+
+.qr-instruction {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cash-info {
+  background: #f5f5f7;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cash-info p {
+  margin: 8px 0;
+}
+
+.recharge-note {
+  background: #fff3e0;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 20px 0;
+  font-size: 0.85rem;
+  border-left: 4px solid #ff9800;
+}
+
+.how-it-works-recharge {
+  background: #f5f5f7;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.how-it-works-recharge h3 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.how-it-works-recharge ol {
+  margin-left: 20px;
+  color: #666;
+}
+
+.how-it-works-recharge li {
+  margin: 8px 0;
+}
+
+.transaction-history {
+  margin-top: 20px;
+  border-top: 1px solid #e9e9ef;
+  padding-top: 20px;
+}
+
+.transaction-history h3 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.recharge-history-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.recharge-item {
+  background: #f5f5f7;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.recharge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.recharge-method {
+  font-weight: 600;
+  color: #e63946;
+}
+
+.recharge-status {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.recharge-details {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.recharge-details div {
+  margin: 4px 0;
+}
+
+.recharge-profile-btn {
+  margin-bottom: 10px !important;
+  background: #e63946 !important;
+}
+
+.recharge-profile-btn:hover {
+  background: #ff6a3d !important;
+}

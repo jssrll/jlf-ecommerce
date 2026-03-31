@@ -14,10 +14,10 @@
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- JLF Fireworks Favicon - Clean Version -->
+  <!-- JLF Fireworks Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
@@ -29,14 +29,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="JLF Fireworks">
 </head>
+<body>
 
 <div class="header">
   <div class="container">
     <div class="nav">
       <div class="logo">JLF</div>
-        <div class="admin-icon" id="adminIcon">
-          <i class="fas fa-code"></i>
-        </div>
+      <div class="admin-icon" id="adminIcon">
+        <i class="fas fa-code"></i>
+      </div>
       <div class="nav-links" id="navLinks">
         <a href="#" data-page="home" class="nav-link active">Home</a>
         <a href="#" data-page="shop" class="nav-link">Shop</a>
@@ -47,6 +48,9 @@
       <div class="nav-actions">
         <div class="admin-exit-btn" id="adminExitBtn" style="display: none;">
           <i class="fas fa-sign-out-alt"></i> Exit Admin
+        </div>
+        <div class="recharge-icon" id="rechargeIcon">
+          <i class="fas fa-wallet"></i>
         </div>
         <div class="account-icon" id="accountIcon">
           <i class="fas fa-user-circle"></i>
@@ -77,7 +81,7 @@
 
     <div class="featured-showcase">
       <div class="showcase-header">
-        <h2> Best Sellers </h2>
+        <h2>Best Sellers</h2>
         <p>Our most popular fireworks for every celebration</p>
       </div>
       <div class="showcase-grid">
@@ -181,7 +185,7 @@
 
   <!-- FEATURED PAGE -->
   <div id="featuredPage" class="page">
-    <div class="page-hero"><h1> Rewards & Redemption </h1><p>Redeem your exclusive codes for amazing rewards and credits</p></div>
+    <div class="page-hero"><h1>Rewards & Redemption</h1><p>Redeem your exclusive codes for amazing rewards and credits</p></div>
     <div class="redemption-section-apple">
       <div class="code-card-apple">
         <h2><i class="fas fa-ticket-alt"></i> Code Redemption</h2>
@@ -204,6 +208,12 @@
         <button class="btn-primary-apple" onclick="switchPage('shop')" style="margin-top: 20px;">Shop Now</button>
       </div>
     </div>
+    
+    <!-- Recharge History Section -->
+    <div class="recharge-history-section" style="margin-top: 40px;">
+      <h2><i class="fas fa-history"></i> Recharge History</h2>
+      <div id="rechargeHistoryOrdersContainer" class="recharge-history-list"></div>
+    </div>
   </div>
 
   <!-- ADMIN PAGE -->
@@ -217,6 +227,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('logs')">Login Logs</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('users')">User Management</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -236,11 +247,15 @@
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminRedemptions()"><i class="fas fa-sync-alt"></i> Refresh Redemptions</button></div>
       <div id="adminRedemptionsContainer" class="admin-redemptions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div></div>
     </div>
+    <div id="adminRechargesTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminRecharges()"><i class="fas fa-sync-alt"></i> Refresh Recharges</button></div>
+      <div id="adminRechargesContainer" class="admin-recharges-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div></div>
+    </div>
   </div>
 
   <!-- HELP PAGE -->
   <div id="helpPage" class="page">
-    <div class="page-hero"><h1> Customer Support </h1><p>We're here to help you 24/7. How can we assist you today?</p></div>
+    <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7. How can we assist you today?</p></div>
     <div class="support-grid-apple">
       <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><p>Chat with our support team instantly</p><button class="btn-secondary-apple" onclick="startChat()">Start Chat</button></div>
       <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlf1010@gmail.com</p><p>Response within 24 hours</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
@@ -255,7 +270,7 @@
   </div>
 </main>
 
-<footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</footer>
+<footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</p></footer>
 
 <!-- Account Modal -->
 <div id="accountModal" class="modal">
@@ -298,7 +313,99 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined Date:</span><span class="info-value" id="profileJoined">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
       </div>
+      <button class="btn-primary-apple recharge-profile-btn" onclick="openRechargeModal()" style="margin-bottom: 10px;"><i class="fas fa-wallet"></i> Recharge Balance</button>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Recharge Modal -->
+<div id="rechargeModal" class="modal">
+  <div class="modal-content recharge-modal">
+    <div class="modal-header">
+      <h2><i class="fas fa-wallet"></i> Recharge Balance</h2>
+      <button class="close-modal" onclick="closeRechargeModal()">&times;</button>
+    </div>
+    <div class="recharge-content">
+      <div class="recharge-tabs">
+        <button class="recharge-tab-btn active" onclick="switchRechargeTab('gcash')">GCash</button>
+        <button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button>
+      </div>
+      
+      <!-- GCash Payment -->
+      <div id="gcashTab" class="recharge-tab active">
+        <div class="qr-container">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCash:09951234567" alt="GCash QR Code" class="qr-code">
+          <p class="qr-instruction">Scan QR code or send to GCash number: <strong>0995 123 4567</strong></p>
+        </div>
+        <div class="recharge-form">
+          <div class="form-group">
+            <label>Account Name</label>
+            <input type="text" id="gcashAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="gcashPhone" readonly>
+          </div>
+          <div class="form-group">
+            <label>Reference Number</label>
+            <input type="text" id="gcashRefNumber" placeholder="Enter GCash reference number">
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="gcashAmount" placeholder="Enter amount" min="10">
+          </div>
+          <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
+        </div>
+      </div>
+      
+      <!-- Cash Payment -->
+      <div id="cashTab" class="recharge-tab">
+        <div class="cash-info">
+          <p><i class="fas fa-store"></i> You can pay cash at our physical store:</p>
+          <p><strong>📍 JLF Fireworks Store</strong><br>Brgy. San Juan, Mexico, Pampanga</p>
+          <p><i class="fas fa-clock"></i> Store Hours: 9:00 AM - 8:00 PM</p>
+        </div>
+        <div class="recharge-form">
+          <div class="form-group">
+            <label>Account Name</label>
+            <input type="text" id="cashAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="cashPhone" readonly>
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="cashAmount" placeholder="Enter amount" min="10">
+          </div>
+          <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
+        </div>
+      </div>
+      
+      <div class="recharge-note">
+        <i class="fas fa-info-circle"></i>
+        <strong>Note:</strong> The amount will be added within an hour. If still not added, try logging out then login again to refresh your account balance.
+      </div>
+      
+      <div class="how-it-works-recharge">
+        <h3><i class="fas fa-question-circle"></i> How It Works</h3>
+        <ol>
+          <li>Select your payment method (GCash or Cash)</li>
+          <li>For GCash: Send payment to the QR code or GCash number, then enter your reference number</li>
+          <li>For Cash: Visit our store and pay the amount</li>
+          <li>Submit your recharge request</li>
+          <li>Wait for admin approval (within 1 hour)</li>
+          <li>Balance will be added automatically</li>
+        </ol>
+      </div>
+      
+      <div class="transaction-history">
+        <h3><i class="fas fa-history"></i> Transaction History</h3>
+        <div id="rechargeHistoryContainer" class="recharge-history-list">
+          <div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
