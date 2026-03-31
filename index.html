@@ -14,7 +14,7 @@
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- JLF Fireworks Favicon - Clean Version -->
@@ -252,7 +252,7 @@
   </div>
 </main>
 
-<footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</footer>
+<footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</p></footer>
 
 <!-- Account Modal -->
 <div id="accountModal" class="modal">
@@ -295,9 +295,10 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined Date:</span><span class="info-value" id="profileJoined">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
       </div>
-        <div class="admin-icon" id="adminIcon">
-          <i class="fas fa-code"></i> Developer Mode
-        </div>
+      <!-- Admin Button - Styled like logout button but smaller -->
+      <button class="admin-access-btn" id="adminIcon" onclick="enableAdminMode()">
+        <i class="fas fa-code"></i> Admin-Authorized Access
+      </button>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
   </div>
@@ -315,6 +316,22 @@
 <script src="js/account.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
-<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(r=>console.log('✅ Service Worker registered')).catch(e=>console.log('❌ Service Worker failed'))});}</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').then(r=>console.log('✅ Service Worker registered')).catch(e=>console.log('❌ Service Worker failed'))
+  });
+}
+
+// Function to handle admin mode - you can customize this
+function enableAdminMode() {
+  // This function will be called when clicking the admin button
+  // You can add your admin logic here
+  console.log('Admin mode requested');
+  // Example: window.location.href = 'admin.html';
+  // Or trigger admin login
+  alert('Admin access requested');
+}
+</script>
 </body>
 </html>
