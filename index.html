@@ -127,10 +127,10 @@
         <a href="#" onclick="switchPage('featured')">Learn more <i class="fas fa-chevron-right"></i></a>
       </div>
       <div class="feature-block">
-        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-        <h3>XCoin Investment</h3>
-        <p>Convert Peso to XCoin and grow your wealth</p>
-        <a href="#" onclick="switchPage('market')">Learn more <i class="fas fa-chevron-right"></i></a>
+        <div class="feature-icon"><i class="fas fa-gift"></i></div>
+        <h3>Exclusive Codes</h3>
+        <p>Redeem special codes for instant credits</p>
+        <a href="#" onclick="switchPage('featured')">Learn more <i class="fas fa-chevron-right"></i></a>
       </div>
       <div class="feature-block">
         <div class="feature-icon"><i class="fas fa-headset"></i></div>
@@ -147,7 +147,7 @@
         <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
         <div class="step"><div class="step-number">2</div><i class="fas fa-shopping-cart"></i><h3>Shop Fireworks</h3><p>Choose your favorites</p></div>
         <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-        <div class="step"><div class="step-number">3</div><i class="fas fa-chart-line"></i><h3>Invest with XCoin</h3><p>Grow your digital assets</p></div>
+        <div class="step"><div class="step-number">3</div><i class="fas fa-ticket-alt"></i><h3>Redeem Codes</h3><p>Get instant credits</p></div>
         <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
         <div class="step"><div class="step-number">4</div><i class="fas fa-fire"></i><h3>Light Up!</h3><p>Enjoy your celebration</p></div>
       </div>
@@ -156,15 +156,16 @@
     <div class="stats-section">
       <div class="stat"><div class="stat-number">49+</div><div class="stat-label">Happy Customers</div></div>
       <div class="stat"><div class="stat-number">200+</div><div class="stat-label">Products Available</div></div>
-      <div class="stat"><div class="stat-number">₱500K+</div><div class="stat-label">Total XCoin Invested</div></div>
+      <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Support Available</div></div>
     </div>
 
     <div class="testimonials-apple">
       <h2>What Our Customers Say</h2>
       <div class="testimonials-grid">
-        <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"The XCoin investment feature is amazing! I've already earned 15% returns!"</p><h4>- Bobby D.</h4></div>
+        <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Ayyy grabe wala ako masabi, dahil takot ako sa paputok pinsan ko pinagsindi ko HAHA ako tamang andar ng motor haha. Pero all in all the best SAWA! Ang ganda ng putok Quality👌"</p><h4>- Bobby D.</h4></div>
         <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Best fireworks shop! Made our New Year celebration unforgettable!"</p><h4>- Mark R.</h4></div>
         <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><p>"Safe and high-quality products. Will definitely order again!"</p><h4>- Christine L.</h4></div>
+        <div class="testimonial-card"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><p>"Fast delivery and great customer service. Highly recommended!"</p><h4>- Jun M.</h4></div>
       </div>
     </div>
   </div>
@@ -183,144 +184,6 @@
       </div>
     </div>
     <div id="productsContainer" class="products-grid-apple"></div>
-  </div>
-
-  <!-- MARKET PAGE - XCoin Investment & Trading -->
-  <div id="marketPage" class="page">
-    <div class="page-hero">
-      <h1><i class="fas fa-chart-line"></i> XCoin Market</h1>
-      <p>1 XCoin = ₱1,000 | Invest, trade, and grow your digital assets</p>
-    </div>
-
-    <!-- XCoin Balance Card -->
-    <div class="xcoin-balance-card">
-      <div class="xcoin-balance-header">
-        <i class="fas fa-coins"></i>
-        <h3>Your XCoin Balance</h3>
-      </div>
-      <div class="xcoin-balance-amount" id="xcoinBalance">0 XCoin</div>
-      <div class="xcoin-conversion">
-        <div class="conversion-box">
-          <p>Convert Peso to XCoin</p>
-          <input type="number" id="pesoToXCoin" placeholder="Enter amount in ₱">
-          <button class="btn-primary-apple" onclick="convertPesoToXCoin()">Convert to XCoin</button>
-          <p class="conversion-rate">1 XCoin = ₱1,000</p>
-        </div>
-        <div class="conversion-box">
-          <p>Convert XCoin to Peso</p>
-          <input type="number" id="xcoinToPeso" placeholder="Enter XCoin amount">
-          <button class="btn-primary-apple" onclick="convertXCoinToPeso()">Convert to Peso</button>
-          <p class="conversion-rate">1 XCoin = ₱1,000</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Investment Section -->
-    <div class="investment-section">
-      <h2><i class="fas fa-chart-pie"></i> Investment Opportunities</h2>
-      <div class="investment-grid" id="investmentGrid">
-        <!-- Bond Investment -->
-        <div class="investment-card">
-          <div class="investment-icon">📈</div>
-          <h3>Bond Investment</h3>
-          <p>Fixed returns with guaranteed payouts</p>
-          <div class="investment-details">
-            <span>Return: 8-15%</span>
-            <span>Duration: 6-36 months</span>
-          </div>
-          <div class="investment-input">
-            <input type="number" id="bondAmount" placeholder="XCoin amount" min="10">
-            <button class="btn-secondary-apple" onclick="investInBond()">Invest</button>
-          </div>
-        </div>
-
-        <!-- Revenue Sharing Investment Pool -->
-        <div class="investment-card">
-          <div class="investment-icon">🤝</div>
-          <h3>Revenue Sharing Pool</h3>
-          <p>Earn from platform revenue share</p>
-          <div class="investment-details">
-            <span>Return: Variable</span>
-            <span>Monthly payouts</span>
-          </div>
-          <div class="investment-input">
-            <input type="number" id="revenueAmount" placeholder="XCoin amount" min="10">
-            <button class="btn-secondary-apple" onclick="investInRevenuePool()">Invest</button>
-          </div>
-        </div>
-
-        <!-- Short-term Commodity-Backed Investment -->
-        <div class="investment-card">
-          <div class="investment-icon">🏭</div>
-          <h3>Commodity-Backed Investment</h3>
-          <p>Backed by physical fireworks inventory</p>
-          <div class="investment-details">
-            <span>Return: 5-10%</span>
-            <span>Duration: 3-6 months</span>
-          </div>
-          <div class="investment-input">
-            <input type="number" id="commodityAmount" placeholder="XCoin amount" min="10">
-            <button class="btn-secondary-apple" onclick="investInCommodity()">Invest</button>
-          </div>
-        </div>
-
-        <!-- Inventory Financing -->
-        <div class="investment-card">
-          <div class="investment-icon">📦</div>
-          <h3>Inventory Financing</h3>
-          <p>Fund fireworks inventory for profit share</p>
-          <div class="investment-details">
-            <span>Return: 12-20%</span>
-            <span>Duration: 30-90 days</span>
-          </div>
-          <div class="investment-input">
-            <input type="number" id="inventoryAmount" placeholder="XCoin amount" min="10">
-            <button class="btn-secondary-apple" onclick="investInInventory()">Invest</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Trading Section -->
-    <div class="trading-section">
-      <h2><i class="fas fa-chart-line"></i> Tokenized Trading</h2>
-      <div class="trading-grid" id="tradingGrid">
-        <div class="trading-card">
-          <div class="trading-icon">🚀</div>
-          <h3>JLF Token (JLF)</h3>
-          <p class="token-price">Current Price: <strong>₱50</strong> (0.05 XCoin)</p>
-          <div class="trading-details">
-            <span>24h Volume: ₱12,450</span>
-            <span>Market Cap: ₱1.2M</span>
-          </div>
-          <div class="trading-input">
-            <input type="number" id="jlfTokenAmount" placeholder="XCoin amount" min="0.1" step="0.1">
-            <button class="btn-secondary-apple" onclick="buyJLFTokens()">Buy Tokens</button>
-          </div>
-        </div>
-        <div class="trading-card">
-          <div class="trading-icon">💎</div>
-          <h3>Fireworks Index (FWX)</h3>
-          <p class="token-price">Current Price: <strong>₱25</strong> (0.025 XCoin)</p>
-          <div class="trading-details">
-            <span>24h Volume: ₱8,230</span>
-            <span>Market Cap: ₱850K</span>
-          </div>
-          <div class="trading-input">
-            <input type="number" id="fwxAmount" placeholder="XCoin amount" min="0.1" step="0.1">
-            <button class="btn-secondary-apple" onclick="buyFWXTokens()">Buy Tokens</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Investment History -->
-    <div class="investment-history-section">
-      <h2><i class="fas fa-history"></i> Your Investment History</h2>
-      <div id="investmentHistoryContainer" class="investment-history-list">
-        <div class="empty-state">No investments yet. Start investing with XCoin!</div>
-      </div>
-    </div>
   </div>
 
   <!-- FEATURED PAGE -->
@@ -356,6 +219,81 @@
     </div>
   </div>
 
+  <!-- MARKET PAGE - XCoin Investment & Trading -->
+  <div id="marketPage" class="page">
+    <div class="page-hero">
+      <h1><i class="fas fa-chart-line"></i> XCoin Market</h1>
+      <p>1 XCoin = ₱1,000 | Invest and grow your digital assets</p>
+    </div>
+
+    <!-- XCoin Balance Card -->
+    <div class="xcoin-balance-card">
+      <div class="xcoin-balance-header">
+        <i class="fas fa-coins"></i>
+        <h3>Your XCoin Balance</h3>
+      </div>
+      <div class="xcoin-balance-amount" id="xcoinBalance">0 XCoin</div>
+      <div class="xcoin-conversion">
+        <div class="conversion-box">
+          <p>Convert Peso to XCoin</p>
+          <input type="number" id="pesoToXCoin" placeholder="Enter amount in ₱ (min ₱50)">
+          <button class="btn-primary-apple" onclick="convertPesoToXCoin()">Convert to XCoin</button>
+          <p class="conversion-rate">1 XCoin = ₱1,000 | Minimum: ₱50</p>
+        </div>
+        <div class="conversion-box">
+          <p>Convert XCoin to Peso</p>
+          <input type="number" id="xcoinToPeso" placeholder="Enter XCoin amount (min 0.05)">
+          <button class="btn-primary-apple" onclick="convertXCoinToPeso()">Convert to Peso</button>
+          <p class="conversion-rate">1 XCoin = ₱1,000 | Minimum: 0.05 XCoin</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Investment Section -->
+    <div class="investment-section">
+      <h2><i class="fas fa-chart-pie"></i> Investment Opportunities</h2>
+      <div class="investment-grid" id="investmentGrid">
+        <!-- Bond Investment -->
+        <div class="investment-card">
+          <div class="investment-icon">📈</div>
+          <h3>Bond Investment</h3>
+          <p>Fixed returns with guaranteed payouts</p>
+          <div class="investment-details">
+            <span>Return: 5%</span>
+            <span>Duration: 3 months</span>
+          </div>
+          <div class="investment-input">
+            <input type="number" id="bondAmount" placeholder="XCoin amount (min 0.05)">
+            <button class="btn-secondary-apple" onclick="investInBond()">Invest</button>
+          </div>
+        </div>
+
+        <!-- Commodity-Backed Investment -->
+        <div class="investment-card">
+          <div class="investment-icon">🏭</div>
+          <h3>Commodity-Backed Investment</h3>
+          <p>Backed by physical fireworks inventory</p>
+          <div class="investment-details">
+            <span>Return: 6%</span>
+            <span>Duration: 3 months</span>
+          </div>
+          <div class="investment-input">
+            <input type="number" id="commodityAmount" placeholder="XCoin amount (min 0.05)">
+            <button class="btn-secondary-apple" onclick="investInCommodity()">Invest</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Investment History -->
+    <div class="investment-history-section">
+      <h2><i class="fas fa-history"></i> Your Investment History</h2>
+      <div id="investmentHistoryContainer" class="investment-history-list">
+        <div class="empty-state">No investments yet. Start investing with XCoin!</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ADMIN PAGE -->
   <div id="adminPage" class="page">
     <div class="page-hero">
@@ -369,7 +307,6 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('conversions')">XCoin Conversions</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">XCoin Investments</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -397,10 +334,6 @@
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminConversions()"><i class="fas fa-sync-alt"></i> Refresh Conversions</button></div>
       <div id="adminConversionsContainer" class="admin-conversions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div></div>
     </div>
-    <div id="adminInvestmentsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminInvestments()"><i class="fas fa-sync-alt"></i> Refresh Investments</button></div>
-      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div></div>
-    </div>
   </div>
 
   <!-- HELP PAGE -->
@@ -412,13 +345,13 @@
     </div>
     <div class="faq-section-apple"><h2>Frequently Asked Questions</h2>
       <div class="faq-list-apple">
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>What is XCoin?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">XCoin is our digital currency where 1 XCoin = ₱1,000. You can convert your Peso balance to XCoin and invest in various opportunities.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout. Make sure you have enough credit balance to complete the purchase.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I track my order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can track your order in the Orders page after logging into your account. Order status is updated in real-time.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How can I add credits to my account?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Click the wallet icon next to your profile. Choose either GCash or Cash payment method, follow the instructions, and submit your recharge request. Admin will approve it within 1 hour.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I invest with XCoin?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Go to the Market page, convert your Peso balance to XCoin, then choose from our investment options: Bonds, Revenue Sharing Pool, Commodity-Backed, or Inventory Financing.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Are fireworks safe and certified?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes! All our fireworks are DTI-certified and undergo strict quality control.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Where is your physical store located?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Brgy. Camansihan, Calapan City, Oriental Mindoro. Store hours: 8:00 AM - 6:00 PM daily.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I track my order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can track your order in the Orders page after logging into your account. Order status is updated in real-time and you'll see if it's Pending, Approved, Completed, or Cancelled.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Do you offer meet-up options?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes! We offer meet-up options for customers within Calapan City and nearby areas. Coordinate with our support team first before placing order.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Is there a minimum order for free delivery?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes, we offer free delivery on all orders ₱1,999 and above around Calapan City. For orders below this amount, a standard delivery fee applies.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How can I add credits to my account?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can recharge your balance by clicking the wallet icon next to your profile. Choose either GCash or Cash payment method, follow the instructions, and submit your recharge request. Admin will approve it within 1 hour.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How long does it take for my recharge to reflect?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Recharge requests are processed within 1 hour during business hours. Once approved by admin, the amount will be added to your balance automatically. If it doesn't reflect, try logging out and logging back in.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>What is XCoin?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">XCoin is our digital asset. 1 XCoin = ₱1,000. You can convert your peso balance to XCoin and invest in our bond and commodity-backed investments with returns up to 6% in 3 months.</div></div>
       </div>
     </div>
   </div>
@@ -466,9 +399,7 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-phone"></i> Phone Number:</span><span class="info-value" id="profilePhone">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined Date:</span><span class="info-value" id="profileJoined">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-chart-line"></i> XCoin Balance:</span><span class="info-value" id="profileXCoinBalance">0 XCoin</span></div>
       </div>
-      <button class="btn-primary-apple recharge-profile-btn" onclick="openRechargeModal()" style="margin-bottom: 10px; background: #e63946;"><i class="fas fa-wallet"></i> Recharge Balance</button>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
   </div>
@@ -494,10 +425,22 @@
           <p class="qr-instruction">Scan QR code or send to GCash number & name: <br> <strong>0963 386 3860  JE*****L C.</strong></p>
         </div>
         <div class="recharge-form">
-          <div class="form-group"><label>Account Name</label><input type="text" id="gcashAccountName" readonly></div>
-          <div class="form-group"><label>Phone Number</label><input type="text" id="gcashPhone" readonly></div>
-          <div class="form-group"><label>Reference Number</label><input type="text" id="gcashRefNumber" placeholder="Enter GCash reference number"></div>
-          <div class="form-group"><label>Amount (₱)</label><input type="number" id="gcashAmount" placeholder="Enter amount" min="10"></div>
+          <div class="form-group">
+            <label>Account Name</label>
+            <input type="text" id="gcashAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="gcashPhone" readonly>
+          </div>
+          <div class="form-group">
+            <label>Reference Number</label>
+            <input type="text" id="gcashRefNumber" placeholder="Enter GCash reference number">
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="gcashAmount" placeholder="Enter amount" min="10">
+          </div>
           <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
         </div>
       </div>
@@ -510,9 +453,18 @@
           <p>8:00 AM - 6:00 PM</p>
         </div>
         <div class="recharge-form">
-          <div class="form-group"><label>Account Name</label><input type="text" id="cashAccountName" readonly></div>
-          <div class="form-group"><label>Phone Number</label><input type="text" id="cashPhone" readonly></div>
-          <div class="form-group"><label>Amount (₱)</label><input type="number" id="cashAmount" placeholder="Enter amount" min="10"></div>
+          <div class="form-group">
+            <label>Account Name</label>
+            <input type="text" id="cashAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="cashPhone" readonly>
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="cashAmount" placeholder="Enter amount" min="10">
+          </div>
           <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
         </div>
       </div>

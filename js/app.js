@@ -11,7 +11,7 @@ let xcoinBalance = 0;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxWtcEqjq3-uTYkflJqei4i-X-K31fzouZ7qR4RtVrToTdWMj6uMW8lU-bwoVVY-v8p/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwT0l8WADnnTYceVh9StIpFLvsVDTalvrE9iutCL4zatoglwZ0CKFWrnpWxSv9TxG7l/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -376,8 +376,8 @@ async function convertPesoToXCoin() {
   
   const pesoAmount = parseFloat(document.getElementById("pesoToXCoin").value);
   
-  if (isNaN(pesoAmount) || pesoAmount < 1000) {
-    showToast("Minimum conversion is ₱1,000", 1500);
+  if (isNaN(pesoAmount) || pesoAmount < 50) {
+    showToast("Minimum conversion is ₱50", 1500);
     return;
   }
   
@@ -465,8 +465,8 @@ async function convertXCoinToPeso() {
   
   const xcoinAmount = parseFloat(document.getElementById("xcoinToPeso").value);
   
-  if (isNaN(xcoinAmount) || xcoinAmount < 1) {
-    showToast("Minimum conversion is 1 XCoin", 1500);
+  if (isNaN(xcoinAmount) || xcoinAmount < 0.05) {
+    showToast("Minimum conversion is 0.05 XCoin", 1500);
     return;
   }
   
@@ -549,7 +549,7 @@ async function convertXCoinToPeso() {
 // INVESTMENT FUNCTIONS
 // ========================================
 
-async function recordInvestment(investmentType, amount, expectedReturn, payoutDate) {
+async function recordInvestment(investmentType, amount, expectedReturn, maturityDate) {
   if (!currentUser) return false;
   
   try {
@@ -562,7 +562,8 @@ async function recordInvestment(investmentType, amount, expectedReturn, payoutDa
     formData.append("investmentType", investmentType);
     formData.append("amount", amount);
     formData.append("expectedReturn", expectedReturn);
-    formData.append("payoutDate", payoutDate);
+    formData.append("status", "Active");
+    formData.append("maturityDate", maturityDate);
     
     const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
     const result = await response.json();
@@ -582,8 +583,8 @@ async function investInBond() {
   
   const amount = parseFloat(document.getElementById("bondAmount").value);
   
-  if (isNaN(amount) || amount < 10) {
-    showToast("Minimum investment is 10 XCoin", 1500);
+  if (isNaN(amount) || amount < 0.05) {
+    showToast("Minimum investment is 0.05 XCoin", 1500);
     return;
   }
   
@@ -592,29 +593,12 @@ async function investInBond() {
     return;
   }
   
-  const duration = prompt("Select bond duration:\n1. 6 months (8% return)\n2. 12 months (12% return)\n3. 24 months (15% return)", "12");
-  let returnRate = 0.12;
-  let months = 12;
-  
-  if (duration === "1" || duration === "6") {
-    returnRate = 0.08;
-    months = 6;
-  } else if (duration === "2" || duration === "12") {
-    returnRate = 0.12;
-    months = 12;
-  } else if (duration === "3" || duration === "24") {
-    returnRate = 0.15;
-    months = 24;
-  } else {
-    showToast("Invalid selection", 1500);
-    return;
-  }
-  
+  const returnRate = 0.05; // 5%
   const expectedReturn = amount * returnRate;
-  const payoutDate = new Date();
-  payoutDate.setMonth(payoutDate.getMonth() + months);
+  const maturityDate = new Date();
+  maturityDate.setMonth(maturityDate.getMonth() + 3); // 3 months
   
-  const confirmMsg = confirm(`Invest ${amount} XCoin in Bond Investment?\nReturn: ${returnRate * 100}%\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nPayout Date: ${payoutDate.toLocaleDateString()}`);
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Bond Investment?\nReturn: 5%\nMaturity: 3 months\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nMaturity Date: ${maturityDate.toLocaleDateString()}`);
   if (!confirmMsg) return;
   
   const investBtn = document.querySelector('#bondAmount').parentElement.querySelector('button');
@@ -628,66 +612,10 @@ async function investInBond() {
     const newBalance = xcoinBalance - amount;
     await updateXCoinBalance(newBalance);
     
-    await recordInvestment("Bond Investment", amount, `${expectedReturn.toFixed(2)} XCoin (${returnRate * 100}%)`, payoutDate.toISOString());
+    await recordInvestment("Bond Investment", amount, `${expectedReturn.toFixed(2)} XCoin (5%)`, maturityDate.toISOString());
     
-    showToast(`✅ Invested ${amount} XCoin in Bond Investment! Expected return: ${expectedReturn.toFixed(2)} XCoin`, 3000);
+    showToast(`✅ Invested ${amount} XCoin in Bond Investment! Matures on ${maturityDate.toLocaleDateString()}`, 3000);
     document.getElementById("bondAmount").value = "";
-    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
-    
-    await loadInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Investment error:", error);
-    showToast("Investment failed. Please try again.", 1500);
-  } finally {
-    if (investBtn) {
-      investBtn.disabled = false;
-      investBtn.innerHTML = originalText;
-    }
-  }
-}
-
-async function investInRevenuePool() {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const amount = parseFloat(document.getElementById("revenueAmount").value);
-  
-  if (isNaN(amount) || amount < 50) {
-    showToast("Minimum investment is 50 XCoin", 1500);
-    return;
-  }
-  
-  if (amount > xcoinBalance) {
-    showToast("Insufficient XCoin balance", 1500);
-    return;
-  }
-  
-  const expectedReturn = amount * 0.1; // 10% return
-  const payoutDate = new Date();
-  payoutDate.setMonth(payoutDate.getMonth() + 1);
-  
-  const confirmMsg = confirm(`Invest ${amount} XCoin in Revenue Sharing Pool?\nExpected Return: 10%\nPayout: Monthly\nFirst Payout: ${payoutDate.toLocaleDateString()}`);
-  if (!confirmMsg) return;
-  
-  const investBtn = document.querySelector('#revenueAmount').parentElement.querySelector('button');
-  const originalText = investBtn?.innerHTML;
-  if (investBtn) {
-    investBtn.disabled = true;
-    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const newBalance = xcoinBalance - amount;
-    await updateXCoinBalance(newBalance);
-    
-    await recordInvestment("Revenue Sharing Pool", amount, `${expectedReturn.toFixed(2)} XCoin (10% monthly)`, payoutDate.toISOString());
-    
-    showToast(`✅ Invested ${amount} XCoin in Revenue Sharing Pool!`, 3000);
-    document.getElementById("revenueAmount").value = "";
     document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
     
     await loadInvestmentHistory();
@@ -712,8 +640,8 @@ async function investInCommodity() {
   
   const amount = parseFloat(document.getElementById("commodityAmount").value);
   
-  if (isNaN(amount) || amount < 100) {
-    showToast("Minimum investment is 100 XCoin", 1500);
+  if (isNaN(amount) || amount < 0.05) {
+    showToast("Minimum investment is 0.05 XCoin", 1500);
     return;
   }
   
@@ -722,26 +650,12 @@ async function investInCommodity() {
     return;
   }
   
-  const duration = prompt("Select duration:\n1. 3 months (5% return)\n2. 6 months (10% return)", "3");
-  let returnRate = 0.05;
-  let months = 3;
-  
-  if (duration === "1" || duration === "3") {
-    returnRate = 0.05;
-    months = 3;
-  } else if (duration === "2" || duration === "6") {
-    returnRate = 0.10;
-    months = 6;
-  } else {
-    showToast("Invalid selection", 1500);
-    return;
-  }
-  
+  const returnRate = 0.06; // 6%
   const expectedReturn = amount * returnRate;
-  const payoutDate = new Date();
-  payoutDate.setMonth(payoutDate.getMonth() + months);
+  const maturityDate = new Date();
+  maturityDate.setMonth(maturityDate.getMonth() + 3); // 3 months
   
-  const confirmMsg = confirm(`Invest ${amount} XCoin in Commodity-Backed Investment?\nReturn: ${returnRate * 100}%\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nPayout Date: ${payoutDate.toLocaleDateString()}`);
+  const confirmMsg = confirm(`Invest ${amount} XCoin in Commodity-Backed Investment?\nReturn: 6%\nMaturity: 3 months\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nMaturity Date: ${maturityDate.toLocaleDateString()}`);
   if (!confirmMsg) return;
   
   const investBtn = document.querySelector('#commodityAmount').parentElement.querySelector('button');
@@ -755,9 +669,9 @@ async function investInCommodity() {
     const newBalance = xcoinBalance - amount;
     await updateXCoinBalance(newBalance);
     
-    await recordInvestment("Commodity-Backed Investment", amount, `${expectedReturn.toFixed(2)} XCoin (${returnRate * 100}%)`, payoutDate.toISOString());
+    await recordInvestment("Commodity-Backed Investment", amount, `${expectedReturn.toFixed(2)} XCoin (6%)`, maturityDate.toISOString());
     
-    showToast(`✅ Invested ${amount} XCoin in Commodity-Backed Investment!`, 3000);
+    showToast(`✅ Invested ${amount} XCoin in Commodity-Backed Investment! Matures on ${maturityDate.toLocaleDateString()}`, 3000);
     document.getElementById("commodityAmount").value = "";
     document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
     
@@ -770,174 +684,6 @@ async function investInCommodity() {
     if (investBtn) {
       investBtn.disabled = false;
       investBtn.innerHTML = originalText;
-    }
-  }
-}
-
-async function investInInventory() {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const amount = parseFloat(document.getElementById("inventoryAmount").value);
-  
-  if (isNaN(amount) || amount < 200) {
-    showToast("Minimum investment is 200 XCoin", 1500);
-    return;
-  }
-  
-  if (amount > xcoinBalance) {
-    showToast("Insufficient XCoin balance", 1500);
-    return;
-  }
-  
-  const expectedReturn = amount * 0.15; // 15% return
-  const payoutDate = new Date();
-  payoutDate.setDate(payoutDate.getDate() + 60);
-  
-  const confirmMsg = confirm(`Invest ${amount} XCoin in Inventory Financing?\nExpected Return: 15%\nDuration: 60 days\nPayout Date: ${payoutDate.toLocaleDateString()}`);
-  if (!confirmMsg) return;
-  
-  const investBtn = document.querySelector('#inventoryAmount').parentElement.querySelector('button');
-  const originalText = investBtn?.innerHTML;
-  if (investBtn) {
-    investBtn.disabled = true;
-    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const newBalance = xcoinBalance - amount;
-    await updateXCoinBalance(newBalance);
-    
-    await recordInvestment("Inventory Financing", amount, `${expectedReturn.toFixed(2)} XCoin (15%)`, payoutDate.toISOString());
-    
-    showToast(`✅ Invested ${amount} XCoin in Inventory Financing!`, 3000);
-    document.getElementById("inventoryAmount").value = "";
-    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
-    
-    await loadInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Investment error:", error);
-    showToast("Investment failed. Please try again.", 1500);
-  } finally {
-    if (investBtn) {
-      investBtn.disabled = false;
-      investBtn.innerHTML = originalText;
-    }
-  }
-}
-
-// ========================================
-// TRADING FUNCTIONS
-// ========================================
-
-async function buyJLFTokens() {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const xcoinAmount = parseFloat(document.getElementById("jlfTokenAmount").value);
-  
-  if (isNaN(xcoinAmount) || xcoinAmount < 0.05) {
-    showToast("Minimum purchase is 0.05 XCoin (₱50)", 1500);
-    return;
-  }
-  
-  if (xcoinAmount > xcoinBalance) {
-    showToast("Insufficient XCoin balance", 1500);
-    return;
-  }
-  
-  const tokenAmount = xcoinAmount / 0.05;
-  
-  const confirmMsg = confirm(`Buy ${tokenAmount.toFixed(2)} JLF Tokens for ${xcoinAmount} XCoin?`);
-  if (!confirmMsg) return;
-  
-  const tradeBtn = document.querySelector('#jlfTokenAmount').parentElement.querySelector('button');
-  const originalText = tradeBtn?.innerHTML;
-  if (tradeBtn) {
-    tradeBtn.disabled = true;
-    tradeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const newBalance = xcoinBalance - xcoinAmount;
-    await updateXCoinBalance(newBalance);
-    
-    await recordInvestment("JLF Token Purchase", xcoinAmount, `${tokenAmount.toFixed(2)} JLF Tokens`, new Date().toISOString());
-    
-    showToast(`✅ Purchased ${tokenAmount.toFixed(2)} JLF Tokens!`, 3000);
-    document.getElementById("jlfTokenAmount").value = "";
-    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
-    
-    await loadInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Trade error:", error);
-    showToast("Purchase failed. Please try again.", 1500);
-  } finally {
-    if (tradeBtn) {
-      tradeBtn.disabled = false;
-      tradeBtn.innerHTML = originalText;
-    }
-  }
-}
-
-async function buyFWXTokens() {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const xcoinAmount = parseFloat(document.getElementById("fwxAmount").value);
-  
-  if (isNaN(xcoinAmount) || xcoinAmount < 0.025) {
-    showToast("Minimum purchase is 0.025 XCoin (₱25)", 1500);
-    return;
-  }
-  
-  if (xcoinAmount > xcoinBalance) {
-    showToast("Insufficient XCoin balance", 1500);
-    return;
-  }
-  
-  const tokenAmount = xcoinAmount / 0.025;
-  
-  const confirmMsg = confirm(`Buy ${tokenAmount.toFixed(2)} FWX Tokens for ${xcoinAmount} XCoin?`);
-  if (!confirmMsg) return;
-  
-  const tradeBtn = document.querySelector('#fwxAmount').parentElement.querySelector('button');
-  const originalText = tradeBtn?.innerHTML;
-  if (tradeBtn) {
-    tradeBtn.disabled = true;
-    tradeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const newBalance = xcoinBalance - xcoinAmount;
-    await updateXCoinBalance(newBalance);
-    
-    await recordInvestment("FWX Token Purchase", xcoinAmount, `${tokenAmount.toFixed(2)} FWX Tokens`, new Date().toISOString());
-    
-    showToast(`✅ Purchased ${tokenAmount.toFixed(2)} FWX Tokens!`, 3000);
-    document.getElementById("fwxAmount").value = "";
-    document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
-    
-    await loadInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Trade error:", error);
-    showToast("Purchase failed. Please try again.", 1500);
-  } finally {
-    if (tradeBtn) {
-      tradeBtn.disabled = false;
-      tradeBtn.innerHTML = originalText;
     }
   }
 }
@@ -965,23 +711,28 @@ async function loadInvestmentHistory() {
     
     container.innerHTML = investments.map(inv => {
       let statusClass = '';
-      switch(inv.status?.toLowerCase()) {
+      let statusText = inv.status || 'Active';
+      switch(statusText.toLowerCase()) {
         case 'active': statusClass = 'status-approved'; break;
         case 'completed': statusClass = 'status-completed'; break;
+        case 'matured': statusClass = 'status-completed'; break;
         default: statusClass = 'status-pending';
       }
+      
+      const maturityDate = inv.maturityDate ? new Date(inv.maturityDate) : null;
+      const isMatured = maturityDate && maturityDate <= new Date();
       
       return `
         <div class="investment-item">
           <div class="investment-header">
             <span class="investment-type">${inv.investmentType}</span>
-            <span class="investment-status ${statusClass}">${inv.status}</span>
+            <span class="investment-status ${statusClass}">${isMatured ? 'Matured' : statusText}</span>
           </div>
           <div class="investment-details">
             <div>📅 ${new Date(inv.timestamp).toLocaleDateString()}</div>
             <div>💰 Amount: ${parseFloat(inv.amount).toLocaleString()} XCoin</div>
             <div>📈 Expected Return: ${inv.expectedReturn}</div>
-            ${inv.payoutDate ? `<div>📅 Payout: ${new Date(inv.payoutDate).toLocaleDateString()}</div>` : ''}
+            ${inv.maturityDate ? `<div>⏰ Matures: ${new Date(inv.maturityDate).toLocaleDateString()}</div>` : ''}
           </div>
         </div>
       `;
@@ -1012,7 +763,7 @@ async function loadAdminConversions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead>  <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th></tr> </thead><tbody>';
     
     conversions.forEach(conv => {
       html += `
@@ -1039,7 +790,7 @@ async function loadAdminConversions() {
 }
 
 // ========================================
-// ORDERS FUNCTIONS
+// ORDERS FUNCTIONS (Keep existing)
 // ========================================
 async function placeOrder() {
   if (!currentUser) {
@@ -1222,7 +973,7 @@ function switchPage(pageName) {
 }
 
 // ========================================
-// CART FUNCTIONS
+// CART FUNCTIONS (Keep existing)
 // ========================================
 function updateCartBadge() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -1466,7 +1217,7 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
-// RECHARGE FUNCTIONS
+// RECHARGE FUNCTIONS (Keep existing)
 // ========================================
 function openRechargeModal() {
   if (!currentUser) {
@@ -1680,7 +1431,7 @@ async function loadAllRechargeHistory() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS
+// ADMIN FUNCTIONS (Keep existing)
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1766,7 +1517,7 @@ async function loadAdminOrders() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
     
     orders.forEach(order => {
       let statusClass = '';
@@ -1780,14 +1531,14 @@ async function loadAdminOrders() {
       
       html += `
         <tr data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-          <td>${new Date(order.timestamp).toLocaleString()}</td>
-          <td>${order.accountId || '-'}</td>
-          <td>${order.fullName || '-'}</td>
-          <td>${order.phone || '-'}</td>
+           <td>${new Date(order.timestamp).toLocaleString()}</td>
+           <td>${order.accountId || '-'}</td>
+           <td>${order.fullName || '-'}</td>
+           <td>${order.phone || '-'}</td>
           <td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td>
-          <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td>
-          <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td>
-          <td>
+           <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td>
+           <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td>
+           <td>
             <select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}">
               <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option>
@@ -1795,8 +1546,8 @@ async function loadAdminOrders() {
               <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
             </select>
             <button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button>
-          </td>
-        </tr>
+           </td>
+         </tr>
       `;
     });
     
@@ -1824,13 +1575,13 @@ async function loadAdminLogs() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
     
     logs.forEach(log => {
-      html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td>`;
+      html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1854,13 +1605,13 @@ async function loadAdminUsers() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead> <tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
     
     users.forEach(user => {
       html += `<tr><td>${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td>₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1884,13 +1635,13 @@ async function loadAdminRedemptions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
     
     redemptions.forEach(redemption => {
       html += `<tr><td>${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1914,7 +1665,7 @@ async function loadAdminRecharges() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th> </thead><tbody>';
     
     recharges.forEach(recharge => {
       let statusClass = '';
@@ -1947,7 +1698,7 @@ async function loadAdminRecharges() {
       `;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -2199,11 +1950,7 @@ function init() {
   window.convertPesoToXCoin = convertPesoToXCoin;
   window.convertXCoinToPeso = convertXCoinToPeso;
   window.investInBond = investInBond;
-  window.investInRevenuePool = investInRevenuePool;
   window.investInCommodity = investInCommodity;
-  window.investInInventory = investInInventory;
-  window.buyJLFTokens = buyJLFTokens;
-  window.buyFWXTokens = buyFWXTokens;
 }
 
 document.addEventListener('DOMContentLoaded', init);
