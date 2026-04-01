@@ -4699,3 +4699,20 @@ body.admin-mode .recharge-icon {
   padding: 40px;
   color: #999;
 }
+
+/* Disabled button styles */
+.btn-primary-apple:disabled,
+.btn-secondary-apple:disabled,
+.investment-input-featured button:disabled,
+.recharge-tab .btn-primary-apple:disabled,
+.withdraw-tab .btn-primary-apple:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary-apple:disabled:hover,
+.btn-secondary-apple:disabled:hover {
+  background: #111;
+  transform: none;
+}
