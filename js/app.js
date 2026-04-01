@@ -39,9 +39,19 @@ function showToast(message, duration = 1800) {
 // REAL-TIME BALANCE UPDATE FUNCTIONS
 // ========================================
 
-// Force refresh user balance from Google Sheets
+// Force refresh user balance from Google Sheets with loading indicator
 async function refreshUserBalance() {
   if (!currentUser) return;
+  
+  // Get the refresh button
+  const refreshBtn = document.querySelector('.refresh-balance-btn');
+  const originalBtnText = refreshBtn ? refreshBtn.innerHTML : '';
+  
+  // Disable button and show loading indicator
+  if (refreshBtn) {
+    refreshBtn.disabled = true;
+    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+  }
   
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
@@ -59,10 +69,21 @@ async function refreshUserBalance() {
         
         // Update all UI elements showing balance
         updateAllBalanceDisplays();
+      } else {
+        showToast(`💰 Balance is up to date: ₱${currentUser.balance.toLocaleString()}`, 1500);
       }
+    } else {
+      showToast("Failed to refresh balance. Please try again.", 1500);
     }
   } catch (error) {
     console.error("Refresh balance error:", error);
+    showToast("Failed to refresh balance. Please check your connection.", 1500);
+  } finally {
+    // Re-enable button and restore original text
+    if (refreshBtn) {
+      refreshBtn.disabled = false;
+      refreshBtn.innerHTML = originalBtnText;
+    }
   }
 }
 
@@ -1025,7 +1046,7 @@ async function loadAdminWithdrawals() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     withdrawals.forEach(withdrawal => {
       let statusClass = '';
@@ -1039,7 +1060,7 @@ async function loadAdminWithdrawals() {
       
       html += `
         <tr data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
-          <td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}   </td>
+          <td>${new Date(withdrawal.timestamp).toLocaleString()}</td>
           <td>${withdrawal.accountId || '-'}</td>
           <td>${withdrawal.fullName || '-'}</td>
           <td>${withdrawal.phone || '-'}</td>
@@ -1150,7 +1171,7 @@ async function loadAdminRecharges() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     recharges.forEach(recharge => {
       let statusClass = '';
@@ -1163,14 +1184,14 @@ async function loadAdminRecharges() {
       
       html += `
         <tr data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
-          <td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}   </td>
+          <td>${new Date(recharge.timestamp).toLocaleString()}</td>
           <td>${recharge.accountId || '-'}</td>
           <td>${recharge.fullName || '-'}</td>
           <td>${recharge.phone || '-'}</td>
           <td>${recharge.method || '-'}</td>
-          <td style="white-space: nowrap;">₱${parseFloat(recharge.amount || 0).toLocaleString()}   </td>
-          <td style="max-width: 150px; word-break: break-word;"><code>${recharge.reference || '-'}</code>   </td>
-          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span>   </td>
+          <td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td>
+          <td><code>${recharge.reference || '-'}</code></td>
+          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td>
           <td>
             <select class="update-recharge-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
               <option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option>
@@ -1178,12 +1199,12 @@ async function loadAdminRecharges() {
               <option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
             </select>
             <button class="update-recharge-btn" onclick="updateRechargeStatusFromAdmin('${recharge.timestamp}', '${recharge.phone}')">Update</button>
-             </td>
-         </tr>
+          </td>
+        </tr>
       `;
     });
     
-    html += '</tbody>   </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1623,7 +1644,7 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
-// RECHARGE FUNCTIONS (continued)
+// RECHARGE FUNCTIONS
 // ========================================
 function openRechargeModal() {
   if (!currentUser) {
@@ -1730,13 +1751,14 @@ async function submitRecharge(method) {
   }
 }
 
+// FIXED: Load Recharge History with proper styling
 async function loadRechargeHistory() {
   if (!currentUser) return;
   
   const container = document.getElementById("rechargeHistoryContainer");
   if (!container) return;
   
-  container.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>';
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>';
   
   try {
     const formData = new URLSearchParams();
@@ -1747,7 +1769,7 @@ async function loadRechargeHistory() {
     const recharges = await response.json();
     
     if (!recharges || recharges.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 20px;">No recharge transactions yet.</div>';
+      container.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No recharge transactions yet.</p></div>';
       return;
     }
     
@@ -1764,15 +1786,15 @@ async function loadRechargeHistory() {
       const methodIcon = recharge.method === 'gcash' ? '📱' : '💰';
       
       return `
-        <div class="recharge-item">
+        <div class="recharge-item ${statusClass}">
           <div class="recharge-header">
             <span class="recharge-method">${methodIcon} ${recharge.method.toUpperCase()}</span>
             <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status}</span>
           </div>
           <div class="recharge-details">
-            <div>📅 ${new Date(recharge.timestamp).toLocaleString()}</div>
-            <div>💰 Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
-            ${recharge.reference ? `<div>🔖 Ref: ${recharge.reference}</div>` : ''}
+            <div><i class="fas fa-calendar"></i> ${new Date(recharge.timestamp).toLocaleString()}</div>
+            <div><i class="fas fa-money-bill-wave"></i> Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
+            ${recharge.reference ? `<div><i class="fas fa-hashtag"></i> Reference: ${recharge.reference}</div>` : ''}
           </div>
         </div>
       `;
@@ -1780,7 +1802,7 @@ async function loadRechargeHistory() {
     
   } catch (error) {
     console.error("Load recharge history error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 20px;">Failed to load transaction history.</div>';
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Failed to load transaction history.</p><button class="btn-secondary-apple" onclick="loadRechargeHistory()" style="margin-top: 10px;">Try Again</button></div>';
   }
 }
 
@@ -1790,7 +1812,7 @@ async function loadAllRechargeHistory() {
   const container = document.getElementById("rechargeHistoryOrdersContainer");
   if (!container) return;
   
-  container.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge history...</div>';
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading recharge history...</div>';
   
   try {
     const formData = new URLSearchParams();
@@ -1801,7 +1823,7 @@ async function loadAllRechargeHistory() {
     const recharges = await response.json();
     
     if (!recharges || recharges.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 20px;">No recharge transactions yet.</div>';
+      container.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No recharge transactions yet.</p></div>';
       return;
     }
     
@@ -1816,15 +1838,15 @@ async function loadAllRechargeHistory() {
       }
       
       return `
-        <div class="recharge-item">
+        <div class="recharge-item ${statusClass}">
           <div class="recharge-header">
             <span class="recharge-method">${recharge.method.toUpperCase()}</span>
             <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status}</span>
           </div>
           <div class="recharge-details">
-            <div>📅 ${new Date(recharge.timestamp).toLocaleString()}</div>
-            <div>💰 Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
-            ${recharge.reference ? `<div>🔖 Ref: ${recharge.reference}</div>` : ''}
+            <div><i class="fas fa-calendar"></i> ${new Date(recharge.timestamp).toLocaleString()}</div>
+            <div><i class="fas fa-money-bill-wave"></i> Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
+            ${recharge.reference ? `<div><i class="fas fa-hashtag"></i> Reference: ${recharge.reference}</div>` : ''}
           </div>
         </div>
       `;
@@ -1832,7 +1854,7 @@ async function loadAllRechargeHistory() {
     
   } catch (error) {
     console.error("Load recharge history error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 20px;">Failed to load recharge history.</div>';
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Failed to load recharge history.</p></div>';
   }
 }
 
@@ -1929,7 +1951,7 @@ async function loadAdminOrders() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
     
     orders.forEach(order => {
       let statusClass = '';
@@ -1987,7 +2009,7 @@ async function loadAdminLogs() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
     
     logs.forEach(log => {
       html += `
@@ -2026,20 +2048,20 @@ async function loadAdminUsers() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
     
     users.forEach(user => {
       html += `
         <tr>
-          <td>${user.accountId || '-'}   \n
-          <td>${user.name || '-'}   \n
-          <td>${user.phone || '-'}   \n
-          <td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}   \n
-           '.
+          <td>${user.accountId || '-'}</td>
+          <td>${user.name || '-'}</td>
+          <td>${user.phone || '-'}</td>
+          <td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td>
+        </tr>
       `;
     });
     
-    html += '</tbody>   </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -2063,22 +2085,22 @@ async function loadAdminRedemptions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
     
     redemptions.forEach(redemption => {
       html += `
         <tr>
-          <td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}   \n
-          <td>${redemption.accountId || '-'}   \n
-          <td>${redemption.fullName || '-'}   \n
-          <td>${redemption.phone || '-'}   \n
-          <td><code>${redemption.codeInput || '-'}</code>   \n
-          <td>${redemption.reward || '-'}   \n
-         </tr>
+          <td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td>
+          <td>${redemption.accountId || '-'}</td>
+          <td>${redemption.fullName || '-'}</td>
+          <td>${redemption.phone || '-'}</td>
+          <td><code>${redemption.codeInput || '-'}</code></td>
+          <td>${redemption.reward || '-'}</td>
+        </tr>
       `;
     });
     
-    html += '</tbody>   </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -2102,24 +2124,24 @@ async function loadAdminConversions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
     
     conversions.forEach(conv => {
       html += `
         <tr>
-          <td style="white-space: nowrap;">${new Date(conv.timestamp).toLocaleString()}   \n
-          <td>${conv.accountId || '-'}   \n
-          <td>${conv.fullName || '-'}   \n
-          <td>${conv.phone || '-'}   \n
-          <td>${conv.type || '-'}   \n
-           <td style="white-space: nowrap;">₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}   \n
-           <td style="white-space: nowrap;">${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin   \n
-           <td style="white-space: nowrap;">${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin   \n
-         </tr>
+          <td style="white-space: nowrap;">${new Date(conv.timestamp).toLocaleString()}</td>
+          <td>${conv.accountId || '-'}</td>
+          <td>${conv.fullName || '-'}</td>
+          <td>${conv.phone || '-'}</td>
+          <td>${conv.type || '-'}</td>
+          <td style="white-space: nowrap;">₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}</td>
+          <td style="white-space: nowrap;">${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin</td>
+          <td style="white-space: nowrap;">${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin</td>
+        </tr>
       `;
     });
     
-    html += '</tbody>   </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -2143,7 +2165,7 @@ async function loadAdminInvestments() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
     
     investments.forEach(inv => {
       let statusClass = '';
@@ -2156,20 +2178,20 @@ async function loadAdminInvestments() {
       
       html += `
         <tr>
-          <td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}   \n
-           Was${inv.accountId || '-'}   \n
-           Was${inv.fullName || '-'}   \n
-           Was${inv.phone || '-'}   \n
-           Was${inv.investmentType || '-'}   \n
-           <td style="white-space: nowrap;">${parseFloat(inv.amount || 0).toLocaleString()} XCoin   \n
-           Was${inv.expectedReturn || '-'}   \n
-           Was<span class="status-badge ${statusClass}">${inv.status || 'Active'}</span>   \n
-           Was${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}   \n
-         </tr>
+          <td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}</td>
+          <td>${inv.accountId || '-'}</td>
+          <td>${inv.fullName || '-'}</td>
+          <td>${inv.phone || '-'}</td>
+          <td>${inv.investmentType || '-'}</td>
+          <td style="white-space: nowrap;">${parseFloat(inv.amount || 0).toLocaleString()} XCoin</td>
+          <td>${inv.expectedReturn || '-'}</td>
+          <td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td>
+          <td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td>
+        </tr>
       `;
     });
     
-    html += '</tbody>   </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
