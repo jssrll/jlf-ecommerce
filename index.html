@@ -49,6 +49,9 @@
         <div class="admin-exit-btn" id="adminExitBtn" style="display: none;">
           <i class="fas fa-sign-out-alt"></i> Exit Admin
         </div>
+        <div class="withdraw-icon" id="withdrawIcon">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
         <div class="xcoin-icon" id="xcoinIcon">
           <i class="fas fa-chart-line"></i>
         </div>
@@ -217,6 +220,12 @@
       <h2>Recharge History</h2>
       <div id="rechargeHistoryOrdersContainer" class="recharge-history-list"></div>
     </div>
+    
+    <!-- Withdrawal History Section -->
+    <div class="withdrawal-history-section" style="margin-top: 40px;">
+      <h2>Withdrawal History</h2>
+      <div id="withdrawalHistoryOrdersContainer" class="withdrawal-history-list"></div>
+    </div>
   </div>
 
   <!-- MARKET PAGE - XCoin Investment & Trading -->
@@ -306,6 +315,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('users')">User Management</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('conversions')">XCoin Conversions</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('investments')">XCoin Investments</button>
     </div>
@@ -331,6 +341,10 @@
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminRecharges()"><i class="fas fa-sync-alt"></i> Refresh Recharges</button></div>
       <div id="adminRechargesContainer" class="admin-recharges-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div></div>
     </div>
+    <div id="adminWithdrawalsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh Withdrawals</button></div>
+      <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
+    </div>
     <div id="adminConversionsTab" class="admin-tab">
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminConversions()"><i class="fas fa-sync-alt"></i> Refresh Conversions</button></div>
       <div id="adminConversionsContainer" class="admin-conversions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div></div>
@@ -352,10 +366,8 @@
       <div class="faq-list-apple">
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout. Make sure you have enough credit balance to complete the purchase.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I track my order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can track your order in the Orders page after logging into your account. Order status is updated in real-time and you'll see if it's Pending, Approved, Completed, or Cancelled.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Do you offer meet-up options?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes! We offer meet-up options for customers within Calapan City and nearby areas. Coordinate with our support team first before placing order.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Is there a minimum order for free delivery?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes, we offer free delivery on all orders ₱1,999 and above around Calapan City. For orders below this amount, a standard delivery fee applies.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How can I add credits to my account?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can recharge your balance by clicking the wallet icon next to your profile. Choose either GCash or Cash payment method, follow the instructions, and submit your recharge request. Admin will approve it within 1 hour.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How long does it take for my recharge to reflect?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Recharge requests are processed within 1 hour during business hours. Once approved by admin, the amount will be added to your balance automatically. If it doesn't reflect, try logging out and logging back in.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I withdraw funds?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Click the withdraw icon (₱) next to the recharge icon, select your withdrawal method (GCash or Cash), enter the required details, and submit. Admin will process within 24 hours.</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I recharge my balance?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Click the wallet icon, choose GCash or Cash payment, follow the instructions, and submit your request. Admin will approve within 1 hour.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>What is XCoin?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">XCoin is our digital asset. 1 XCoin = ₱1,000. You can convert your peso balance to XCoin and invest in our bond and commodity-backed investments with returns up to 6% in 3 months.</div></div>
       </div>
     </div>
@@ -488,6 +500,88 @@
           <li>Submit your recharge request</li>
           <li>Wait for admin approval (within 1 hour)</li>
           <li>Balance will be added automatically</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Withdraw Modal -->
+<div id="withdrawModal" class="modal">
+  <div class="modal-content withdraw-modal">
+    <div class="modal-header">
+      <h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2>
+      <button class="close-modal" onclick="closeWithdrawModal()">&times;</button>
+    </div>
+    <div class="withdraw-content">
+      <div class="withdraw-tabs">
+        <button class="withdraw-tab-btn active" onclick="switchWithdrawTab('gcash')">GCash</button>
+        <button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button>
+      </div>
+      
+      <!-- GCash Withdrawal -->
+      <div id="withdrawGcashTab" class="withdraw-tab active">
+        <div class="withdraw-form">
+          <div class="form-group">
+            <label>Account Name (Fixed)</label>
+            <input type="text" id="withdrawAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Account ID (Fixed)</label>
+            <input type="text" id="withdrawAccountId" readonly>
+          </div>
+          <div class="form-group">
+            <label>Receiver Name</label>
+            <input type="text" id="gcashReceiverName" placeholder="Enter receiver's full name" required>
+          </div>
+          <div class="form-group">
+            <label>Receiver GCash Number</label>
+            <input type="tel" id="gcashReceiverNumber" placeholder="09XXXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="withdrawGcashAmount" placeholder="Enter amount to withdraw" min="50">
+          </div>
+          <div class="withdraw-note">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Note:</strong> The system is not responsible for any wrong account information provided. Please double-check the receiver details before submitting.
+          </div>
+          <button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button>
+        </div>
+      </div>
+      
+      <!-- Cash Withdrawal -->
+      <div id="withdrawCashTab" class="withdraw-tab">
+        <div class="withdraw-form">
+          <div class="form-group">
+            <label>Account Name (Fixed)</label>
+            <input type="text" id="withdrawCashAccountName" readonly>
+          </div>
+          <div class="form-group">
+            <label>Account ID (Fixed)</label>
+            <input type="text" id="withdrawCashAccountId" readonly>
+          </div>
+          <div class="form-group">
+            <label>Amount (₱)</label>
+            <input type="number" id="withdrawCashAmount" placeholder="Enter amount to withdraw" min="50">
+          </div>
+          <div class="withdraw-note">
+            <i class="fas fa-store"></i>
+            <strong>Note:</strong> Cash withdrawal can be claimed at our physical store. Please bring your valid ID.
+          </div>
+          <button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button>
+        </div>
+      </div>
+      
+      <div class="withdraw-info">
+        <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+        <ol>
+          <li>Select your withdrawal method (GCash or Cash)</li>
+          <li>For GCash: Enter receiver name and GCash number</li>
+          <li>For Cash: Withdraw at our physical store</li>
+          <li>Submit your withdrawal request</li>
+          <li>Wait for admin approval (within 24 hours)</li>
+          <li>Funds will be sent/available after approval</li>
         </ol>
       </div>
     </div>

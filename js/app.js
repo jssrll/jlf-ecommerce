@@ -11,7 +11,7 @@ let xcoinBalance = 0;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbyc9jq1pTNh419GDuFA08gF8WBZf4voBOlvIDMoDDy4dlAXw3cA0k5qiJrwBV4QloVS/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzZM_iFKQangDfkFsoWgjLlM6gPWB5MU65o16qvoWxQM5inv-nF5qUvoV-ugJhCLf-v/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -745,8 +745,281 @@ async function loadInvestmentHistory() {
 }
 
 // ========================================
+// WITHDRAWAL FUNCTIONS
+// ========================================
+
+function openWithdrawModal() {
+  if (!currentUser) {
+    showToast("Please login to withdraw", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  document.getElementById("withdrawAccountName").value = currentUser.name;
+  document.getElementById("withdrawAccountId").value = currentUser.id;
+  document.getElementById("withdrawCashAccountName").value = currentUser.name;
+  document.getElementById("withdrawCashAccountId").value = currentUser.id;
+  
+  const modal = document.getElementById("withdrawModal");
+  modal.classList.add("show");
+  loadWithdrawalHistory();
+}
+
+function closeWithdrawModal() {
+  const modal = document.getElementById("withdrawModal");
+  modal.classList.remove("show");
+}
+
+function switchWithdrawTab(tabName) {
+  document.querySelectorAll('.withdraw-tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (tabName === 'gcash') {
+    document.querySelector('.withdraw-tab-btn:first-child').classList.add('active');
+  } else {
+    document.querySelector('.withdraw-tab-btn:last-child').classList.add('active');
+  }
+  
+  document.querySelectorAll('.withdraw-tab').forEach(tab => tab.classList.remove('active'));
+  if (tabName === 'gcash') {
+    document.getElementById('withdrawGcashTab').classList.add('active');
+  } else {
+    document.getElementById('withdrawCashTab').classList.add('active');
+  }
+}
+
+async function submitWithdraw(method) {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  let amount, receiverName = "", receiverNumber = "";
+  const submitBtn = document.querySelector(`#withdraw${method === 'gcash' ? 'Gcash' : 'Cash'}Tab .btn-primary-apple`);
+  const originalText = submitBtn.innerHTML;
+  
+  if (method === 'gcash') {
+    amount = document.getElementById("withdrawGcashAmount").value;
+    receiverName = document.getElementById("gcashReceiverName").value.trim();
+    receiverNumber = document.getElementById("gcashReceiverNumber").value.trim();
+    
+    if (!receiverName) {
+      showToast("Please enter receiver name", 1500);
+      return;
+    }
+    if (!receiverNumber || !/^09\d{9}$/.test(receiverNumber)) {
+      showToast("Please enter a valid GCash number (09XXXXXXXXX)", 1500);
+      return;
+    }
+  } else {
+    amount = document.getElementById("withdrawCashAmount").value;
+  }
+  
+  amount = parseFloat(amount);
+  if (isNaN(amount) || amount < 50) {
+    showToast("Please enter a valid amount (minimum ₱50)", 1500);
+    return;
+  }
+  
+  if (amount > currentUser.balance) {
+    showToast("Insufficient balance", 1500);
+    return;
+  }
+  
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addWithdrawal");
+    formData.append("timestamp", new Date().toISOString());
+    formData.append("accountId", currentUser.id);
+    formData.append("fullName", currentUser.name);
+    formData.append("phone", currentUser.phone);
+    formData.append("method", method);
+    formData.append("amount", amount);
+    formData.append("receiverName", receiverName);
+    formData.append("receiverNumber", receiverNumber);
+    formData.append("status", "Pending");
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`✅ Withdrawal request submitted! Amount: ₱${amount}. Please wait for approval.`, 3000);
+      if (method === 'gcash') {
+        document.getElementById("withdrawGcashAmount").value = "";
+        document.getElementById("gcashReceiverName").value = "";
+        document.getElementById("gcashReceiverNumber").value = "";
+      } else {
+        document.getElementById("withdrawCashAmount").value = "";
+      }
+      loadWithdrawalHistory();
+    } else {
+      showToast(result.message || "Submission failed", 1500);
+    }
+  } catch (error) {
+    console.error("Withdrawal error:", error);
+    showToast("Failed to submit. Please try again.", 1500);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+}
+
+async function loadWithdrawalHistory() {
+  if (!currentUser) return;
+  
+  const container = document.getElementById("withdrawalHistoryOrdersContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal history...</div>';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserWithdrawals");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const withdrawals = await response.json();
+    
+    if (!withdrawals || withdrawals.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 20px;">No withdrawal transactions yet.</div>';
+      return;
+    }
+    
+    container.innerHTML = withdrawals.map(withdrawal => {
+      let statusClass = '';
+      let statusIcon = '';
+      switch(withdrawal.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; statusIcon = '⏳'; break;
+        case 'processing': statusClass = 'status-processing'; statusIcon = '🔄'; break;
+        case 'completed': statusClass = 'status-approved'; statusIcon = '✅'; break;
+        case 'rejected': statusClass = 'status-cancelled'; statusIcon = '❌'; break;
+        default: statusClass = 'status-pending'; statusIcon = '⏳';
+      }
+      
+      const methodIcon = withdrawal.method === 'gcash' ? '📱' : '💰';
+      
+      return `
+        <div class="withdrawal-item">
+          <div class="withdrawal-header">
+            <span class="withdrawal-method">${methodIcon} ${withdrawal.method.toUpperCase()}</span>
+            <span class="withdrawal-status ${statusClass}">${statusIcon} ${withdrawal.status}</span>
+          </div>
+          <div class="withdrawal-details">
+            <div>📅 ${new Date(withdrawal.timestamp).toLocaleString()}</div>
+            <div>💰 Amount: ₱${parseFloat(withdrawal.amount).toLocaleString()}</div>
+            ${withdrawal.receiverName ? `<div>👤 Receiver: ${withdrawal.receiverName}</div>` : ''}
+            ${withdrawal.receiverNumber ? `<div>📱 Number: ${withdrawal.receiverNumber}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Load withdrawal history error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 20px;">Failed to load withdrawal history.</div>';
+  }
+}
+
+// ========================================
 // ADMIN FUNCTIONS
 // ========================================
+
+async function loadAdminWithdrawals() {
+  const container = document.getElementById("adminWithdrawalsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllWithdrawals`);
+    const withdrawals = await response.json();
+    
+    if (!withdrawals || withdrawals.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No withdrawal requests found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead> <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th></tr> </thead><tbody>';
+    
+    withdrawals.forEach(withdrawal => {
+      let statusClass = '';
+      switch(withdrawal.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; break;
+        case 'processing': statusClass = 'status-processing'; break;
+        case 'completed': statusClass = 'status-approved'; break;
+        case 'rejected': statusClass = 'status-cancelled'; break;
+        default: statusClass = 'status-pending';
+      }
+      
+      html += `
+        <tr data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
+          <td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}</td>
+          <td>${withdrawal.accountId || '-'}</td>
+          <td>${withdrawal.fullName || '-'}</td>
+          <td>${withdrawal.phone || '-'}</td>
+          <td>${withdrawal.method || '-'}</td>
+          <td>₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td>
+          <td>${withdrawal.receiverName || '-'}</td>
+          <td>${withdrawal.receiverNumber || '-'}</td>
+          <td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td>
+          <td>
+            <select class="update-withdrawal-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
+              <option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option>
+              <option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+            <button class="update-withdrawal-btn" onclick="updateWithdrawalStatusFromAdmin('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button>
+          </td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody> </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin withdrawals error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests.</div>';
+  }
+}
+
+async function updateWithdrawalStatusFromAdmin(timestamp, phone) {
+  const select = document.querySelector(`.update-withdrawal-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  const newStatus = select.value;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateWithdrawalStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`Withdrawal status updated to: ${newStatus}`, 1500);
+      loadAdminWithdrawals();
+      if (currentUser && currentUser.phone === phone && (newStatus === "Completed" || newStatus === "Approved")) {
+        const userResponse = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
+        const users = await userResponse.json();
+        const updatedUser = users.find(u => u.phone === phone);
+        if (updatedUser) {
+          currentUser.balance = updatedUser.balance || 0;
+          localStorage.setItem("nova_user", JSON.stringify(currentUser));
+        }
+      }
+    } else {
+      showToast("Failed to update withdrawal status", 1500);
+    }
+  } catch (error) {
+    console.error("Update withdrawal status error:", error);
+    showToast("Failed to update withdrawal status", 1500);
+  }
+}
 
 async function loadAdminInvestments() {
   const container = document.getElementById("adminInvestmentsContainer");
@@ -789,12 +1062,12 @@ async function loadAdminInvestments() {
       `;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody>  </table>';
     container.innerHTML = html;
     
   } catch (error) {
     console.error("Load admin investments error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments. Please try again.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments.</div>';
   }
 }
 
@@ -1013,6 +1286,7 @@ function switchPage(pageName) {
   else if (pageName === 'orders') {
     loadUserOrders();
     loadAllRechargeHistory();
+    loadWithdrawalHistory();
   }
   else if (pageName === 'market') {
     loadXCoinBalance();
@@ -1481,7 +1755,7 @@ async function loadAllRechargeHistory() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS
+// ADMIN FUNCTIONS (continued)
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1542,6 +1816,7 @@ function switchAdminTab(tabName) {
   else if (tabName === 'users') loadAdminUsers();
   else if (tabName === 'redemptions') loadAdminRedemptions();
   else if (tabName === 'recharges') loadAdminRecharges();
+  else if (tabName === 'withdrawals') loadAdminWithdrawals();
   else if (tabName === 'conversions') loadAdminConversions();
   else if (tabName === 'investments') loadAdminInvestments();
 }
@@ -1552,6 +1827,7 @@ async function loadAdminData() {
   loadAdminUsers();
   loadAdminRedemptions();
   loadAdminRecharges();
+  loadAdminWithdrawals();
   loadAdminConversions();
   loadAdminInvestments();
 }
@@ -1571,7 +1847,7 @@ async function loadAdminOrders() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
     
     orders.forEach(order => {
       let statusClass = '';
@@ -1585,27 +1861,27 @@ async function loadAdminOrders() {
       
       html += `
         <tr data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-           <td>${new Date(order.timestamp).toLocaleString()}</td>
-           <td>${order.accountId || '-'}</td>
-           <td>${order.fullName || '-'}</td>
-           <td>${order.phone || '-'}</td>
-          <td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td>
-           <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td>
-           <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td>
-           <td>
-            <select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-              <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option>
-              <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
-              <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-            </select>
-            <button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button>
-           </td>
-         </tr>
+            <td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}  </td>
+            <td>${order.accountId || '-'}</td>
+            <td>${order.fullName || '-'}</td>
+            <td>${order.phone || '-'}</td>
+            <td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td>
+            <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td>
+            <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td>
+            <td>
+              <select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}">
+                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option>
+                <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+              </select>
+              <button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button>
+            </td>
+          </tr>
       `;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1629,13 +1905,13 @@ async function loadAdminLogs() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th></tr></thead><tbody>';
     
     logs.forEach(log => {
       html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1659,13 +1935,13 @@ async function loadAdminUsers() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr></thead><tbody>';
     
     users.forEach(user => {
       html += `<tr><td>${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td>₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1689,13 +1965,13 @@ async function loadAdminRedemptions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
     
     redemptions.forEach(redemption => {
       html += `<tr><td>${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     
-    html += '</tbody> </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1719,7 +1995,7 @@ async function loadAdminRecharges() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     recharges.forEach(recharge => {
       let statusClass = '';
@@ -1732,27 +2008,27 @@ async function loadAdminRecharges() {
       
       html += `
         <tr data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
-           <td>${new Date(recharge.timestamp).toLocaleString()}</td>
-           <td>${recharge.accountId || '-'}</td>
-           <td>${recharge.fullName || '-'}</td>
-           <td>${recharge.phone || '-'}</td>
-           <td>${recharge.method || '-'}</td>
-           <td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td>
-           <td><code>${recharge.reference || '-'}</code></td>
-           <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td>
-           <td>
+          <td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td>
+          <td>${recharge.accountId || '-'}</td>
+          <td>${recharge.fullName || '-'}</td>
+          <td>${recharge.phone || '-'}</td>
+          <td>${recharge.method || '-'}</td>
+          <td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td>
+          <td><code>${recharge.reference || '-'}</code></td>
+          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td>
+          <td>
             <select class="update-recharge-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
               <option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option>
               <option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
             </select>
             <button class="update-recharge-btn" onclick="updateRechargeStatusFromAdmin('${recharge.timestamp}', '${recharge.phone}')">Update</button>
-            </td>
-          </tr>
+          </td>
+        </tr>
       `;
     });
     
-    html += '</tbody>  </table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1918,6 +2194,16 @@ function initRechargeIcon() {
 }
 
 // ========================================
+// WITHDRAW ICON
+// ========================================
+function initWithdrawIcon() {
+  const withdrawIcon = document.getElementById('withdrawIcon');
+  if (withdrawIcon) {
+    withdrawIcon.addEventListener('click', () => { openWithdrawModal(); });
+  }
+}
+
+// ========================================
 // XCOIN ICON
 // ========================================
 function initXCoinIcon() {
@@ -1961,6 +2247,7 @@ function init() {
   
   initAdminIcon();
   initRechargeIcon();
+  initWithdrawIcon();
   initXCoinIcon();
   
   switchPage('home');
@@ -1988,14 +2275,20 @@ function init() {
   window.closeRechargeModal = closeRechargeModal;
   window.switchRechargeTab = switchRechargeTab;
   window.submitRecharge = submitRecharge;
+  window.openWithdrawModal = openWithdrawModal;
+  window.closeWithdrawModal = closeWithdrawModal;
+  window.switchWithdrawTab = switchWithdrawTab;
+  window.submitWithdraw = submitWithdraw;
   window.updateOrderStatusFromAdmin = updateOrderStatusFromAdmin;
   window.updateRechargeStatusFromAdmin = updateRechargeStatusFromAdmin;
+  window.updateWithdrawalStatusFromAdmin = updateWithdrawalStatusFromAdmin;
   window.switchAdminTab = switchAdminTab;
   window.refreshAdminOrders = refreshAdminOrders;
   window.refreshAdminLogs = refreshAdminLogs;
   window.refreshAdminUsers = refreshAdminUsers;
   window.refreshAdminRedemptions = refreshAdminRedemptions;
   window.loadAdminRecharges = loadAdminRecharges;
+  window.loadAdminWithdrawals = loadAdminWithdrawals;
   window.loadAdminConversions = loadAdminConversions;
   window.loadAdminInvestments = loadAdminInvestments;
   window.loadUserOrders = loadUserOrders;
