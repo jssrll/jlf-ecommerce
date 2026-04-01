@@ -249,15 +249,7 @@
     <div class="investment-history-section-featured">
       <h2><i class="fas fa-history"></i> Your Investment History</h2>
       <div id="investmentHistoryContainerFeatured" class="investment-history-list-featured">
-        <div class="empty-state">No investments yet. Start investing with your credit balance!</div>
-      </div>
-    </div>
-
-    <!-- Featured Products -->
-    <div class="featured-products">
-      <h2>Featured Items</h2>
-      <div class="featured-grid" id="featuredGrid">
-        <!-- Featured products will be loaded here -->
+        <div class="empty-state">No investments yet.</div>
       </div>
     </div>
   </div>
@@ -283,60 +275,83 @@
     </div>
   </div>
 
-<!-- ADMIN PAGE -->
-<div id="adminPage" class="page">
-  <div class="page-hero">
-    <h1><i class="fas fa-code"></i> Admin Dashboard</h1>
-    <p>Manage orders, view logs, and monitor system activity</p>
-  </div>
-  <div class="admin-tabs">
-    <button class="admin-tab-btn active" onclick="switchAdminTab('orders')">Orders Management</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('logs')">Login Logs</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('users')">User Management</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
-    <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
-  </div>
-  <div id="adminOrdersTab" class="admin-tab active">
-    <div class="admin-actions">
-      <button class="btn-secondary-apple" onclick="refreshAdminOrders()"><i class="fas fa-sync-alt"></i> Refresh Orders</button>
+  <!-- ADMIN PAGE -->
+  <div id="adminPage" class="page">
+    <div class="page-hero">
+      <h1><i class="fas fa-code"></i> Admin Dashboard</h1>
+      <p>Manage orders, view logs, and monitor system activity</p>
     </div>
-    <div id="adminOrdersContainer" class="admin-orders-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div></div>
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchAdminTab('orders')">Orders Management</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('logs')">Login Logs</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('users')">User Management</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
+    </div>
+    <div id="adminOrdersTab" class="admin-tab active">
+      <div class="admin-actions">
+        <button class="btn-secondary-apple" onclick="refreshAdminOrders()"><i class="fas fa-sync-alt"></i> Refresh Orders</button>
+      </div>
+      <div id="adminOrdersContainer" class="admin-orders-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div></div>
+    </div>
+    <div id="adminLogsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminLogs()"><i class="fas fa-sync-alt"></i> Refresh Logs</button></div>
+      <div id="adminLogsContainer" class="admin-logs-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div></div>
+    </div>
+    <div id="adminUsersTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminUsers()"><i class="fas fa-sync-alt"></i> Refresh Users</button></div>
+      <div id="adminUsersContainer" class="admin-users-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div></div>
+    </div>
+    <div id="adminRedemptionsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminRedemptions()"><i class="fas fa-sync-alt"></i> Refresh Redemptions</button></div>
+      <div id="adminRedemptionsContainer" class="admin-redemptions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div></div>
+    </div>
+    <div id="adminRechargesTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminRecharges()"><i class="fas fa-sync-alt"></i> Refresh Recharges</button></div>
+      <div id="adminRechargesContainer" class="admin-recharges-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div></div>
+    </div>
+    <div id="adminWithdrawalsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh Withdrawals</button></div>
+      <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
+    </div>
+    <div id="adminInvestmentsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Bond Investments</button></div>
+      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div></div>
+    </div>
   </div>
-  <div id="adminLogsTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminLogs()"><i class="fas fa-sync-alt"></i> Refresh Logs</button></div>
-    <div id="adminLogsContainer" class="admin-logs-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div></div>
-  </div>
-  <div id="adminUsersTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminUsers()"><i class="fas fa-sync-alt"></i> Refresh Users</button></div>
-    <div id="adminUsersContainer" class="admin-users-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div></div>
-  </div>
-  <div id="adminRedemptionsTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="refreshAdminRedemptions()"><i class="fas fa-sync-alt"></i> Refresh Redemptions</button></div>
-    <div id="adminRedemptionsContainer" class="admin-redemptions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div></div>
-  </div>
-  <div id="adminRechargesTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminRecharges()"><i class="fas fa-sync-alt"></i> Refresh Recharges</button></div>
-    <div id="adminRechargesContainer" class="admin-recharges-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div></div>
-  </div>
-  <div id="adminWithdrawalsTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh Withdrawals</button></div>
-    <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
-  </div>
-  <div id="adminInvestmentsTab" class="admin-tab">
-    <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Bond Investments</button></div>
-    <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div></div>
-  </div>
-</div>
 
   <!-- HELP PAGE -->
   <div id="helpPage" class="page">
     <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7. How can we assist you today?</p></div>
+    
     <div class="support-grid-apple">
       <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><p>Chat with our support team instantly</p><button class="btn-secondary-apple" onclick="startChat()">Start Chat</button></div>
       <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlfworks.official@gmail.com</p><p>Response within 24 hours</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
     </div>
+
+    <!-- Admin Access Container -->
+    <div class="admin-access-container">
+      <div class="admin-access-card">
+        <div class="admin-access-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Admin Access</h3>
+        <p>Manage orders, users, and system settings</p>
+        <div class="admin-access-buttons">
+          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()">
+            <i class="fas fa-code"></i> Enter Admin Mode
+          </button>
+          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()">
+            <i class="fas fa-sign-out-alt"></i> Exit Admin Mode
+          </button>
+        </div>
+        <div class="admin-note">
+          <i class="fas fa-lock"></i>
+          <span>Admin access requires password verification</span>
+        </div>
+      </div>
+    </div>
+
     <div class="faq-section-apple"><h2>Frequently Asked Questions</h2>
       <div class="faq-list-apple">
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout. Make sure you have enough credit balance to complete the purchase.</div></div>
