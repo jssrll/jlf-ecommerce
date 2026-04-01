@@ -11,7 +11,7 @@ let xcoinBalance = 0;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwT0l8WADnnTYceVh9StIpFLvsVDTalvrE9iutCL4zatoglwZ0CKFWrnpWxSv9TxG7l/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbyc9jq1pTNh419GDuFA08gF8WBZf4voBOlvIDMoDDy4dlAXw3cA0k5qiJrwBV4QloVS/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -745,8 +745,58 @@ async function loadInvestmentHistory() {
 }
 
 // ========================================
-// ADMIN CONVERSION FUNCTIONS
+// ADMIN FUNCTIONS
 // ========================================
+
+async function loadAdminInvestments() {
+  const container = document.getElementById("adminInvestmentsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllInvestments`);
+    const investments = await response.json();
+    
+    if (!investments || investments.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin investments found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
+    
+    investments.forEach(inv => {
+      let statusClass = '';
+      switch(inv.status?.toLowerCase()) {
+        case 'active': statusClass = 'status-approved'; break;
+        case 'completed': statusClass = 'status-completed'; break;
+        case 'matured': statusClass = 'status-completed'; break;
+        default: statusClass = 'status-pending';
+      }
+      
+      html += `
+          <tr>
+            <td>${new Date(inv.timestamp).toLocaleString()}</td>
+            <td>${inv.accountId || '-'}</td>
+            <td>${inv.fullName || '-'}</td>
+            <td>${inv.phone || '-'}</td>
+            <td>${inv.investmentType || '-'}</td>
+            <td>${parseFloat(inv.amount || 0).toLocaleString()} XCoin</td>
+            <td>${inv.expectedReturn || '-'}</td>
+            <td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td>
+            <td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td>
+          </tr>
+      `;
+    });
+    
+    html += '</tbody> </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin investments error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments. Please try again.</div>';
+  }
+}
 
 async function loadAdminConversions() {
   const container = document.getElementById("adminConversionsContainer");
@@ -763,24 +813,24 @@ async function loadAdminConversions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>  <tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th></tr> </thead><tbody>';
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
     
     conversions.forEach(conv => {
       html += `
-        <tr>
-          <td>${new Date(conv.timestamp).toLocaleString()}</td>
-          <td>${conv.accountId || '-'}</td>
-          <td>${conv.fullName || '-'}</td>
-          <td>${conv.phone || '-'}</td>
-          <td>${conv.type || '-'}</td>
-          <td>₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}</td>
-          <td>${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin</td>
-          <td>${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin</td>
-        </tr>
+          <tr>
+            <td>${new Date(conv.timestamp).toLocaleString()}</td>
+            <td>${conv.accountId || '-'}</td>
+            <td>${conv.fullName || '-'}</td>
+            <td>${conv.phone || '-'}</td>
+            <td>${conv.type || '-'}</td>
+            <td>₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}</td>
+            <td>${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin</td>
+            <td>${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin</td>
+          </tr>
       `;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -790,7 +840,7 @@ async function loadAdminConversions() {
 }
 
 // ========================================
-// ORDERS FUNCTIONS (Keep existing)
+// ORDERS FUNCTIONS
 // ========================================
 async function placeOrder() {
   if (!currentUser) {
@@ -973,7 +1023,7 @@ function switchPage(pageName) {
 }
 
 // ========================================
-// CART FUNCTIONS (Keep existing)
+// CART FUNCTIONS
 // ========================================
 function updateCartBadge() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -1217,7 +1267,7 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
-// RECHARGE FUNCTIONS (Keep existing)
+// RECHARGE FUNCTIONS
 // ========================================
 function openRechargeModal() {
   if (!currentUser) {
@@ -1431,7 +1481,7 @@ async function loadAllRechargeHistory() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS (Keep existing)
+// ADMIN FUNCTIONS
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1483,7 +1533,9 @@ function switchAdminTab(tabName) {
   if (event && event.target) event.target.classList.add('active');
   
   document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
-  document.getElementById(`admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`).classList.add('active');
+  const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
+  const targetTab = document.getElementById(tabId);
+  if (targetTab) targetTab.classList.add('active');
   
   if (tabName === 'orders') loadAdminOrders();
   else if (tabName === 'logs') loadAdminLogs();
@@ -1491,6 +1543,7 @@ function switchAdminTab(tabName) {
   else if (tabName === 'redemptions') loadAdminRedemptions();
   else if (tabName === 'recharges') loadAdminRecharges();
   else if (tabName === 'conversions') loadAdminConversions();
+  else if (tabName === 'investments') loadAdminInvestments();
 }
 
 async function loadAdminData() {
@@ -1500,6 +1553,7 @@ async function loadAdminData() {
   loadAdminRedemptions();
   loadAdminRecharges();
   loadAdminConversions();
+  loadAdminInvestments();
 }
 
 async function loadAdminOrders() {
@@ -1551,7 +1605,7 @@ async function loadAdminOrders() {
       `;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1581,7 +1635,7 @@ async function loadAdminLogs() {
       html += `<tr><td>${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1611,7 +1665,7 @@ async function loadAdminUsers() {
       html += `<tr><td>${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td>₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1641,7 +1695,7 @@ async function loadAdminRedemptions() {
       html += `<tr><td>${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody> </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1678,27 +1732,27 @@ async function loadAdminRecharges() {
       
       html += `
         <tr data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
-          <td>${new Date(recharge.timestamp).toLocaleString()}</td>
-          <td>${recharge.accountId || '-'}</td>
-          <td>${recharge.fullName || '-'}</td>
-          <td>${recharge.phone || '-'}</td>
-          <td>${recharge.method || '-'}</td>
-          <td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td>
-          <td><code>${recharge.reference || '-'}</code></td>
-          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td>
-          <td>
+           <td>${new Date(recharge.timestamp).toLocaleString()}</td>
+           <td>${recharge.accountId || '-'}</td>
+           <td>${recharge.fullName || '-'}</td>
+           <td>${recharge.phone || '-'}</td>
+           <td>${recharge.method || '-'}</td>
+           <td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td>
+           <td><code>${recharge.reference || '-'}</code></td>
+           <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td>
+           <td>
             <select class="update-recharge-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
               <option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option>
               <option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
             </select>
             <button class="update-recharge-btn" onclick="updateRechargeStatusFromAdmin('${recharge.timestamp}', '${recharge.phone}')">Update</button>
-          </td>
-        </tr>
+            </td>
+          </tr>
       `;
     });
     
-    html += '</tbody></table>';
+    html += '</tbody>  </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1943,6 +1997,7 @@ function init() {
   window.refreshAdminRedemptions = refreshAdminRedemptions;
   window.loadAdminRecharges = loadAdminRecharges;
   window.loadAdminConversions = loadAdminConversions;
+  window.loadAdminInvestments = loadAdminInvestments;
   window.loadUserOrders = loadUserOrders;
   window.toggleAdminMode = toggleAdminMode;
   window.enterAdminMode = enterAdminMode;
