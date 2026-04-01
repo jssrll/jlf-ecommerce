@@ -39,22 +39,9 @@ function showToast(message, duration = 1800) {
 // REAL-TIME BALANCE UPDATE FUNCTIONS
 // ========================================
 
-// Force refresh user balance from Google Sheets with loading indicator
+// Force refresh user balance from Google Sheets
 async function refreshUserBalance() {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    return;
-  }
-  
-  // Get the refresh button
-  const refreshBtn = document.querySelector('.refresh-balance-btn');
-  const originalBtnText = refreshBtn ? refreshBtn.innerHTML : '';
-  
-  // Disable button and show loading indicator
-  if (refreshBtn) {
-    refreshBtn.disabled = true;
-    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-  }
+  if (!currentUser) return;
   
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
@@ -72,21 +59,10 @@ async function refreshUserBalance() {
         
         // Update all UI elements showing balance
         updateAllBalanceDisplays();
-      } else {
-        showToast(`💰 Balance is up to date: ₱${currentUser.balance.toLocaleString()}`, 1500);
       }
-    } else {
-      showToast("Failed to refresh balance. Please try again.", 1500);
     }
   } catch (error) {
     console.error("Refresh balance error:", error);
-    showToast("Failed to refresh balance. Please check your connection.", 1500);
-  } finally {
-    // Re-enable button and restore original text
-    if (refreshBtn) {
-      refreshBtn.disabled = false;
-      refreshBtn.innerHTML = originalBtnText;
-    }
   }
 }
 
@@ -105,6 +81,28 @@ function updateAllBalanceDisplays() {
   const userNameDisplay = document.getElementById("userNameDisplay");
   if (userNameDisplay && currentUser) {
     userNameDisplay.innerText = currentUser.name.split(' ')[0];
+  }
+}
+
+// Real-time balance check function (can be called periodically)
+function startRealTimeBalanceCheck() {
+  // Clear existing interval if any
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+  }
+  
+  // Check balance every 30 seconds
+  balanceCheckInterval = setInterval(() => {
+    if (currentUser) {
+      refreshUserBalance();
+    }
+  }, 30000); // 30 seconds
+}
+
+function stopRealTimeBalanceCheck() {
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+    balanceCheckInterval = null;
   }
 }
 
