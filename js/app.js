@@ -11,7 +11,7 @@ let balanceCheckInterval = null;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxZ6LK8MQuA9TtkhZC3t0S0v7eJIppA9jNEeyemwW8v556ULb_1B40tGGva6jE-NYVE/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbw1AsynmiRg94etVk_ko5hrG37LpUl6r0IEK3K_Dh8pKsb9jrl9h_T8HnhtlOcgZWlw/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -336,16 +336,18 @@ async function addUserCredit(amount) {
 }
 
 // ========================================
-// CREDIT-BASED INVESTMENT FUNCTIONS
+// BOND INVESTMENT FUNCTIONS - TWO OPTIONS
 // ========================================
-async function investInBondCredit() {
+
+// Option 1: 3% return in 90 days (3 months)
+async function investInBondOption1() {
   if (!currentUser) {
     showToast("Please login to invest", 1500);
     openAccountModal();
     return;
   }
   
-  const amount = parseFloat(document.getElementById("bondAmountCredit").value);
+  const amount = parseFloat(document.getElementById("bondAmountOption1").value);
   
   if (isNaN(amount) || amount < 500) {
     showToast("Minimum investment is ₱500", 1500);
@@ -357,15 +359,16 @@ async function investInBondCredit() {
     return;
   }
   
-  const returnRate = 0.05;
+  const returnRate = 0.03; // 3%
   const expectedReturn = amount * returnRate;
+  const durationDays = 90;
   const maturityDate = new Date();
-  maturityDate.setMonth(maturityDate.getMonth() + 3);
+  maturityDate.setDate(maturityDate.getDate() + durationDays);
   
-  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment?\n\nReturn: 5%\nDuration: 3 months\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
+  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 1?\n\nReturn: 3%\nDuration: ${durationDays} days (3 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
   if (!confirmMsg) return;
   
-  const investBtn = document.querySelector('#bondAmountCredit').parentElement.querySelector('button');
+  const investBtn = document.querySelector('#bondAmountOption1').parentElement.querySelector('button');
   const originalText = investBtn.innerHTML;
   if (investBtn) {
     investBtn.disabled = true;
@@ -390,10 +393,10 @@ async function investInBondCredit() {
     currentUser.balance = result.newBalance;
     localStorage.setItem("nova_user", JSON.stringify(currentUser));
     
-    await recordCreditInvestment("Bond Investment", amount, expectedReturn, maturityDate.toISOString());
+    await recordCreditInvestment("Bond Investment - Option 1 (3% / 90 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
     
-    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Investment! Matures on ${maturityDate.toLocaleDateString()}`, 3000);
-    document.getElementById("bondAmountCredit").value = "";
+    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 1! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
+    document.getElementById("bondAmountOption1").value = "";
     updateAllBalanceDisplays();
     await loadCreditInvestmentHistory();
     
@@ -408,14 +411,15 @@ async function investInBondCredit() {
   }
 }
 
-async function investInCommodityCredit() {
+// Option 2: 6% return in 150 days (5 months)
+async function investInBondOption2() {
   if (!currentUser) {
     showToast("Please login to invest", 1500);
     openAccountModal();
     return;
   }
   
-  const amount = parseFloat(document.getElementById("commodityAmountCredit").value);
+  const amount = parseFloat(document.getElementById("bondAmountOption2").value);
   
   if (isNaN(amount) || amount < 500) {
     showToast("Minimum investment is ₱500", 1500);
@@ -427,15 +431,16 @@ async function investInCommodityCredit() {
     return;
   }
   
-  const returnRate = 0.06;
+  const returnRate = 0.06; // 6%
   const expectedReturn = amount * returnRate;
+  const durationDays = 150;
   const maturityDate = new Date();
-  maturityDate.setMonth(maturityDate.getMonth() + 3);
+  maturityDate.setDate(maturityDate.getDate() + durationDays);
   
-  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Commodity-Backed Investment?\n\nReturn: 6%\nDuration: 3 months\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
+  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 2?\n\nReturn: 6%\nDuration: ${durationDays} days (5 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
   if (!confirmMsg) return;
   
-  const investBtn = document.querySelector('#commodityAmountCredit').parentElement.querySelector('button');
+  const investBtn = document.querySelector('#bondAmountOption2').parentElement.querySelector('button');
   const originalText = investBtn.innerHTML;
   if (investBtn) {
     investBtn.disabled = true;
@@ -460,10 +465,10 @@ async function investInCommodityCredit() {
     currentUser.balance = result.newBalance;
     localStorage.setItem("nova_user", JSON.stringify(currentUser));
     
-    await recordCreditInvestment("Commodity-Backed Investment", amount, expectedReturn, maturityDate.toISOString());
+    await recordCreditInvestment("Bond Investment - Option 2 (6% / 150 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
     
-    showToast(`✅ Invested ₱${amount.toLocaleString()} in Commodity-Backed Investment! Matures on ${maturityDate.toLocaleDateString()}`, 3000);
-    document.getElementById("commodityAmountCredit").value = "";
+    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 2! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
+    document.getElementById("bondAmountOption2").value = "";
     updateAllBalanceDisplays();
     await loadCreditInvestmentHistory();
     
@@ -478,7 +483,7 @@ async function investInCommodityCredit() {
   }
 }
 
-async function recordCreditInvestment(investmentType, amount, expectedReturn, maturityDate) {
+async function recordCreditInvestment(investmentType, amount, expectedReturn, maturityDate, durationDays) {
   if (!currentUser) return false;
   
   try {
@@ -493,6 +498,7 @@ async function recordCreditInvestment(investmentType, amount, expectedReturn, ma
     formData.append("expectedReturn", expectedReturn);
     formData.append("status", "Active");
     formData.append("maturityDate", maturityDate);
+    formData.append("durationDays", durationDays);
     
     const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
     const result = await response.json();
@@ -537,6 +543,11 @@ async function loadCreditInvestmentHistory() {
       const maturityDate = inv.maturityDate ? new Date(inv.maturityDate) : null;
       const isMatured = maturityDate && maturityDate <= new Date();
       
+      // Extract return percentage from investment type
+      let returnText = '';
+      if (inv.investmentType.includes('3%')) returnText = '3% (90 days)';
+      else if (inv.investmentType.includes('6%')) returnText = '6% (150 days)';
+      
       return `
         <div class="investment-item-featured">
           <div class="investment-header-featured">
@@ -546,7 +557,7 @@ async function loadCreditInvestmentHistory() {
           <div class="investment-details-featured-list">
             <div>📅 ${new Date(inv.timestamp).toLocaleDateString()}</div>
             <div>💰 Amount: ₱${parseFloat(inv.amount).toLocaleString()}</div>
-            <div>📈 Expected Return: ₱${parseFloat(inv.expectedReturn).toLocaleString()}</div>
+            <div>📈 Expected Return: ₱${parseFloat(inv.expectedReturn).toLocaleString()} (${returnText})</div>
             ${inv.maturityDate ? `<div>⏰ Matures: ${new Date(inv.maturityDate).toLocaleDateString()}</div>` : ''}
           </div>
         </div>
@@ -1214,15 +1225,15 @@ async function loadAdminWithdrawals() {
 async function loadAdminCreditInvestments() {
   const container = document.getElementById("adminInvestmentsContainer");
   if (!container) return;
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading credit investments...</div>';
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div>';
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllCreditInvestments`);
     const investments = await response.json();
     if (!investments || investments.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No credit investments found.</div>';
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No bond investments found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (₱)</th><th>Expected Return (₱)</th><th>Status</th><th>Maturity Date</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (₱)</th><th>Expected Return (₱)</th><th>Status</th><th>Maturity Date</th><th>Duration</th></tr></thead><tbody>';
     investments.forEach(inv => {
       let statusClass = '';
       switch(inv.status?.toLowerCase()) {
@@ -1231,12 +1242,12 @@ async function loadAdminCreditInvestments() {
         case 'matured': statusClass = 'status-completed'; break;
         default: statusClass = 'status-pending';
       }
-      html += `<tr><td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}</td><td>${inv.accountId || '-'}</td><td>${inv.fullName || '-'}</td><td>${inv.phone || '-'}</td><td>${inv.investmentType || '-'}</td><td style="white-space: nowrap;">₱${parseFloat(inv.amount || 0).toLocaleString()}</td><td style="white-space: nowrap;">₱${parseFloat(inv.expectedReturn || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td><td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}</td><td>${inv.accountId || '-'}</td><td>${inv.fullName || '-'}</td><td>${inv.phone || '-'}</td><td>${inv.investmentType || '-'}</td><td style="white-space: nowrap;">₱${parseFloat(inv.amount || 0).toLocaleString()}</td><td style="white-space: nowrap;">₱${parseFloat(inv.expectedReturn || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td><td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td><td>${inv.durationDays ? inv.durationDays + ' days' : '-'}</td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load credit investments.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load bond investments.</div>';
   }
 }
 
@@ -1572,8 +1583,8 @@ function init() {
   window.closeWithdrawModal = closeWithdrawModal;
   window.switchWithdrawTab = switchWithdrawTab;
   window.submitWithdraw = submitWithdraw;
-  window.investInBondCredit = investInBondCredit;
-  window.investInCommodityCredit = investInCommodityCredit;
+  window.investInBondOption1 = investInBondOption1;
+  window.investInBondOption2 = investInBondOption2;
   window.switchAdminTab = switchAdminTab;
   window.refreshAdminOrders = refreshAdminOrders;
   window.refreshAdminLogs = refreshAdminLogs;
