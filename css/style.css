@@ -4126,3 +4126,13 @@ body.admin-mode .recharge-icon {
   background: #e3f2fd;
   color: #1565c0;
 }
+
+/* Disabled Button State */
+button:disabled,
+.btn-secondary-apple:disabled,
+.refresh-balance-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  pointer-events: none;
+}
