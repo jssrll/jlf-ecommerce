@@ -35,9 +35,11 @@
   <div class="container">
     <div class="nav">
       <div class="logo">JLF</div>
-      <div class="admin-icon" id="adminIcon">
-        <i class="fas fa-code"></i>
+      <div class="account-icon" id="accountIcon">
+        <i class="fas fa-user-circle"></i>
+        <span class="user-name" id="userNameDisplay"></span>
       </div>
+
       <div class="nav-links" id="navLinks">
         <a href="#" data-page="home" class="nav-link active">Home</a>
         <a href="#" data-page="shop" class="nav-link">Shop</a>
@@ -62,10 +64,7 @@
           <i class="fas fa-bag-shopping"></i>
           <span class="cart-count" id="cartCountBadge">0</span>
         </div>
-        <div class="account-icon" id="accountIcon">
-          <i class="fas fa-user-circle"></i>
-          <span class="user-name" id="userNameDisplay"></span>
-        </div>
+
       </div>
     </div>
   </div>
@@ -434,6 +433,9 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-phone"></i> Phone Number:</span><span class="info-value" id="profilePhone">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined Date:</span><span class="info-value" id="profileJoined">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
+      </div>
+      <div class="admin-icon" id="adminIcon">
+        <i class="fas fa-code"></i>
       </div>
       <button class="btn-secondary-apple refresh-balance-btn" onclick="refreshUserBalance()" style="margin-bottom: 10px; width: 100%;">
         <i class="fas fa-sync-alt"></i> Refresh Balance
