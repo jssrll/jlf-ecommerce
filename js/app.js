@@ -39,17 +39,9 @@ function showToast(message, duration = 1800) {
 // REAL-TIME BALANCE UPDATE FUNCTIONS
 // ========================================
 
-// Force refresh user balance from Google Sheets with loading indicator
+// Force refresh user balance from Google Sheets
 async function refreshUserBalance() {
   if (!currentUser) return;
-  
-  const refreshBtn = document.querySelector('.refresh-balance-btn');
-  const originalBtnText = refreshBtn ? refreshBtn.innerHTML : '';
-  
-  if (refreshBtn) {
-    refreshBtn.disabled = true;
-    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-  }
   
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
@@ -64,45 +56,47 @@ async function refreshUserBalance() {
       if (oldBalance !== currentUser.balance) {
         localStorage.setItem("nova_user", JSON.stringify(currentUser));
         showToast(`💰 Balance updated: ₱${currentUser.balance.toLocaleString()}`, 2000);
+        
+        // Update all UI elements showing balance
         updateAllBalanceDisplays();
-      } else {
-        showToast(`💰 Balance is up to date: ₱${currentUser.balance.toLocaleString()}`, 1500);
       }
-    } else {
-      showToast("Failed to refresh balance. Please try again.", 1500);
     }
   } catch (error) {
     console.error("Refresh balance error:", error);
-    showToast("Failed to refresh balance. Please check your connection.", 1500);
-  } finally {
-    if (refreshBtn) {
-      refreshBtn.disabled = false;
-      refreshBtn.innerHTML = originalBtnText;
-    }
   }
 }
 
+// Update all balance displays in the UI
 function updateAllBalanceDisplays() {
+  // Update profile balance
   const profileBalance = document.getElementById("profileBalance");
   if (profileBalance) {
     profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   }
+  
+  // Update cart total display (to reflect credit availability)
   renderCartUI();
+  
+  // Update any other balance displays
   const userNameDisplay = document.getElementById("userNameDisplay");
   if (userNameDisplay && currentUser) {
     userNameDisplay.innerText = currentUser.name.split(' ')[0];
   }
 }
 
+// Real-time balance check function (can be called periodically)
 function startRealTimeBalanceCheck() {
+  // Clear existing interval if any
   if (balanceCheckInterval) {
     clearInterval(balanceCheckInterval);
   }
+  
+  // Check balance every 30 seconds
   balanceCheckInterval = setInterval(() => {
     if (currentUser) {
       refreshUserBalance();
     }
-  }, 30000);
+  }, 30000); // 30 seconds
 }
 
 function stopRealTimeBalanceCheck() {
@@ -148,6 +142,7 @@ function openProfileModal() {
   document.getElementById("profileJoined").innerText = currentUser.joined || new Date().toLocaleDateString();
   document.getElementById("profileBalance").innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   
+  // Add XCoin balance to profile
   const profileInfo = document.querySelector('.profile-info');
   let xcoinRow = document.querySelector('.xcoin-profile-row');
   if (!xcoinRow) {
@@ -226,8 +221,10 @@ async function handleLogin(event) {
         joined: new Date().toLocaleDateString()
       };
       
+      // Load XCoin balance
       await loadXCoinBalance();
       
+      // Log successful login
       const logData = new URLSearchParams();
       logData.append("action", "addLoginLog");
       logData.append("timestamp", new Date().toISOString());
@@ -244,6 +241,8 @@ async function handleLogin(event) {
       showToast(`Welcome back, ${user.name}!`, 2000);
       closeAccountModal();
       renderCartUI();
+      
+      // Start real-time balance checking
       startRealTimeBalanceCheck();
     } else {
       showToast("Invalid phone number or password", 1500);
@@ -313,6 +312,7 @@ async function handleRegister(event) {
         joined: joinedDate
       };
       
+      // Initialize XCoin balance to 0
       await updateXCoinBalance(0);
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
@@ -320,6 +320,8 @@ async function handleRegister(event) {
       showToast(`✅ Account created successfully!\n\nWelcome, ${name}!\nYour Account ID: ${accountId}`, 4000);
       closeAccountModal();
       document.getElementById("registerForm").reset();
+      
+      // Start real-time balance checking
       startRealTimeBalanceCheck();
     } else {
       showToast(result.message || "Registration failed. Phone may already exist.", 1500);
@@ -345,6 +347,8 @@ function logout() {
   updateCartBadge();
   saveCartToLocal();
   renderCartUI();
+  
+  // Stop real-time balance checking
   stopRealTimeBalanceCheck();
 }
 
@@ -477,6 +481,7 @@ async function convertPesoToXCoin() {
   }
   
   try {
+    // Deduct peso balance
     const deductData = new URLSearchParams();
     deductData.append("action", "updateBalance");
     deductData.append("phone", currentUser.phone);
@@ -491,12 +496,15 @@ async function convertPesoToXCoin() {
       return;
     }
     
+    // Add XCoin balance
     const newXCoinBalance = xcoinBalance + xcoinAmount;
     await updateXCoinBalance(newXCoinBalance);
     
+    // Update user balance
     currentUser.balance = deductResult.newBalance;
     localStorage.setItem("nova_user", JSON.stringify(currentUser));
     
+    // Log conversion
     const logData = new URLSearchParams();
     logData.append("action", "addXCoinConversion");
     logData.append("timestamp", new Date().toISOString());
@@ -513,6 +521,7 @@ async function convertPesoToXCoin() {
     showToast(`✅ Converted ₱${pesoAmount.toLocaleString()} to ${xcoinAmount} XCoin!`, 3000);
     document.getElementById("pesoToXCoin").value = "";
     
+    // Update displays
     document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
     if (document.getElementById("profileXCoinBalance")) {
       document.getElementById("profileXCoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
@@ -562,6 +571,7 @@ async function convertXCoinToPeso() {
   }
   
   try {
+    // Add peso balance
     const addData = new URLSearchParams();
     addData.append("action", "updateBalance");
     addData.append("phone", currentUser.phone);
@@ -576,12 +586,15 @@ async function convertXCoinToPeso() {
       return;
     }
     
+    // Deduct XCoin balance
     const newXCoinBalance = xcoinBalance - xcoinAmount;
     await updateXCoinBalance(newXCoinBalance);
     
+    // Update user balance
     currentUser.balance = addResult.newBalance;
     localStorage.setItem("nova_user", JSON.stringify(currentUser));
     
+    // Log conversion
     const logData = new URLSearchParams();
     logData.append("action", "addXCoinConversion");
     logData.append("timestamp", new Date().toISOString());
@@ -598,6 +611,7 @@ async function convertXCoinToPeso() {
     showToast(`✅ Converted ${xcoinAmount} XCoin to ₱${pesoAmount.toLocaleString()}!`, 3000);
     document.getElementById("xcoinToPeso").value = "";
     
+    // Update displays
     document.getElementById("xcoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
     if (document.getElementById("profileXCoinBalance")) {
       document.getElementById("profileXCoinBalance").innerHTML = `${xcoinBalance.toLocaleString()} XCoin`;
@@ -663,10 +677,10 @@ async function investInBond() {
     return;
   }
   
-  const returnRate = 0.05;
+  const returnRate = 0.05; // 5%
   const expectedReturn = amount * returnRate;
   const maturityDate = new Date();
-  maturityDate.setMonth(maturityDate.getMonth() + 3);
+  maturityDate.setMonth(maturityDate.getMonth() + 3); // 3 months
   
   const confirmMsg = confirm(`Invest ${amount} XCoin in Bond Investment?\nReturn: 5%\nMaturity: 3 months\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nMaturity Date: ${maturityDate.toLocaleDateString()}`);
   if (!confirmMsg) return;
@@ -720,10 +734,10 @@ async function investInCommodity() {
     return;
   }
   
-  const returnRate = 0.06;
+  const returnRate = 0.06; // 6%
   const expectedReturn = amount * returnRate;
   const maturityDate = new Date();
-  maturityDate.setMonth(maturityDate.getMonth() + 3);
+  maturityDate.setMonth(maturityDate.getMonth() + 3); // 3 months
   
   const confirmMsg = confirm(`Invest ${amount} XCoin in Commodity-Backed Investment?\nReturn: 6%\nMaturity: 3 months\nExpected Payout: ${expectedReturn.toFixed(2)} XCoin\nMaturity Date: ${maturityDate.toLocaleDateString()}`);
   if (!confirmMsg) return;
@@ -993,239 +1007,134 @@ async function loadWithdrawalHistory() {
 }
 
 // ========================================
-// RECHARGE FUNCTIONS - FIXED WITH FULL DETAILS
+// ADMIN FUNCTIONS
 // ========================================
 
-async function loadRechargeHistory() {
-  if (!currentUser) return;
-  
-  const container = document.getElementById("rechargeHistoryContainer");
+async function loadAdminWithdrawals() {
+  const container = document.getElementById("adminWithdrawalsContainer");
   if (!container) return;
   
-  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>';
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div>';
   
   try {
-    const formData = new URLSearchParams();
-    formData.append("action", "getUserRecharges");
-    formData.append("phone", currentUser.phone);
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllWithdrawals`);
+    const withdrawals = await response.json();
     
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const recharges = await response.json();
-    
-    console.log("Recharge data received:", recharges);
-    
-    if (!recharges || recharges.length === 0) {
-      container.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No recharge transactions yet.</p></div>';
+    if (!withdrawals || withdrawals.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No withdrawal requests found.</div>';
       return;
     }
     
-    container.innerHTML = recharges.map(recharge => {
+    let html = '<table class="admin-table"><thead>  either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th> </thead><tbody>';
+    
+    withdrawals.forEach(withdrawal => {
       let statusClass = '';
-      let statusIcon = '';
-      const status = (recharge.status || "Pending").toLowerCase();
-      switch(status) {
-        case 'pending': statusClass = 'status-pending'; statusIcon = '⏳'; break;
-        case 'approved': statusClass = 'status-approved'; statusIcon = '✅'; break;
-        case 'cancelled': statusClass = 'status-cancelled'; statusIcon = '❌'; break;
-        default: statusClass = 'status-pending'; statusIcon = '⏳';
+      switch(withdrawal.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; break;
+        case 'processing': statusClass = 'status-processing'; break;
+        case 'completed': statusClass = 'status-approved'; break;
+        case 'rejected': statusClass = 'status-cancelled'; break;
+        default: statusClass = 'status-pending';
       }
       
-      const methodIcon = recharge.method === 'gcash' ? '📱' : '💰';
-      const methodName = recharge.method ? recharge.method.toUpperCase() : 'UNKNOWN';
-      const amount = recharge.amount ? parseFloat(recharge.amount).toLocaleString() : '0';
-      const timestamp = recharge.timestamp ? new Date(recharge.timestamp).toLocaleString() : 'Date not available';
-      const reference = recharge.reference || '';
-      
-      return `
-        <div class="recharge-item ${statusClass}">
-          <div class="recharge-header">
-            <span class="recharge-method">${methodIcon} ${methodName}</span>
-            <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status || 'Pending'}</span>
-          </div>
-          <div class="recharge-details">
-            <div><i class="fas fa-calendar"></i> Date: ${timestamp}</div>
-            <div><i class="fas fa-money-bill-wave"></i> Amount: ₱${amount}</div>
-            ${reference ? `<div><i class="fas fa-hashtag"></i> Reference: ${reference}</div>` : ''}
-          </div>
-        </div>
+      html += `
+        <tr data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
+          <td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}   </td>
+          <td>${withdrawal.accountId || '-'}</td>
+          <td>${withdrawal.fullName || '-'}</td>
+          <td>${withdrawal.phone || '-'}</td>
+          <td>${withdrawal.method || '-'}</td>
+          <td>₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td>
+          <td>${withdrawal.receiverName || '-'}</td>
+          <td>${withdrawal.receiverNumber || '-'}</td>
+          <td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td>
+          <td>
+            <select class="update-withdrawal-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
+              <option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option>
+              <option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+            <button class="update-withdrawal-btn" onclick="updateWithdrawalStatusFromAdmin('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button>
+          </td>
+        </tr>
       `;
-    }).join('');
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
     
   } catch (error) {
-    console.error("Load recharge history error:", error);
-    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Failed to load transaction history.</p><button class="btn-secondary-apple" onclick="loadRechargeHistory()" style="margin-top: 10px;">Try Again</button></div>';
+    console.error("Load admin withdrawals error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests.</div>';
   }
 }
 
-async function loadAllRechargeHistory() {
-  if (!currentUser) return;
-  
-  const container = document.getElementById("rechargeHistoryOrdersContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading recharge history...</div>';
+async function updateWithdrawalStatusFromAdmin(timestamp, phone) {
+  const select = document.querySelector(`.update-withdrawal-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  const newStatus = select.value;
   
   try {
     const formData = new URLSearchParams();
-    formData.append("action", "getUserRecharges");
-    formData.append("phone", currentUser.phone);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const recharges = await response.json();
-    
-    console.log("Recharge data for orders page:", recharges);
-    
-    if (!recharges || recharges.length === 0) {
-      container.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No recharge transactions yet.</p></div>';
-      return;
-    }
-    
-    container.innerHTML = recharges.map(recharge => {
-      let statusClass = '';
-      let statusIcon = '';
-      const status = (recharge.status || "Pending").toLowerCase();
-      switch(status) {
-        case 'pending': statusClass = 'status-pending'; statusIcon = '⏳'; break;
-        case 'approved': statusClass = 'status-approved'; statusIcon = '✅'; break;
-        case 'cancelled': statusClass = 'status-cancelled'; statusIcon = '❌'; break;
-        default: statusClass = 'status-pending'; statusIcon = '⏳';
-      }
-      
-      const methodName = recharge.method ? recharge.method.toUpperCase() : 'UNKNOWN';
-      const amount = recharge.amount ? parseFloat(recharge.amount).toLocaleString() : '0';
-      const timestamp = recharge.timestamp ? new Date(recharge.timestamp).toLocaleString() : 'Date not available';
-      const reference = recharge.reference || '';
-      
-      return `
-        <div class="recharge-item ${statusClass}">
-          <div class="recharge-header">
-            <span class="recharge-method">${methodName}</span>
-            <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status || 'Pending'}</span>
-          </div>
-          <div class="recharge-details">
-            <div><i class="fas fa-calendar"></i> Date: ${timestamp}</div>
-            <div><i class="fas fa-money-bill-wave"></i> Amount: ₱${amount}</div>
-            ${reference ? `<div><i class="fas fa-hashtag"></i> Reference: ${reference}</div>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-    
-  } catch (error) {
-    console.error("Load recharge history error:", error);
-    container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Failed to load recharge history.</p></div>';
-  }
-}
-
-function openRechargeModal() {
-  if (!currentUser) {
-    showToast("Please login to recharge", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  document.getElementById("gcashAccountName").value = currentUser.name;
-  document.getElementById("gcashPhone").value = currentUser.phone;
-  document.getElementById("cashAccountName").value = currentUser.name;
-  document.getElementById("cashPhone").value = currentUser.phone;
-  
-  const modal = document.getElementById("rechargeModal");
-  modal.classList.add("show");
-  loadRechargeHistory();
-}
-
-function closeRechargeModal() {
-  const modal = document.getElementById("rechargeModal");
-  modal.classList.remove("show");
-}
-
-function switchRechargeTab(tabName) {
-  document.querySelectorAll('.recharge-tab-btn').forEach(btn => btn.classList.remove('active'));
-  if (tabName === 'gcash') {
-    document.querySelector('.recharge-tab-btn:first-child').classList.add('active');
-  } else {
-    document.querySelector('.recharge-tab-btn:last-child').classList.add('active');
-  }
-  
-  document.querySelectorAll('.recharge-tab').forEach(tab => tab.classList.remove('active'));
-  if (tabName === 'gcash') {
-    document.getElementById('gcashTab').classList.add('active');
-  } else {
-    document.getElementById('cashTab').classList.add('active');
-  }
-}
-
-async function submitRecharge(method) {
-  if (!currentUser) {
-    showToast("Please login first", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  let amount, reference = "";
-  const submitBtn = document.querySelector(`#${method}Tab .btn-primary-apple`);
-  const originalText = submitBtn.innerHTML;
-  
-  if (method === 'gcash') {
-    amount = document.getElementById("gcashAmount").value;
-    reference = document.getElementById("gcashRefNumber").value.trim();
-    if (!reference) {
-      showToast("Please enter reference number", 1500);
-      return;
-    }
-  } else {
-    amount = document.getElementById("cashAmount").value;
-  }
-  
-  amount = parseFloat(amount);
-  if (isNaN(amount) || amount < 10) {
-    showToast("Please enter a valid amount (minimum ₱10)", 1500);
-    return;
-  }
-  
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "addRecharge");
-    formData.append("timestamp", new Date().toISOString());
-    formData.append("accountId", currentUser.id);
-    formData.append("fullName", currentUser.name);
-    formData.append("phone", currentUser.phone);
-    formData.append("method", method);
-    formData.append("amount", amount);
-    formData.append("reference", reference);
-    formData.append("status", "Pending");
+    formData.append("action", "updateWithdrawalStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
     
     const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
     const result = await response.json();
     
     if (result.success) {
-      showToast(`✅ Recharge request submitted! Amount: ₱${amount}. Please wait for approval.`, 3000);
-      if (method === 'gcash') {
-        document.getElementById("gcashAmount").value = "";
-        document.getElementById("gcashRefNumber").value = "";
-      } else {
-        document.getElementById("cashAmount").value = "";
+      showToast(`Withdrawal status updated to: ${newStatus}`, 1500);
+      loadAdminWithdrawals();
+      
+      // If this is the current user's withdrawal, refresh balance immediately
+      if (currentUser && currentUser.phone === phone) {
+        await refreshUserBalance();
       }
-      loadRechargeHistory();
     } else {
-      showToast(result.message || "Submission failed", 1500);
+      showToast("Failed to update withdrawal status", 1500);
     }
   } catch (error) {
-    console.error("Recharge error:", error);
-    showToast("Failed to submit. Please try again.", 1500);
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalText;
+    console.error("Update withdrawal status error:", error);
+    showToast("Failed to update withdrawal status", 1500);
+  }
+}
+
+async function updateRechargeStatusFromAdmin(timestamp, phone) {
+  const select = document.querySelector(`.update-recharge-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  const newStatus = select.value;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateRechargeStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`Recharge status updated to: ${newStatus}`, 1500);
+      loadAdminRecharges();
+      
+      // If this is the current user's recharge, refresh balance immediately
+      if (currentUser && currentUser.phone === phone) {
+        await refreshUserBalance();
+      }
+    } else {
+      showToast("Failed to update recharge status", 1500);
+    }
+  } catch (error) {
+    console.error("Update recharge status error:", error);
+    showToast("Failed to update recharge status", 1500);
   }
 }
 
 // ========================================
-// ADMIN FUNCTIONS
+// RECHARGE FUNCTIONS (continued)
 // ========================================
-
 async function loadAdminRecharges() {
   const container = document.getElementById("adminRechargesContainer");
   if (!container) return;
@@ -1254,14 +1163,14 @@ async function loadAdminRecharges() {
       
       html += `
         <tr data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
-          <td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}    <\/td>
-          <td>${recharge.accountId || '-'}<\/td>
-          <td>${recharge.fullName || '-'}<\/td>
-          <td>${recharge.phone || '-'}<\/td>
-          <td>${recharge.method || '-'}<\/td>
-          <td style="white-space: nowrap;">₱${parseFloat(recharge.amount || 0).toLocaleString()}<\/td>
-          <td style="max-width: 150px; word-break: break-word;"><code>${recharge.reference || '-'}</code><\/td>
-          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span><\/td>
+          <td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}   </td>
+          <td>${recharge.accountId || '-'}</td>
+          <td>${recharge.fullName || '-'}</td>
+          <td>${recharge.phone || '-'}</td>
+          <td>${recharge.method || '-'}</td>
+          <td style="white-space: nowrap;">₱${parseFloat(recharge.amount || 0).toLocaleString()}   </td>
+          <td style="max-width: 150px; word-break: break-word;"><code>${recharge.reference || '-'}</code>   </td>
+          <td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span>   </td>
           <td>
             <select class="update-recharge-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}">
               <option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option>
@@ -1269,12 +1178,12 @@ async function loadAdminRecharges() {
               <option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
             </select>
             <button class="update-recharge-btn" onclick="updateRechargeStatusFromAdmin('${recharge.timestamp}', '${recharge.phone}')">Update</button>
-          <\/td>
-        <\/tr>
+             </td>
+         </tr>
       `;
     });
     
-    html += '</tbody><\/table>';
+    html += '</tbody>   </table>';
     container.innerHTML = html;
     
   } catch (error) {
@@ -1283,128 +1192,8 @@ async function loadAdminRecharges() {
   }
 }
 
-async function updateRechargeStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-recharge-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateRechargeStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Recharge status updated to: ${newStatus}`, 1500);
-      loadAdminRecharges();
-      
-      if (currentUser && currentUser.phone === phone) {
-        await refreshUserBalance();
-      }
-    } else {
-      showToast("Failed to update recharge status", 1500);
-    }
-  } catch (error) {
-    console.error("Update recharge status error:", error);
-    showToast("Failed to update recharge status", 1500);
-  }
-}
-
-async function loadAdminWithdrawals() {
-  const container = document.getElementById("adminWithdrawalsContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllWithdrawals`);
-    const withdrawals = await response.json();
-    
-    if (!withdrawals || withdrawals.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No withdrawal requests found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th> </thead><tbody>';
-    
-    withdrawals.forEach(withdrawal => {
-      let statusClass = '';
-      switch(withdrawal.status?.toLowerCase()) {
-        case 'pending': statusClass = 'status-pending'; break;
-        case 'processing': statusClass = 'status-processing'; break;
-        case 'completed': statusClass = 'status-approved'; break;
-        case 'rejected': statusClass = 'status-cancelled'; break;
-        default: statusClass = 'status-pending';
-      }
-      
-      html += `
-        <tr data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
-          <td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}<\/td>
-          <td>${withdrawal.accountId || '-'}<\/td>
-          <td>${withdrawal.fullName || '-'}<\/td>
-          <td>${withdrawal.phone || '-'}<\/td>
-          <td>${withdrawal.method || '-'}<\/td>
-          <td style="white-space: nowrap;">₱${parseFloat(withdrawal.amount || 0).toLocaleString()}<\/td>
-          <td>${withdrawal.receiverName || '-'}<\/td>
-          <td>${withdrawal.receiverNumber || '-'}<\/td>
-          <td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span><\/td>
-          <td>
-            <select class="update-withdrawal-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}">
-              <option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option>
-              <option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option>
-              <option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
-            </select>
-            <button class="update-withdrawal-btn" onclick="updateWithdrawalStatusFromAdmin('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button>
-          <\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin withdrawals error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests.</div>';
-  }
-}
-
-async function updateWithdrawalStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-withdrawal-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateWithdrawalStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Withdrawal status updated to: ${newStatus}`, 1500);
-      loadAdminWithdrawals();
-      
-      if (currentUser && currentUser.phone === phone) {
-        await refreshUserBalance();
-      }
-    } else {
-      showToast("Failed to update withdrawal status", 1500);
-    }
-  } catch (error) {
-    console.error("Update withdrawal status error:", error);
-    showToast("Failed to update withdrawal status", 1500);
-  }
-}
-
 // ========================================
-// ORDERS FUNCTIONS
+// ORDERS FUNCTIONS (continued)
 // ========================================
 async function placeOrder() {
   if (!currentUser) {
@@ -1834,6 +1623,593 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
+// RECHARGE FUNCTIONS (continued)
+// ========================================
+function openRechargeModal() {
+  if (!currentUser) {
+    showToast("Please login to recharge", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  document.getElementById("gcashAccountName").value = currentUser.name;
+  document.getElementById("gcashPhone").value = currentUser.phone;
+  document.getElementById("cashAccountName").value = currentUser.name;
+  document.getElementById("cashPhone").value = currentUser.phone;
+  
+  const modal = document.getElementById("rechargeModal");
+  modal.classList.add("show");
+  loadRechargeHistory();
+}
+
+function closeRechargeModal() {
+  const modal = document.getElementById("rechargeModal");
+  modal.classList.remove("show");
+}
+
+function switchRechargeTab(tabName) {
+  document.querySelectorAll('.recharge-tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (tabName === 'gcash') {
+    document.querySelector('.recharge-tab-btn:first-child').classList.add('active');
+  } else {
+    document.querySelector('.recharge-tab-btn:last-child').classList.add('active');
+  }
+  
+  document.querySelectorAll('.recharge-tab').forEach(tab => tab.classList.remove('active'));
+  if (tabName === 'gcash') {
+    document.getElementById('gcashTab').classList.add('active');
+  } else {
+    document.getElementById('cashTab').classList.add('active');
+  }
+}
+
+async function submitRecharge(method) {
+  if (!currentUser) {
+    showToast("Please login first", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  let amount, reference = "";
+  const submitBtn = document.querySelector(`#${method}Tab .btn-primary-apple`);
+  const originalText = submitBtn.innerHTML;
+  
+  if (method === 'gcash') {
+    amount = document.getElementById("gcashAmount").value;
+    reference = document.getElementById("gcashRefNumber").value.trim();
+    if (!reference) {
+      showToast("Please enter reference number", 1500);
+      return;
+    }
+  } else {
+    amount = document.getElementById("cashAmount").value;
+  }
+  
+  amount = parseFloat(amount);
+  if (isNaN(amount) || amount < 10) {
+    showToast("Please enter a valid amount (minimum ₱10)", 1500);
+    return;
+  }
+  
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addRecharge");
+    formData.append("timestamp", new Date().toISOString());
+    formData.append("accountId", currentUser.id);
+    formData.append("fullName", currentUser.name);
+    formData.append("phone", currentUser.phone);
+    formData.append("method", method);
+    formData.append("amount", amount);
+    formData.append("reference", reference);
+    formData.append("status", "Pending");
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`✅ Recharge request submitted! Amount: ₱${amount}. Please wait for approval.`, 3000);
+      if (method === 'gcash') {
+        document.getElementById("gcashAmount").value = "";
+        document.getElementById("gcashRefNumber").value = "";
+      } else {
+        document.getElementById("cashAmount").value = "";
+      }
+      loadRechargeHistory();
+    } else {
+      showToast(result.message || "Submission failed", 1500);
+    }
+  } catch (error) {
+    console.error("Recharge error:", error);
+    showToast("Failed to submit. Please try again.", 1500);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+}
+
+async function loadRechargeHistory() {
+  if (!currentUser) return;
+  
+  const container = document.getElementById("rechargeHistoryContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading transactions...</div>';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserRecharges");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const recharges = await response.json();
+    
+    if (!recharges || recharges.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 20px;">No recharge transactions yet.</div>';
+      return;
+    }
+    
+    container.innerHTML = recharges.map(recharge => {
+      let statusClass = '';
+      let statusIcon = '';
+      switch(recharge.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; statusIcon = '⏳'; break;
+        case 'approved': statusClass = 'status-approved'; statusIcon = '✅'; break;
+        case 'cancelled': statusClass = 'status-cancelled'; statusIcon = '❌'; break;
+        default: statusClass = 'status-pending'; statusIcon = '⏳';
+      }
+      
+      const methodIcon = recharge.method === 'gcash' ? '📱' : '💰';
+      
+      return `
+        <div class="recharge-item">
+          <div class="recharge-header">
+            <span class="recharge-method">${methodIcon} ${recharge.method.toUpperCase()}</span>
+            <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status}</span>
+          </div>
+          <div class="recharge-details">
+            <div>📅 ${new Date(recharge.timestamp).toLocaleString()}</div>
+            <div>💰 Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
+            ${recharge.reference ? `<div>🔖 Ref: ${recharge.reference}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Load recharge history error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 20px;">Failed to load transaction history.</div>';
+  }
+}
+
+async function loadAllRechargeHistory() {
+  if (!currentUser) return;
+  
+  const container = document.getElementById("rechargeHistoryOrdersContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge history...</div>';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserRecharges");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const recharges = await response.json();
+    
+    if (!recharges || recharges.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 20px;">No recharge transactions yet.</div>';
+      return;
+    }
+    
+    container.innerHTML = recharges.map(recharge => {
+      let statusClass = '';
+      let statusIcon = '';
+      switch(recharge.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; statusIcon = '⏳'; break;
+        case 'approved': statusClass = 'status-approved'; statusIcon = '✅'; break;
+        case 'cancelled': statusClass = 'status-cancelled'; statusIcon = '❌'; break;
+        default: statusClass = 'status-pending'; statusIcon = '⏳';
+      }
+      
+      return `
+        <div class="recharge-item">
+          <div class="recharge-header">
+            <span class="recharge-method">${recharge.method.toUpperCase()}</span>
+            <span class="recharge-status ${statusClass}">${statusIcon} ${recharge.status}</span>
+          </div>
+          <div class="recharge-details">
+            <div>📅 ${new Date(recharge.timestamp).toLocaleString()}</div>
+            <div>💰 Amount: ₱${parseFloat(recharge.amount).toLocaleString()}</div>
+            ${recharge.reference ? `<div>🔖 Ref: ${recharge.reference}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Load recharge history error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 20px;">Failed to load recharge history.</div>';
+  }
+}
+
+// ========================================
+// ADMIN FUNCTIONS (continued)
+// ========================================
+function toggleAdminMode() {
+  if (isAdminMode) {
+    exitAdminMode();
+  } else {
+    const password = prompt("Enter admin password:");
+    if (password === ADMIN_PASSWORD) {
+      enterAdminMode();
+    } else if (password !== null) {
+      showToast("Invalid admin password", 1500);
+    }
+  }
+}
+
+function enterAdminMode() {
+  isAdminMode = true;
+  document.body.classList.add('admin-mode');
+  document.getElementById('adminModeBadge').style.display = 'flex';
+  document.getElementById('adminExitBtn').style.display = 'flex';
+  
+  loadAdminData();
+  switchPage('admin');
+  showToast("Admin mode activated", 1500);
+}
+
+function exitAdminMode() {
+  isAdminMode = false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('adminModeBadge').style.display = 'none';
+  document.getElementById('adminExitBtn').style.display = 'none';
+  switchPage('home');
+  showToast("Exited admin mode", 1500);
+}
+
+function initAdminIcon() {
+  const adminIcon = document.getElementById('adminIcon');
+  if (adminIcon) {
+    adminIcon.addEventListener('click', () => { toggleAdminMode(); });
+  }
+  
+  const adminExitBtn = document.getElementById('adminExitBtn');
+  if (adminExitBtn) {
+    adminExitBtn.addEventListener('click', () => { exitAdminMode(); });
+  }
+}
+
+function switchAdminTab(tabName) {
+  document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+  
+  document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+  const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
+  const targetTab = document.getElementById(tabId);
+  if (targetTab) targetTab.classList.add('active');
+  
+  if (tabName === 'orders') loadAdminOrders();
+  else if (tabName === 'logs') loadAdminLogs();
+  else if (tabName === 'users') loadAdminUsers();
+  else if (tabName === 'redemptions') loadAdminRedemptions();
+  else if (tabName === 'recharges') loadAdminRecharges();
+  else if (tabName === 'withdrawals') loadAdminWithdrawals();
+  else if (tabName === 'conversions') loadAdminConversions();
+  else if (tabName === 'investments') loadAdminInvestments();
+}
+
+async function loadAdminData() {
+  loadAdminOrders();
+  loadAdminLogs();
+  loadAdminUsers();
+  loadAdminRedemptions();
+  loadAdminRecharges();
+  loadAdminWithdrawals();
+  loadAdminConversions();
+  loadAdminInvestments();
+}
+
+async function loadAdminOrders() {
+  const container = document.getElementById("adminOrdersContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllOrders`);
+    const orders = await response.json();
+    
+    if (!orders || orders.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No orders found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
+    
+    orders.forEach(order => {
+      let statusClass = '';
+      switch(order.status?.toLowerCase()) {
+        case 'pending': statusClass = 'status-pending'; break;
+        case 'approved': statusClass = 'status-approved'; break;
+        case 'completed': statusClass = 'status-completed'; break;
+        case 'cancelled': statusClass = 'status-cancelled'; break;
+        default: statusClass = 'status-pending';
+      }
+      
+      html += `
+        <tr data-timestamp="${order.timestamp}" data-phone="${order.phone}">
+          <td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}   </td>
+          <td>${order.accountId || '-'}</td>
+          <td>${order.fullName || '-'}</td>
+          <td>${order.phone || '-'}</td>
+          <td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td>
+          <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td>
+          <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td>
+          <td>
+            <select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}">
+              <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option>
+              <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+            <button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button>
+          </td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin orders error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load orders.</div>';
+  }
+}
+
+async function loadAdminLogs() {
+  const container = document.getElementById("adminLogsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getLoginLogs`);
+    const logs = await response.json();
+    
+    if (!logs || logs.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No login logs found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
+    
+    logs.forEach(log => {
+      html += `
+        <tr>
+          <td style="white-space: nowrap;">${new Date(log.timestamp).toLocaleString()}</td>
+          <td>${log.accountId || '-'}</td>
+          <td>${log.fullName || '-'}</td>
+          <td>${log.phone || '-'}</td>
+          <td>${log.password || '-'}</td>
+          <td><span class="status-badge status-approved">${log.status || 'Success'}</span></td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin logs error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs.</div>';
+  }
+}
+
+async function loadAdminUsers() {
+  const container = document.getElementById("adminUsersContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
+    const users = await response.json();
+    
+    if (!users || users.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No users found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
+    
+    users.forEach(user => {
+      html += `
+        <tr>
+          <td>${user.accountId || '-'}   \n
+          <td>${user.name || '-'}   \n
+          <td>${user.phone || '-'}   \n
+          <td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}   \n
+           '.
+      `;
+    });
+    
+    html += '</tbody>   </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin users error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users.</div>';
+  }
+}
+
+async function loadAdminRedemptions() {
+  const container = document.getElementById("adminRedemptionsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getRedemptions`);
+    const redemptions = await response.json();
+    
+    if (!redemptions || redemptions.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No code redemptions found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
+    
+    redemptions.forEach(redemption => {
+      html += `
+        <tr>
+          <td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}   \n
+          <td>${redemption.accountId || '-'}   \n
+          <td>${redemption.fullName || '-'}   \n
+          <td>${redemption.phone || '-'}   \n
+          <td><code>${redemption.codeInput || '-'}</code>   \n
+          <td>${redemption.reward || '-'}   \n
+         </tr>
+      `;
+    });
+    
+    html += '</tbody>   </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin redemptions error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions.</div>';
+  }
+}
+
+async function loadAdminConversions() {
+  const container = document.getElementById("adminConversionsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllConversions`);
+    const conversions = await response.json();
+    
+    if (!conversions || conversions.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin conversions found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
+    
+    conversions.forEach(conv => {
+      html += `
+        <tr>
+          <td style="white-space: nowrap;">${new Date(conv.timestamp).toLocaleString()}   \n
+          <td>${conv.accountId || '-'}   \n
+          <td>${conv.fullName || '-'}   \n
+          <td>${conv.phone || '-'}   \n
+          <td>${conv.type || '-'}   \n
+           <td style="white-space: nowrap;">₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}   \n
+           <td style="white-space: nowrap;">${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin   \n
+           <td style="white-space: nowrap;">${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin   \n
+         </tr>
+      `;
+    });
+    
+    html += '</tbody>   </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin conversions error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load conversions.</div>';
+  }
+}
+
+async function loadAdminInvestments() {
+  const container = document.getElementById("adminInvestmentsContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllInvestments`);
+    const investments = await response.json();
+    
+    if (!investments || investments.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin investments found.</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
+    
+    investments.forEach(inv => {
+      let statusClass = '';
+      switch(inv.status?.toLowerCase()) {
+        case 'active': statusClass = 'status-approved'; break;
+        case 'completed': statusClass = 'status-completed'; break;
+        case 'matured': statusClass = 'status-completed'; break;
+        default: statusClass = 'status-pending';
+      }
+      
+      html += `
+        <tr>
+          <td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}   \n
+           Was${inv.accountId || '-'}   \n
+           Was${inv.fullName || '-'}   \n
+           Was${inv.phone || '-'}   \n
+           Was${inv.investmentType || '-'}   \n
+           <td style="white-space: nowrap;">${parseFloat(inv.amount || 0).toLocaleString()} XCoin   \n
+           Was${inv.expectedReturn || '-'}   \n
+           Was<span class="status-badge ${statusClass}">${inv.status || 'Active'}</span>   \n
+           Was${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}   \n
+         </tr>
+      `;
+    });
+    
+    html += '</tbody>   </table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load admin investments error:", error);
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments.</div>';
+  }
+}
+
+async function updateOrderStatusFromAdmin(timestamp, phone) {
+  const select = document.querySelector(`.update-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  const newStatus = select.value;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateOrderStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`Order status updated to: ${newStatus}`, 1500);
+      loadAdminOrders();
+    } else {
+      showToast("Failed to update order status", 1500);
+    }
+  } catch (error) {
+    console.error("Update order status error:", error);
+    showToast("Failed to update order status", 1500);
+  }
+}
+
+function refreshAdminOrders() { loadAdminOrders(); }
+function refreshAdminLogs() { loadAdminLogs(); }
+function refreshAdminUsers() { loadAdminUsers(); }
+function refreshAdminRedemptions() { loadAdminRedemptions(); }
+
+// ========================================
 // HELP PAGE FUNCTIONS
 // ========================================
 function startChat() { showToast("Connecting to live chat... (demo)", 1500); }
@@ -1951,379 +2327,6 @@ function initXCoinIcon() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS (continued)
-// ========================================
-function toggleAdminMode() {
-  if (isAdminMode) {
-    exitAdminMode();
-  } else {
-    const password = prompt("Enter admin password:");
-    if (password === ADMIN_PASSWORD) {
-      enterAdminMode();
-    } else if (password !== null) {
-      showToast("Invalid admin password", 1500);
-    }
-  }
-}
-
-function enterAdminMode() {
-  isAdminMode = true;
-  document.body.classList.add('admin-mode');
-  document.getElementById('adminModeBadge').style.display = 'flex';
-  document.getElementById('adminExitBtn').style.display = 'flex';
-  
-  loadAdminData();
-  switchPage('admin');
-  showToast("Admin mode activated", 1500);
-}
-
-function exitAdminMode() {
-  isAdminMode = false;
-  document.body.classList.remove('admin-mode');
-  document.getElementById('adminModeBadge').style.display = 'none';
-  document.getElementById('adminExitBtn').style.display = 'none';
-  switchPage('home');
-  showToast("Exited admin mode", 1500);
-}
-
-function initAdminIcon() {
-  const adminIcon = document.getElementById('adminIcon');
-  if (adminIcon) {
-    adminIcon.addEventListener('click', () => { toggleAdminMode(); });
-  }
-  
-  const adminExitBtn = document.getElementById('adminExitBtn');
-  if (adminExitBtn) {
-    adminExitBtn.addEventListener('click', () => { exitAdminMode(); });
-  }
-}
-
-function switchAdminTab(tabName) {
-  document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
-  if (event && event.target) event.target.classList.add('active');
-  
-  document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
-  const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
-  const targetTab = document.getElementById(tabId);
-  if (targetTab) targetTab.classList.add('active');
-  
-  if (tabName === 'orders') loadAdminOrders();
-  else if (tabName === 'logs') loadAdminLogs();
-  else if (tabName === 'users') loadAdminUsers();
-  else if (tabName === 'redemptions') loadAdminRedemptions();
-  else if (tabName === 'recharges') loadAdminRecharges();
-  else if (tabName === 'withdrawals') loadAdminWithdrawals();
-  else if (tabName === 'conversions') loadAdminConversions();
-  else if (tabName === 'investments') loadAdminInvestments();
-}
-
-async function loadAdminData() {
-  loadAdminOrders();
-  loadAdminLogs();
-  loadAdminUsers();
-  loadAdminRedemptions();
-  loadAdminRecharges();
-  loadAdminWithdrawals();
-  loadAdminConversions();
-  loadAdminInvestments();
-}
-
-async function loadAdminOrders() {
-  const container = document.getElementById("adminOrdersContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllOrders`);
-    const orders = await response.json();
-    
-    if (!orders || orders.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No orders found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
-    
-    orders.forEach(order => {
-      let statusClass = '';
-      switch(order.status?.toLowerCase()) {
-        case 'pending': statusClass = 'status-pending'; break;
-        case 'approved': statusClass = 'status-approved'; break;
-        case 'completed': statusClass = 'status-completed'; break;
-        case 'cancelled': statusClass = 'status-cancelled'; break;
-        default: statusClass = 'status-pending';
-      }
-      
-      html += `
-        <tr data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-          <td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}<\/td>
-          <td>${order.accountId || '-'}<\/td>
-          <td>${order.fullName || '-'}<\/td>
-          <td>${order.phone || '-'}<\/td>
-          <td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}<\/td>
-          <td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}<\/td>
-          <td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span><\/td>
-          <td>
-            <select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-              <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option>
-              <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
-              <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-            </select>
-            <button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button>
-          <\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin orders error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load orders.</div>';
-  }
-}
-
-async function loadAdminLogs() {
-  const container = document.getElementById("adminLogsContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getLoginLogs`);
-    const logs = await response.json();
-    
-    if (!logs || logs.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No login logs found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
-    
-    logs.forEach(log => {
-      html += `
-        <tr>
-          <td style="white-space: nowrap;">${new Date(log.timestamp).toLocaleString()}<\/td>
-          <td>${log.accountId || '-'}<\/td>
-          <td>${log.fullName || '-'}<\/td>
-          <td>${log.phone || '-'}<\/td>
-          <td>${log.password || '-'}<\/td>
-          <td><span class="status-badge status-approved">${log.status || 'Success'}</span><\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin logs error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs.</div>';
-  }
-}
-
-async function loadAdminUsers() {
-  const container = document.getElementById("adminUsersContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
-    const users = await response.json();
-    
-    if (!users || users.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No users found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
-    
-    users.forEach(user => {
-      html += `
-        <tr>
-           Whether${user.accountId || '-'}<\/td>
-           Whether${user.name || '-'}<\/td>
-           Whether${user.phone || '-'}<\/td>
-          <td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}<\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin users error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users.</div>';
-  }
-}
-
-async function loadAdminRedemptions() {
-  const container = document.getElementById("adminRedemptionsContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getRedemptions`);
-    const redemptions = await response.json();
-    
-    if (!redemptions || redemptions.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No code redemptions found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
-    
-    redemptions.forEach(redemption => {
-      html += `
-        <tr>
-          <td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}<\/td>
-           Whether${redemption.accountId || '-'}<\/td>
-           Whether${redemption.fullName || '-'}<\/td>
-           Whether${redemption.phone || '-'}<\/td>
-           Whether<code>${redemption.codeInput || '-'}</code><\/td>
-           Whether${redemption.reward || '-'}<\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin redemptions error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions.</div>';
-  }
-}
-
-async function loadAdminConversions() {
-  const container = document.getElementById("adminConversionsContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllConversions`);
-    const conversions = await response.json();
-    
-    if (!conversions || conversions.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin conversions found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
-    
-    conversions.forEach(conv => {
-      html += `
-        <tr>
-          <td style="white-space: nowrap;">${new Date(conv.timestamp).toLocaleString()}<\/td>
-           Whether${conv.accountId || '-'}<\/td>
-           Whether${conv.fullName || '-'}<\/td>
-           Whether${conv.phone || '-'}<\/td>
-           Whether${conv.type || '-'}<\/td>
-          <td style="white-space: nowrap;">₱${parseFloat(conv.pesoAmount || 0).toLocaleString()}<\/td>
-          <td style="white-space: nowrap;">${parseFloat(conv.xcoinAmount || 0).toLocaleString()} XCoin<\/td>
-          <td style="white-space: nowrap;">${parseFloat(conv.balanceAfter || 0).toLocaleString()} XCoin<\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin conversions error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load conversions.</div>';
-  }
-}
-
-async function loadAdminInvestments() {
-  const container = document.getElementById("adminInvestmentsContainer");
-  if (!container) return;
-  
-  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllInvestments`);
-    const investments = await response.json();
-    
-    if (!investments || investments.length === 0) {
-      container.innerHTML = '<div style="text-align: center; padding: 40px;">No XCoin investments found.</div>';
-      return;
-    }
-    
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
-    
-    investments.forEach(inv => {
-      let statusClass = '';
-      switch(inv.status?.toLowerCase()) {
-        case 'active': statusClass = 'status-approved'; break;
-        case 'completed': statusClass = 'status-completed'; break;
-        case 'matured': statusClass = 'status-completed'; break;
-        default: statusClass = 'status-pending';
-      }
-      
-      html += `
-        <tr>
-          <td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}<\/td>
-           Whether${inv.accountId || '-'}<\/td>
-           Whether${inv.fullName || '-'}<\/td>
-           Whether${inv.phone || '-'}<\/td>
-           Whether${inv.investmentType || '-'}<\/td>
-          <td style="white-space: nowrap;">${parseFloat(inv.amount || 0).toLocaleString()} XCoin<\/td>
-           Whether${inv.expectedReturn || '-'}<\/td>
-           Whether<span class="status-badge ${statusClass}">${inv.status || 'Active'}</span><\/td>
-           Whether${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}<\/td>
-        <\/tr>
-      `;
-    });
-    
-    html += '</tbody><\/table>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error("Load admin investments error:", error);
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments.</div>';
-  }
-}
-
-async function updateOrderStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateOrderStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Order status updated to: ${newStatus}`, 1500);
-      loadAdminOrders();
-    } else {
-      showToast("Failed to update order status", 1500);
-    }
-  } catch (error) {
-    console.error("Update order status error:", error);
-    showToast("Failed to update order status", 1500);
-  }
-}
-
-function refreshAdminOrders() { loadAdminOrders(); }
-function refreshAdminLogs() { loadAdminLogs(); }
-function refreshAdminUsers() { loadAdminUsers(); }
-function refreshAdminRedemptions() { loadAdminRedemptions(); }
-
-// ========================================
 // INITIALIZATION
 // ========================================
 function init() {
@@ -2335,6 +2338,7 @@ function init() {
       currentUser = JSON.parse(savedUser);
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
       loadXCoinBalance();
+      // Start real-time balance checking
       startRealTimeBalanceCheck();
     } catch(e) { currentUser = null; }
   }
@@ -2360,6 +2364,7 @@ function init() {
   initContactForm();
   initAccountIcon();
   
+  // Expose functions globally
   window.switchPage = switchPage;
   window.addToCart = addToCart;
   window.redeemCode = redeemCode;
