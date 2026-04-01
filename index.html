@@ -316,6 +316,8 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('conversions')">XCoin Conversions</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">XCoin Investments</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -342,6 +344,14 @@
     <div id="adminWithdrawalsTab" class="admin-tab">
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh Withdrawals</button></div>
       <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
+    </div>
+    <div id="adminConversionsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminConversions()"><i class="fas fa-sync-alt"></i> Refresh Conversions</button></div>
+      <div id="adminConversionsContainer" class="admin-conversions-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading conversions...</div></div>
+    </div>
+    <div id="adminInvestmentsTab" class="admin-tab">
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminInvestments()"><i class="fas fa-sync-alt"></i> Refresh Investments</button></div>
+      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div></div>
     </div>
   </div>
 
