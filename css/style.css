@@ -3536,9 +3536,10 @@ body.admin-mode .recharge-icon {
 }
 
 /* ========================================
-   RECHARGE HISTORY STYLES
+   RECHARGE HISTORY STYLES - FIXED
    ======================================== */
 
+/* Recharge History Section */
 .recharge-history-section {
   margin-top: 40px;
   padding-top: 20px;
@@ -3555,6 +3556,7 @@ body.admin-mode .recharge-icon {
   color: #1d1d1f;
 }
 
+/* Recharge History List Container */
 .recharge-history-list {
   display: flex;
   flex-direction: column;
@@ -3564,6 +3566,7 @@ body.admin-mode .recharge-icon {
   padding: 5px;
 }
 
+/* Recharge History Item */
 .recharge-item {
   background: white;
   border-radius: 20px;
@@ -3581,6 +3584,35 @@ body.admin-mode .recharge-icon {
   border-color: #e63946;
 }
 
+/* Status Timeline Dot */
+.recharge-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #e9e9ef;
+  transition: all 0.3s;
+}
+
+.recharge-item.status-pending::before {
+  background: #ed6c02;
+}
+
+.recharge-item.status-approved::before {
+  background: #2e7d32;
+}
+
+.recharge-item.status-cancelled::before {
+  background: #d32f2f;
+}
+
+.recharge-item:hover::before {
+  width: 4px;
+}
+
+/* Recharge Header */
 .recharge-header {
   display: flex;
   justify-content: space-between;
@@ -3601,6 +3633,7 @@ body.admin-mode .recharge-icon {
   gap: 6px;
 }
 
+/* Recharge Status Badges */
 .recharge-status {
   font-size: 0.75rem;
   padding: 4px 12px;
@@ -3626,6 +3659,7 @@ body.admin-mode .recharge-icon {
   color: #d32f2f;
 }
 
+/* Recharge Details */
 .recharge-details {
   display: flex;
   flex-direction: column;
@@ -3645,6 +3679,109 @@ body.admin-mode .recharge-icon {
   width: 20px;
   color: #e63946;
   font-size: 0.9rem;
+}
+
+.recharge-details .recharge-amount {
+  font-weight: 600;
+  color: #e63946;
+  font-size: 1rem;
+}
+
+.recharge-details .recharge-ref {
+  font-family: monospace;
+  background: #f5f5f7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e9e9ef;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #c0c0c0;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.empty-state p {
+  color: #86868b;
+  font-size: 0.9rem;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #86868b;
+}
+
+.loading-state i {
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar for recharge history */
+.recharge-history-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recharge-history-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 10px;
+}
+
+.recharge-history-list::-webkit-scrollbar-thumb:hover {
+  background: #e63946;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .recharge-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .recharge-item {
+    padding: 14px 16px;
+  }
+  
+  .recharge-details div {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  .recharge-history-section h2 {
+    font-size: 1.3rem;
+  }
 }
 
 /* ========================================
