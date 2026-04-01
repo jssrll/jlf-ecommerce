@@ -4263,3 +4263,33 @@ body.admin-mode .recharge-icon {
   background: #e3f2fd;
   color: #1565c0;
 }
+
+/* Ensure recharge details are visible */
+.recharge-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #e9e9ef;
+}
+
+.recharge-details div {
+  font-size: 0.85rem;
+  color: #5e5e5e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.recharge-details div i {
+  width: 24px;
+  color: #e63946;
+  font-size: 0.9rem;
+}
+
+.recharge-details div:first-child {
+  font-weight: 500;
+  color: #1d1d1f;
+}
