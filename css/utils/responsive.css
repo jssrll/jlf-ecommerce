@@ -1,0 +1,300 @@
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+/* Mobile Styles (max-width: 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  /* Header */
+  .nav {
+    flex-direction: column;
+  }
+  
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-actions {
+    justify-content: center;
+  }
+  
+  /* Hero Section */
+  .hero-apple,
+  .hero-fireworks {
+    padding: 40px 20px;
+    margin: 20px 0;
+    border-radius: var(--radius-xl);
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* Buttons */
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .hero-buttons button {
+    width: 100%;
+  }
+  
+  /* Grid Layouts */
+  .showcase-grid,
+  .features-apple,
+  .testimonials-grid,
+  .products-grid-apple {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  /* Product Cards */
+  .product-img-apple {
+    height: 120px !important;
+    font-size: 2.5rem !important;
+  }
+  
+  .product-info-apple {
+    padding: 10px !important;
+  }
+  
+  .product-title-apple {
+    font-size: 0.85rem !important;
+  }
+  
+  .product-price-apple {
+    font-size: 1rem !important;
+  }
+  
+  .add-to-cart-apple {
+    padding: 6px !important;
+    font-size: 0.65rem !important;
+  }
+  
+  /* Showcase Cards */
+  .showcase-item {
+    padding: 20px 12px !important;
+  }
+  
+  .showcase-icon {
+    font-size: 2.5rem !important;
+  }
+  
+  .showcase-item h3 {
+    font-size: 0.9rem !important;
+  }
+  
+  .showcase-item p {
+    font-size: 0.75rem;
+  }
+  
+  /* Filters */
+  .filters-bar-apple {
+    flex-direction: column;
+    border-radius: var(--radius-xl);
+    padding: 15px;
+  }
+  
+  .search-box-apple {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .category-filter-apple {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cat-btn-apple {
+    padding: 6px 12px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  /* Modals */
+  .modal-content {
+    width: 95%;
+    border-radius: var(--radius-xl);
+  }
+  
+  .modal-header {
+    padding: 16px 20px !important;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.2rem !important;
+  }
+  
+  .tab-content {
+    padding: 20px !important;
+  }
+  
+  /* Forms */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    font-size: 0.85rem;
+  }
+  
+  .form-group input {
+    padding: 10px 12px !important;
+    font-size: 0.85rem;
+  }
+  
+  /* Cart */
+  .cart-drawer {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .cart-header {
+    padding: 16px 20px !important;
+  }
+  
+  .cart-items-list {
+    padding: 16px !important;
+  }
+  
+  .cart-footer {
+    padding: 16px 20px !important;
+  }
+  
+  .cart-item {
+    padding: 10px !important;
+  }
+  
+  .cart-item-img {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem !important;
+  }
+  
+  /* Order Cards */
+  .order-card {
+    padding: 16px !important;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .order-date {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Investment Cards */
+  .investment-grid-featured {
+    grid-template-columns: 1fr;
+  }
+  
+  .investment-card-featured {
+    padding: 20px;
+  }
+  
+  .investment-details-featured {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* FAQ */
+  .faq-question-apple {
+    font-size: 0.85rem;
+    padding: 14px 16px !important;
+  }
+  
+  .faq-answer-apple {
+    font-size: 0.8rem;
+  }
+  
+  /* Admin Tables */
+  .admin-table th,
+  .admin-table td {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .admin-tab-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  
+  /* Toast */
+  .toast-msg {
+    white-space: normal;
+    text-align: center;
+    max-width: 85%;
+    font-size: 0.7rem;
+    padding: 8px 16px;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 20px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Extra Small Devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .showcase-grid,
+  .products-grid-apple {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .product-img-apple {
+    height: 100px !important;
+    font-size: 2rem !important;
+  }
+  
+  .product-title-apple {
+    font-size: 0.75rem !important;
+  }
+  
+  .product-price-apple {
+    font-size: 0.85rem !important;
+  }
+  
+  .stats-section {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 32px;
+  }
+  
+  .products-grid-apple {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop Styles (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .products-grid-apple {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

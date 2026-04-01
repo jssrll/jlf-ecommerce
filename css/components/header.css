@@ -1,0 +1,174 @@
+/* ========================================
+   HEADER & NAVIGATION STYLES
+   ======================================== */
+.header {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--secondary), var(--text-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo span {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-weight: 500;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition-fast);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.account-icon,
+.cart-icon,
+.recharge-icon,
+.withdraw-icon,
+.admin-icon {
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--text);
+  transition: var(--transition-fast);
+}
+
+.account-icon:hover,
+.cart-icon:hover,
+.recharge-icon:hover,
+.withdraw-icon:hover,
+.admin-icon:hover {
+  color: var(--primary);
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: var(--radius-full);
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.user-name {
+  font-size: 0.8rem;
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Admin Mode Styles */
+.admin-exit-btn {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-exit-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.admin-mode-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Admin Mode Body Class */
+body.admin-mode .nav-links {
+  display: none !important;
+}
+
+body.admin-mode .cart-icon {
+  display: none !important;
+}
+
+body.admin-mode .account-icon {
+  display: none !important;
+}
+
+body.admin-mode .admin-icon {
+  display: none !important;
+}
+
+body.admin-mode .recharge-icon,
+body.admin-mode .withdraw-icon {
+  display: none !important;
+}
+
+body.admin-mode .admin-exit-btn {
+  display: flex !important;
+}
+
+body.admin-mode .admin-mode-badge {
+  display: flex !important;
+}
