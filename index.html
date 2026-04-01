@@ -52,9 +52,6 @@
         <div class="withdraw-icon" id="withdrawIcon">
           <i class="fas fa-money-bill-wave"></i>
         </div>
-        <div class="admin-icon" id="adminIcon">
-          <i class="fas fa-code"></i>
-        </div>
         <div class="cart-icon" id="cartIconBtn">
           <i class="fas fa-bag-shopping"></i>
           <span class="cart-count" id="cartCountBadge">0</span>
@@ -331,27 +328,6 @@
       <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlfworks.official@gmail.com</p><p>Response within 24 hours</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
     </div>
 
-    <!-- Admin Access Container -->
-    <div class="admin-access-container">
-      <div class="admin-access-card">
-        <div class="admin-access-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Admin Access</h3>
-        <p>Manage orders, users, and system settings</p>
-        <div class="admin-access-buttons">
-          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()">
-            <i class="fas fa-code"></i> Enter Admin Mode
-          </button>
-          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()">
-            <i class="fas fa-sign-out-alt"></i> Exit Admin Mode
-          </button>
-        </div>
-        <div class="admin-note">
-          <i class="fas fa-lock"></i>
-          <span>Admin access requires password verification</span>
-        </div>
-      </div>
-    </div>
-
     <div class="faq-section-apple"><h2>Frequently Asked Questions</h2>
       <div class="faq-list-apple">
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout. Make sure you have enough credit balance to complete the purchase.</div></div>
@@ -377,6 +353,27 @@
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I become a reseller?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">We welcome resellers! Please contact our support team for reseller inquiries and wholesale pricing.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Is my personal information secure?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Yes, we take your privacy seriously. All personal information is encrypted and stored securely. We never share your data with third parties.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Still Have Questions?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">If your question wasn't answered here, please don't hesitate to reach out to our support team. We're always happy to help!</div></div>
+      </div>
+    </div>
+
+    <!-- Admin Access Container -->
+    <div class="admin-access-container">
+      <div class="admin-access-card">
+        <div class="admin-access-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Admin Access</h3>
+        <p>Manage orders, users, and system settings</p>
+        <div class="admin-access-buttons">
+          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()">
+            <i class="fas fa-code"></i> Enter Admin Mode
+          </button>
+          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()">
+            <i class="fas fa-sign-out-alt"></i> Exit Admin Mode
+          </button>
+        </div>
+        <div class="admin-note">
+          <i class="fas fa-lock"></i>
+          <span>For Authorized Admins Only</span>
+        </div>
       </div>
     </div>
   </div>
