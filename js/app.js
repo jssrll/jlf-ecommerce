@@ -1208,7 +1208,7 @@ async function loadAllRechargeHistory() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS - FIXED TABLE RENDERING
+// ADMIN FUNCTIONS - FIXED (REMOVED "either" TEXT)
 // ========================================
 
 async function loadAdminOrders() {
@@ -1226,7 +1226,7 @@ async function loadAdminOrders() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     orders.forEach(order => {
       let statusClass = '';
@@ -1240,7 +1240,7 @@ async function loadAdminOrders() {
       
       html += `
         <tr data-timestamp="${order.timestamp}" data-phone="${order.phone}">
-          <td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}   <\/td>
+          <td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}<\/td>
           <td>${order.accountId || '-'}<\/td>
           <td>${order.fullName || '-'}<\/td>
           <td>${order.phone || '-'}<\/td>
@@ -1284,11 +1284,11 @@ async function loadAdminLogs() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Password</th><th>Status</th></tr></thead><tbody>';
     
     logs.forEach(log => {
       html += `
-         <tr>
+        <tr>
           <td style="white-space: nowrap;">${new Date(log.timestamp).toLocaleString()}<\/td>
           <td>${log.accountId || '-'}<\/td>
           <td>${log.fullName || '-'}<\/td>
@@ -1323,11 +1323,11 @@ async function loadAdminUsers() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr></thead><tbody>';
     
     users.forEach(user => {
       html += `
-         <tr>
+        <tr>
           <td>${user.accountId || '-'}<\/td>
           <td>${user.name || '-'}<\/td>
           <td>${user.phone || '-'}<\/td>
@@ -1360,11 +1360,11 @@ async function loadAdminRedemptions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
     
     redemptions.forEach(redemption => {
       html += `
-         <tr>
+        <tr>
           <td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}<\/td>
           <td>${redemption.accountId || '-'}<\/td>
           <td>${redemption.fullName || '-'}<\/td>
@@ -1399,7 +1399,7 @@ async function loadAdminRecharges() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     recharges.forEach(recharge => {
       let statusClass = '';
@@ -1456,7 +1456,7 @@ async function loadAdminWithdrawals() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Method</th><th>Amount</th><th>Receiver Name</th><th>Receiver Number</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     
     withdrawals.forEach(withdrawal => {
       let statusClass = '';
@@ -1516,11 +1516,11 @@ async function loadAdminConversions() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Type</th><th>Peso Amount</th><th>XCoin Amount</th><th>Balance After</th></tr></thead><tbody>';
     
     conversions.forEach(conv => {
       html += `
-         <tr>
+        <tr>
           <td style="white-space: nowrap;">${new Date(conv.timestamp).toLocaleString()}<\/td>
           <td>${conv.accountId || '-'}<\/td>
           <td>${conv.fullName || '-'}<\/td>
@@ -1557,7 +1557,7 @@ async function loadAdminInvestments() {
       return;
     }
     
-    let html = '<table class="admin-table"><thead>   either<th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th> </thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Investment Type</th><th>Amount (XCoin)</th><th>Expected Return</th><th>Status</th><th>Maturity Date</th></tr></thead><tbody>';
     
     investments.forEach(inv => {
       let statusClass = '';
@@ -1569,7 +1569,7 @@ async function loadAdminInvestments() {
       }
       
       html += `
-         <tr>
+        <tr>
           <td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}<\/td>
           <td>${inv.accountId || '-'}<\/td>
           <td>${inv.fullName || '-'}<\/td>
@@ -1589,92 +1589,6 @@ async function loadAdminInvestments() {
   } catch (error) {
     console.error("Load admin investments error:", error);
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load investments.</div>';
-  }
-}
-
-async function updateRechargeStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-recharge-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateRechargeStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Recharge status updated to: ${newStatus}`, 1500);
-      loadAdminRecharges();
-      
-      if (currentUser && currentUser.phone === phone) {
-        await refreshUserBalance();
-      }
-    } else {
-      showToast("Failed to update recharge status", 1500);
-    }
-  } catch (error) {
-    console.error("Update recharge status error:", error);
-    showToast("Failed to update recharge status", 1500);
-  }
-}
-
-async function updateWithdrawalStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-withdrawal-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateWithdrawalStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Withdrawal status updated to: ${newStatus}`, 1500);
-      loadAdminWithdrawals();
-      
-      if (currentUser && currentUser.phone === phone) {
-        await refreshUserBalance();
-      }
-    } else {
-      showToast("Failed to update withdrawal status", 1500);
-    }
-  } catch (error) {
-    console.error("Update withdrawal status error:", error);
-    showToast("Failed to update withdrawal status", 1500);
-  }
-}
-
-async function updateOrderStatusFromAdmin(timestamp, phone) {
-  const select = document.querySelector(`.update-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
-  const newStatus = select.value;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateOrderStatus");
-    formData.append("timestamp", timestamp);
-    formData.append("phone", phone);
-    formData.append("status", newStatus);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (result.success) {
-      showToast(`Order status updated to: ${newStatus}`, 1500);
-      loadAdminOrders();
-    } else {
-      showToast("Failed to update order status", 1500);
-    }
-  } catch (error) {
-    console.error("Update order status error:", error);
-    showToast("Failed to update order status", 1500);
   }
 }
 
