@@ -143,7 +143,7 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// LOGIN FUNCTION
+// LOGIN FUNCTION - WITH LOADING INDICATOR
 // ========================================
 async function handleLogin(event) {
   event.preventDefault();
@@ -212,7 +212,7 @@ async function handleLogin(event) {
 }
 
 // ========================================
-// REGISTER FUNCTION
+// REGISTER FUNCTION - WITH LOADING INDICATOR
 // ========================================
 async function handleRegister(event) {
   event.preventDefault();
@@ -336,7 +336,7 @@ async function addUserCredit(amount) {
 }
 
 // ========================================
-// BOND INVESTMENT FUNCTIONS - TWO OPTIONS
+// BOND INVESTMENT FUNCTIONS - WITH LOADING INDICATOR
 // ========================================
 
 // Option 1: 3% return in 90 days (3 months)
@@ -827,6 +827,9 @@ function loadFeaturedPage() {
   }
 }
 
+// ========================================
+// CODE REDEMPTION - WITH LOADING INDICATOR
+// ========================================
 async function redeemCode() {
   if (!currentUser) {
     showToast("Please login to redeem codes", 1500);
@@ -1452,7 +1455,7 @@ function initWithdrawIcon() {
 }
 
 // ========================================
-// RECHARGE MODAL FUNCTIONS
+// RECHARGE MODAL FUNCTIONS - WITH LOADING INDICATOR
 // ========================================
 function openRechargeModal() {
   if (!currentUser) {
@@ -1490,19 +1493,31 @@ async function submitRecharge(method) {
     showToast("Please login first", 1500);
     return;
   }
+  
   let amount, reference = "";
+  let submitBtn, originalText;
+  
   if (method === 'gcash') {
     amount = document.getElementById("gcashAmount").value;
     reference = document.getElementById("gcashRefNumber").value.trim();
+    submitBtn = document.querySelector('#gcashTab .btn-primary-apple');
     if (!reference) { showToast("Please enter reference number", 1500); return; }
   } else {
     amount = document.getElementById("cashAmount").value;
+    submitBtn = document.querySelector('#cashTab .btn-primary-apple');
   }
+  
   amount = parseFloat(amount);
   if (isNaN(amount) || amount < 10) {
     showToast("Please enter a valid amount (minimum ₱10)", 1500);
     return;
   }
+  
+  // Disable button and show loading indicator
+  originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  
   try {
     const formData = new URLSearchParams();
     formData.append("action", "addRecharge");
@@ -1514,8 +1529,10 @@ async function submitRecharge(method) {
     formData.append("amount", amount);
     formData.append("reference", reference);
     formData.append("status", "Pending");
+    
     const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
     const result = await response.json();
+    
     if (result.success) {
       showToast(`✅ Recharge request submitted! Amount: ₱${amount}. Please wait for approval.`, 3000);
       if (method === 'gcash') {
@@ -1528,12 +1545,17 @@ async function submitRecharge(method) {
       showToast(result.message || "Submission failed", 1500);
     }
   } catch (error) {
+    console.error("Recharge error:", error);
     showToast("Failed to submit. Please try again.", 1500);
+  } finally {
+    // Re-enable button and restore text
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
   }
 }
 
 // ========================================
-// WITHDRAW MODAL FUNCTIONS
+// WITHDRAW MODAL FUNCTIONS - WITH LOADING INDICATOR
 // ========================================
 function openWithdrawModal() {
   if (!currentUser) {
@@ -1571,25 +1593,42 @@ async function submitWithdraw(method) {
     showToast("Please login first", 1500);
     return;
   }
+  
   let amount, receiverName = "", receiverNumber = "";
+  let submitBtn, originalText;
+  
   if (method === 'gcash') {
     amount = document.getElementById("withdrawGcashAmount").value;
     receiverName = document.getElementById("gcashReceiverName").value.trim();
     receiverNumber = document.getElementById("gcashReceiverNumber").value.trim();
+    submitBtn = document.querySelector('#withdrawGcashTab .btn-primary-apple');
+    
     if (!receiverName) { showToast("Please enter receiver name", 1500); return; }
-    if (!receiverNumber || !/^09\d{9}$/.test(receiverNumber)) { showToast("Please enter a valid GCash number (09XXXXXXXXX)", 1500); return; }
+    if (!receiverNumber || !/^09\d{9}$/.test(receiverNumber)) { 
+      showToast("Please enter a valid GCash number (09XXXXXXXXX)", 1500); 
+      return; 
+    }
   } else {
     amount = document.getElementById("withdrawCashAmount").value;
+    submitBtn = document.querySelector('#withdrawCashTab .btn-primary-apple');
   }
+  
   amount = parseFloat(amount);
   if (isNaN(amount) || amount < 50) {
     showToast("Please enter a valid amount (minimum ₱50)", 1500);
     return;
   }
+  
   if (amount > currentUser.balance) {
     showToast("Insufficient balance", 1500);
     return;
   }
+  
+  // Disable button and show loading indicator
+  originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  
   try {
     const formData = new URLSearchParams();
     formData.append("action", "addWithdrawal");
@@ -1602,8 +1641,10 @@ async function submitWithdraw(method) {
     formData.append("receiverName", receiverName);
     formData.append("receiverNumber", receiverNumber);
     formData.append("status", "Pending");
+    
     const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
     const result = await response.json();
+    
     if (result.success) {
       showToast(`✅ Withdrawal request submitted! Amount: ₱${amount}. Please wait for approval.`, 3000);
       if (method === 'gcash') {
@@ -1617,7 +1658,12 @@ async function submitWithdraw(method) {
       showToast(result.message || "Submission failed", 1500);
     }
   } catch (error) {
+    console.error("Withdrawal error:", error);
     showToast("Failed to submit. Please try again.", 1500);
+  } finally {
+    // Re-enable button and restore text
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
   }
 }
 
