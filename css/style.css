@@ -2158,3 +2158,141 @@ footer {
     gap: 12px;
   }
 }
+
+/* ========================================
+   ADMIN ACCESS CONTAINER (HELP PAGE)
+   ======================================== */
+.admin-access-container {
+  max-width: 450px;
+  margin: 30px auto 40px;
+  padding: 0 16px;
+}
+
+.admin-access-card {
+  background: white;
+  border-radius: 28px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid #e9e9ef;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.admin-access-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+  border-color: #e63946;
+}
+
+.admin-access-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #e63946, #ff6a3d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.admin-access-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.admin-access-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1d1d1f;
+}
+
+.admin-access-card p {
+  color: #86868b;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.admin-access-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.admin-access-buttons .btn-primary-apple,
+.admin-access-buttons .btn-secondary-apple {
+  min-width: 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.admin-note {
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #e9e9ef;
+}
+
+.admin-note i {
+  color: #e63946;
+  font-size: 0.8rem;
+}
+
+.admin-note span {
+  color: #86868b;
+}
+
+/* Responsive for Admin Access Container */
+@media (max-width: 768px) {
+  .admin-access-container {
+    margin: 20px auto 30px;
+    padding: 0 16px;
+  }
+  
+  .admin-access-card {
+    padding: 24px 20px;
+  }
+  
+  .admin-access-icon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .admin-access-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .admin-access-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .admin-access-card p {
+    font-size: 0.8rem;
+  }
+  
+  .admin-access-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-access-buttons .btn-primary-apple,
+  .admin-access-buttons .btn-secondary-apple {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .admin-note {
+    font-size: 0.7rem;
+    padding: 8px 12px;
+  }
+}

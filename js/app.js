@@ -1000,7 +1000,7 @@ async function loadUserOrders() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS - WORKING WITH BUTTONS
+// ADMIN FUNCTIONS - WITH HELP PAGE BUTTON HANDLING
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1020,6 +1020,13 @@ function enterAdminMode() {
   document.body.classList.add('admin-mode');
   document.getElementById('adminModeBadge').style.display = 'flex';
   document.getElementById('adminExitBtn').style.display = 'flex';
+  
+  // Update help page buttons
+  const adminAccessBtn = document.getElementById('adminAccessBtn');
+  const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
+  if (adminAccessBtn) adminAccessBtn.style.display = 'none';
+  if (adminAccessExitBtn) adminAccessExitBtn.style.display = 'flex';
+  
   loadAdminData();
   switchPage('admin');
   showToast("Admin mode activated", 1500);
@@ -1030,6 +1037,13 @@ function exitAdminMode() {
   document.body.classList.remove('admin-mode');
   document.getElementById('adminModeBadge').style.display = 'none';
   document.getElementById('adminExitBtn').style.display = 'none';
+  
+  // Update help page buttons
+  const adminAccessBtn = document.getElementById('adminAccessBtn');
+  const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
+  if (adminAccessBtn) adminAccessBtn.style.display = 'flex';
+  if (adminAccessExitBtn) adminAccessExitBtn.style.display = 'none';
+  
   switchPage('home');
   showToast("Exited admin mode", 1500);
 }
