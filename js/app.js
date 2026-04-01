@@ -11,7 +11,7 @@ let balanceCheckInterval = null;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbw1AsynmiRg94etVk_ko5hrG37LpUl6r0IEK3K_Dh8pKsb9jrl9h_T8HnhtlOcgZWlw/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzuGKRF8Pspu4kMeMJPg7CiHQZAss_wnNUJsw4tHCviKeo8U68Pvn1aM8kfhbzXjsBO/exec";
 
 // ========================================
 // HELPER FUNCTIONS
@@ -543,7 +543,6 @@ async function loadCreditInvestmentHistory() {
       const maturityDate = inv.maturityDate ? new Date(inv.maturityDate) : null;
       const isMatured = maturityDate && maturityDate <= new Date();
       
-      // Extract return percentage from investment type
       let returnText = '';
       if (inv.investmentType.includes('3%')) returnText = '3% (90 days)';
       else if (inv.investmentType.includes('6%')) returnText = '6% (150 days)';
@@ -998,7 +997,7 @@ async function loadUserOrders() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS
+// ADMIN FUNCTIONS - WORKING WITH BUTTONS
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1088,12 +1087,44 @@ async function loadAdminOrders() {
         case 'cancelled': statusClass = 'status-cancelled'; break;
         default: statusClass = 'status-pending';
       }
-      html += `<tr><td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}</td><td>${order.accountId || '-'}</td><td>${order.fullName || '-'}</td><td>${order.phone || '-'}</td><td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td><td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td><td><select class="update-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}"><option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-status-btn" onclick="updateOrderStatusFromAdmin('${order.timestamp}', '${order.phone}')">Update</button></td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(order.timestamp).toLocaleString()}</td><td>${order.accountId || '-'}</td><td>${order.fullName || '-'}</td><td>${order.phone || '-'}</td><td style="max-width: 200px; word-break: break-word;">${order.orderList || '-'}</td><td>₱${parseFloat(order.totalPrice || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${order.status || 'Pending'}</span></td><td><select class="order-status-select" data-timestamp="${order.timestamp}" data-phone="${order.phone}"><option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${order.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-order-btn" onclick="updateOrderStatus('${order.timestamp}', '${order.phone}')">Update</button></td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load orders.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load orders. <button class="btn-secondary-apple" onclick="loadAdminOrders()">Try Again</button></div>';
+  }
+}
+
+async function updateOrderStatus(timestamp, phone) {
+  const select = document.querySelector(`.order-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  if (!select) return;
+  const newStatus = select.value;
+  const button = select.nextElementSibling;
+  const originalText = button.innerHTML;
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateOrderStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    if (result.success) {
+      showToast(`Order status updated to: ${newStatus}`, 1500);
+      await loadAdminOrders();
+    } else {
+      showToast(result.message || "Update failed", 1500);
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  } catch (error) {
+    console.error("Update order error:", error);
+    showToast("Update failed. Please try again.", 1500);
+    button.disabled = false;
+    button.innerHTML = originalText;
   }
 }
 
@@ -1115,7 +1146,7 @@ async function loadAdminLogs() {
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs. <button class="btn-secondary-apple" onclick="loadAdminLogs()">Try Again</button></div>';
   }
 }
 
@@ -1137,7 +1168,7 @@ async function loadAdminUsers() {
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users. <button class="btn-secondary-apple" onclick="loadAdminUsers()">Try Again</button></div>';
   }
 }
 
@@ -1159,7 +1190,7 @@ async function loadAdminRedemptions() {
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions. <button class="btn-secondary-apple" onclick="loadAdminRedemptions()">Try Again</button></div>';
   }
 }
 
@@ -1183,12 +1214,44 @@ async function loadAdminRecharges() {
         case 'cancelled': statusClass = 'status-cancelled'; break;
         default: statusClass = 'status-pending';
       }
-      html += `<tr><td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td><td>${recharge.accountId || '-'}</td><td>${recharge.fullName || '-'}</td><td>${recharge.phone || '-'}</td><td>${recharge.method || '-'}</td><td style="white-space: nowrap;">₱${parseFloat(recharge.amount || 0).toLocaleString()}</td><td style="max-width: 150px; word-break: break-word;"><code>${recharge.reference || '-'}</code></td><td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td><td><select class="update-recharge-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}"><option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-recharge-btn" onclick="updateRechargeStatusFromAdmin('${recharge.timestamp}', '${recharge.phone}')">Update</button></td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td><td>${recharge.accountId || '-'}</td><td>${recharge.fullName || '-'}</td><td>${recharge.phone || '-'}</td><td>${recharge.method || '-'}</td><td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td><td><code>${recharge.reference || '-'}</code></td><td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td><td><select class="recharge-status-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}"><option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-recharge-btn" onclick="updateRechargeStatus('${recharge.timestamp}', '${recharge.phone}')">Update</button></td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load recharge requests.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load recharge requests. <button class="btn-secondary-apple" onclick="loadAdminRecharges()">Try Again</button></div>';
+  }
+}
+
+async function updateRechargeStatus(timestamp, phone) {
+  const select = document.querySelector(`.recharge-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  if (!select) return;
+  const newStatus = select.value;
+  const button = select.nextElementSibling;
+  const originalText = button.innerHTML;
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateRechargeStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    if (result.success) {
+      showToast(`Recharge status updated to: ${newStatus}`, 1500);
+      await loadAdminRecharges();
+    } else {
+      showToast(result.message || "Update failed", 1500);
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  } catch (error) {
+    console.error("Update recharge error:", error);
+    showToast("Update failed. Please try again.", 1500);
+    button.disabled = false;
+    button.innerHTML = originalText;
   }
 }
 
@@ -1213,12 +1276,44 @@ async function loadAdminWithdrawals() {
         case 'rejected': statusClass = 'status-cancelled'; break;
         default: statusClass = 'status-pending';
       }
-      html += `<tr><td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}</td><td>${withdrawal.accountId || '-'}</td><td>${withdrawal.fullName || '-'}</td><td>${withdrawal.phone || '-'}</td><td>${withdrawal.method || '-'}</td><td style="white-space: nowrap;">₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td><td>${withdrawal.receiverName || '-'}</td><td>${withdrawal.receiverNumber || '-'}</td><td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td><td><select class="update-withdrawal-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}"><option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option><option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option></select><button class="update-withdrawal-btn" onclick="updateWithdrawalStatusFromAdmin('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button></td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}</td><td>${withdrawal.accountId || '-'}</td><td>${withdrawal.fullName || '-'}</td><td>${withdrawal.phone || '-'}</td><td>${withdrawal.method || '-'}</td><td>₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td><td>${withdrawal.receiverName || '-'}</td><td>${withdrawal.receiverNumber || '-'}</td><td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td><td><select class="withdrawal-status-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}"><option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option><option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option></select><button class="update-withdrawal-btn" onclick="updateWithdrawalStatus('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button></td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests. <button class="btn-secondary-apple" onclick="loadAdminWithdrawals()">Try Again</button></div>';
+  }
+}
+
+async function updateWithdrawalStatus(timestamp, phone) {
+  const select = document.querySelector(`.withdrawal-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
+  if (!select) return;
+  const newStatus = select.value;
+  const button = select.nextElementSibling;
+  const originalText = button.innerHTML;
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateWithdrawalStatus");
+    formData.append("timestamp", timestamp);
+    formData.append("phone", phone);
+    formData.append("status", newStatus);
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    if (result.success) {
+      showToast(`Withdrawal status updated to: ${newStatus}`, 1500);
+      await loadAdminWithdrawals();
+    } else {
+      showToast(result.message || "Update failed", 1500);
+      button.disabled = false;
+      button.innerHTML = originalText;
+    }
+  } catch (error) {
+    console.error("Update withdrawal error:", error);
+    showToast("Update failed. Please try again.", 1500);
+    button.disabled = false;
+    button.innerHTML = originalText;
   }
 }
 
@@ -1242,12 +1337,12 @@ async function loadAdminCreditInvestments() {
         case 'matured': statusClass = 'status-completed'; break;
         default: statusClass = 'status-pending';
       }
-      html += `<tr><td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}</td><td>${inv.accountId || '-'}</td><td>${inv.fullName || '-'}</td><td>${inv.phone || '-'}</td><td>${inv.investmentType || '-'}</td><td style="white-space: nowrap;">₱${parseFloat(inv.amount || 0).toLocaleString()}</td><td style="white-space: nowrap;">₱${parseFloat(inv.expectedReturn || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td><td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td><td>${inv.durationDays ? inv.durationDays + ' days' : '-'}</td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(inv.timestamp).toLocaleString()}</td><td>${inv.accountId || '-'}</td><td>${inv.fullName || '-'}</td><td>${inv.phone || '-'}</td><td>${inv.investmentType || '-'}</td><td>₱${parseFloat(inv.amount || 0).toLocaleString()}</td><td>₱${parseFloat(inv.expectedReturn || 0).toLocaleString()}</td><td><span class="status-badge ${statusClass}">${inv.status || 'Active'}</span></td><td>${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : '-'}</td><td>${inv.durationDays ? inv.durationDays + ' days' : '-'}</td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
-    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load bond investments.</div>';
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load bond investments. <button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()">Try Again</button></div>';
   }
 }
 
@@ -1585,6 +1680,9 @@ function init() {
   window.submitWithdraw = submitWithdraw;
   window.investInBondOption1 = investInBondOption1;
   window.investInBondOption2 = investInBondOption2;
+  window.updateOrderStatus = updateOrderStatus;
+  window.updateRechargeStatus = updateRechargeStatus;
+  window.updateWithdrawalStatus = updateWithdrawalStatus;
   window.switchAdminTab = switchAdminTab;
   window.refreshAdminOrders = refreshAdminOrders;
   window.refreshAdminLogs = refreshAdminLogs;
