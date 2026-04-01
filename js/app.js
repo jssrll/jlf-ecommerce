@@ -102,7 +102,7 @@ function startRealTimeBalanceCheck() {
     if (currentUser) {
       refreshUserBalance();
     }
-  }, 10000); //10 seconds refresh
+  }, 30000); //30 seconds refresh
 }
 
 function stopRealTimeBalanceCheck() {
