@@ -13,6 +13,9 @@ const ADMIN_PASSWORD = "jssrll101007";
 // Your Google Sheets Web App URL
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzuGKRF8Pspu4kMeMJPg7CiHQZAss_wnNUJsw4tHCviKeo8U68Pvn1aM8kfhbzXjsBO/exec";
 
+// PWA Install Variables
+let deferredPrompt = null;
+
 // ========================================
 // HELPER FUNCTIONS
 // ========================================
@@ -33,6 +36,68 @@ function showToast(message, duration = 1800) {
   toast.classList.add("show");
   setTimeout(() => { toast.classList.remove("show"); }, duration);
 }
+
+// ========================================
+// DOWNLOAD POPUP FUNCTIONS
+// ========================================
+
+// Show download popup
+function showDownloadPopup() {
+    // Check if user already closed popup before
+    const popupClosed = localStorage.getItem("downloadPopupClosed");
+    const appInstalled = window.matchMedia('(display-mode: standalone)').matches;
+    
+    // Don't show if already installed or user closed it
+    if (appInstalled || popupClosed === "true") return;
+    
+    // Show popup after 3 seconds
+    setTimeout(() => {
+        const popup = document.getElementById("downloadPopup");
+        if (popup) popup.style.display = "flex";
+    }, 3000);
+}
+
+// Close download popup
+function closeDownloadPopup() {
+    const popup = document.getElementById("downloadPopup");
+    if (popup) popup.style.display = "none";
+    // Remember user closed it for 7 days
+    localStorage.setItem("downloadPopupClosed", "true");
+    setTimeout(() => {
+        localStorage.removeItem("downloadPopupClosed");
+    }, 7 * 24 * 60 * 60 * 1000); // 7 days
+}
+
+// Trigger PWA install
+function triggerInstall() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted install');
+                closeDownloadPopup();
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        // Fallback - show instructions
+        showToast("Tap the share button and select 'Add to Home Screen'", 3000);
+        closeDownloadPopup();
+    }
+}
+
+// Handle beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log('✅ Install prompt available');
+});
+
+// Handle app installed event
+window.addEventListener('appinstalled', () => {
+    console.log('App was installed successfully');
+    closeDownloadPopup();
+});
 
 // ========================================
 // REAL-TIME BALANCE UPDATE FUNCTIONS
@@ -902,7 +967,7 @@ async function redeemCode() {
 function renderFeaturedProducts() {
   const featuredGrid = document.getElementById("featuredGrid");
   if (!featuredGrid) return;
-  const featured = products.filter(p => p.name === "Fruity milk" || p.name === "Milk shake" || p.name === "Halo-halo");
+  const featured = products.filter(p => p.name === "Roman Candle" || p.name === "Sky Rocket" || p.name === "Sparklers Pack");
   featuredGrid.innerHTML = featured.map(prod => `<div class="product-card-apple">
       <div class="product-img-apple" style="font-size: 4rem; background: #f5f5f7;">${prod.image}</div>
       <div class="product-info-apple">
@@ -1180,7 +1245,7 @@ async function loadAdminUsers() {
     }
     let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr></thead><tbody>';
     users.forEach(user => {
-      html += `<tr><td>${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
@@ -1716,6 +1781,15 @@ function init() {
   initContactForm();
   initAccountIcon();
   
+  // Show download popup
+  showDownloadPopup();
+  
+  // Setup install button
+  const installBtn = document.getElementById("installAppBtn");
+  if (installBtn) {
+    installBtn.addEventListener("click", triggerInstall);
+  }
+  
   window.switchPage = switchPage;
   window.addToCart = addToCart;
   window.redeemCode = redeemCode;
@@ -1752,6 +1826,9 @@ function init() {
   window.loadAdminWithdrawals = loadAdminWithdrawals;
   window.loadAdminCreditInvestments = loadAdminCreditInvestments;
   window.toggleAdminMode = toggleAdminMode;
+  window.showDownloadPopup = showDownloadPopup;
+  window.closeDownloadPopup = closeDownloadPopup;
+  window.triggerInstall = triggerInstall;
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -602,6 +602,29 @@
 </div>
 <div id="toastMsg" class="toast-msg">Item added to cart</div>
 
+<!-- Download App Popup Modal -->
+<div id="downloadPopup" class="download-popup" style="display: none;">
+    <div class="download-popup-content">
+        <button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button>
+        <div class="download-popup-icon">
+            <i class="fas fa-fire"></i>
+        </div>
+        <h3>Install JLF Fireworks App</h3>
+        <p>Get the best experience with our app! Install now for faster checkout and exclusive offers.</p>
+        <div class="download-popup-buttons">
+            <button class="download-btn-primary" id="installAppBtn">
+                <i class="fas fa-download"></i> Install App
+            </button>
+            <button class="download-btn-secondary" onclick="closeDownloadPopup()">
+                Maybe Later
+            </button>
+        </div>
+        <div class="download-popup-note">
+            <i class="fas fa-mobile-alt"></i> Works on Android, iOS, and Desktop
+        </div>
+    </div>
+</div>
+
 <script src="js/account.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
