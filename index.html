@@ -46,6 +46,10 @@
         <div class="admin-exit-btn" id="adminExitBtn" style="display: none;">
           <i class="fas fa-sign-out-alt"></i> Exit Admin
         </div>
+        <div class="notification-icon" id="notificationIcon" style="cursor: pointer; position: relative;">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge" id="notificationBadge" style="display: none; position: absolute; top: -8px; right: -12px; background: #e63946; color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px;">!</span>
+        </div>
         <div class="recharge-icon" id="rechargeIcon">
           <i class="fas fa-wallet"></i>
         </div>
@@ -686,6 +690,122 @@
     <div class="download-popup-note"><i class="fas fa-mobile-alt"></i> Works on Android, iOS, and Desktop</div>
   </div>
 </div>
+
+<!-- Push Notification System -->
+<script>
+// Your VAPID Public Key
+const VAPID_PUBLIC_KEY = 'eyJjcnYiOiJQLTI1NiIsImV4dCI6dHJ1ZSwia2V5X29wcyI6WyJ2ZXJpZnkiXSwia3R5IjoiRUMiLCJ4IjoiZEFkU09LcW1GRjcwa2ViQ0pCZmxsTXItSG1pT3h1SV9idVdjOElHT0UyRSIsInkiOiJYU1RGUTN4ZEJGVnpCc2VMZkMyYk9IckEyYUhKcUJpTFEtRkk1LUkyWUZvIn0';
+
+// Convert base64 to Uint8Array
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+// Request notification permission
+async function requestNotificationPermission() {
+    if (!('Notification' in window)) {
+        console.log('This browser does not support notifications');
+        return false;
+    }
+    
+    if (Notification.permission === 'granted') {
+        console.log('Notification permission already granted');
+        subscribeToPush();
+        return true;
+    }
+    
+    if (Notification.permission !== 'denied') {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            console.log('✅ Notification permission granted');
+            subscribeToPush();
+            return true;
+        }
+    }
+    return false;
+}
+
+// Subscribe to push notifications
+async function subscribeToPush() {
+    try {
+        const registration = await navigator.serviceWorker.ready;
+        
+        // Check if already subscribed
+        let subscription = await registration.pushManager.getSubscription();
+        
+        if (subscription) {
+            console.log('Already subscribed to push');
+            return subscription;
+        }
+        
+        // Create new subscription
+        subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+        });
+        
+        console.log('✅ Push subscription successful');
+        
+        // Save subscription to localStorage
+        localStorage.setItem('pushSubscription', JSON.stringify(subscription));
+        
+        // Send to your backend (optional)
+        if (currentUser) {
+            const formData = new URLSearchParams();
+            formData.append("action", "savePushSubscription");
+            formData.append("userId", currentUser.id);
+            formData.append("subscription", JSON.stringify(subscription));
+            fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData }).catch(e => console.log(e));
+        }
+        
+        return subscription;
+        
+    } catch (error) {
+        console.error('Push subscription error:', error);
+    }
+}
+
+// Show a test notification
+function showTestNotification() {
+    if (Notification.permission === 'granted') {
+        new Notification('JLF Fireworks 🎆', {
+            body: 'Push notifications are working! You will receive order updates and promo alerts.',
+            icon: '/icons/apple-touch-icon.png',
+            badge: '/icons/favicon-32x32.png',
+            vibrate: [200, 100, 200]
+        });
+    }
+}
+
+// Auto-request permission when page loads
+if ('serviceWorker' in navigator && 'Notification' in window) {
+    // Wait a bit before asking
+    setTimeout(() => {
+        requestNotificationPermission();
+    }, 3000);
+}
+
+// Add bell icon click handler to manually request
+document.addEventListener('DOMContentLoaded', function() {
+    const bellIcon = document.querySelector('.notification-icon');
+    if (bellIcon) {
+        bellIcon.addEventListener('click', function() {
+            if (Notification.permission !== 'granted') {
+                requestNotificationPermission();
+            } else {
+                showTestNotification();
+            }
+        });
+    }
+});
+</script>
 
 <!-- QR Code and Scanner Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
