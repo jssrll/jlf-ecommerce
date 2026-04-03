@@ -43,6 +43,9 @@ footer {
   clear: both;
 }
 
+/* ========================================
+   NAVIGATION LINKS WITH UNDERLINE INDICATOR
+   ======================================== */
 .nav-links {
   display: flex;
   gap: 32px;
@@ -57,6 +60,25 @@ footer {
   transition: 0.2s;
   font-size: 0.9rem;
   cursor: pointer;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Underline animation */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #e63946;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
 }
 
 .nav-links a:hover,
@@ -64,6 +86,9 @@ footer {
   color: #e63946;
 }
 
+/* ========================================
+   NAV ACTIONS - ICONS WITH ACTIVE INDICATOR
+   ======================================== */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -93,6 +118,34 @@ footer {
 .cart-icon:hover,
 .account-icon:hover {
   color: #e63946;
+}
+
+/* Active state for icons */
+.announcement-icon.active,
+.recharge-icon.active,
+.withdraw-icon.active,
+.settings-icon.active,
+.cart-icon.active,
+.account-icon.active {
+  color: #e63946;
+}
+
+/* Active indicator dot for icons */
+.announcement-icon.active::after,
+.recharge-icon.active::after,
+.withdraw-icon.active::after,
+.settings-icon.active::after,
+.cart-icon.active::after,
+.account-icon.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #e63946;
+  border-radius: 50%;
 }
 
 .cart-count {
@@ -155,7 +208,6 @@ footer {
     justify-content: center;
     margin-top: 10px;
   }
-}
   
   .nav-actions {
     justify-content: center;
@@ -175,6 +227,7 @@ footer {
   .user-name {
     font-size: 0.7rem;
   }
+}
 
 /* Extra small devices */
 @media (max-width: 480px) {

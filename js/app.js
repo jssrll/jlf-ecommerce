@@ -2,11 +2,47 @@
 // JLF FIREWORKS - MAIN APPLICATION
 // ========================================
 
+// UPDATE ICON ACTIVE STATE
+function updateIconActiveState() {
+  // Remove active class from all icons
+  document.querySelectorAll('.announcement-icon, .recharge-icon, .withdraw-icon, .settings-icon, .cart-icon, .account-icon').forEach(icon => {
+    icon.classList.remove('active');
+  });
+  
+  // Add active class based on current state
+  if (document.getElementById('announcementModal')?.classList.contains('show')) {
+    document.getElementById('announcementIcon')?.classList.add('active');
+  }
+  if (document.getElementById('rechargeModal')?.classList.contains('show')) {
+    document.getElementById('rechargeIcon')?.classList.add('active');
+  }
+  if (document.getElementById('withdrawModal')?.classList.contains('show')) {
+    document.getElementById('withdrawIcon')?.classList.add('active');
+  }
+  if (currentPage === 'settings') {
+    document.getElementById('settingsIcon')?.classList.add('active');
+  }
+  if (document.getElementById('cartDrawer')?.classList.contains('open')) {
+    document.getElementById('cartIconBtn')?.classList.add('active');
+  }
+  if (document.getElementById('profileModal')?.classList.contains('show') || document.getElementById('accountModal')?.classList.contains('show')) {
+    document.getElementById('accountIcon')?.classList.add('active');
+  }
+}
+
 // PAGE NAVIGATION
 function switchPage(pageName) {
   document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
   const targetPage = document.getElementById(`${pageName}Page`);
   if (targetPage) targetPage.classList.add('active');
+  
+  // Update active nav link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-page') === pageName) {
+      link.classList.add('active');
+    }
+  });
   
   currentPage = pageName;
   if (pageName === 'featured') loadFeaturedPage();
@@ -14,6 +50,9 @@ function switchPage(pageName) {
   else if (pageName === 'orders') loadUserOrders();
   else if (pageName === 'settings') renderSettingsPage();
   else if (pageName === 'admin') loadAdminData();
+  
+  // Update icon active states
+  updateIconActiveState();
 }
 
 // CREDIT FUNCTIONS
@@ -55,11 +94,14 @@ function initAccountIcon() {
   const accountIcon = document.getElementById('accountIcon');
   if (accountIcon) {
     accountIcon.addEventListener('click', () => {
-      if (currentUser && !isAdmin) openProfileModal();
-      else if (isAdmin) {
+      if (currentUser && !isAdmin) {
+        openProfileModal();
+        updateIconActiveState();
+      } else if (isAdmin) {
         showToast("Admin logged in. Logout to access user features.", 1500);
       } else {
         openAccountModal();
+        updateIconActiveState();
       }
     });
   }
@@ -87,8 +129,12 @@ function initRechargeIcon() {
   const rechargeIcon = document.getElementById('rechargeIcon');
   if (rechargeIcon) {
     rechargeIcon.addEventListener('click', () => { 
-      if (!isAdmin) openRechargeModal(); 
-      else showToast("Admin mode. Cannot recharge.", 1500);
+      if (!isAdmin) {
+        openRechargeModal();
+        updateIconActiveState();
+      } else {
+        showToast("Admin mode. Cannot recharge.", 1500);
+      }
     });
   }
 }
@@ -98,8 +144,12 @@ function initWithdrawIcon() {
   const withdrawIcon = document.getElementById('withdrawIcon');
   if (withdrawIcon) {
     withdrawIcon.addEventListener('click', () => { 
-      if (!isAdmin) openWithdrawModal(); 
-      else showToast("Admin mode. Cannot withdraw.", 1500);
+      if (!isAdmin) {
+        openWithdrawModal();
+        updateIconActiveState();
+      } else {
+        showToast("Admin mode. Cannot withdraw.", 1500);
+      }
     });
   }
 }
@@ -173,7 +223,10 @@ function init() {
   // Setup announcement icon click
   const announcementIcon = document.getElementById("announcementIcon");
   if (announcementIcon) {
-    announcementIcon.addEventListener("click", openAnnouncementModal);
+    announcementIcon.addEventListener("click", () => {
+      openAnnouncementModal();
+      updateIconActiveState();
+    });
   }
   
   const installBtn = document.getElementById("installAppBtn");
@@ -249,6 +302,8 @@ function init() {
   window.loadAdminBugReports = loadAdminBugReports;
   window.updateBugReportStatus = updateBugReportStatus;
   window.refreshAdminBugReports = refreshAdminBugReports;
+  // Update icon active state
+  updateIconActiveState();
 }
 
 document.addEventListener('DOMContentLoaded', init);
