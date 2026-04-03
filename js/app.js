@@ -11,6 +11,9 @@ let balanceCheckInterval = null;
 let loyaltyRefreshInterval = null;
 let scanInterval = null;
 let currentStream = null;
+let announcementRefreshInterval = null;
+let announcements = [];
+let readAnnouncements = [];
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
@@ -148,7 +151,6 @@ function stopRealTimeBalanceCheck() {
 // LOYALTY QR CODE FUNCTIONS
 // ========================================
 
-// Generate QR Code for user (from Account ID)
 async function generateUserQRCode() {
     if (!currentUser) return;
     
@@ -178,7 +180,6 @@ async function generateUserQRCode() {
     }
 }
 
-// Load loyalty marks for user
 async function loadUserLoyalty() {
     if (!currentUser) return;
     
@@ -208,7 +209,6 @@ async function loadUserLoyalty() {
     }
 }
 
-// Create user loyalty record
 async function createUserLoyalty() {
     if (!currentUser) return;
     
@@ -227,7 +227,6 @@ async function createUserLoyalty() {
     }
 }
 
-// Update loyalty display (12 marks)
 function updateLoyaltyDisplay(marks) {
     const marksContainer = document.getElementById("loyaltyMarksContainer");
     const marksCountSpan = document.getElementById("loyaltyMarksCount");
@@ -259,7 +258,6 @@ function updateLoyaltyDisplay(marks) {
     }
 }
 
-// Add loyalty from purchase (every ₱699 = 1 scan)
 async function addLoyaltyFromPurchase(totalAmount) {
     const REQUIRED_AMOUNT = 699;
     const scansEarned = Math.floor(totalAmount / REQUIRED_AMOUNT);
@@ -290,7 +288,6 @@ async function addLoyaltyFromPurchase(totalAmount) {
 // ADMIN QR SCANNER FUNCTIONS
 // ========================================
 
-// Start camera scanner
 function startQrScanner() {
     const video = document.getElementById("qrVideo");
     const startBtn = document.getElementById("startScannerBtn");
@@ -317,7 +314,6 @@ function startQrScanner() {
         });
 }
 
-// Stop camera scanner
 function stopQrScanner() {
     if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
@@ -379,7 +375,6 @@ async function scanQRFromVideo() {
     }
 }
 
-// Process QR code scan from file upload
 async function processQrFileUpload(file) {
     if (!file) return;
     
@@ -412,7 +407,6 @@ async function processQrFileUpload(file) {
     reader.readAsDataURL(file);
 }
 
-// Process scanned QR data (format: accountId_phone)
 async function processQrScan(qrData) {
     const parts = qrData.split('_');
     let accountId = qrData;
@@ -505,7 +499,6 @@ async function loadRecentScans() {
     }
 }
 
-// Auto-refresh loyalty data every 5 seconds
 function startLoyaltyAutoRefresh() {
     if (loyaltyRefreshInterval) clearInterval(loyaltyRefreshInterval);
     
@@ -517,6 +510,351 @@ function startLoyaltyAutoRefresh() {
             loadRecentScans();
         }
     }, 5000);
+}
+
+// ========================================
+// ANNOUNCEMENT SYSTEM FUNCTIONS
+// ========================================
+
+// Load read announcements from localStorage
+function loadReadAnnouncements() {
+    const saved = localStorage.getItem("readAnnouncements");
+    if (saved) {
+        readAnnouncements = JSON.parse(saved);
+    } else {
+        readAnnouncements = [];
+    }
+}
+
+// Save read announcements to localStorage
+function saveReadAnnouncements() {
+    localStorage.setItem("readAnnouncements", JSON.stringify(readAnnouncements));
+}
+
+// Mark single announcement as read
+function markAnnouncementRead(timestamp) {
+    if (!readAnnouncements.includes(timestamp)) {
+        readAnnouncements.push(timestamp);
+        saveReadAnnouncements();
+        updateAnnouncementBadge();
+        
+        const btn = document.querySelector(`.mark-read-btn[data-timestamp="${timestamp}"]`);
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-check"></i> Read';
+            btn.classList.add('read');
+            btn.disabled = true;
+        }
+        
+        showToast("Marked as read", 1000);
+    }
+}
+
+// Mark all announcements as read
+function markAllAnnouncementsRead() {
+    announcements.forEach(ann => {
+        if (!readAnnouncements.includes(ann.timestamp)) {
+            readAnnouncements.push(ann.timestamp);
+        }
+    });
+    saveReadAnnouncements();
+    updateAnnouncementBadge();
+    renderAnnouncements();
+    showToast("All announcements marked as read", 1500);
+}
+
+// Get unread count
+function getUnreadCount() {
+    if (!announcements.length) return 0;
+    let count = 0;
+    announcements.forEach(ann => {
+        if (!readAnnouncements.includes(ann.timestamp)) {
+            count++;
+        }
+    });
+    return count;
+}
+
+// Update bell badge
+function updateAnnouncementBadge() {
+    const count = getUnreadCount();
+    const badge = document.getElementById("announcementBadge");
+    if (badge) {
+        if (count > 0) {
+            badge.style.display = "flex";
+            badge.innerText = count > 99 ? "99+" : count;
+        } else {
+            badge.style.display = "none";
+        }
+    }
+}
+
+// Fetch announcements from Google Sheets
+async function fetchAnnouncements() {
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAnnouncements`);
+        announcements = await response.json();
+        updateAnnouncementBadge();
+        return announcements;
+    } catch (error) {
+        console.error("Fetch announcements error:", error);
+        return [];
+    }
+}
+
+// Helper functions for announcement types
+function getTypeClass(type) {
+    const types = {
+        'sale': 'type-sale',
+        'promo': 'type-promo',
+        'holiday': 'type-holiday',
+        'alert': 'type-alert',
+        'general': 'type-general'
+    };
+    return types[type] || 'type-general';
+}
+
+function getTypeLabel(type) {
+    const labels = {
+        'sale': '🔥 SALE',
+        'promo': '🎁 PROMO',
+        'holiday': '🎉 HOLIDAY',
+        'alert': '⚠️ ALERT',
+        'general': 'ℹ️ INFO'
+    };
+    return labels[type] || 'ℹ️ INFO';
+}
+
+function getPriorityClass(priority) {
+    const classes = {
+        'high': 'priority-high',
+        'medium': 'priority-medium',
+        'low': 'priority-low'
+    };
+    return classes[priority] || '';
+}
+
+// Render announcements in modal
+function renderAnnouncements() {
+    const container = document.getElementById("announcementContainer");
+    if (!container) return;
+    
+    if (!announcements.length) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-bell-slash"></i>
+                <p>No announcements yet</p>
+                <p style="font-size: 0.75rem;">Check back later for updates!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    announcements.forEach(ann => {
+        const isRead = readAnnouncements.includes(ann.timestamp);
+        const typeClass = getTypeClass(ann.type);
+        const priorityClass = getPriorityClass(ann.priority);
+        
+        html += `
+            <div class="announcement-item ${priorityClass}" data-timestamp="${ann.timestamp}">
+                <span class="announcement-type ${typeClass}">${getTypeLabel(ann.type)}</span>
+                <div class="announcement-header">
+                    <div class="announcement-icon-display">${ann.icon || '📢'}</div>
+                    <div class="announcement-title">
+                        <h3>${escapeHtml(ann.header)}</h3>
+                        <div class="announcement-date">
+                            <i class="fas fa-calendar-alt"></i> ${ann.date}
+                            ${!isRead ? '<span class="new-badge">NEW</span>' : ''}
+                        </div>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    ${escapeHtml(ann.content)}
+                </div>
+                <div class="announcement-actions">
+                    ${ann.link ? `<a href="${ann.link}" target="_blank" class="announcement-btn"><i class="fas fa-external-link-alt"></i> ${ann.linkText}</a>` : ''}
+                    <button class="announcement-btn mark-read-btn ${isRead ? 'read' : ''}" data-timestamp="${ann.timestamp}" ${isRead ? 'disabled' : ''} onclick="markAnnouncementRead('${ann.timestamp}')">
+                        <i class="fas ${isRead ? 'fa-check' : 'fa-eye'}"></i> ${isRead ? 'Read' : 'Mark as read'}
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Open announcement modal
+async function openAnnouncementModal() {
+    const modal = document.getElementById("announcementModal");
+    if (!modal) return;
+    
+    const container = document.getElementById("announcementContainer");
+    if (container) {
+        container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading announcements...</div>';
+    }
+    
+    modal.classList.add("show");
+    
+    await fetchAnnouncements();
+    renderAnnouncements();
+    updateAnnouncementBadge();
+}
+
+// Close announcement modal
+function closeAnnouncementModal() {
+    const modal = document.getElementById("announcementModal");
+    if (modal) modal.classList.remove("show");
+}
+
+// Start announcement auto-refresh
+function startAnnouncementAutoRefresh() {
+    if (announcementRefreshInterval) clearInterval(announcementRefreshInterval);
+    announcementRefreshInterval = setInterval(async () => {
+        await fetchAnnouncements();
+        if (document.getElementById("announcementModal")?.classList.contains("show")) {
+            renderAnnouncements();
+        }
+        updateAnnouncementBadge();
+    }, 30000);
+}
+
+// ========================================
+// ADMIN ANNOUNCEMENT FUNCTIONS
+// ========================================
+
+// Publish announcement
+async function publishAnnouncement() {
+    const header = document.getElementById("annHeader").value;
+    const content = document.getElementById("annContent").value;
+    const type = document.getElementById("annType").value;
+    const priority = document.getElementById("annPriority").value;
+    const icon = document.getElementById("annIcon").value;
+    const link = document.getElementById("annLink").value;
+    const linkText = document.getElementById("annLinkText").value;
+    const expiryDate = document.getElementById("annExpiry").value;
+    
+    if (!header || !content) {
+        showToast("Please fill in header and content", 1500);
+        return;
+    }
+    
+    const publishBtn = event.target;
+    const originalText = publishBtn.innerHTML;
+    publishBtn.disabled = true;
+    publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "addAnnouncement");
+        formData.append("timestamp", new Date().toISOString());
+        formData.append("date", new Date().toLocaleDateString());
+        formData.append("header", header);
+        formData.append("content", content);
+        formData.append("type", type);
+        formData.append("priority", priority);
+        formData.append("icon", icon);
+        formData.append("link", link);
+        formData.append("linkText", linkText);
+        formData.append("expiryDate", expiryDate);
+        formData.append("publishedBy", currentUser?.name || "Admin");
+        
+        const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast("✅ Announcement published successfully!", 2000);
+            
+            document.getElementById("annHeader").value = "";
+            document.getElementById("annContent").value = "";
+            document.getElementById("annLink").value = "";
+            document.getElementById("annLinkText").value = "Learn More";
+            document.getElementById("annExpiry").value = "";
+            
+            loadRecentAnnouncements();
+            
+            await fetchAnnouncements();
+            if (document.getElementById("announcementModal")?.classList.contains("show")) {
+                renderAnnouncements();
+            }
+            updateAnnouncementBadge();
+            
+        } else {
+            showToast("Failed to publish", 1500);
+        }
+    } catch (error) {
+        console.error("Publish error:", error);
+        showToast("Error publishing announcement", 1500);
+    } finally {
+        publishBtn.disabled = false;
+        publishBtn.innerHTML = originalText;
+    }
+}
+
+// Load recent announcements for admin
+async function loadRecentAnnouncements() {
+    const container = document.getElementById("recentAnnouncementsList");
+    if (!container) return;
+    
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAnnouncements`);
+        const announcementsList = await response.json();
+        
+        if (!announcementsList.length) {
+            container.innerHTML = '<div class="empty-state">No announcements yet</div>';
+            return;
+        }
+        
+        let html = '<div style="max-height: 300px; overflow-y: auto;">';
+        announcementsList.forEach(ann => {
+            html += `
+                <div class="admin-announcement-item" style="background: #f5f5f7; padding: 12px; border-radius: 12px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${ann.icon} ${ann.header}</strong>
+                            <div style="font-size: 0.7rem; color: #86868b;">${ann.date} | ${ann.type} | ${ann.priority}</div>
+                        </div>
+                        <button class="btn-secondary-apple" style="padding: 4px 12px; font-size: 0.7rem;" onclick="deleteAnnouncement('${ann.timestamp}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+        
+    } catch (error) {
+        console.error("Load recent announcements error:", error);
+        container.innerHTML = '<div class="empty-state">Failed to load</div>';
+    }
+}
+
+// Delete announcement
+async function deleteAnnouncement(timestamp) {
+    if (!confirm("Are you sure you want to delete this announcement?")) return;
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "updateAnnouncementStatus");
+        formData.append("timestamp", timestamp);
+        formData.append("status", "deleted");
+        
+        const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast("Announcement deleted", 1500);
+            loadRecentAnnouncements();
+            await fetchAnnouncements();
+            updateAnnouncementBadge();
+        } else {
+            showToast("Delete failed", 1500);
+        }
+    } catch (error) {
+        console.error("Delete error:", error);
+        showToast("Error deleting", 1500);
+    }
 }
 
 // ========================================
@@ -1494,22 +1832,16 @@ function initAdminIcon() {
   if (adminExitBtn) adminExitBtn.addEventListener('click', () => { exitAdminMode(); });
 }
 
-// ========================================
-// FIXED switchAdminTab FUNCTION - THIS WILL MAKE QR SCANNER WORK
-// ========================================
 function switchAdminTab(tabName) {
     console.log("🔄 Switching to admin tab:", tabName);
     
-    // Remove active class from all tab buttons
     document.querySelectorAll('.admin-tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    // Add active class to the clicked button
     if (event && event.target) {
         event.target.classList.add('active');
     } else {
-        // Find button by onclick attribute
         const buttons = document.querySelectorAll('.admin-tab-btn');
         for (let i = 0; i < buttons.length; i++) {
             const btn = buttons[i];
@@ -1521,13 +1853,11 @@ function switchAdminTab(tabName) {
         }
     }
     
-    // HIDE ALL ADMIN TABS - Force hide using both class and style
     document.querySelectorAll('.admin-tab').forEach(tab => {
         tab.classList.remove('active');
         tab.style.display = 'none';
     });
     
-    // SHOW THE SELECTED TAB - Force show
     const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
@@ -1538,7 +1868,6 @@ function switchAdminTab(tabName) {
         console.log(`❌ Tab not found: ${tabId}`);
     }
     
-    // Load data for the selected tab
     if (tabName === 'orders') loadAdminOrders();
     else if (tabName === 'logs') loadAdminLogs();
     else if (tabName === 'users') loadAdminUsers();
@@ -1549,6 +1878,9 @@ function switchAdminTab(tabName) {
     else if (tabName === 'qrscanner') {
         console.log("📷 Loading QR Scanner...");
         loadRecentScans();
+    } else if (tabName === 'announcements') {
+        console.log("📢 Loading Announcements...");
+        loadRecentAnnouncements();
     }
 }
 
@@ -1573,7 +1905,7 @@ async function loadAdminOrders() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No orders found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th><tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody>';
     orders.forEach(order => {
       let statusClass = '';
       switch(order.status?.toLowerCase()) {
@@ -1661,7 +1993,7 @@ async function loadAdminUsers() {
     users.forEach(user => {
       html += `<tr><td style="white-space: nowrap;">${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
-    html += '</tbody></table>';
+    html += '</tbody></tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users. <button class="btn-secondary-apple" onclick="loadAdminUsers()">Try Again</button></div>';
@@ -1681,7 +2013,7 @@ async function loadAdminRedemptions() {
     }
     let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th><tr></thead><tbody>';
     redemptions.forEach(redemption => {
-      html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
+      html += `<td><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
@@ -1712,7 +2044,7 @@ async function loadAdminRecharges() {
       }
       html += `<tr><td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td><td>${recharge.accountId || '-'}</td><td>${recharge.fullName || '-'}</td><td>${recharge.phone || '-'}</td><td>${recharge.method || '-'}</td><td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td><td><code>${recharge.reference || '-'}</code></td><td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td><td><select class="recharge-status-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}"><option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-recharge-btn" onclick="updateRechargeStatus('${recharge.timestamp}', '${recharge.phone}')">Update</button></td></tr>`;
     });
-    html += '</tbody></table>';
+    html += '</tbody></tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load recharge requests. <button class="btn-secondary-apple" onclick="loadAdminRecharges()">Try Again</button></div>';
@@ -2187,7 +2519,7 @@ function setupQrScannerUI() {
 // INITIALIZATION
 // ========================================
 function init() {
-  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System...");
+  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System and Announcements...");
   
   const savedUser = localStorage.getItem("nova_user");
   if (savedUser) {
@@ -2221,6 +2553,17 @@ function init() {
   setupQrScannerUI();
   startLoyaltyAutoRefresh();
   showDownloadPopup();
+  
+  // Initialize Announcement System
+  loadReadAnnouncements();
+  fetchAnnouncements();
+  startAnnouncementAutoRefresh();
+  
+  // Setup announcement icon click
+  const announcementIcon = document.getElementById("announcementIcon");
+  if (announcementIcon) {
+    announcementIcon.addEventListener("click", openAnnouncementModal);
+  }
   
   const installBtn = document.getElementById("installAppBtn");
   if (installBtn) {
@@ -2270,6 +2613,14 @@ function init() {
   window.stopQrScanner = stopQrScanner;
   window.processQrFileUpload = processQrFileUpload;
   window.loadRecentScans = loadRecentScans;
+  // Announcement System Functions
+  window.openAnnouncementModal = openAnnouncementModal;
+  window.closeAnnouncementModal = closeAnnouncementModal;
+  window.markAnnouncementRead = markAnnouncementRead;
+  window.markAllAnnouncementsRead = markAllAnnouncementsRead;
+  window.publishAnnouncement = publishAnnouncement;
+  window.deleteAnnouncement = deleteAnnouncement;
+  window.loadRecentAnnouncements = loadRecentAnnouncements;
 }
 
 document.addEventListener('DOMContentLoaded', init);

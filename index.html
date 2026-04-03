@@ -46,6 +46,10 @@
         <div class="admin-exit-btn" id="adminExitBtn" style="display: none;">
           <i class="fas fa-sign-out-alt"></i> Exit Admin
         </div>
+        <div class="announcement-icon" id="announcementIcon">
+          <i class="fas fa-bell"></i>
+          <span class="announcement-badge" id="announcementBadge" style="display: none;">0</span>
+        </div>
         <div class="recharge-icon" id="rechargeIcon">
           <i class="fas fa-wallet"></i>
         </div>
@@ -275,7 +279,8 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
-      <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('announcements')">📢 Announcements</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -314,51 +319,122 @@
         <h2><i class="fas fa-qrcode"></i> Loyalty QR Scanner</h2>
         <p class="scanner-subtitle">Scan customer's QR code to add 1 loyalty mark</p>
         
-        <!-- Camera Scanner Section -->
         <div class="scanner-section">
           <h3><i class="fas fa-camera"></i> Camera Scanner</h3>
           <div class="video-container">
             <video id="qrVideo" playsinline autoplay style="width: 100%; max-width: 500px; margin: 0 auto; display: block;"></video>
           </div>
           <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
-            <button class="btn-primary-apple" id="startScannerBtn">
-              <i class="fas fa-play"></i> Start Camera
-            </button>
-            <button class="btn-secondary-apple" id="stopScannerBtn" style="display: none;">
-              <i class="fas fa-stop"></i> Stop Camera
-            </button>
+            <button class="btn-primary-apple" id="startScannerBtn"><i class="fas fa-play"></i> Start Camera</button>
+            <button class="btn-secondary-apple" id="stopScannerBtn" style="display: none;"><i class="fas fa-stop"></i> Stop Camera</button>
           </div>
         </div>
         
-        <!-- File Upload Scanner Section -->
         <div class="scanner-section">
           <h3><i class="fas fa-upload"></i> Upload QR Code</h3>
           <div class="upload-area" id="uploadArea" style="border: 2px dashed #ccc; border-radius: 16px; padding: 40px; text-align: center; cursor: pointer;">
             <i class="fas fa-qrcode" style="font-size: 3rem; color: #e63946; margin-bottom: 12px; display: block;"></i>
             <p>Click or drag QR code image here</p>
             <input type="file" id="qrFileInput" accept="image/*" hidden>
-            <button class="btn-primary-apple" onclick="document.getElementById('qrFileInput').click()" style="margin-top: 10px;">
-              Choose File
-            </button>
+            <button class="btn-primary-apple" onclick="document.getElementById('qrFileInput').click()" style="margin-top: 10px;">Choose File</button>
           </div>
         </div>
         
-        <!-- Scan Result -->
         <div id="qrScanResult" class="qr-scan-result" style="display: none;">
-          <div class="result-header">
-            <i class="fas fa-check-circle"></i>
-            <h3>Scan Result</h3>
-          </div>
+          <div class="result-header"><i class="fas fa-check-circle"></i><h3>Scan Result</h3></div>
           <div id="qrScanResultContent"></div>
         </div>
         
-        <!-- Recent Scans -->
         <div class="recent-scans" style="margin-top: 30px;">
           <h3><i class="fas fa-history"></i> Recent Scans</h3>
           <div id="recentScansContainer" class="recent-scans-list" style="max-height: 300px; overflow-y: auto;">
-            <div class="loading-state" style="text-align: center; padding: 40px; color: #86868b;">
-              <i class="fas fa-spinner fa-spin"></i> Loading recent scans...
+            <div class="loading-state" style="text-align: center; padding: 40px; color: #86868b;"><i class="fas fa-spinner fa-spin"></i> Loading recent scans...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Announcement Publish Tab -->
+    <div id="adminAnnouncementsTab" class="admin-tab">
+      <div class="qr-scanner-container">
+        <h2><i class="fas fa-bullhorn"></i> Publish Announcement</h2>
+        <p class="scanner-subtitle">Create and manage announcements for all users</p>
+        
+        <div class="scanner-section">
+          <h3><i class="fas fa-plus-circle"></i> New Announcement</h3>
+          
+          <div class="form-group">
+            <label>Header / Title</label>
+            <input type="text" id="annHeader" placeholder="e.g., New Year Sale Starts Tomorrow!">
+          </div>
+          
+          <div class="form-group">
+            <label>Content / Message</label>
+            <textarea id="annContent" rows="3" placeholder="Write your announcement here..."></textarea>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Type</label>
+              <select id="annType">
+                <option value="sale">🔥 SALE</option>
+                <option value="promo">🎁 PROMO</option>
+                <option value="holiday">🎉 HOLIDAY</option>
+                <option value="alert">⚠️ ALERT</option>
+                <option value="general">ℹ️ GENERAL</option>
+              </select>
             </div>
+            
+            <div class="form-group">
+              <label>Priority</label>
+              <select id="annPriority">
+                <option value="high">🔴 HIGH</option>
+                <option value="medium">🟡 MEDIUM</option>
+                <option value="low">🟢 LOW</option>
+              </select>
+            </div>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Icon (emoji)</label>
+              <select id="annIcon">
+                <option value="🎆">🎆 Fireworks</option>
+                <option value="🎇">🎇 Sparkler</option>
+                <option value="🎉">🎉 Party</option>
+                <option value="🔥">🔥 Hot</option>
+                <option value="⚠️">⚠️ Warning</option>
+                <option value="ℹ️">ℹ️ Info</option>
+                <option value="📢">📢 Announcement</option>
+                <option value="🎁">🎁 Gift</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Expiry Date (optional)</label>
+              <input type="date" id="annExpiry">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Link URL (optional)</label>
+            <input type="text" id="annLink" placeholder="/shop, /featured, /profile, etc.">
+          </div>
+          
+          <div class="form-group">
+            <label>Button Text</label>
+            <input type="text" id="annLinkText" placeholder="Learn More" value="Learn More">
+          </div>
+          
+          <button class="btn-primary-apple full-width" onclick="publishAnnouncement()">
+            <i class="fas fa-paper-plane"></i> Publish Announcement
+          </button>
+        </div>
+        
+        <div class="scanner-section">
+          <h3><i class="fas fa-history"></i> Recent Announcements</h3>
+          <div id="recentAnnouncementsList" class="recent-announcements-list">
+            <div class="loading-state">Loading announcements...</div>
           </div>
         </div>
       </div>
@@ -409,17 +485,10 @@
         <h3>Admin Access</h3>
         <p>Manage orders, users, and system settings</p>
         <div class="admin-access-buttons">
-          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()">
-            <i class="fas fa-code"></i> Enter Admin Mode
-          </button>
-          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()">
-            <i class="fas fa-sign-out-alt"></i> Exit Admin Mode
-          </button>
+          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()"><i class="fas fa-code"></i> Enter Admin Mode</button>
+          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()"><i class="fas fa-sign-out-alt"></i> Exit Admin Mode</button>
         </div>
-        <div class="admin-note">
-          <i class="fas fa-lock"></i>
-          <span>For Authorized Admins Only</span>
-        </div>
+        <div class="admin-note"><i class="fas fa-lock"></i><span>For Authorized Admins Only</span></div>
       </div>
     </div>
   </div>
@@ -471,28 +540,14 @@
       
       <!-- Loyalty QR Code Section -->
       <div class="loyalty-section">
-        <div class="loyalty-header">
-          <i class="fas fa-qrcode"></i>
-          <h3>My Loyalty QR Code</h3>
-        </div>
-        <div id="qrCodeContainer" class="qr-code-container">
-          <div class="qr-loading">Loading QR code...</div>
-        </div>
+        <div class="loyalty-header"><i class="fas fa-qrcode"></i><h3>My Loyalty QR Code</h3></div>
+        <div id="qrCodeContainer" class="qr-code-container"><div class="qr-loading">Loading QR code...</div></div>
         <p class="qr-instruction">Show this QR code to earn loyalty points</p>
-        
         <div class="loyalty-card">
-          <div class="loyalty-card-header">
-            <i class="fas fa-gem"></i>
-            <span>LOYALTY CARD</span>
-            <i class="fas fa-gem"></i>
-          </div>
+          <div class="loyalty-card-header"><i class="fas fa-gem"></i><span>LOYALTY CARD</span><i class="fas fa-gem"></i></div>
           <div id="loyaltyMarksContainer" class="loyalty-marks"></div>
-          <div class="loyalty-progress">
-            <span id="loyaltyMarksCount">0</span>/12 scans
-          </div>
-          <div id="loyaltyRewardMessage" class="loyalty-reward">
-            <i class="fas fa-info-circle"></i> Every ₱699 purchase = 1 free scan
-          </div>
+          <div class="loyalty-progress"><span id="loyaltyMarksCount">0</span>/12 scans</div>
+          <div id="loyaltyRewardMessage" class="loyalty-reward"><i class="fas fa-info-circle"></i> Every ₱699 purchase = 1 free scan</div>
         </div>
       </div>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -500,19 +555,31 @@
   </div>
 </div>
 
+<!-- Announcement Modal -->
+<div id="announcementModal" class="modal">
+  <div class="modal-content announcement-modal">
+    <div class="modal-header">
+      <h2><i class="fas fa-bullhorn"></i> Announcements</h2>
+      <button class="close-modal" onclick="closeAnnouncementModal()">&times;</button>
+    </div>
+    <div class="announcement-container" id="announcementContainer">
+      <div class="loading-state">Loading announcements...</div>
+    </div>
+    <div class="announcement-footer">
+      <button class="btn-secondary-apple" onclick="markAllAnnouncementsRead()"><i class="fas fa-check-double"></i> Mark all as read</button>
+    </div>
+  </div>
+</div>
+
 <!-- Recharge Modal -->
 <div id="rechargeModal" class="modal">
   <div class="modal-content recharge-modal">
-    <div class="modal-header">
-      <h2><i class="fas fa-wallet"></i> Recharge Balance</h2>
-      <button class="close-modal" onclick="closeRechargeModal()">&times;</button>
-    </div>
+    <div class="modal-header"><h2><i class="fas fa-wallet"></i> Recharge Balance</h2><button class="close-modal" onclick="closeRechargeModal()">&times;</button></div>
     <div class="recharge-content">
       <div class="recharge-tabs">
         <button class="recharge-tab-btn active" onclick="switchRechargeTab('gcash')">GCash</button>
         <button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button>
       </div>
-      
       <div id="gcashTab" class="recharge-tab active">
         <div class="qr-container">
           <img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code">
@@ -526,7 +593,6 @@
           <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
         </div>
       </div>
-      
       <div id="cashTab" class="recharge-tab">
         <div class="cash-info">
           <p><i class="fas fa-store"></i> Pay cash at our physical store:</p>
@@ -540,23 +606,8 @@
           <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
         </div>
       </div>
-      
-      <div class="recharge-note">
-        <i class="fas fa-info-circle"></i>
-        <strong>Note:</strong> The amount will be added within an hour. If still not added, try logging out then login again to refresh your account balance.
-      </div>
-      
-      <div class="how-it-works-recharge">
-        <h3><i class="fas fa-question-circle"></i> How It Works</h3>
-        <ol>
-          <li>Select your payment method (GCash or Cash)</li>
-          <li>For GCash: Send payment to the QR code or GCash number, then enter your reference number</li>
-          <li>For Cash: Visit our store and pay the amount</li>
-          <li>Submit your recharge request</li>
-          <li>Wait for admin approval (within 1 hour)</li>
-          <li>Balance will be added automatically</li>
-        </ol>
-      </div>
+      <div class="recharge-note"><i class="fas fa-info-circle"></i> <strong>Note:</strong> The amount will be added within an hour. If still not added, try logging out then login again to refresh your account balance.</div>
+      <div class="how-it-works-recharge"><h3><i class="fas fa-question-circle"></i> How It Works</h3><ol><li>Select your payment method (GCash or Cash)</li><li>For GCash: Send payment to the QR code or GCash number, then enter your reference number</li><li>For Cash: Visit our store and pay the amount</li><li>Submit your recharge request</li><li>Wait for admin approval (within 1 hour)</li><li>Balance will be added automatically</li></ol></div>
     </div>
   </div>
 </div>
@@ -564,16 +615,12 @@
 <!-- Withdraw Modal -->
 <div id="withdrawModal" class="modal">
   <div class="modal-content withdraw-modal">
-    <div class="modal-header">
-      <h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2>
-      <button class="close-modal" onclick="closeWithdrawModal()">&times;</button>
-    </div>
+    <div class="modal-header"><h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2><button class="close-modal" onclick="closeWithdrawModal()">&times;</button></div>
     <div class="withdraw-content">
       <div class="withdraw-tabs">
         <button class="withdraw-tab-btn active" onclick="switchWithdrawTab('gcash')">GCash</button>
         <button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button>
       </div>
-      
       <div id="withdrawGcashTab" class="withdraw-tab active">
         <div class="withdraw-form">
           <div class="form-group"><label>Account Name (Fixed)</label><input type="text" id="withdrawAccountName" readonly></div>
@@ -585,7 +632,6 @@
           <button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button>
         </div>
       </div>
-      
       <div id="withdrawCashTab" class="withdraw-tab">
         <div class="withdraw-form">
           <div class="form-group"><label>Account Name (Fixed)</label><input type="text" id="withdrawCashAccountName" readonly></div>
@@ -595,67 +641,34 @@
           <button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button>
         </div>
       </div>
-      
-      <div class="withdraw-info">
-        <h3><i class="fas fa-info-circle"></i> How It Works</h3>
-        <ol>
-          <li>Select your withdrawal method (GCash or Cash)</li>
-          <li>For GCash: Enter receiver name and GCash number</li>
-          <li>For Cash: Withdraw at our physical store</li>
-          <li>Submit your withdrawal request</li>
-          <li>Wait for admin approval (within 24 hours)</li>
-          <li>Funds will be sent/available after approval</li>
-        </ol>
-      </div>
+      <div class="withdraw-info"><h3><i class="fas fa-info-circle"></i> How It Works</h3><ol><li>Select your withdrawal method (GCash or Cash)</li><li>For GCash: Enter receiver name and GCash number</li><li>For Cash: Withdraw at our physical store</li><li>Submit your withdrawal request</li><li>Wait for admin approval (within 24 hours)</li><li>Funds will be sent/available after approval</li></ol></div>
     </div>
   </div>
 </div>
 
 <script>
-// DIRECT FIX FOR QR SCANNER TAB - BYPASSES switchAdminTab
+// DIRECT FIX FOR QR SCANNER TAB
 (function() {
-    // Wait for page to load
     document.addEventListener('DOMContentLoaded', function() {
         const qrTabBtn = document.getElementById('qrScannerTabBtn');
-        
         if (qrTabBtn) {
-            // Remove any existing onclick
             qrTabBtn.removeAttribute('onclick');
-            
-            // Add new click handler
             qrTabBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
                 console.log('📷 QR Scanner button clicked - DIRECT FIX');
-                
-                // Remove active class from all tab buttons
-                document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // Add active to this button
+                document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                
-                // Hide all admin tabs
                 document.querySelectorAll('.admin-tab').forEach(tab => {
                     tab.classList.remove('active');
                     tab.style.display = 'none';
                 });
-                
-                // Show QR Scanner tab
                 const qrTab = document.getElementById('adminQrScannerTab');
                 if (qrTab) {
                     qrTab.classList.add('active');
                     qrTab.style.display = 'block';
                     console.log('✅ QR Scanner tab displayed');
-                    
-                    // Load recent scans
-                    if (typeof loadRecentScans === 'function') {
-                        loadRecentScans();
-                    }
-                } else {
-                    console.log('❌ QR Scanner tab not found');
+                    if (typeof loadRecentScans === 'function') loadRecentScans();
                 }
             });
         }
