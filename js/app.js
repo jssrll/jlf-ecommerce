@@ -1495,9 +1495,11 @@ function initAdminIcon() {
 }
 
 // ========================================
-// FIXED switchAdminTab FUNCTION - THIS IS THE IMPORTANT PART
+// FIXED switchAdminTab FUNCTION - THIS WILL MAKE QR SCANNER WORK
 // ========================================
 function switchAdminTab(tabName) {
+    console.log("🔄 Switching to admin tab:", tabName);
+    
     // Remove active class from all tab buttons
     document.querySelectorAll('.admin-tab-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -1519,16 +1521,18 @@ function switchAdminTab(tabName) {
         }
     }
     
-    // Hide all admin tabs
+    // HIDE ALL ADMIN TABS - Force hide using both class and style
     document.querySelectorAll('.admin-tab').forEach(tab => {
         tab.classList.remove('active');
+        tab.style.display = 'none';
     });
     
-    // Show the selected tab
+    // SHOW THE SELECTED TAB - Force show
     const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
     const targetTab = document.getElementById(tabId);
     if (targetTab) {
         targetTab.classList.add('active');
+        targetTab.style.display = 'block';
         console.log(`✅ Activated tab: ${tabId}`);
     } else {
         console.log(`❌ Tab not found: ${tabId}`);
@@ -1542,7 +1546,10 @@ function switchAdminTab(tabName) {
     else if (tabName === 'recharges') loadAdminRecharges();
     else if (tabName === 'withdrawals') loadAdminWithdrawals();
     else if (tabName === 'investments') loadAdminCreditInvestments();
-    else if (tabName === 'qrscanner') loadRecentScans();
+    else if (tabName === 'qrscanner') {
+        console.log("📷 Loading QR Scanner...");
+        loadRecentScans();
+    }
 }
 
 async function loadAdminData() {
@@ -1566,7 +1573,7 @@ async function loadAdminOrders() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No orders found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th><tr></thead><tbody>';
     orders.forEach(order => {
       let statusClass = '';
       switch(order.status?.toLowerCase()) {
@@ -1672,7 +1679,7 @@ async function loadAdminRedemptions() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No code redemptions found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th><tr></thead><tbody>';
     redemptions.forEach(redemption => {
       html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
@@ -1767,7 +1774,7 @@ async function loadAdminWithdrawals() {
       }
       html += `<tr><td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}</td><td>${withdrawal.accountId || '-'}</td><td>${withdrawal.fullName || '-'}</td><td>${withdrawal.phone || '-'}</td><td>${withdrawal.method || '-'}</td><td>₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td><td>${withdrawal.receiverName || '-'}</td><td>${withdrawal.receiverNumber || '-'}</td><td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td><td><select class="withdrawal-status-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}"><option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option><option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option></select><button class="update-withdrawal-btn" onclick="updateWithdrawalStatus('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button></td></tr>`;
     });
-    html += '</tbody></table>';
+    html += '</tbody></tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests. <button class="btn-secondary-apple" onclick="loadAdminWithdrawals()">Try Again</button></div>';

@@ -3112,3 +3112,20 @@ body.dark .scan-history-item {
 body.dark .scan-history-item .scan-history-time {
     color: #a1a1a6;
 }
+
+/* FORCE FIX FOR QR SCANNER TAB */
+#adminQrScannerTab {
+    display: none;
+}
+
+#adminQrScannerTab.admin-tab.active {
+    display: block !important;
+}
+
+.admin-tab {
+    display: none;
+}
+
+.admin-tab.active {
+    display: block !important;
+}
