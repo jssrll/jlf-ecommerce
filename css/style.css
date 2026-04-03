@@ -3129,3 +3129,21 @@ body.dark .scan-history-item .scan-history-time {
 .admin-tab.active {
     display: block !important;
 }
+
+/* EMERGENCY FIX - Force QR Scanner to show when active */
+#adminQrScannerTab {
+    display: none !important;
+}
+
+#adminQrScannerTab.active {
+    display: block !important;
+}
+
+/* Also force all admin tabs to work */
+.admin-tab {
+    display: none !important;
+}
+
+.admin-tab.active {
+    display: block !important;
+}

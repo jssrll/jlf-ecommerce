@@ -283,7 +283,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
+      <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -618,6 +618,58 @@
     </div>
   </div>
 </div>
+
+<script>
+// DIRECT FIX FOR QR SCANNER TAB - BYPASSES switchAdminTab
+(function() {
+    // Wait for page to load
+    document.addEventListener('DOMContentLoaded', function() {
+        const qrTabBtn = document.getElementById('qrScannerTabBtn');
+        
+        if (qrTabBtn) {
+            // Remove any existing onclick
+            qrTabBtn.removeAttribute('onclick');
+            
+            // Add new click handler
+            qrTabBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('📷 QR Scanner button clicked - DIRECT FIX');
+                
+                // Remove active class from all tab buttons
+                document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active to this button
+                this.classList.add('active');
+                
+                // Hide all admin tabs
+                document.querySelectorAll('.admin-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.style.display = 'none';
+                });
+                
+                // Show QR Scanner tab
+                const qrTab = document.getElementById('adminQrScannerTab');
+                if (qrTab) {
+                    qrTab.classList.add('active');
+                    qrTab.style.display = 'block';
+                    console.log('✅ QR Scanner tab displayed');
+                    
+                    // Load recent scans
+                    if (typeof loadRecentScans === 'function') {
+                        loadRecentScans();
+                    }
+                } else {
+                    console.log('❌ QR Scanner tab not found');
+                }
+            });
+        }
+    });
+})();
+</script>
 
 <!-- Cart Sidebar -->
 <div id="cartOverlay" class="cart-overlay"></div>
