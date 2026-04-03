@@ -17,7 +17,7 @@ let readAnnouncements = [];
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbylNiUdO09-g7ZVXzkLFttrN6HeHVY3AdGTfFjdxkJ6qQ9t6Tbf458UP_gZg4S3iM_I/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwN1o57PLgmTrCRUjthAgbz0EZgtE1APWTUSBxNhFNRdmohkFWvroA55JFU58fmbCEE/exec";
 
 // PWA Install Variables
 let deferredPrompt = null;
