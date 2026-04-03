@@ -686,9 +686,44 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 
-<script src="js/account.js"></script>
-<script src="js/data.js"></script>
+<!-- Core -->
+<script src="js/config.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/state.js"></script>
+
+<!-- Features -->
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/products.js"></script>
+
+<!-- Bond & Credit -->
+<script src="js/bonds.js"></script>
+<script src="js/credit.js"></script>
+
+<!-- Recharge & Withdraw -->
+<script src="js/recharge.js"></script>
+<script src="js/withdraw.js"></script>
+
+<!-- Loyalty System -->
+<script src="js/loyalty.js"></script>
+
+<!-- Announcements -->
+<script src="js/announcements.js"></script>
+
+<!-- Admin -->
+<script src="js/admin-orders.js"></script>
+<script src="js/admin-users.js"></script>
+<script src="js/admin-logs.js"></script>
+<script src="js/admin-recharges.js"></script>
+<script src="js/admin-withdrawals.js"></script>
+<script src="js/admin-investments.js"></script>
+<script src="js/admin-announcements.js"></script>
+<script src="js/admin.js"></script>
+
+<!-- Main App -->
 <script src="js/app.js"></script>
+
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(r=>console.log('✅ Service Worker registered')).catch(e=>console.log('❌ Service Worker failed'))});}</script>
 </body>
 </html>
