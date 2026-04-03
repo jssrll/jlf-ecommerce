@@ -1,0 +1,126 @@
+/* ========================================
+   LAYOUT STYLES - Header, Nav, Footer
+   ======================================== */
+.header {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #1d1d1f, #86868b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-weight: 500;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #1d1d1f;
+  transition: 0.2s;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: #e63946;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.announcement-icon,
+.recharge-icon,
+.withdraw-icon,
+.cart-icon,
+.account-icon {
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #1d1d1f;
+  transition: 0.2s;
+  position: relative;
+}
+.announcement-icon:hover,
+.recharge-icon:hover,
+.withdraw-icon:hover,
+.cart-icon:hover,
+.account-icon:hover {
+  color: #e63946;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #e63946;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.user-name {
+  font-size: 0.8rem;
+  margin-left: 6px;
+  font-weight: 500;
+  color: #e63946;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid #e9e9ef;
+  margin-top: 40px;
+  color: #86868b;
+  font-size: 0.75rem;
+}
+
+/* Toast Notification */
+.toast-msg {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: #1d1d1f;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 980px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: 0.2s;
+  z-index: 250;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast-msg.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}

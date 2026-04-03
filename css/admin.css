@@ -1,0 +1,141 @@
+/* ========================================
+   ADMIN DASHBOARD STYLES
+   ======================================== */
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0 20px;
+  border-bottom: 1px solid #e9e9ef;
+  padding-bottom: 10px;
+}
+.admin-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #86868b;
+  transition: 0.2s;
+  border-radius: 980px;
+}
+.admin-tab-btn:hover {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+.admin-tab-btn.active {
+  background: #1d1d1f;
+  color: white;
+}
+.admin-tab {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.admin-tab.active {
+  display: block;
+}
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+/* Admin Tables */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.admin-table th,
+.admin-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e9e9ef;
+}
+.admin-table th {
+  background: #f5f5f7;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+.admin-table td {
+  color: #86868b;
+}
+.admin-table tr:hover {
+  background: #fafafc;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.status-badge.status-pending {
+  background: #fff3e0;
+  color: #ff9800;
+}
+.status-badge.status-approved {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+.status-badge.status-completed {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+.status-badge.status-cancelled {
+  background: #ffebee;
+  color: #f44336;
+}
+.status-badge.status-processing {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Select & Update Buttons */
+.update-status-select,
+.recharge-status-select,
+.withdrawal-status-select {
+  padding: 6px 10px;
+  border: 1px solid #e9e9ef;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+}
+.update-status-btn,
+.update-recharge-btn,
+.update-withdrawal-btn {
+  background: #1d1d1f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: 0.2s;
+}
+.update-status-btn:hover,
+.update-recharge-btn:hover,
+.update-withdrawal-btn:hover {
+  background: #e63946;
+}
+
+/* Admin Announcement List */
+.recent-announcements-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.admin-announcement-item {
+  background: #f5f5f7;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+body.dark .admin-announcement-item {
+  background: #3a3a3c;
+}
