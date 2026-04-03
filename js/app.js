@@ -14,7 +14,7 @@ let currentStream = null;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx4j_j1g0smpZiKQqWTl_yhUal63jAHl86kCznLMLWIcb9qLsYDAXyBQIkoL9PPZw3B/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwCt3wms5bHYFH-T4LG2CZeDnsmYqjjy6-FiYPvbNZ6bxXToVnJiRKJt97qu1qny4Kp/exec";
 
 // PWA Install Variables
 let deferredPrompt = null;
@@ -159,7 +159,6 @@ async function generateUserQRCode() {
     qrContainer.innerHTML = '';
     
     try {
-        // Using QRCode.js library
         if (typeof QRCode !== 'undefined') {
             new QRCode(qrContainer, {
                 text: qrData,
@@ -170,7 +169,6 @@ async function generateUserQRCode() {
                 correctLevel: QRCode.CorrectLevel.H
             });
         } else {
-            // Fallback using Google Charts API
             const qrUrl = `https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=${encodeURIComponent(qrData)}&choe=UTF-8`;
             qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width:180px;height:180px;">`;
         }
@@ -555,7 +553,6 @@ function openProfileModal() {
   document.getElementById("profileJoined").innerText = currentUser.joined || new Date().toLocaleDateString();
   document.getElementById("profileBalance").innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   
-  // Generate QR code and load loyalty when profile opens
   generateUserQRCode();
   loadUserLoyalty();
   
@@ -706,7 +703,6 @@ async function handleRegister(event) {
         joined: joinedDate
       };
       
-      // Create loyalty record for new user
       await createUserLoyalty();
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
@@ -1192,7 +1188,6 @@ async function placeOrder() {
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
       updateAllBalanceDisplays();
       
-      // Add loyalty scans from purchase (every ₱699 = 1 scan)
       await addLoyaltyFromPurchase(total);
       
       return true;
@@ -1481,7 +1476,6 @@ function exitAdminMode() {
   document.getElementById('adminModeBadge').style.display = 'none';
   document.getElementById('adminExitBtn').style.display = 'none';
   
-  // Stop camera if running
   stopQrScanner();
   
   const adminAccessBtn = document.getElementById('adminAccessBtn');
@@ -1500,23 +1494,55 @@ function initAdminIcon() {
   if (adminExitBtn) adminExitBtn.addEventListener('click', () => { exitAdminMode(); });
 }
 
+// ========================================
+// FIXED switchAdminTab FUNCTION - THIS IS THE IMPORTANT PART
+// ========================================
 function switchAdminTab(tabName) {
-  document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
-  if (event && event.target) event.target.classList.add('active');
-  
-  document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
-  const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
-  const targetTab = document.getElementById(tabId);
-  if (targetTab) targetTab.classList.add('active');
-  
-  if (tabName === 'orders') loadAdminOrders();
-  else if (tabName === 'logs') loadAdminLogs();
-  else if (tabName === 'users') loadAdminUsers();
-  else if (tabName === 'redemptions') loadAdminRedemptions();
-  else if (tabName === 'recharges') loadAdminRecharges();
-  else if (tabName === 'withdrawals') loadAdminWithdrawals();
-  else if (tabName === 'investments') loadAdminCreditInvestments();
-  else if (tabName === 'qrscanner') loadRecentScans();
+    // Remove active class from all tab buttons
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Add active class to the clicked button
+    if (event && event.target) {
+        event.target.classList.add('active');
+    } else {
+        // Find button by onclick attribute
+        const buttons = document.querySelectorAll('.admin-tab-btn');
+        for (let i = 0; i < buttons.length; i++) {
+            const btn = buttons[i];
+            const onclickAttr = btn.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(tabName)) {
+                btn.classList.add('active');
+                break;
+            }
+        }
+    }
+    
+    // Hide all admin tabs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show the selected tab
+    const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+        console.log(`✅ Activated tab: ${tabId}`);
+    } else {
+        console.log(`❌ Tab not found: ${tabId}`);
+    }
+    
+    // Load data for the selected tab
+    if (tabName === 'orders') loadAdminOrders();
+    else if (tabName === 'logs') loadAdminLogs();
+    else if (tabName === 'users') loadAdminUsers();
+    else if (tabName === 'redemptions') loadAdminRedemptions();
+    else if (tabName === 'recharges') loadAdminRecharges();
+    else if (tabName === 'withdrawals') loadAdminWithdrawals();
+    else if (tabName === 'investments') loadAdminCreditInvestments();
+    else if (tabName === 'qrscanner') loadRecentScans();
 }
 
 async function loadAdminData() {
@@ -2185,16 +2211,10 @@ function init() {
   initContactForm();
   initAccountIcon();
   
-  // Setup QR Scanner UI
   setupQrScannerUI();
-  
-  // Start loyalty auto-refresh
   startLoyaltyAutoRefresh();
-  
-  // Show download popup
   showDownloadPopup();
   
-  // Setup install button
   const installBtn = document.getElementById("installAppBtn");
   if (installBtn) {
     installBtn.addEventListener("click", triggerInstall);
