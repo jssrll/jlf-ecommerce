@@ -6,7 +6,7 @@ let currentCategory = "all";
 let searchQuery = "";
 let currentPage = "home";
 let currentUser = null;
-let isAdminMode = false;
+let isAdmin = false;  // Changed from isAdminMode to isAdmin
 let balanceCheckInterval = null;
 let loyaltyRefreshInterval = null;
 let scanInterval = null;
@@ -14,10 +14,13 @@ let currentStream = null;
 let announcementRefreshInterval = null;
 let announcements = [];
 let readAnnouncements = [];
-const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwnaCIKYhwQx9EWR7-q60rxA3YB1QyIHlHwvenkuTwK_iQhzULYkdl9SJU_jB3I8Zz6/exec";
+
+// Hardcoded Admin Credentials
+const ADMIN_PHONE = "101007101007";
+const ADMIN_PASSWORD = "101007101007";
 
 // PWA Install Variables
 let deferredPrompt = null;
@@ -99,7 +102,7 @@ window.addEventListener('appinstalled', () => {
 // REAL-TIME BALANCE UPDATE FUNCTIONS
 // ========================================
 async function refreshUserBalance() {
-  if (!currentUser) return;
+  if (!currentUser || isAdmin) return;
   
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
@@ -123,12 +126,12 @@ async function refreshUserBalance() {
 
 function updateAllBalanceDisplays() {
   const profileBalance = document.getElementById("profileBalance");
-  if (profileBalance) {
+  if (profileBalance && currentUser && !isAdmin) {
     profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   }
   renderCartUI();
   const userNameDisplay = document.getElementById("userNameDisplay");
-  if (userNameDisplay && currentUser) {
+  if (userNameDisplay && currentUser && !isAdmin) {
     userNameDisplay.innerText = currentUser.name.split(' ')[0];
   }
 }
@@ -136,7 +139,7 @@ function updateAllBalanceDisplays() {
 function startRealTimeBalanceCheck() {
   if (balanceCheckInterval) clearInterval(balanceCheckInterval);
   balanceCheckInterval = setInterval(() => {
-    if (currentUser) refreshUserBalance();
+    if (currentUser && !isAdmin) refreshUserBalance();
   }, 30000);
 }
 
@@ -152,7 +155,7 @@ function stopRealTimeBalanceCheck() {
 // ========================================
 
 async function generateUserQRCode() {
-    if (!currentUser) return;
+    if (!currentUser || isAdmin) return;
     
     const qrContainer = document.getElementById("qrCodeContainer");
     if (!qrContainer) return;
@@ -181,7 +184,7 @@ async function generateUserQRCode() {
 }
 
 async function loadUserLoyalty() {
-    if (!currentUser) return;
+    if (!currentUser || isAdmin) return;
     
     try {
         const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUserLoyalty&phone=${currentUser.phone}`);
@@ -210,7 +213,7 @@ async function loadUserLoyalty() {
 }
 
 async function createUserLoyalty() {
-    if (!currentUser) return;
+    if (!currentUser || isAdmin) return;
     
     try {
         const formData = new URLSearchParams();
@@ -477,10 +480,10 @@ function startLoyaltyAutoRefresh() {
     if (loyaltyRefreshInterval) clearInterval(loyaltyRefreshInterval);
     
     loyaltyRefreshInterval = setInterval(() => {
-        if (currentUser && document.getElementById("profileModal")?.classList.contains("show")) {
+        if (currentUser && !isAdmin && document.getElementById("profileModal")?.classList.contains("show")) {
             loadUserLoyalty();
         }
-        if (isAdminMode && document.getElementById("adminQrScannerTab")?.classList.contains("active")) {
+        if (isAdmin && document.getElementById("adminQrScannerTab")?.classList.contains("active")) {
             loadRecentScans();
         }
     }, 5000);
@@ -699,6 +702,11 @@ function startAnnouncementAutoRefresh() {
 
 // Publish announcement
 async function publishAnnouncement() {
+    if (!isAdmin) {
+        showToast("Admin access required", 1500);
+        return;
+    }
+    
     const header = document.getElementById("annHeader").value;
     const content = document.getElementById("annContent").value;
     const type = document.getElementById("annType").value;
@@ -731,7 +739,7 @@ async function publishAnnouncement() {
         formData.append("link", link);
         formData.append("linkText", linkText);
         formData.append("expiryDate", expiryDate);
-        formData.append("publishedBy", currentUser?.name || "Admin");
+        formData.append("publishedBy", "Admin");
         
         const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
         const result = await response.json();
@@ -767,6 +775,8 @@ async function publishAnnouncement() {
 
 // Load recent announcements for admin
 async function loadRecentAnnouncements() {
+    if (!isAdmin) return;
+    
     const container = document.getElementById("recentAnnouncementsList");
     if (!container) return;
     
@@ -806,6 +816,7 @@ async function loadRecentAnnouncements() {
 
 // Delete announcement
 async function deleteAnnouncement(timestamp) {
+    if (!isAdmin) return;
     if (!confirm("Are you sure you want to delete this announcement?")) return;
     
     try {
@@ -854,8 +865,8 @@ function closeAccountModal() {
 }
 
 function openProfileModal() {
-  if (!currentUser) {
-    openAccountModal();
+  if (!currentUser || isAdmin) {
+    if (!currentUser) openAccountModal();
     return;
   }
   
@@ -891,7 +902,7 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// LOGIN FUNCTION
+// LOGIN FUNCTION - WITH HARCODED ADMIN CHECK
 // ========================================
 async function handleLogin(event) {
   event.preventDefault();
@@ -907,6 +918,39 @@ async function handleLogin(event) {
   loginBtn.disabled = true;
   loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
   
+  // CHECK FOR HARCODED ADMIN FIRST
+  if (phone === ADMIN_PHONE && password === ADMIN_PASSWORD) {
+    console.log("✅ Admin login successful");
+    
+    isAdmin = true;
+    currentUser = null;
+    localStorage.removeItem("nova_user");
+    
+    // Clear cart for admin
+    cart = [];
+    updateCartBadge();
+    saveCartToLocal();
+    renderCartUI();
+    
+    showToast("Welcome Admin! 👑", 2000);
+    closeAccountModal();
+    
+    // Hide user elements, show admin elements
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.style.display = 'none';
+    });
+    document.getElementById("userNameDisplay").innerText = "";
+    
+    // Load admin data and switch to admin page
+    loadAdminData();
+    switchPage('admin');
+    
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = "Login";
+    return;
+  }
+  
+  // NORMAL USER LOGIN - Check Google Sheets
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
     const users = await response.json();
@@ -930,6 +974,8 @@ async function handleLogin(event) {
         joined: new Date().toLocaleDateString()
       };
       
+      isAdmin = false;
+      
       const logData = new URLSearchParams();
       logData.append("action", "addLoginLog");
       logData.append("timestamp", new Date().toISOString());
@@ -943,10 +989,17 @@ async function handleLogin(event) {
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+      
+      // Show user navigation links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.style.display = 'block';
+      });
+      
       showToast(`Welcome back, ${user.name}!`, 2000);
       closeAccountModal();
       renderCartUI();
       startRealTimeBalanceCheck();
+      switchPage('home');
     } else {
       showToast("Invalid phone number or password", 1500);
     }
@@ -1015,6 +1068,8 @@ async function handleRegister(event) {
         joined: joinedDate
       };
       
+      isAdmin = false;
+      
       await createUserLoyalty();
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
@@ -1023,6 +1078,7 @@ async function handleRegister(event) {
       closeAccountModal();
       document.getElementById("registerForm").reset();
       startRealTimeBalanceCheck();
+      switchPage('home');
     } else {
       showToast(result.message || "Registration failed. Phone may already exist.", 1500);
     }
@@ -1038,6 +1094,7 @@ async function handleRegister(event) {
 
 function logout() {
   currentUser = null;
+  isAdmin = false;
   localStorage.removeItem("nova_user");
   document.getElementById("userNameDisplay").innerText = "";
   closeProfileModal();
@@ -1047,18 +1104,25 @@ function logout() {
   saveCartToLocal();
   renderCartUI();
   stopRealTimeBalanceCheck();
+  
+  // Show user navigation links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.style.display = 'block';
+  });
+  
+  switchPage('home');
 }
 
 // ========================================
 // CREDIT FUNCTIONS
 // ========================================
 function loadUserCredit() {
-  if (currentUser) return currentUser.balance || 0;
+  if (currentUser && !isAdmin) return currentUser.balance || 0;
   return 0;
 }
 
 async function addUserCredit(amount) {
-  if (!currentUser) return 0;
+  if (!currentUser || isAdmin) return 0;
   
   try {
     const formData = new URLSearchParams();
@@ -1090,7 +1154,7 @@ async function addUserCredit(amount) {
 // ========================================
 
 async function investInBondOption1() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to invest", 1500);
     openAccountModal();
     return;
@@ -1161,7 +1225,7 @@ async function investInBondOption1() {
 }
 
 async function investInBondOption2() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to invest", 1500);
     openAccountModal();
     return;
@@ -1232,7 +1296,7 @@ async function investInBondOption2() {
 }
 
 async function recordCreditInvestment(investmentType, amount, expectedReturn, maturityDate, durationDays) {
-  if (!currentUser) return false;
+  if (!currentUser || isAdmin) return false;
   
   try {
     const formData = new URLSearchParams();
@@ -1258,7 +1322,7 @@ async function recordCreditInvestment(investmentType, amount, expectedReturn, ma
 }
 
 async function loadCreditInvestmentHistory() {
-  if (!currentUser) return;
+  if (!currentUser || isAdmin) return;
   
   const container = document.getElementById("investmentHistoryContainerFeatured");
   if (!container) return;
@@ -1321,6 +1385,7 @@ async function loadCreditInvestmentHistory() {
 // CART FUNCTIONS
 // ========================================
 function updateCartBadge() {
+  if (isAdmin) return;
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const badge = document.getElementById("cartCountBadge");
   if (badge) badge.innerText = totalItems;
@@ -1328,10 +1393,14 @@ function updateCartBadge() {
 }
 
 function saveCartToLocal() { 
-  localStorage.setItem("nova_cart", JSON.stringify(cart)); 
+  if (!isAdmin) localStorage.setItem("nova_cart", JSON.stringify(cart)); 
 }
 
 function loadCartFromLocal() {
+  if (isAdmin) {
+    cart = [];
+    return;
+  }
   const saved = localStorage.getItem("nova_cart");
   cart = saved ? JSON.parse(saved) : [];
   updateCartBadge();
@@ -1339,7 +1408,7 @@ function loadCartFromLocal() {
 }
 
 function addToCart(productId) {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to add items to cart", 1500);
     openAccountModal();
     return;
@@ -1358,6 +1427,7 @@ function addToCart(productId) {
 }
 
 function updateQuantity(itemId, delta) {
+  if (isAdmin) return;
   const idx = cart.findIndex(i => i.id === itemId);
   if (idx === -1) return;
   const newQty = cart[idx].quantity + delta;
@@ -1369,6 +1439,7 @@ function updateQuantity(itemId, delta) {
 }
 
 function removeItem(itemId) {
+  if (isAdmin) return;
   cart = cart.filter(i => i.id !== itemId);
   updateCartBadge();
   saveCartToLocal();
@@ -1376,6 +1447,7 @@ function removeItem(itemId) {
 }
 
 function renderCartUI() {
+  if (isAdmin) return;
   const cartListDiv = document.getElementById("cartItemsList");
   const totalSpan = document.getElementById("cartTotalPrice");
   if (!cartListDiv) return;
@@ -1429,10 +1501,10 @@ function renderCartUI() {
 }
 
 // ========================================
-// PLACE ORDER FUNCTION - Loyalty from purchase REMOVED
+// PLACE ORDER FUNCTION
 // ========================================
 async function placeOrder() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to place order", 1500);
     openAccountModal();
     return false;
@@ -1500,8 +1572,6 @@ async function placeOrder() {
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
       updateAllBalanceDisplays();
       
-      // ❌ Loyalty from purchase REMOVED - only QR code scan adds marks
-      
       return true;
     } else {
       const refundData = new URLSearchParams();
@@ -1538,6 +1608,7 @@ function getFilteredProducts() {
 }
 
 function renderProducts() {
+  if (isAdmin) return;
   const container = document.getElementById("productsContainer");
   if (!container) return;
   const filtered = getFilteredProducts();
@@ -1571,6 +1642,7 @@ function renderProducts() {
 // FEATURED PAGE
 // ========================================
 function loadFeaturedPage() {
+  if (isAdmin) return;
   renderFeaturedProducts();
   if (currentUser) {
     loadUserCredit();
@@ -1582,7 +1654,7 @@ function loadFeaturedPage() {
 // CODE REDEMPTION
 // ========================================
 async function redeemCode() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to redeem codes", 1500);
     openAccountModal();
     return;
@@ -1651,6 +1723,7 @@ async function redeemCode() {
 }
 
 function renderFeaturedProducts() {
+  if (isAdmin) return;
   const featuredGrid = document.getElementById("featuredGrid");
   if (!featuredGrid) return;
   const featured = products.filter(p => p.name === "Roman Candle" || p.name === "Sky Rocket" || p.name === "Sparklers Pack");
@@ -1672,13 +1745,6 @@ function switchPage(pageName) {
   const targetPage = document.getElementById(`${pageName}Page`);
   if (targetPage) targetPage.classList.add('active');
   
-  if (!isAdminMode) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('data-page') === pageName) link.classList.add('active');
-    });
-  }
-  
   currentPage = pageName;
   if (pageName === 'featured') loadFeaturedPage();
   else if (pageName === 'shop') renderProducts();
@@ -1690,7 +1756,7 @@ function switchPage(pageName) {
 // ORDERS FUNCTIONS
 // ========================================
 async function loadUserOrders() {
-  if (!currentUser) return;
+  if (!currentUser || isAdmin) return;
   
   const ordersContainer = document.getElementById("ordersContainer");
   if (!ordersContainer) return;
@@ -1753,60 +1819,10 @@ async function loadUserOrders() {
 // ========================================
 // ADMIN FUNCTIONS
 // ========================================
-function toggleAdminMode() {
-  if (isAdminMode) {
-    exitAdminMode();
-  } else {
-    const password = prompt("Enter admin password:");
-    if (password === ADMIN_PASSWORD) {
-      enterAdminMode();
-    } else if (password !== null) {
-      showToast("Invalid admin password", 1500);
-    }
-  }
-}
-
-function enterAdminMode() {
-  isAdminMode = true;
-  document.body.classList.add('admin-mode');
-  document.getElementById('adminModeBadge').style.display = 'flex';
-  document.getElementById('adminExitBtn').style.display = 'flex';
-  
-  const adminAccessBtn = document.getElementById('adminAccessBtn');
-  const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
-  if (adminAccessBtn) adminAccessBtn.style.display = 'none';
-  if (adminAccessExitBtn) adminAccessExitBtn.style.display = 'flex';
-  
-  loadAdminData();
-  switchPage('admin');
-  showToast("Admin mode activated", 1500);
-}
-
-function exitAdminMode() {
-  isAdminMode = false;
-  document.body.classList.remove('admin-mode');
-  document.getElementById('adminModeBadge').style.display = 'none';
-  document.getElementById('adminExitBtn').style.display = 'none';
-  
-  stopQrScanner();
-  
-  const adminAccessBtn = document.getElementById('adminAccessBtn');
-  const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
-  if (adminAccessBtn) adminAccessBtn.style.display = 'flex';
-  if (adminAccessExitBtn) adminAccessExitBtn.style.display = 'none';
-  
-  switchPage('home');
-  showToast("Exited admin mode", 1500);
-}
-
-function initAdminIcon() {
-  const adminIcon = document.getElementById('adminIcon');
-  if (adminIcon) adminIcon.addEventListener('click', () => { toggleAdminMode(); });
-  const adminExitBtn = document.getElementById('adminExitBtn');
-  if (adminExitBtn) adminExitBtn.addEventListener('click', () => { exitAdminMode(); });
-}
 
 function switchAdminTab(tabName) {
+    if (!isAdmin) return;
+    
     console.log("🔄 Switching to admin tab:", tabName);
     
     document.querySelectorAll('.admin-tab-btn').forEach(btn => {
@@ -1859,6 +1875,7 @@ function switchAdminTab(tabName) {
 }
 
 async function loadAdminData() {
+  if (!isAdmin) return;
   loadAdminOrders();
   loadAdminLogs();
   loadAdminUsers();
@@ -1869,6 +1886,7 @@ async function loadAdminData() {
 }
 
 async function loadAdminOrders() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminOrdersContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div>';
@@ -1879,7 +1897,7 @@ async function loadAdminOrders() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No orders found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Order List</th><th>Total</th><th>Status</th><th>Action</th><tr></thead><tbody>';
     orders.forEach(order => {
       let statusClass = '';
       switch(order.status?.toLowerCase()) {
@@ -1899,6 +1917,7 @@ async function loadAdminOrders() {
 }
 
 async function updateOrderStatus(timestamp, phone) {
+  if (!isAdmin) return;
   const select = document.querySelector(`.order-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
   if (!select) return;
   const newStatus = select.value;
@@ -1931,6 +1950,7 @@ async function updateOrderStatus(timestamp, phone) {
 }
 
 async function loadAdminLogs() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminLogsContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div>';
@@ -1945,7 +1965,7 @@ async function loadAdminLogs() {
     logs.forEach(log => {
       html += `<tr><td style="white-space: nowrap;">${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
     });
-    html += '</tbody></tr>';
+    html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs. <button class="btn-secondary-apple" onclick="loadAdminLogs()">Try Again</button></div>';
@@ -1953,6 +1973,7 @@ async function loadAdminLogs() {
 }
 
 async function loadAdminUsers() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminUsersContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div>';
@@ -1963,7 +1984,7 @@ async function loadAdminUsers() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No users found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Balance</th></td></thead><tbody>';
     users.forEach(user => {
       html += `<tr><td style="white-space: nowrap;">${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
@@ -1975,6 +1996,7 @@ async function loadAdminUsers() {
 }
 
 async function loadAdminRedemptions() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminRedemptionsContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div>';
@@ -1997,6 +2019,7 @@ async function loadAdminRedemptions() {
 }
 
 async function loadAdminRecharges() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminRechargesContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div>';
@@ -2018,7 +2041,7 @@ async function loadAdminRecharges() {
       }
       html += `<tr><td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td><td>${recharge.accountId || '-'}</td><td>${recharge.fullName || '-'}</td><td>${recharge.phone || '-'}</td><td>${recharge.method || '-'}</td><td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td><td><code>${recharge.reference || '-'}</code></td><td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td><td><select class="recharge-status-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}"><option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-recharge-btn" onclick="updateRechargeStatus('${recharge.timestamp}', '${recharge.phone}')">Update</button></td></tr>`;
     });
-    html += '</tbody><tr>';
+    html += '</tbody></tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load recharge requests. <button class="btn-secondary-apple" onclick="loadAdminRecharges()">Try Again</button></div>';
@@ -2026,6 +2049,7 @@ async function loadAdminRecharges() {
 }
 
 async function updateRechargeStatus(timestamp, phone) {
+  if (!isAdmin) return;
   const select = document.querySelector(`.recharge-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
   if (!select) return;
   const newStatus = select.value;
@@ -2058,6 +2082,7 @@ async function updateRechargeStatus(timestamp, phone) {
 }
 
 async function loadAdminWithdrawals() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminWithdrawalsContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div>';
@@ -2080,7 +2105,7 @@ async function loadAdminWithdrawals() {
       }
       html += `<tr><td style="white-space: nowrap;">${new Date(withdrawal.timestamp).toLocaleString()}</td><td>${withdrawal.accountId || '-'}</td><td>${withdrawal.fullName || '-'}</td><td>${withdrawal.phone || '-'}</td><td>${withdrawal.method || '-'}</td><td>₱${parseFloat(withdrawal.amount || 0).toLocaleString()}</td><td>${withdrawal.receiverName || '-'}</td><td>${withdrawal.receiverNumber || '-'}</td><td><span class="status-badge ${statusClass}">${withdrawal.status || 'Pending'}</span></td><td><select class="withdrawal-status-select" data-timestamp="${withdrawal.timestamp}" data-phone="${withdrawal.phone}"><option value="Pending" ${withdrawal.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Processing" ${withdrawal.status === 'Processing' ? 'selected' : ''}>Processing</option><option value="Completed" ${withdrawal.status === 'Completed' ? 'selected' : ''}>Completed</option><option value="Rejected" ${withdrawal.status === 'Rejected' ? 'selected' : ''}>Rejected</option></select><button class="update-withdrawal-btn" onclick="updateWithdrawalStatus('${withdrawal.timestamp}', '${withdrawal.phone}')">Update</button></td></tr>`;
     });
-    html += '</tbody></tr>';
+    html += '</tbody><tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load withdrawal requests. <button class="btn-secondary-apple" onclick="loadAdminWithdrawals()">Try Again</button></div>';
@@ -2088,6 +2113,7 @@ async function loadAdminWithdrawals() {
 }
 
 async function updateWithdrawalStatus(timestamp, phone) {
+  if (!isAdmin) return;
   const select = document.querySelector(`.withdrawal-status-select[data-timestamp="${timestamp}"][data-phone="${phone}"]`);
   if (!select) return;
   const newStatus = select.value;
@@ -2120,6 +2146,7 @@ async function updateWithdrawalStatus(timestamp, phone) {
 }
 
 async function loadAdminCreditInvestments() {
+  if (!isAdmin) return;
   const container = document.getElementById("adminInvestmentsContainer");
   if (!container) return;
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div>';
@@ -2148,10 +2175,10 @@ async function loadAdminCreditInvestments() {
   }
 }
 
-function refreshAdminOrders() { loadAdminOrders(); }
-function refreshAdminLogs() { loadAdminLogs(); }
-function refreshAdminUsers() { loadAdminUsers(); }
-function refreshAdminRedemptions() { loadAdminRedemptions(); }
+function refreshAdminOrders() { if(isAdmin) loadAdminOrders(); }
+function refreshAdminLogs() { if(isAdmin) loadAdminLogs(); }
+function refreshAdminUsers() { if(isAdmin) loadAdminUsers(); }
+function refreshAdminRedemptions() { if(isAdmin) loadAdminRedemptions(); }
 
 // ========================================
 // HELP PAGE FUNCTIONS
@@ -2227,8 +2254,12 @@ function initAccountIcon() {
   const accountIcon = document.getElementById('accountIcon');
   if (accountIcon) {
     accountIcon.addEventListener('click', () => {
-      if (currentUser) openProfileModal();
-      else openAccountModal();
+      if (currentUser && !isAdmin) openProfileModal();
+      else if (isAdmin) {
+        showToast("Admin logged in. Logout to access user features.", 1500);
+      } else {
+        openAccountModal();
+      }
     });
   }
 }
@@ -2239,7 +2270,10 @@ function initAccountIcon() {
 function initRechargeIcon() {
   const rechargeIcon = document.getElementById('rechargeIcon');
   if (rechargeIcon) {
-    rechargeIcon.addEventListener('click', () => { openRechargeModal(); });
+    rechargeIcon.addEventListener('click', () => { 
+      if (!isAdmin) openRechargeModal(); 
+      else showToast("Admin mode. Cannot recharge.", 1500);
+    });
   }
 }
 
@@ -2249,7 +2283,10 @@ function initRechargeIcon() {
 function initWithdrawIcon() {
   const withdrawIcon = document.getElementById('withdrawIcon');
   if (withdrawIcon) {
-    withdrawIcon.addEventListener('click', () => { openWithdrawModal(); });
+    withdrawIcon.addEventListener('click', () => { 
+      if (!isAdmin) openWithdrawModal(); 
+      else showToast("Admin mode. Cannot withdraw.", 1500);
+    });
   }
 }
 
@@ -2257,7 +2294,7 @@ function initWithdrawIcon() {
 // RECHARGE MODAL FUNCTIONS
 // ========================================
 function openRechargeModal() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to recharge", 1500);
     openAccountModal();
     return;
@@ -2288,7 +2325,7 @@ function switchRechargeTab(tabName) {
 }
 
 async function submitRecharge(method) {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login first", 1500);
     return;
   }
@@ -2355,7 +2392,7 @@ async function submitRecharge(method) {
 // WITHDRAW MODAL FUNCTIONS
 // ========================================
 function openWithdrawModal() {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login to withdraw", 1500);
     openAccountModal();
     return;
@@ -2386,7 +2423,7 @@ function switchWithdrawTab(tabName) {
 }
 
 async function submitWithdraw(method) {
-  if (!currentUser) {
+  if (!currentUser || isAdmin) {
     showToast("Please login first", 1500);
     return;
   }
@@ -2499,6 +2536,7 @@ function init() {
   if (savedUser) {
     try {
       currentUser = JSON.parse(savedUser);
+      isAdmin = false;
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
       startRealTimeBalanceCheck();
     } catch(e) { currentUser = null; }
@@ -2514,7 +2552,6 @@ function init() {
     });
   });
   
-  initAdminIcon();
   initRechargeIcon();
   initWithdrawIcon();
   
@@ -2579,7 +2616,6 @@ function init() {
   window.loadAdminRecharges = loadAdminRecharges;
   window.loadAdminWithdrawals = loadAdminWithdrawals;
   window.loadAdminCreditInvestments = loadAdminCreditInvestments;
-  window.toggleAdminMode = toggleAdminMode;
   window.showDownloadPopup = showDownloadPopup;
   window.closeDownloadPopup = closeDownloadPopup;
   window.triggerInstall = triggerInstall;

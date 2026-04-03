@@ -43,9 +43,6 @@
         <a href="#" data-page="help" class="nav-link">Help</a>
       </div>
       <div class="nav-actions">
-        <div class="admin-exit-btn" id="adminExitBtn" style="display: none;">
-          <i class="fas fa-sign-out-alt"></i> Exit Admin
-        </div>
         <div class="announcement-icon" id="announcementIcon">
           <i class="fas fa-bell"></i>
           <span class="announcement-badge" id="announcementBadge" style="display: none;">0</span>
@@ -67,10 +64,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="admin-mode-badge" id="adminModeBadge" style="display: none;">
-  <i class="fas fa-shield-alt"></i> Admin Mode
 </div>
 
 <main class="container">
@@ -478,19 +471,8 @@
       </div>
     </div>
 
-    <!-- Admin Access Container -->
-    <div class="admin-access-container">
-      <div class="admin-access-card">
-        <div class="admin-access-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Admin Access</h3>
-        <p>Manage orders, users, and system settings</p>
-        <div class="admin-access-buttons">
-          <button class="btn-primary-apple" id="adminAccessBtn" onclick="toggleAdminMode()"><i class="fas fa-code"></i> Enter Admin Mode</button>
-          <button class="btn-secondary-apple" id="adminAccessExitBtn" style="display: none;" onclick="exitAdminMode()"><i class="fas fa-sign-out-alt"></i> Exit Admin Mode</button>
-        </div>
-        <div class="admin-note"><i class="fas fa-lock"></i><span>For Authorized Admins Only</span></div>
-      </div>
-    </div>
+    <!-- Admin Access Container - REMOVED for security -->
+    <!-- Admin access is now only through dedicated admin login -->
   </div>
 </main>
 
