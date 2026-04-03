@@ -31,6 +31,18 @@
   flex-shrink: 0;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid #e9e9ef;
+  margin-top: 40px;
+  color: #86868b;
+  font-size: 0.75rem;
+  width: 100%;
+  clear: both;
+}
+
 .nav-links {
   display: flex;
   gap: 32px;
