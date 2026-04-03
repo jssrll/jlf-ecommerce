@@ -208,7 +208,6 @@
       <p class="investment-subtitle">Choose your investment term and earn guaranteed returns!</p>
       
       <div class="investment-grid-featured" id="investmentGridFeatured">
-        <!-- Option 1: 3% in 90 Days -->
         <div class="investment-card-featured">
           <div class="investment-icon-featured">📈</div>
           <h3>Bond Investment - Option 1</h3>
@@ -224,7 +223,6 @@
           </div>
         </div>
 
-        <!-- Option 2: 6% in 150 Days -->
         <div class="investment-card-featured">
           <div class="investment-icon-featured">📊</div>
           <h3>Bond Investment - Option 2</h3>
@@ -265,7 +263,6 @@
       </div>
     </div>
     
-    <!-- Withdrawal History Section -->
     <div class="withdrawal-history-section" style="margin-top: 40px;">
       <h2>Withdrawal History</h2>
       <div id="withdrawalHistoryOrdersContainer" class="withdrawal-history-list"></div>
@@ -286,6 +283,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -316,6 +314,54 @@
     <div id="adminInvestmentsTab" class="admin-tab">
       <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Bond Investments</button></div>
       <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div></div>
+    </div>
+
+    <!-- QR Scanner Tab -->
+    <div id="adminQrScannerTab" class="admin-tab">
+      <div class="qr-scanner-container">
+        <h2><i class="fas fa-qrcode"></i> Loyalty QR Scanner</h2>
+        <p class="scanner-subtitle">Scan customer's QR code to add 1 loyalty mark</p>
+        
+        <div class="scanner-section">
+          <h3><i class="fas fa-camera"></i> Camera Scanner</h3>
+          <div class="video-container">
+            <video id="qrVideo" playsinline autoplay></video>
+          </div>
+          <button class="btn-secondary-apple" id="startScannerBtn">
+            <i class="fas fa-play"></i> Start Camera
+          </button>
+          <button class="btn-secondary-apple" id="stopScannerBtn" style="display: none;">
+            <i class="fas fa-stop"></i> Stop Camera
+          </button>
+        </div>
+        
+        <div class="scanner-section">
+          <h3><i class="fas fa-upload"></i> Upload QR Code</h3>
+          <div class="upload-area" id="uploadArea">
+            <i class="fas fa-qrcode"></i>
+            <p>Click or drag QR code image here</p>
+            <input type="file" id="qrFileInput" accept="image/*" hidden>
+            <button class="btn-primary-apple" onclick="document.getElementById('qrFileInput').click()">
+              Choose File
+            </button>
+          </div>
+        </div>
+        
+        <div id="qrScanResult" class="qr-scan-result" style="display: none;">
+          <div class="result-header">
+            <i class="fas fa-check-circle"></i>
+            <h3>Scan Result</h3>
+          </div>
+          <div id="qrScanResultContent"></div>
+        </div>
+        
+        <div class="recent-scans">
+          <h3><i class="fas fa-history"></i> Recent Scans</h3>
+          <div id="recentScansContainer" class="recent-scans-list">
+            <div class="loading-state">Loading recent scans...</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -409,7 +455,7 @@
   </div>
 </div>
 
-<!-- Profile Modal -->
+<!-- Profile Modal with Loyalty QR Code -->
 <div id="profileModal" class="modal">
   <div class="modal-content profile-modal">
     <div class="modal-header"><h2><i class="fas fa-user-circle"></i> My Profile</h2><button class="close-modal" onclick="closeProfileModal()">&times;</button></div>
@@ -423,6 +469,33 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
       </div>
       <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      
+      <!-- Loyalty QR Code Section -->
+      <div class="loyalty-section">
+        <div class="loyalty-header">
+          <i class="fas fa-qrcode"></i>
+          <h3>My Loyalty QR Code</h3>
+        </div>
+        <div id="qrCodeContainer" class="qr-code-container">
+          <div class="qr-loading">Loading QR code...</div>
+        </div>
+        <p class="qr-instruction">Show this QR code to admin to earn loyalty points</p>
+        
+        <div class="loyalty-card">
+          <div class="loyalty-card-header">
+            <i class="fas fa-gem"></i>
+            <span>LOYALTY CARD</span>
+            <i class="fas fa-gem"></i>
+          </div>
+          <div id="loyaltyMarksContainer" class="loyalty-marks"></div>
+          <div class="loyalty-progress">
+            <span id="loyaltyMarksCount">0</span>/12 scans
+          </div>
+          <div id="loyaltyRewardMessage" class="loyalty-reward">
+            <i class="fas fa-info-circle"></i> Every ₱699 purchase = 1 free scan
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -440,34 +513,20 @@
         <button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button>
       </div>
       
-      <!-- GCash Payment -->
       <div id="gcashTab" class="recharge-tab active">
         <div class="qr-container">
           <img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code">
           <p class="qr-instruction">Scan QR code or send to GCash number & name: <br> <strong>0963 386 3860  JE*****L C.</strong></p>
         </div>
         <div class="recharge-form">
-          <div class="form-group">
-            <label>Account Name</label>
-            <input type="text" id="gcashAccountName" readonly>
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" id="gcashPhone" readonly>
-          </div>
-          <div class="form-group">
-            <label>Reference Number</label>
-            <input type="text" id="gcashRefNumber" placeholder="Enter GCash reference number">
-          </div>
-          <div class="form-group">
-            <label>Amount (₱)</label>
-            <input type="number" id="gcashAmount" placeholder="Enter amount" min="10">
-          </div>
+          <div class="form-group"><label>Account Name</label><input type="text" id="gcashAccountName" readonly></div>
+          <div class="form-group"><label>Phone Number</label><input type="text" id="gcashPhone" readonly></div>
+          <div class="form-group"><label>Reference Number</label><input type="text" id="gcashRefNumber" placeholder="Enter GCash reference number"></div>
+          <div class="form-group"><label>Amount (₱)</label><input type="number" id="gcashAmount" placeholder="Enter amount" min="10"></div>
           <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
         </div>
       </div>
       
-      <!-- Cash Payment -->
       <div id="cashTab" class="recharge-tab">
         <div class="cash-info">
           <p><i class="fas fa-store"></i> Pay cash at our physical store:</p>
@@ -475,18 +534,9 @@
           <p>8:00 AM - 6:00 PM</p>
         </div>
         <div class="recharge-form">
-          <div class="form-group">
-            <label>Account Name</label>
-            <input type="text" id="cashAccountName" readonly>
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" id="cashPhone" readonly>
-          </div>
-          <div class="form-group">
-            <label>Amount (₱)</label>
-            <input type="number" id="cashAmount" placeholder="Enter amount" min="10">
-          </div>
+          <div class="form-group"><label>Account Name</label><input type="text" id="cashAccountName" readonly></div>
+          <div class="form-group"><label>Phone Number</label><input type="text" id="cashPhone" readonly></div>
+          <div class="form-group"><label>Amount (₱)</label><input type="number" id="cashAmount" placeholder="Enter amount" min="10"></div>
           <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
         </div>
       </div>
@@ -524,56 +574,24 @@
         <button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button>
       </div>
       
-      <!-- GCash Withdrawal -->
       <div id="withdrawGcashTab" class="withdraw-tab active">
         <div class="withdraw-form">
-          <div class="form-group">
-            <label>Account Name (Fixed)</label>
-            <input type="text" id="withdrawAccountName" readonly>
-          </div>
-          <div class="form-group">
-            <label>Account ID (Fixed)</label>
-            <input type="text" id="withdrawAccountId" readonly>
-          </div>
-          <div class="form-group">
-            <label>Receiver Name</label>
-            <input type="text" id="gcashReceiverName" placeholder="Enter receiver's full name" required>
-          </div>
-          <div class="form-group">
-            <label>Receiver GCash Number</label>
-            <input type="tel" id="gcashReceiverNumber" placeholder="09XXXXXXXXX" required>
-          </div>
-          <div class="form-group">
-            <label>Amount (₱)</label>
-            <input type="number" id="withdrawGcashAmount" placeholder="Enter amount to withdraw" min="50">
-          </div>
-          <div class="withdraw-note">
-            <i class="fas fa-exclamation-triangle"></i>
-            <strong>Note:</strong> The system is not responsible for any wrong account information provided. Please double-check the receiver details before submitting.
-          </div>
+          <div class="form-group"><label>Account Name (Fixed)</label><input type="text" id="withdrawAccountName" readonly></div>
+          <div class="form-group"><label>Account ID (Fixed)</label><input type="text" id="withdrawAccountId" readonly></div>
+          <div class="form-group"><label>Receiver Name</label><input type="text" id="gcashReceiverName" placeholder="Enter receiver's full name" required></div>
+          <div class="form-group"><label>Receiver GCash Number</label><input type="tel" id="gcashReceiverNumber" placeholder="09XXXXXXXXX" required></div>
+          <div class="form-group"><label>Amount (₱)</label><input type="number" id="withdrawGcashAmount" placeholder="Enter amount to withdraw" min="50"></div>
+          <div class="withdraw-note"><i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> The system is not responsible for any wrong account information provided. Please double-check the receiver details before submitting.</div>
           <button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button>
         </div>
       </div>
       
-      <!-- Cash Withdrawal -->
       <div id="withdrawCashTab" class="withdraw-tab">
         <div class="withdraw-form">
-          <div class="form-group">
-            <label>Account Name (Fixed)</label>
-            <input type="text" id="withdrawCashAccountName" readonly>
-          </div>
-          <div class="form-group">
-            <label>Account ID (Fixed)</label>
-            <input type="text" id="withdrawCashAccountId" readonly>
-          </div>
-          <div class="form-group">
-            <label>Amount (₱)</label>
-            <input type="number" id="withdrawCashAmount" placeholder="Enter amount to withdraw" min="50">
-          </div>
-          <div class="withdraw-note">
-            <i class="fas fa-store"></i>
-            <strong>Note:</strong> Cash withdrawal can be claimed at our physical store. Please bring your valid ID.
-          </div>
+          <div class="form-group"><label>Account Name (Fixed)</label><input type="text" id="withdrawCashAccountName" readonly></div>
+          <div class="form-group"><label>Account ID (Fixed)</label><input type="text" id="withdrawCashAccountId" readonly></div>
+          <div class="form-group"><label>Amount (₱)</label><input type="number" id="withdrawCashAmount" placeholder="Enter amount to withdraw" min="50"></div>
+          <div class="withdraw-note"><i class="fas fa-store"></i> <strong>Note:</strong> Cash withdrawal can be claimed at our physical store. Please bring your valid ID.</div>
           <button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button>
         </div>
       </div>
@@ -604,26 +622,22 @@
 
 <!-- Download App Popup Modal -->
 <div id="downloadPopup" class="download-popup" style="display: none;">
-    <div class="download-popup-content">
-        <button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button>
-        <div class="download-popup-icon">
-            <i class="fas fa-fire"></i>
-        </div>
-        <h3>Install JLF Fireworks App</h3>
-        <p>Get the best experience with our app! Install now for faster checkout and exclusive offers.</p>
-        <div class="download-popup-buttons">
-            <button class="download-btn-primary" id="installAppBtn">
-                <i class="fas fa-download"></i> Install App
-            </button>
-            <button class="download-btn-secondary" onclick="closeDownloadPopup()">
-                Maybe Later
-            </button>
-        </div>
-        <div class="download-popup-note">
-            <i class="fas fa-mobile-alt"></i> Works on Android, iOS, and Desktop
-        </div>
+  <div class="download-popup-content">
+    <button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button>
+    <div class="download-popup-icon"><i class="fas fa-fire"></i></div>
+    <h3>Install JLF Fireworks App</h3>
+    <p>Get the best experience with our app! Install now for faster checkout and exclusive offers.</p>
+    <div class="download-popup-buttons">
+      <button class="download-btn-primary" id="installAppBtn"><i class="fas fa-download"></i> Install App</button>
+      <button class="download-btn-secondary" onclick="closeDownloadPopup()">Maybe Later</button>
     </div>
+    <div class="download-popup-note"><i class="fas fa-mobile-alt"></i> Works on Android, iOS, and Desktop</div>
+  </div>
 </div>
+
+<!-- QR Code and Scanner Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 
 <script src="js/account.js"></script>
 <script src="js/data.js"></script>

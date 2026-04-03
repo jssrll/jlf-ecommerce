@@ -8,10 +8,13 @@ let currentPage = "home";
 let currentUser = null;
 let isAdminMode = false;
 let balanceCheckInterval = null;
+let loyaltyRefreshInterval = null;
+let scanInterval = null;
+let currentStream = null;
 const ADMIN_PASSWORD = "jssrll101007";
 
 // Your Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzuGKRF8Pspu4kMeMJPg7CiHQZAss_wnNUJsw4tHCviKeo8U68Pvn1aM8kfhbzXjsBO/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbx4j_j1g0smpZiKQqWTl_yhUal63jAHl86kCznLMLWIcb9qLsYDAXyBQIkoL9PPZw3B/exec";
 
 // PWA Install Variables
 let deferredPrompt = null;
@@ -41,34 +44,27 @@ function showToast(message, duration = 1800) {
 // DOWNLOAD POPUP FUNCTIONS
 // ========================================
 
-// Show download popup
 function showDownloadPopup() {
-    // Check if user already closed popup before
     const popupClosed = localStorage.getItem("downloadPopupClosed");
     const appInstalled = window.matchMedia('(display-mode: standalone)').matches;
     
-    // Don't show if already installed or user closed it
     if (appInstalled || popupClosed === "true") return;
     
-    // Show popup after 3 seconds
     setTimeout(() => {
         const popup = document.getElementById("downloadPopup");
         if (popup) popup.style.display = "flex";
     }, 3000);
 }
 
-// Close download popup
 function closeDownloadPopup() {
     const popup = document.getElementById("downloadPopup");
     if (popup) popup.style.display = "none";
-    // Remember user closed it for 7 days
     localStorage.setItem("downloadPopupClosed", "true");
     setTimeout(() => {
         localStorage.removeItem("downloadPopupClosed");
-    }, 7 * 24 * 60 * 60 * 1000); // 7 days
+    }, 7 * 24 * 60 * 60 * 1000);
 }
 
-// Trigger PWA install
 function triggerInstall() {
     if (deferredPrompt) {
         deferredPrompt.prompt();
@@ -80,20 +76,17 @@ function triggerInstall() {
             deferredPrompt = null;
         });
     } else {
-        // Fallback - show instructions
         showToast("Tap the share button and select 'Add to Home Screen'", 3000);
         closeDownloadPopup();
     }
 }
 
-// Handle beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     console.log('✅ Install prompt available');
 });
 
-// Handle app installed event
 window.addEventListener('appinstalled', () => {
     console.log('App was installed successfully');
     closeDownloadPopup();
@@ -152,6 +145,383 @@ function stopRealTimeBalanceCheck() {
 }
 
 // ========================================
+// LOYALTY QR CODE FUNCTIONS
+// ========================================
+
+// Generate QR Code for user (from Account ID)
+async function generateUserQRCode() {
+    if (!currentUser) return;
+    
+    const qrContainer = document.getElementById("qrCodeContainer");
+    if (!qrContainer) return;
+    
+    const qrData = `${currentUser.id}_${currentUser.phone}`;
+    qrContainer.innerHTML = '';
+    
+    try {
+        // Using QRCode.js library
+        if (typeof QRCode !== 'undefined') {
+            new QRCode(qrContainer, {
+                text: qrData,
+                width: 180,
+                height: 180,
+                colorDark: "#1d1d1f",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        } else {
+            // Fallback using Google Charts API
+            const qrUrl = `https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=${encodeURIComponent(qrData)}&choe=UTF-8`;
+            qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width:180px;height:180px;">`;
+        }
+    } catch (error) {
+        console.error("QR generation error:", error);
+        qrContainer.innerHTML = '<div class="qr-loading">Error generating QR code</div>';
+    }
+}
+
+// Load loyalty marks for user
+async function loadUserLoyalty() {
+    if (!currentUser) return;
+    
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUserLoyalty&phone=${currentUser.phone}`);
+        const data = await response.json();
+        
+        let marks = 0;
+        if (data.success && data.marks !== undefined) {
+            marks = data.marks;
+        } else {
+            const checkResponse = await fetch(`${GOOGLE_SHEETS_URL}?action=checkUserLoyalty&phone=${currentUser.phone}`);
+            const checkData = await checkResponse.json();
+            if (!checkData.exists) {
+                await createUserLoyalty();
+                marks = 0;
+            } else {
+                marks = checkData.marks || 0;
+            }
+        }
+        
+        updateLoyaltyDisplay(marks);
+        return marks;
+    } catch (error) {
+        console.error("Load loyalty error:", error);
+        return 0;
+    }
+}
+
+// Create user loyalty record
+async function createUserLoyalty() {
+    if (!currentUser) return;
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "createUserLoyalty");
+        formData.append("accountId", currentUser.id);
+        formData.append("fullName", currentUser.name);
+        formData.append("phone", currentUser.phone);
+        formData.append("marks", "0");
+        formData.append("totalEarned", "0");
+        
+        await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    } catch (error) {
+        console.error("Create loyalty error:", error);
+    }
+}
+
+// Update loyalty display (12 marks)
+function updateLoyaltyDisplay(marks) {
+    const marksContainer = document.getElementById("loyaltyMarksContainer");
+    const marksCountSpan = document.getElementById("loyaltyMarksCount");
+    const loyaltyRewardMsg = document.getElementById("loyaltyRewardMessage");
+    
+    if (!marksContainer) return;
+    
+    let html = '';
+    for (let i = 1; i <= 12; i++) {
+        const earned = i <= marks;
+        html += `<div class="loyalty-mark ${earned ? 'earned' : 'empty'}">${earned ? '✓' : i}</div>`;
+    }
+    marksContainer.innerHTML = html;
+    
+    if (marksCountSpan) {
+        marksCountSpan.innerText = marks;
+    }
+    
+    if (loyaltyRewardMsg) {
+        if (marks >= 12) {
+            loyaltyRewardMsg.innerHTML = '<i class="fas fa-gift"></i> 🎉 Congratulations! You\'ve reached 12 marks! Claim your ₱99 reward! 🎉';
+            loyaltyRewardMsg.style.background = "#4caf50";
+            loyaltyRewardMsg.style.color = "white";
+        } else {
+            loyaltyRewardMsg.innerHTML = '<i class="fas fa-info-circle"></i> Every ₱699 purchase = 1 free scan. Need ' + (12 - marks) + ' more scan(s) for ₱99 reward!';
+            loyaltyRewardMsg.style.background = "rgba(255,255,255,0.15)";
+            loyaltyRewardMsg.style.color = "inherit";
+        }
+    }
+}
+
+// Add loyalty from purchase (every ₱699 = 1 scan)
+async function addLoyaltyFromPurchase(totalAmount) {
+    const REQUIRED_AMOUNT = 699;
+    const scansEarned = Math.floor(totalAmount / REQUIRED_AMOUNT);
+    
+    if (scansEarned > 0 && currentUser) {
+        try {
+            const formData = new URLSearchParams();
+            formData.append("action", "addLoyaltyFromPurchase");
+            formData.append("phone", currentUser.phone);
+            formData.append("amount", totalAmount);
+            formData.append("scansEarned", scansEarned);
+            
+            const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+            const result = await response.json();
+            
+            if (result.success && result.newMarks) {
+                showToast(`🎉 You earned ${scansEarned} loyalty scan(s) from your purchase!`, 3000);
+                await loadUserLoyalty();
+                await refreshUserBalance();
+            }
+        } catch (error) {
+            console.error("Add loyalty from purchase error:", error);
+        }
+    }
+}
+
+// ========================================
+// ADMIN QR SCANNER FUNCTIONS
+// ========================================
+
+// Start camera scanner
+function startQrScanner() {
+    const video = document.getElementById("qrVideo");
+    const startBtn = document.getElementById("startScannerBtn");
+    const stopBtn = document.getElementById("stopScannerBtn");
+    
+    if (currentStream) {
+        stopQrScanner();
+    }
+    
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then(stream => {
+            currentStream = stream;
+            video.srcObject = stream;
+            video.play();
+            
+            if (startBtn) startBtn.style.display = "none";
+            if (stopBtn) stopBtn.style.display = "inline-block";
+            
+            startScanningInterval();
+        })
+        .catch(err => {
+            console.error("Camera error:", err);
+            showToast("Cannot access camera. Please check permissions.", 3000);
+        });
+}
+
+// Stop camera scanner
+function stopQrScanner() {
+    if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+        currentStream = null;
+    }
+    
+    const video = document.getElementById("qrVideo");
+    if (video) video.srcObject = null;
+    
+    const startBtn = document.getElementById("startScannerBtn");
+    const stopBtn = document.getElementById("stopScannerBtn");
+    
+    if (startBtn) startBtn.style.display = "inline-block";
+    if (stopBtn) stopBtn.style.display = "none";
+    
+    if (scanInterval) {
+        clearInterval(scanInterval);
+        scanInterval = null;
+    }
+}
+
+function startScanningInterval() {
+    if (scanInterval) clearInterval(scanInterval);
+    
+    scanInterval = setInterval(() => {
+        scanQRFromVideo();
+    }, 1000);
+}
+
+async function scanQRFromVideo() {
+    const video = document.getElementById("qrVideo");
+    if (!video || !video.videoWidth || !video.videoHeight) return;
+    
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    const imageData = canvas.toDataURL("image/png");
+    
+    if (typeof jsQR !== 'undefined') {
+        const img = new Image();
+        img.src = imageData;
+        img.onload = async () => {
+            const tempCanvas = document.createElement("canvas");
+            tempCanvas.width = img.width;
+            tempCanvas.height = img.height;
+            const tempCtx = tempCanvas.getContext("2d");
+            tempCtx.drawImage(img, 0, 0);
+            const imageDataObj = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            const code = jsQR(imageDataObj.data, tempCanvas.width, tempCanvas.height);
+            
+            if (code && code.data) {
+                stopQrScanner();
+                await processQrScan(code.data);
+            }
+        };
+    }
+}
+
+// Process QR code scan from file upload
+async function processQrFileUpload(file) {
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        const imageData = e.target.result;
+        
+        const img = new Image();
+        img.onload = async () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            if (typeof jsQR !== 'undefined') {
+                const code = jsQR(imageDataObj.data, canvas.width, canvas.height);
+                if (code && code.data) {
+                    await processQrScan(code.data);
+                } else {
+                    showScanResult("No QR code found in image", true);
+                }
+            } else {
+                showScanResult("QR scanner library not loaded", true);
+            }
+        };
+        img.src = imageData;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Process scanned QR data (format: accountId_phone)
+async function processQrScan(qrData) {
+    const parts = qrData.split('_');
+    let accountId = qrData;
+    let phone = '';
+    
+    if (parts.length >= 2) {
+        accountId = parts[0];
+        phone = parts[1];
+    }
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "addLoyaltyScan");
+        formData.append("accountId", accountId);
+        formData.append("phone", phone);
+        formData.append("scannedBy", currentUser?.id || "Admin");
+        formData.append("timestamp", new Date().toISOString());
+        
+        const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+            showScanResult(`
+                <div class="scan-success">
+                    <p><strong>✅ Scan Successful!</strong></p>
+                    <p>User: ${result.userName || accountId}</p>
+                    <p>Phone: ${result.phone || phone}</p>
+                    <p>New Marks: ${result.newMarks}/12</p>
+                    ${result.rewardClaimed ? '<p>🎉 Reward claimed! ₱99 added to balance!</p>' : ''}
+                </div>
+            `);
+            
+            loadRecentScans();
+            
+            if (currentUser && (currentUser.id === accountId || currentUser.phone === phone)) {
+                await loadUserLoyalty();
+                await refreshUserBalance();
+            }
+        } else {
+            showScanResult(result.message || "Scan failed. User not found.", true);
+        }
+    } catch (error) {
+        console.error("Scan error:", error);
+        showScanResult("Error processing scan. Please try again.", true);
+    }
+}
+
+function showScanResult(message, isError = false) {
+    const resultDiv = document.getElementById("qrScanResult");
+    const contentDiv = document.getElementById("qrScanResultContent");
+    
+    if (!resultDiv) return;
+    
+    resultDiv.className = `qr-scan-result ${isError ? 'error' : ''}`;
+    resultDiv.style.display = "block";
+    contentDiv.innerHTML = message;
+    
+    setTimeout(() => {
+        resultDiv.style.display = "none";
+    }, 5000);
+}
+
+async function loadRecentScans() {
+    const container = document.getElementById("recentScansContainer");
+    if (!container) return;
+    
+    container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+    
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getRecentScans&limit=20`);
+        const scans = await response.json();
+        
+        if (!scans || scans.length === 0) {
+            container.innerHTML = '<div class="empty-state">No recent scans</div>';
+            return;
+        }
+        
+        container.innerHTML = scans.map(scan => `
+            <div class="scan-history-item">
+                <div>
+                    <div class="scan-history-user">${scan.fullName || scan.accountId}</div>
+                    <div class="scan-history-time">${new Date(scan.timestamp).toLocaleString()}</div>
+                </div>
+                <div class="scan-history-marks">+1</div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error("Load recent scans error:", error);
+        container.innerHTML = '<div class="empty-state">Failed to load scans</div>';
+    }
+}
+
+// Auto-refresh loyalty data every 5 seconds
+function startLoyaltyAutoRefresh() {
+    if (loyaltyRefreshInterval) clearInterval(loyaltyRefreshInterval);
+    
+    loyaltyRefreshInterval = setInterval(() => {
+        if (currentUser && document.getElementById("profileModal")?.classList.contains("show")) {
+            loadUserLoyalty();
+        }
+        if (isAdminMode && document.getElementById("adminQrScannerTab")?.classList.contains("active")) {
+            loadRecentScans();
+        }
+    }, 5000);
+}
+
+// ========================================
 // ACCOUNT MODAL FUNCTIONS
 // ========================================
 function openAccountModal() {
@@ -185,6 +555,10 @@ function openProfileModal() {
   document.getElementById("profileJoined").innerText = currentUser.joined || new Date().toLocaleDateString();
   document.getElementById("profileBalance").innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   
+  // Generate QR code and load loyalty when profile opens
+  generateUserQRCode();
+  loadUserLoyalty();
+  
   const modal = document.getElementById("profileModal");
   modal.classList.add("show");
 }
@@ -208,7 +582,7 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// LOGIN FUNCTION - WITH LOADING INDICATOR
+// LOGIN FUNCTION
 // ========================================
 async function handleLogin(event) {
   event.preventDefault();
@@ -277,7 +651,7 @@ async function handleLogin(event) {
 }
 
 // ========================================
-// REGISTER FUNCTION - WITH LOADING INDICATOR
+// REGISTER FUNCTION
 // ========================================
 async function handleRegister(event) {
   event.preventDefault();
@@ -331,6 +705,9 @@ async function handleRegister(event) {
         balance: 0,
         joined: joinedDate
       };
+      
+      // Create loyalty record for new user
+      await createUserLoyalty();
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
@@ -401,10 +778,9 @@ async function addUserCredit(amount) {
 }
 
 // ========================================
-// BOND INVESTMENT FUNCTIONS - WITH LOADING INDICATOR
+// BOND INVESTMENT FUNCTIONS
 // ========================================
 
-// Option 1: 3% return in 90 days (3 months)
 async function investInBondOption1() {
   if (!currentUser) {
     showToast("Please login to invest", 1500);
@@ -424,7 +800,7 @@ async function investInBondOption1() {
     return;
   }
   
-  const returnRate = 0.03; // 3%
+  const returnRate = 0.03;
   const expectedReturn = amount * returnRate;
   const durationDays = 90;
   const maturityDate = new Date();
@@ -476,7 +852,6 @@ async function investInBondOption1() {
   }
 }
 
-// Option 2: 6% return in 150 days (5 months)
 async function investInBondOption2() {
   if (!currentUser) {
     showToast("Please login to invest", 1500);
@@ -496,7 +871,7 @@ async function investInBondOption2() {
     return;
   }
   
-  const returnRate = 0.06; // 6%
+  const returnRate = 0.06;
   const expectedReturn = amount * returnRate;
   const durationDays = 150;
   const maturityDate = new Date();
@@ -746,7 +1121,7 @@ function renderCartUI() {
 }
 
 // ========================================
-// PLACE ORDER FUNCTION
+// PLACE ORDER FUNCTION (with loyalty from purchase)
 // ========================================
 async function placeOrder() {
   if (!currentUser) {
@@ -816,6 +1191,10 @@ async function placeOrder() {
       
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
       updateAllBalanceDisplays();
+      
+      // Add loyalty scans from purchase (every ₱699 = 1 scan)
+      await addLoyaltyFromPurchase(total);
+      
       return true;
     } else {
       const refundData = new URLSearchParams();
@@ -893,7 +1272,7 @@ function loadFeaturedPage() {
 }
 
 // ========================================
-// CODE REDEMPTION - WITH LOADING INDICATOR
+// CODE REDEMPTION
 // ========================================
 async function redeemCode() {
   if (!currentUser) {
@@ -1065,7 +1444,7 @@ async function loadUserOrders() {
 }
 
 // ========================================
-// ADMIN FUNCTIONS - WITH HELP PAGE BUTTON HANDLING
+// ADMIN FUNCTIONS
 // ========================================
 function toggleAdminMode() {
   if (isAdminMode) {
@@ -1086,7 +1465,6 @@ function enterAdminMode() {
   document.getElementById('adminModeBadge').style.display = 'flex';
   document.getElementById('adminExitBtn').style.display = 'flex';
   
-  // Update help page buttons
   const adminAccessBtn = document.getElementById('adminAccessBtn');
   const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
   if (adminAccessBtn) adminAccessBtn.style.display = 'none';
@@ -1103,7 +1481,9 @@ function exitAdminMode() {
   document.getElementById('adminModeBadge').style.display = 'none';
   document.getElementById('adminExitBtn').style.display = 'none';
   
-  // Update help page buttons
+  // Stop camera if running
+  stopQrScanner();
+  
   const adminAccessBtn = document.getElementById('adminAccessBtn');
   const adminAccessExitBtn = document.getElementById('adminAccessExitBtn');
   if (adminAccessBtn) adminAccessBtn.style.display = 'flex';
@@ -1136,6 +1516,7 @@ function switchAdminTab(tabName) {
   else if (tabName === 'recharges') loadAdminRecharges();
   else if (tabName === 'withdrawals') loadAdminWithdrawals();
   else if (tabName === 'investments') loadAdminCreditInvestments();
+  else if (tabName === 'qrscanner') loadRecentScans();
 }
 
 async function loadAdminData() {
@@ -1534,7 +1915,7 @@ function initWithdrawIcon() {
 }
 
 // ========================================
-// RECHARGE MODAL FUNCTIONS - WITH LOADING INDICATOR
+// RECHARGE MODAL FUNCTIONS
 // ========================================
 function openRechargeModal() {
   if (!currentUser) {
@@ -1592,7 +1973,6 @@ async function submitRecharge(method) {
     return;
   }
   
-  // Disable button and show loading indicator
   originalText = submitBtn.innerHTML;
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
@@ -1627,14 +2007,13 @@ async function submitRecharge(method) {
     console.error("Recharge error:", error);
     showToast("Failed to submit. Please try again.", 1500);
   } finally {
-    // Re-enable button and restore text
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalText;
   }
 }
 
 // ========================================
-// WITHDRAW MODAL FUNCTIONS - WITH LOADING INDICATOR
+// WITHDRAW MODAL FUNCTIONS
 // ========================================
 function openWithdrawModal() {
   if (!currentUser) {
@@ -1703,7 +2082,6 @@ async function submitWithdraw(method) {
     return;
   }
   
-  // Disable button and show loading indicator
   originalText = submitBtn.innerHTML;
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
@@ -1740,17 +2118,43 @@ async function submitWithdraw(method) {
     console.error("Withdrawal error:", error);
     showToast("Failed to submit. Please try again.", 1500);
   } finally {
-    // Re-enable button and restore text
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalText;
   }
 }
 
 // ========================================
+// QR SCANNER UI SETUP
+// ========================================
+function setupQrScannerUI() {
+    const startScannerBtn = document.getElementById("startScannerBtn");
+    const stopScannerBtn = document.getElementById("stopScannerBtn");
+    const qrFileInput = document.getElementById("qrFileInput");
+    const uploadArea = document.getElementById("uploadArea");
+    
+    if (startScannerBtn) {
+        startScannerBtn.addEventListener("click", startQrScanner);
+    }
+    if (stopScannerBtn) {
+        stopScannerBtn.addEventListener("click", stopQrScanner);
+    }
+    if (qrFileInput) {
+        qrFileInput.addEventListener("change", (e) => {
+            if (e.target.files[0]) processQrFileUpload(e.target.files[0]);
+        });
+    }
+    if (uploadArea) {
+        uploadArea.addEventListener("click", () => {
+            if (qrFileInput) qrFileInput.click();
+        });
+    }
+}
+
+// ========================================
 // INITIALIZATION
 // ========================================
 function init() {
-  console.log("Initializing JLF Fireworks e-commerce app...");
+  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System...");
   
   const savedUser = localStorage.getItem("nova_user");
   if (savedUser) {
@@ -1780,6 +2184,12 @@ function init() {
   initCartDrawer();
   initContactForm();
   initAccountIcon();
+  
+  // Setup QR Scanner UI
+  setupQrScannerUI();
+  
+  // Start loyalty auto-refresh
+  startLoyaltyAutoRefresh();
   
   // Show download popup
   showDownloadPopup();
@@ -1829,6 +2239,10 @@ function init() {
   window.showDownloadPopup = showDownloadPopup;
   window.closeDownloadPopup = closeDownloadPopup;
   window.triggerInstall = triggerInstall;
+  window.startQrScanner = startQrScanner;
+  window.stopQrScanner = stopQrScanner;
+  window.processQrFileUpload = processQrFileUpload;
+  window.loadRecentScans = loadRecentScans;
 }
 
 document.addEventListener('DOMContentLoaded', init);
