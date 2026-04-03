@@ -1,28 +1,37 @@
 // PRODUCT DATABASE - FIREWORKS SHOP
 const products = [
   // Aerial Fireworks
-  { id: 1, name: "Roman Candle", category: "Aerial", price: 150, image: "🎇", description: "Multi-shot aerial effects with colorful bursts" },
-  { id: 2, name: "Sky Rocket", category: "Aerial", price: 200, image: "🚀", description: "High-flying rocket with whistle and burst" },
-  { id: 3, name: "Aerial Shell", category: "Aerial", price: 350, image: "💥", description: "Professional-grade aerial display shell" },
-  { id: 4, name: "Mortar Kit", category: "Aerial", price: 500, image: "🎆", description: "Complete mortar set with multiple shells" },
+  { id: 1, name: "Maribel Kwitis", category: "Aerial", price: 129, image: "🎇", description: "10 pcs per order" },
   
   // Ground Fireworks
-  { id: 5, name: "Firecracker Roll", category: "Ground", price: 50, image: "🧨", description: "Classic firecracker roll - 100 pieces" },
-  { id: 6, name: "Fountain", category: "Ground", price: 120, image: "⛲", description: "Ground fountain with colorful sparks" },
-  { id: 7, name: "Wheel", category: "Ground", price: 180, image: "🎡", description: "Spinning wheel with crackling effects" },
-  { id: 8, name: "Mine", category: "Ground", price: 90, image: "💣", description: "Ground mine with shower of sparks" },
+  { id: 2, name: "TS Pastillas Small", category: "Ground", price: 29, image: "🧨", description: "Pack of 10 per order" },
+  { id: 3, name: "TS Special Pastillas", category: "Ground", price: 39, image: "🧨", description: "Pack of 10 per order" },
+  { id: 4, name: "TS Pastillas Big", category: "Ground", price: 149, image: "🧨", description: "Pack of 10 per order" },
+  { id: 5, name: "TS Thunder Sawa 500 Rounds", category: "Ground", price: 749, image: "🧨", description: "1 pcs per order" },
+  { id: 6, name: "TS Special DK Sawa 500 Rounds", category: "Ground", price: 789, image: "🧨", description: "1 pcs per order" },
+  { id: 7, name: "TS Super Thunder Sawa 500 Rounds", category: "Ground", price: 799, image: "🧨", description: "1 pcs per order" },
+  { id: 8, name: "Dreamlight 3 Star", category: "Ground", price: 149, image: "🧨", description: "Ream of 100 per order" },
+  { id: 9, name: "Phoenix Thunder", category: "Ground", price: 249, image: "🧨", description: "Ream of 100 per order" },
+  { id: 10, name: "Dreamlight Whistle Bomb", category: "Ground", price: 129, image: "🧨", description: "Pack of 10 per order" },
+  { id: 11, name: "Nation Whistle Bomb", category: "Ground", price: 129, image: "🧨", description: "Pack of 10 per order" },
   
   // Sparklers
-  { id: 9, name: "Sparklers Pack", category: "Sparklers", price: 30, image: "✨", description: "Pack of 10 hand-held sparklers" },
-  { id: 10, name: "Glitter Stick", category: "Sparklers", price: 45, image: "🌟", description: "Long-lasting glitter sparkler" },
-  { id: 11, name: "Heart Sparkler", category: "Sparklers", price: 60, image: "❤️", description: "Heart-shaped sparkler for special moments" },
-  { id: 12, name: "Star Sparkler", category: "Sparklers", price: 55, image: "⭐", description: "Star-shaped sparkler for celebrations" },
+  { id: 12, name: "Maribel Mabuhay Ordinary", category: "Sparklers", price: 29, image: "✨", description: "Pack of 10 per order" },
+  { id: 13, name: "Tiger 1 Minutes Luces w/ Effect", category: "Sparklers", price: 49, image: "✨", description: "1 pcs per order" },
+  { id: 14, name: "Yanco 1 Minute RC Luces", category: "Sparklers", price: 34, image: "✨", description: "1 pcs per order" },
+  { id: 15, name: "Yanco 1 Minute Baby Luces", category: "Sparklers", price: 129, image: "✨", description: "Pack of 10 per order" },
   
   // Fountains
-  { id: 13, name: "Mini Fountain", category: "Fountains", price: 80, image: "🌊", description: "Small fountain with colorful sparks" },
-  { id: 14, name: "Cascade Fountain", category: "Fountains", price: 150, image: "💧", description: "Waterfall effect fountain" },
-  { id: 15, name: "Color Changing Fountain", category: "Fountains", price: 200, image: "🌈", description: "Multi-color changing fountain" },
-  { id: 16, name: "Palm Tree Fountain", category: "Fountains", price: 250, image: "🌴", description: "Palm tree effect with crackling finale" }
+  { id: 16, name: "Yanco Batibot", category: "Fountains", price: 99, image: "💧", description: "3 pcs per order" },
+  { id: 17, name: "Yanco Small Silver", category: "Fountains", price: 99, image: "💧", description: "2 pcs per order" },
+
+  // Others
+  { id: 18, name: "alp-alp", category: "Others", price: 169, image: "🌊", description: "Pack of 10 per order" },
+  { id: 19, name: "kk", category: "Others", price: 269, image: "🌊", description: "Pack of 10 per order" },
+  { id: 20, name: "dyn", category: "Others", price: 69, image: "🌊", description: "1 pcs per order" },
+  { id: 21, name: "kbs", category: "Others", price: 69, image: "🌊", description: "1 pcs per order" },
+  { id: 22, name: "el", category: "Others", price: 79, image: "🌊", description: "1 pcs per order" },
+  { id: 23, name: "al", category: "Others", price: 159, image: "🌊", description: "1 pcs per order" }
 ];
 
 // ========================================
