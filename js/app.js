@@ -65,6 +65,23 @@ function initAccountIcon() {
   }
 }
 
+// SETTINGS ICON
+function initSettingsIcon() {
+  const settingsIcon = document.getElementById('settingsIcon');
+  if (settingsIcon) {
+    settingsIcon.addEventListener('click', () => {
+      if (!isAdmin && currentUser) {
+        switchPage('settings');
+      } else if (!currentUser) {
+        showToast("Please login first", 1500);
+        openAccountModal();
+      } else if (isAdmin) {
+        showToast("Admin mode. Cannot access settings.", 1500);
+      }
+    });
+  }
+}
+
 // RECHARGE ICON
 function initRechargeIcon() {
   const rechargeIcon = document.getElementById('rechargeIcon');
@@ -136,6 +153,7 @@ function init() {
   
   initRechargeIcon();
   initWithdrawIcon();
+  initSettingsIcon();
   
   switchPage('home');
   initFilters();

@@ -8,13 +8,6 @@ function loadSettings() {
     if (savedSettings) {
         const settings = JSON.parse(savedSettings);
         
-        // Apply Dark Mode
-        if (settings.darkMode) {
-            document.body.classList.add('dark');
-        } else {
-            document.body.classList.remove('dark');
-        }
-        
         // Apply Font Size
         if (settings.fontSize) {
             applyFontSize(settings.fontSize);
@@ -39,7 +32,6 @@ function loadSettings() {
     
     // Default settings
     return {
-        darkMode: false,
         fontSize: 'medium',
         compactMode: false,
         highContrast: false
@@ -59,28 +51,6 @@ function applyFontSize(size) {
         large: '19px'
     };
     document.documentElement.style.fontSize = sizes[size] || '16px';
-}
-
-// Toggle Dark Mode
-function toggleDarkMode() {
-    const settings = loadSettings();
-    settings.darkMode = !settings.darkMode;
-    
-    if (settings.darkMode) {
-        document.body.classList.add('dark');
-    } else {
-        document.body.classList.remove('dark');
-    }
-    
-    saveSettings(settings);
-    
-    // Update toggle switch UI if settings modal is open
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    if (darkModeToggle) {
-        darkModeToggle.checked = settings.darkMode;
-    }
-    
-    showToast(settings.darkMode ? "Dark mode enabled" : "Light mode enabled", 1500);
 }
 
 // Change Font Size
@@ -141,81 +111,17 @@ function toggleHighContrast() {
     showToast(settings.highContrast ? "High contrast mode enabled" : "High contrast mode disabled", 1500);
 }
 
-// Clear Cache
-function clearCache() {
-    if (confirm("Are you sure you want to clear all cached data? This will clear your cart, read announcements, and settings. Your account and balance will remain.")) {
-        // Clear cart
-        cart = [];
-        if (typeof updateCartBadge === 'function') updateCartBadge();
-        if (typeof saveCartToLocal === 'function') saveCartToLocal();
-        if (typeof renderCartUI === 'function') renderCartUI();
-        
-        // Clear read announcements
-        if (typeof readAnnouncements !== 'undefined') {
-            readAnnouncements = [];
-            if (typeof saveReadAnnouncements === 'function') saveReadAnnouncements();
-            if (typeof updateAnnouncementBadge === 'function') updateAnnouncementBadge();
-        }
-        
-        // Clear search history
-        if (typeof searchQuery !== 'undefined') {
-            searchQuery = "";
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) searchInput.value = "";
-            if (typeof renderProducts === 'function') renderProducts();
-        }
-        
-        // Reset current category
-        if (typeof currentCategory !== 'undefined') {
-            currentCategory = "all";
-            const activeCatBtn = document.querySelector('.cat-btn-apple.active');
-            if (activeCatBtn && activeCatBtn.getAttribute('data-cat') !== 'all') {
-                const allBtn = document.querySelector('.cat-btn-apple[data-cat="all"]');
-                if (allBtn) allBtn.click();
-            }
-        }
-        
-        showToast("Cache cleared successfully!", 2000);
-    }
-}
-
-// Reset All Settings
-function resetAllSettings() {
-    if (confirm("Reset all settings to default? This will reset Dark Mode, Font Size, Compact Mode, and High Contrast.")) {
-        const defaultSettings = {
-            darkMode: false,
-            fontSize: 'medium',
-            compactMode: false,
-            highContrast: false
-        };
-        
-        // Apply defaults
-        document.body.classList.remove('dark', 'compact', 'high-contrast');
-        applyFontSize('medium');
-        saveSettings(defaultSettings);
-        
-        // Update UI elements if settings modal is open
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        if (darkModeToggle) darkModeToggle.checked = false;
-        
-        const fontSizeSelect = document.getElementById('fontSizeSelect');
-        if (fontSizeSelect) fontSizeSelect.value = 'medium';
-        
-        const compactToggle = document.getElementById('compactModeToggle');
-        if (compactToggle) compactToggle.checked = false;
-        
-        const contrastToggle = document.getElementById('highContrastToggle');
-        if (contrastToggle) contrastToggle.checked = false;
-        
-        showToast("All settings reset to default", 1500);
-    }
-}
-
 // Render Settings Page
 function renderSettingsPage() {
+    const mainContent = document.getElementById("mainContent");
+    if (!mainContent) {
+        console.error("mainContent element not found!");
+        return;
+    }
+    
     const settings = loadSettings();
     
-    const html = `
+    mainContent.innerHTML = `
         <div class="settings-container">
             <div class="page-hero">
                 <h1><i class="fas fa-sliders-h"></i> Settings</h1>
@@ -225,13 +131,6 @@ function renderSettingsPage() {
             <!-- Appearance Section -->
             <div class="settings-card">
                 <h3><i class="fas fa-palette"></i> Appearance</h3>
-                <div class="settings-row">
-                    <span><i class="fas fa-moon"></i> Dark Mode</span>
-                    <label class="switch">
-                        <input type="checkbox" id="darkModeToggle" ${settings.darkMode ? 'checked' : ''}>
-                        <span class="slider"></span>
-                    </label>
-                </div>
                 <div class="settings-row">
                     <span><i class="fas fa-text-height"></i> Font Size</span>
                     <select id="fontSizeSelect" class="settings-select">
@@ -256,19 +155,6 @@ function renderSettingsPage() {
                 </div>
             </div>
             
-            <!-- Data Section -->
-            <div class="settings-card">
-                <h3><i class="fas fa-database"></i> Data</h3>
-                <div class="settings-row">
-                    <span><i class="fas fa-trash-alt"></i> Clear Cache</span>
-                    <button class="btn-secondary-apple" id="clearCacheBtn">Clear</button>
-                </div>
-                <div class="settings-row">
-                    <span><i class="fas fa-undo-alt"></i> Reset All Settings</span>
-                    <button class="btn-secondary-apple" id="resetSettingsBtn">Reset</button>
-                </div>
-            </div>
-            
             <!-- About & Support Section -->
             <div class="settings-card">
                 <h3><i class="fas fa-info-circle"></i> About & Support</h3>
@@ -289,10 +175,6 @@ function renderSettingsPage() {
                     <button class="btn-secondary-apple" id="contactDevBtn">Email</button>
                 </div>
                 <div class="settings-row">
-                    <span><i class="fas fa-share-alt"></i> Share App</span>
-                    <button class="btn-secondary-apple" id="shareAppBtn">Share</button>
-                </div>
-                <div class="settings-row">
                     <span><i class="fas fa-question-circle"></i> FAQ</span>
                     <button class="btn-secondary-apple" id="faqBtn">Go to FAQ</button>
                 </div>
@@ -304,39 +186,15 @@ function renderSettingsPage() {
         </div>
     `;
     
-    document.getElementById("mainContent").innerHTML = html;
-    
     // Attach event listeners
-    document.getElementById('darkModeToggle')?.addEventListener('change', toggleDarkMode);
     document.getElementById('fontSizeSelect')?.addEventListener('change', (e) => changeFontSize(e.target.value));
     document.getElementById('compactModeToggle')?.addEventListener('change', toggleCompactMode);
     document.getElementById('highContrastToggle')?.addEventListener('change', toggleHighContrast);
-    document.getElementById('clearCacheBtn')?.addEventListener('click', clearCache);
-    document.getElementById('resetSettingsBtn')?.addEventListener('click', resetAllSettings);
     document.getElementById('viewTermsBtn')?.addEventListener('click', () => openTermsModal());
     document.getElementById('viewPrivacyBtn')?.addEventListener('click', () => openPrivacyModal());
     document.getElementById('contactDevBtn')?.addEventListener('click', () => window.location.href = "mailto:jessrell1010@gmail.com");
-    document.getElementById('shareAppBtn')?.addEventListener('click', shareApp);
     document.getElementById('faqBtn')?.addEventListener('click', () => switchPage('help'));
     document.getElementById('reportBugBtn')?.addEventListener('click', openBugReportModal);
-}
-
-// Share App function
-function shareApp() {
-    const url = window.location.href;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'JLF Fireworks',
-            text: 'Check out JLF Fireworks - Quality fireworks for every celebration!',
-            url: url
-        }).catch(err => console.log('Share cancelled:', err));
-    } else {
-        // Fallback - copy to clipboard
-        navigator.clipboard.writeText(url).then(() => {
-            showToast("Link copied to clipboard! Share with your friends.", 2000);
-        });
-    }
 }
 
 // Open Terms of Service Modal

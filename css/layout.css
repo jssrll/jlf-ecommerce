@@ -28,13 +28,17 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
   gap: 32px;
   font-weight: 500;
+  flex: 1;
+  justify-content: center;
 }
+
 .nav-links a {
   text-decoration: none;
   color: #1d1d1f;
@@ -42,6 +46,7 @@
   font-size: 0.9rem;
   cursor: pointer;
 }
+
 .nav-links a:hover,
 .nav-links a.active {
   color: #e63946;
@@ -51,11 +56,13 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-shrink: 0;
 }
 
 .announcement-icon,
 .recharge-icon,
 .withdraw-icon,
+.settings-icon,
 .cart-icon,
 .account-icon {
   cursor: pointer;
@@ -63,10 +70,14 @@
   color: #1d1d1f;
   transition: 0.2s;
   position: relative;
+  display: flex;
+  align-items: center;
 }
+
 .announcement-icon:hover,
 .recharge-icon:hover,
 .withdraw-icon:hover,
+.settings-icon:hover,
 .cart-icon:hover,
 .account-icon:hover {
   color: #e63946;
@@ -86,6 +97,19 @@
   text-align: center;
 }
 
+.announcement-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #e63946;
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
 .user-name {
   font-size: 0.8rem;
   margin-left: 6px;
@@ -93,34 +117,73 @@
   color: #e63946;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 25px;
-  border-top: 1px solid #e9e9ef;
-  margin-top: 40px;
-  color: #86868b;
-  font-size: 0.75rem;
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    order: 1;
+  }
+  
+  .nav-actions {
+    order: 2;
+    width: auto;
+    justify-content: flex-end;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
 }
+  
+  .nav-actions {
+    justify-content: center;
+    width: 100%;
+    gap: 24px;
+  }
+  
+  .announcement-icon,
+  .recharge-icon,
+  .withdraw-icon,
+  .settings-icon,
+  .cart-icon,
+  .account-icon {
+    font-size: 1.2rem;
+  }
+  
+  .user-name {
+    font-size: 0.7rem;
+  }
 
-/* Toast Notification */
-.toast-msg {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  background: #1d1d1f;
-  color: white;
-  padding: 10px 24px;
-  border-radius: 980px;
-  font-size: 0.8rem;
-  opacity: 0;
-  transition: 0.2s;
-  z-index: 250;
-  pointer-events: none;
-  white-space: nowrap;
-}
-.toast-msg.show {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
+/* Extra small devices */
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 12px;
+  }
+  
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+  
+  .nav-actions {
+    gap: 18px;
+  }
+  
+  .announcement-icon,
+  .recharge-icon,
+  .withdraw-icon,
+  .settings-icon,
+  .cart-icon,
+  .account-icon {
+    font-size: 1.1rem;
+  }
 }
