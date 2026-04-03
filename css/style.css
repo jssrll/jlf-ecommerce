@@ -2910,3 +2910,36 @@ body.dark .scan-history-item {
 body.dark .scan-history-item .scan-history-time {
   color: #a1a1a6;
 }
+
+/* Force QR Scanner tab to show when active */
+#adminQrScannerTab.admin-tab.active {
+    display: block !important;
+}
+
+/* Make sure video container is visible */
+.video-container {
+    display: flex !important;
+    min-height: 300px;
+}
+
+#qrVideo {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Upload area styles */
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.upload-area:hover {
+    border-color: #e63946;
+    background: #fafafc;
+}
