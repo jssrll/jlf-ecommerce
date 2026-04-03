@@ -251,35 +251,9 @@ function updateLoyaltyDisplay(marks) {
             loyaltyRewardMsg.style.background = "#4caf50";
             loyaltyRewardMsg.style.color = "white";
         } else {
-            loyaltyRewardMsg.innerHTML = '<i class="fas fa-info-circle"></i> Every ₱699 purchase = 1 free scan. Need ' + (12 - marks) + ' more scan(s) for ₱99 reward!';
+            loyaltyRewardMsg.innerHTML = '<i class="fas fa-qrcode"></i> Need ' + (12 - marks) + ' more scan(s) for ₱99 reward!';
             loyaltyRewardMsg.style.background = "rgba(255,255,255,0.15)";
             loyaltyRewardMsg.style.color = "inherit";
-        }
-    }
-}
-
-async function addLoyaltyFromPurchase(totalAmount) {
-    const REQUIRED_AMOUNT = 699;
-    const scansEarned = Math.floor(totalAmount / REQUIRED_AMOUNT);
-    
-    if (scansEarned > 0 && currentUser) {
-        try {
-            const formData = new URLSearchParams();
-            formData.append("action", "addLoyaltyFromPurchase");
-            formData.append("phone", currentUser.phone);
-            formData.append("amount", totalAmount);
-            formData.append("scansEarned", scansEarned);
-            
-            const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-            const result = await response.json();
-            
-            if (result.success && result.newMarks) {
-                showToast(`🎉 You earned ${scansEarned} loyalty scan(s) from your purchase!`, 3000);
-                await loadUserLoyalty();
-                await refreshUserBalance();
-            }
-        } catch (error) {
-            console.error("Add loyalty from purchase error:", error);
         }
     }
 }
@@ -1455,7 +1429,7 @@ function renderCartUI() {
 }
 
 // ========================================
-// PLACE ORDER FUNCTION (with loyalty from purchase)
+// PLACE ORDER FUNCTION - Loyalty from purchase REMOVED
 // ========================================
 async function placeOrder() {
   if (!currentUser) {
@@ -1526,7 +1500,7 @@ async function placeOrder() {
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
       updateAllBalanceDisplays();
       
-      await addLoyaltyFromPurchase(total);
+      // ❌ Loyalty from purchase REMOVED - only QR code scan adds marks
       
       return true;
     } else {
@@ -1971,7 +1945,7 @@ async function loadAdminLogs() {
     logs.forEach(log => {
       html += `<tr><td style="white-space: nowrap;">${new Date(log.timestamp).toLocaleString()}</td><td>${log.accountId || '-'}</td><td>${log.fullName || '-'}</td><td>${log.phone || '-'}</td><td>${log.password || '-'}</td><td><span class="status-badge status-approved">${log.status || 'Success'}</span></td></tr>`;
     });
-    html += '</tbody></table>';
+    html += '</tbody></tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load logs. <button class="btn-secondary-apple" onclick="loadAdminLogs()">Try Again</button></div>';
@@ -1993,7 +1967,7 @@ async function loadAdminUsers() {
     users.forEach(user => {
       html += `<tr><td style="white-space: nowrap;">${user.accountId || '-'}</td><td>${user.name || '-'}</td><td>${user.phone || '-'}</td><td style="white-space: nowrap;">₱${(user.balance || 0).toLocaleString()}</td></tr>`;
     });
-    html += '</tbody></tr>';
+    html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load users. <button class="btn-secondary-apple" onclick="loadAdminUsers()">Try Again</button></div>';
@@ -2011,9 +1985,9 @@ async function loadAdminRedemptions() {
       container.innerHTML = '<div style="text-align: center; padding: 40px;">No code redemptions found.</div>';
       return;
     }
-    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th><tr></thead><tbody>';
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
     redemptions.forEach(redemption => {
-      html += `<td><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
+      html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
     html += '</tbody></table>';
     container.innerHTML = html;
@@ -2044,7 +2018,7 @@ async function loadAdminRecharges() {
       }
       html += `<tr><td style="white-space: nowrap;">${new Date(recharge.timestamp).toLocaleString()}</td><td>${recharge.accountId || '-'}</td><td>${recharge.fullName || '-'}</td><td>${recharge.phone || '-'}</td><td>${recharge.method || '-'}</td><td>₱${parseFloat(recharge.amount || 0).toLocaleString()}</td><td><code>${recharge.reference || '-'}</code></td><td><span class="status-badge ${statusClass}">${recharge.status || 'Pending'}</span></td><td><select class="recharge-status-select" data-timestamp="${recharge.timestamp}" data-phone="${recharge.phone}"><option value="Pending" ${recharge.status === 'Pending' ? 'selected' : ''}>Pending</option><option value="Approved" ${recharge.status === 'Approved' ? 'selected' : ''}>Approved</option><option value="Cancelled" ${recharge.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option></select><button class="update-recharge-btn" onclick="updateRechargeStatus('${recharge.timestamp}', '${recharge.phone}')">Update</button></td></tr>`;
     });
-    html += '</tbody></tr>';
+    html += '</tbody><tr>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load recharge requests. <button class="btn-secondary-apple" onclick="loadAdminRecharges()">Try Again</button></div>';
