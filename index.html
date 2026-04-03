@@ -40,6 +40,7 @@
         <a href="#" data-page="shop" class="nav-link">Shop</a>
         <a href="#" data-page="featured" class="nav-link">Featured</a>
         <a href="#" data-page="orders" class="nav-link">Orders</a>
+        <a href="#" data-page="settings" class="nav-link">Settings</a>
         <a href="#" data-page="help" class="nav-link">Help</a>
       </div>
       <div class="nav-actions">
@@ -258,6 +259,11 @@
     </div>
   </div>
 
+  <!-- SETTINGS PAGE -->
+  <div id="settingsPage" class="page">
+    <!-- Content will be rendered by JavaScript -->
+  </div>
+
   <!-- ADMIN PAGE -->
   <div id="adminPage" class="page">
     <div class="page-hero">
@@ -274,6 +280,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
       <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('announcements')">📢 Announcements</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('bugreports')">🐛 Bug Reports</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -429,6 +436,24 @@
           <div id="recentAnnouncementsList" class="recent-announcements-list">
             <div class="loading-state">Loading announcements...</div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Bug Reports Tab -->
+    <div id="adminBugreportsTab" class="admin-tab">
+      <div class="qr-scanner-container">
+        <h2><i class="fas fa-bug"></i> Bug Reports</h2>
+        <p class="scanner-subtitle">View and manage user bug reports</p>
+        
+        <div class="admin-actions">
+          <button class="btn-secondary-apple" onclick="refreshAdminBugReports()">
+            <i class="fas fa-sync-alt"></i> Refresh Reports
+          </button>
+        </div>
+        
+        <div id="adminBugReportsContainer" class="admin-bugreports-container">
+          <div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bug reports...</div>
         </div>
       </div>
     </div>
@@ -710,6 +735,11 @@
 
 <!-- Announcements -->
 <script src="js/announcements.js"></script>
+
+<!-- Settings & Bug Report -->
+<script src="js/settings.js"></script>
+<script src="js/bug-report.js"></script>
+<script src="js/admin-bugreports.js"></script>
 
 <!-- Admin -->
 <script src="js/admin-orders.js"></script>

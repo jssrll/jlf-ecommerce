@@ -12,6 +12,7 @@ function switchPage(pageName) {
   if (pageName === 'featured') loadFeaturedPage();
   else if (pageName === 'shop') renderProducts();
   else if (pageName === 'orders') loadUserOrders();
+  else if (pageName === 'settings') renderSettingsPage();
   else if (pageName === 'admin') loadAdminData();
 }
 
@@ -108,7 +109,10 @@ function initContactForm() {
 // INITIALIZATION
 // ========================================
 function init() {
-  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System and Announcements...");
+  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System, Announcements, and Settings...");
+  
+  // Load settings first
+  loadSettings();
   
   const savedUser = localStorage.getItem("nova_user");
   if (savedUser) {
@@ -210,6 +214,23 @@ function init() {
   window.publishAnnouncement = publishAnnouncement;
   window.deleteAnnouncement = deleteAnnouncement;
   window.loadRecentAnnouncements = loadRecentAnnouncements;
+  // Settings Functions
+  window.toggleDarkMode = toggleDarkMode;
+  window.changeFontSize = changeFontSize;
+  window.toggleCompactMode = toggleCompactMode;
+  window.toggleHighContrast = toggleHighContrast;
+  window.clearCache = clearCache;
+  window.resetAllSettings = resetAllSettings;
+  window.openTermsModal = openTermsModal;
+  window.openPrivacyModal = openPrivacyModal;
+  window.shareApp = shareApp;
+  window.openBugReportModal = openBugReportModal;
+  window.closeBugReportModal = closeBugReportModal;
+  window.submitBugReport = submitBugReport;
+  // Admin Bug Reports
+  window.loadAdminBugReports = loadAdminBugReports;
+  window.updateBugReportStatus = updateBugReportStatus;
+  window.refreshAdminBugReports = refreshAdminBugReports;
 }
 
 document.addEventListener('DOMContentLoaded', init);

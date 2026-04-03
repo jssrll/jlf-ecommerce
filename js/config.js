@@ -3,7 +3,7 @@
 // ========================================
 
 // Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwnaCIKYhwQx9EWR7-q60rxA3YB1QyIHlHwvenkuTwK_iQhzULYkdl9SJU_jB3I8Zz6/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbznlGTx7NsOvC1AjmRzIpyMmktF3LQ5UjgkdRIbnV_eWOBpPSHJtxe06cahFHkMdpql/exec";
 
 // Hardcoded Admin Credentials
 const ADMIN_PHONE = "101007101007";

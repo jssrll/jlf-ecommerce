@@ -23,5 +23,8 @@
 /* Announcement System */
 @import url('announcements.css');
 
+/* Settings & Bug Report */
+@import url('settings.css');
+
 /* Responsive */
 @import url('responsive.css');
