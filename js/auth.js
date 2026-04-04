@@ -2,9 +2,6 @@
 // AUTHENTICATION FUNCTIONS
 // ========================================
 
-// Global interval variable
-let balanceCheckInterval = null;
-
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -62,26 +59,23 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// REAL-TIME BALANCE UPDATE FUNCTIONS - FIXED (10 seconds)
+// REAL-TIME BALANCE UPDATE FUNCTIONS - 10 SECONDS
 // ========================================
 
-/**
- * Stops the balance check interval
- */
 function stopRealTimeBalanceCheck() {
   if (balanceCheckInterval) {
     clearInterval(balanceCheckInterval);
     balanceCheckInterval = null;
-    console.log("✅ Balance check stopped");
+    console.log("⏹️ Balance check stopped");
   }
 }
 
-/**
- * Starts real-time balance checking every 10 seconds
- */
 function startRealTimeBalanceCheck() {
   // Stop any existing interval first
-  stopRealTimeBalanceCheck();
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+    balanceCheckInterval = null;
+  }
   
   // Only start if user is logged in and not admin
   if (currentUser && !isAdmin) {
@@ -93,27 +87,22 @@ function startRealTimeBalanceCheck() {
     // Then run every 10 seconds
     balanceCheckInterval = setInterval(() => {
       if (currentUser && !isAdmin) {
-        console.log("🔄 Auto-refreshing balance...");
+        console.log("🔄 Auto-refreshing balance at:", new Date().toLocaleTimeString());
         refreshUserBalance();
       } else if (!currentUser || isAdmin) {
         // Stop if user logged out or became admin
         stopRealTimeBalanceCheck();
       }
-    }, 10000); // 10 seconds interval
+    }, 10000); // 10 seconds
   }
 }
 
-/**
- * Refreshes user balance from Google Sheets
- */
 async function refreshUserBalance() {
   if (!currentUser || isAdmin) {
-    console.log("⚠️ Cannot refresh balance: No user logged in or admin mode");
     return;
   }
   
   try {
-    console.log("💰 Fetching latest balance for:", currentUser.phone);
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
     const users = await response.json();
     const updatedUser = users.find(u => u.phone === currentUser.phone);
@@ -127,29 +116,21 @@ async function refreshUserBalance() {
         localStorage.setItem("nova_user", JSON.stringify(currentUser));
         console.log(`💰 Balance updated: ₱${oldBalance.toLocaleString()} → ₱${newBalance.toLocaleString()}`);
         
-        // Show toast notification for balance change
+        // Show toast for balance change
         if (newBalance > oldBalance) {
-          showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added to your balance! New balance: ₱${newBalance.toLocaleString()}`, 3000);
+          showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added! New balance: ₱${newBalance.toLocaleString()}`, 3000);
         } else if (newBalance < oldBalance) {
           showToast(`💸 -₱${(oldBalance - newBalance).toLocaleString()} deducted. Balance: ₱${newBalance.toLocaleString()}`, 3000);
         }
         
-        // Update all UI elements that show balance
         updateAllBalanceDisplays();
-      } else {
-        console.log("💰 Balance unchanged: ₱" + newBalance.toLocaleString());
       }
-    } else {
-      console.log("⚠️ User not found in balance refresh");
     }
   } catch (error) {
     console.error("❌ Refresh balance error:", error);
   }
 }
 
-/**
- * Updates all balance displays in the UI
- */
 function updateAllBalanceDisplays() {
   // Update profile modal balance
   const profileBalance = document.getElementById("profileBalance");
@@ -157,10 +138,10 @@ function updateAllBalanceDisplays() {
     profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   }
   
-  // Update cart UI
+  // Update cart UI if function exists
   if (typeof renderCartUI === 'function') renderCartUI();
   
-  // Update user name display (first name only)
+  // Update user name display
   const userNameDisplay = document.getElementById("userNameDisplay");
   if (userNameDisplay && currentUser && !isAdmin) {
     userNameDisplay.innerText = currentUser.name.split(' ')[0];
@@ -190,7 +171,6 @@ async function handleLogin(event) {
   if (phone === ADMIN_PHONE && password === ADMIN_PASSWORD) {
     console.log("✅ Admin login successful");
     
-    // Stop any running balance check for admin
     stopRealTimeBalanceCheck();
     
     isAdmin = true;
@@ -264,7 +244,6 @@ async function handleLogin(event) {
       
       showToast(`Welcome back, ${user.name}!`, 2000);
       closeAccountModal();
-      
       if (typeof renderCartUI === 'function') renderCartUI();
       
       // START REAL-TIME BALANCE CHECK (10 seconds)
