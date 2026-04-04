@@ -12,7 +12,7 @@ function updateIconActiveState() {
   // Add active class based on current state
   if (document.getElementById('announcementModal')?.classList.contains('show')) {
     document.getElementById('announcementIcon')?.classList.add('active');
-  }
+  } 
   if (document.getElementById('rechargeModal')?.classList.contains('show')) {
     document.getElementById('rechargeIcon')?.classList.add('active');
   }
@@ -47,7 +47,7 @@ function switchPage(pageName) {
   currentPage = pageName;
   if (pageName === 'featured') loadFeaturedPage();
   else if (pageName === 'shop') renderProducts();
-  else if (pageName === 'orders') loadUserOrders();
+  else if (pageName === 'orders') loadTransactionHistory();
   else if (pageName === 'settings') renderSettingsPage();
   else if (pageName === 'admin') loadAdminData();
   
@@ -270,6 +270,7 @@ function init() {
   window.loadAdminRecharges = loadAdminRecharges;
   window.loadAdminWithdrawals = loadAdminWithdrawals;
   window.loadAdminCreditInvestments = loadAdminCreditInvestments;
+  window.loadTransactionHistory = loadTransactionHistory;
   window.showDownloadPopup = showDownloadPopup;
   window.closeDownloadPopup = closeDownloadPopup;
   window.triggerInstall = triggerInstall;
