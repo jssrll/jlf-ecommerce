@@ -59,7 +59,7 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// REAL-TIME BALANCE UPDATE FUNCTIONS - 10 SECONDS
+// REAL-TIME BALANCE UPDATE FUNCTIONS - 1 SECONDS
 // ========================================
 
 function stopRealTimeBalanceCheck() {
@@ -79,12 +79,12 @@ function startRealTimeBalanceCheck() {
   
   // Only start if user is logged in and not admin
   if (currentUser && !isAdmin) {
-    console.log("🚀 Starting real-time balance check every 10 seconds for user:", currentUser.phone);
+    console.log("🚀 Starting real-time balance check every 1 seconds for user:", currentUser.phone);
     
     // Run immediately on start
     refreshUserBalance();
     
-    // Then run every 10 seconds
+    // Then run every 1 seconds
     balanceCheckInterval = setInterval(() => {
       if (currentUser && !isAdmin) {
         console.log("🔄 Auto-refreshing balance at:", new Date().toLocaleTimeString());
@@ -93,7 +93,7 @@ function startRealTimeBalanceCheck() {
         // Stop if user logged out or became admin
         stopRealTimeBalanceCheck();
       }
-    }, 10000); // 10 seconds
+    }, 1000); // 1 seconds
   }
 }
 
