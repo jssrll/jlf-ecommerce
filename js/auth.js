@@ -2,6 +2,9 @@
 // AUTHENTICATION FUNCTIONS
 // ========================================
 
+// Global interval variable
+let balanceCheckInterval = null;
+
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -59,7 +62,115 @@ function switchTab(tabName) {
 }
 
 // ========================================
-// LOGIN FUNCTION - WITH HARCODED ADMIN CHECK
+// REAL-TIME BALANCE UPDATE FUNCTIONS - FIXED (10 seconds)
+// ========================================
+
+/**
+ * Stops the balance check interval
+ */
+function stopRealTimeBalanceCheck() {
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+    balanceCheckInterval = null;
+    console.log("✅ Balance check stopped");
+  }
+}
+
+/**
+ * Starts real-time balance checking every 10 seconds
+ */
+function startRealTimeBalanceCheck() {
+  // Stop any existing interval first
+  stopRealTimeBalanceCheck();
+  
+  // Only start if user is logged in and not admin
+  if (currentUser && !isAdmin) {
+    console.log("🚀 Starting real-time balance check every 10 seconds for user:", currentUser.phone);
+    
+    // Run immediately on start
+    refreshUserBalance();
+    
+    // Then run every 10 seconds
+    balanceCheckInterval = setInterval(() => {
+      if (currentUser && !isAdmin) {
+        console.log("🔄 Auto-refreshing balance...");
+        refreshUserBalance();
+      } else if (!currentUser || isAdmin) {
+        // Stop if user logged out or became admin
+        stopRealTimeBalanceCheck();
+      }
+    }, 10000); // 10 seconds interval
+  }
+}
+
+/**
+ * Refreshes user balance from Google Sheets
+ */
+async function refreshUserBalance() {
+  if (!currentUser || isAdmin) {
+    console.log("⚠️ Cannot refresh balance: No user logged in or admin mode");
+    return;
+  }
+  
+  try {
+    console.log("💰 Fetching latest balance for:", currentUser.phone);
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
+    const users = await response.json();
+    const updatedUser = users.find(u => u.phone === currentUser.phone);
+    
+    if (updatedUser) {
+      const oldBalance = currentUser.balance || 0;
+      const newBalance = updatedUser.balance || 0;
+      
+      if (oldBalance !== newBalance) {
+        currentUser.balance = newBalance;
+        localStorage.setItem("nova_user", JSON.stringify(currentUser));
+        console.log(`💰 Balance updated: ₱${oldBalance.toLocaleString()} → ₱${newBalance.toLocaleString()}`);
+        
+        // Show toast notification for balance change
+        if (newBalance > oldBalance) {
+          showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added to your balance! New balance: ₱${newBalance.toLocaleString()}`, 3000);
+        } else if (newBalance < oldBalance) {
+          showToast(`💸 -₱${(oldBalance - newBalance).toLocaleString()} deducted. Balance: ₱${newBalance.toLocaleString()}`, 3000);
+        }
+        
+        // Update all UI elements that show balance
+        updateAllBalanceDisplays();
+      } else {
+        console.log("💰 Balance unchanged: ₱" + newBalance.toLocaleString());
+      }
+    } else {
+      console.log("⚠️ User not found in balance refresh");
+    }
+  } catch (error) {
+    console.error("❌ Refresh balance error:", error);
+  }
+}
+
+/**
+ * Updates all balance displays in the UI
+ */
+function updateAllBalanceDisplays() {
+  // Update profile modal balance
+  const profileBalance = document.getElementById("profileBalance");
+  if (profileBalance && currentUser && !isAdmin) {
+    profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
+  }
+  
+  // Update cart UI
+  if (typeof renderCartUI === 'function') renderCartUI();
+  
+  // Update user name display (first name only)
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  if (userNameDisplay && currentUser && !isAdmin) {
+    userNameDisplay.innerText = currentUser.name.split(' ')[0];
+  }
+  
+  console.log("💳 Balance displays updated: ₱" + (currentUser?.balance || 0).toLocaleString());
+}
+
+// ========================================
+// LOGIN FUNCTION - WITH ADMIN CHECK
 // ========================================
 async function handleLogin(event) {
   event.preventDefault();
@@ -78,6 +189,9 @@ async function handleLogin(event) {
   // CHECK FOR HARCODED ADMIN FIRST
   if (phone === ADMIN_PHONE && password === ADMIN_PASSWORD) {
     console.log("✅ Admin login successful");
+    
+    // Stop any running balance check for admin
+    stopRealTimeBalanceCheck();
     
     isAdmin = true;
     currentUser = null;
@@ -150,8 +264,12 @@ async function handleLogin(event) {
       
       showToast(`Welcome back, ${user.name}!`, 2000);
       closeAccountModal();
+      
       if (typeof renderCartUI === 'function') renderCartUI();
-      if (typeof startRealTimeBalanceCheck === 'function') startRealTimeBalanceCheck();
+      
+      // START REAL-TIME BALANCE CHECK (10 seconds)
+      startRealTimeBalanceCheck();
+      
       if (typeof switchPage === 'function') switchPage('home');
     } else {
       showToast("Invalid phone number or password", 1500);
@@ -230,7 +348,10 @@ async function handleRegister(event) {
       showToast(`✅ Account created successfully!\n\nWelcome, ${name}!\nYour Account ID: ${accountId}`, 4000);
       closeAccountModal();
       document.getElementById("registerForm").reset();
-      if (typeof startRealTimeBalanceCheck === 'function') startRealTimeBalanceCheck();
+      
+      // START REAL-TIME BALANCE CHECK FOR NEW USER (10 seconds)
+      startRealTimeBalanceCheck();
+      
       if (typeof switchPage === 'function') switchPage('home');
     } else {
       showToast(result.message || "Registration failed. Phone may already exist.", 1500);
@@ -246,6 +367,9 @@ async function handleRegister(event) {
 }
 
 function logout() {
+  // Stop balance check on logout
+  stopRealTimeBalanceCheck();
+  
   currentUser = null;
   isAdmin = false;
   localStorage.removeItem("nova_user");
@@ -256,63 +380,10 @@ function logout() {
   if (typeof updateCartBadge === 'function') updateCartBadge();
   if (typeof saveCartToLocal === 'function') saveCartToLocal();
   if (typeof renderCartUI === 'function') renderCartUI();
-  if (typeof stopRealTimeBalanceCheck === 'function') stopRealTimeBalanceCheck();
   
   document.querySelectorAll('.nav-link').forEach(link => {
     link.style.display = 'block';
   });
   
   if (typeof switchPage === 'function') switchPage('home');
-}
-
-// ========================================
-// REAL-TIME BALANCE UPDATE FUNCTIONS
-// ========================================
-async function refreshUserBalance() {
-  if (!currentUser || isAdmin) return;
-  
-  try {
-    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
-    const users = await response.json();
-    const updatedUser = users.find(u => u.phone === currentUser.phone);
-    
-    if (updatedUser) {
-      const oldBalance = currentUser.balance;
-      currentUser.balance = updatedUser.balance || 0;
-      
-      if (oldBalance !== currentUser.balance) {
-        localStorage.setItem("nova_user", JSON.stringify(currentUser));
-        showToast(`💰 Balance updated: ₱${currentUser.balance.toLocaleString()}`, 2000);
-        if (typeof updateAllBalanceDisplays === 'function') updateAllBalanceDisplays();
-      }
-    }
-  } catch (error) {
-    console.error("Refresh balance error:", error);
-  }
-}
-
-function updateAllBalanceDisplays() {
-  const profileBalance = document.getElementById("profileBalance");
-  if (profileBalance && currentUser && !isAdmin) {
-    profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
-  }
-  if (typeof renderCartUI === 'function') renderCartUI();
-  const userNameDisplay = document.getElementById("userNameDisplay");
-  if (userNameDisplay && currentUser && !isAdmin) {
-    userNameDisplay.innerText = currentUser.name.split(' ')[0];
-  }
-}
-
-function startRealTimeBalanceCheck() {
-  if (balanceCheckInterval) clearInterval(balanceCheckInterval);
-  balanceCheckInterval = setInterval(() => {
-    if (currentUser && !isAdmin) refreshUserBalance();
-  }, 30000);
-}
-
-function stopRealTimeBalanceCheck() {
-  if (balanceCheckInterval) {
-    clearInterval(balanceCheckInterval);
-    balanceCheckInterval = null;
-  }
 }
