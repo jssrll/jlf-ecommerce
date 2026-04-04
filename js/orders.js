@@ -1,5 +1,5 @@
 // ========================================
-// TRANSACTION HISTORY FUNCTIONS
+// TRANSACTION HISTORY FUNCTIONS - FIXED
 // ========================================
 
 // Load all transaction histories
@@ -12,104 +12,118 @@ async function loadTransactionHistory() {
   container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading transaction history...</div>';
   
   try {
-    // Fetch all histories in parallel
-    const [orders, investments, redemptions, recharges, withdrawals] = await Promise.all([
-      fetchUserOrders(),
-      fetchUserInvestments(),
-      fetchUserRedemptions(),
-      fetchUserRecharges(),
-      fetchUserWithdrawals()
-    ]);
+    // Fetch all histories
+    const orders = await safeFetch('getUserOrders', currentUser.phone);
+    const investments = await safeFetch('getUserCreditInvestments', currentUser.phone);
+    const redemptions = await safeFetch('getUserRedemptions', currentUser.phone);
+    const recharges = await safeFetch('getUserRecharges', currentUser.phone);
+    const withdrawals = await safeFetch('getUserWithdrawals', currentUser.phone);
+    
+    console.log("Orders:", orders);
+    console.log("Investments:", investments);
+    console.log("Redemptions:", redemptions);
+    console.log("Recharges:", recharges);
+    console.log("Withdrawals:", withdrawals);
     
     // Combine all transactions
     let allTransactions = [];
     
     // Add orders
-    orders.forEach(order => {
-      allTransactions.push({
-        type: 'order',
-        typeIcon: '📦',
-        typeLabel: 'Order',
-        typeColor: '#4caf50',
-        timestamp: order.timestamp,
-        date: new Date(order.timestamp).toLocaleString(),
-        title: `Order #${order.orderId || order.timestamp.substring(0, 8)}`,
-        details: order.orderList,
-        amount: order.totalPrice,
-        status: order.status,
-        statusClass: getStatusClass(order.status)
+    if (orders && orders.length) {
+      orders.forEach(order => {
+        allTransactions.push({
+          type: 'order',
+          typeIcon: '📦',
+          typeLabel: 'Order',
+          typeColor: '#4caf50',
+          timestamp: order.timestamp,
+          date: order.timestamp ? new Date(order.timestamp).toLocaleString() : new Date().toLocaleString(),
+          title: `Order #${(order.timestamp || '').substring(0, 8)}`,
+          details: order.orderList || '',
+          amount: order.totalPrice ? `₱${parseFloat(order.totalPrice).toLocaleString()}` : '₱0',
+          status: order.status || 'Pending',
+          statusClass: getStatusClass(order.status)
+        });
       });
-    });
+    }
     
     // Add investments
-    investments.forEach(inv => {
-      allTransactions.push({
-        type: 'investment',
-        typeIcon: '📈',
-        typeLabel: 'Investment',
-        typeColor: '#9c27b0',
-        timestamp: inv.timestamp,
-        date: new Date(inv.timestamp).toLocaleString(),
-        title: inv.investmentType,
-        details: `Expected Return: ₱${parseFloat(inv.expectedReturn).toLocaleString()} | Matures: ${inv.maturityDate ? new Date(inv.maturityDate).toLocaleDateString() : 'N/A'}`,
-        amount: `-₱${parseFloat(inv.amount).toLocaleString()}`,
-        status: inv.status,
-        statusClass: getInvestmentStatusClass(inv.status, inv.maturityDate)
+    if (investments && investments.length) {
+      investments.forEach(inv => {
+        allTransactions.push({
+          type: 'investment',
+          typeIcon: '📈',
+          typeLabel: 'Investment',
+          typeColor: '#9c27b0',
+          timestamp: inv.timestamp,
+          date: inv.timestamp ? new Date(inv.timestamp).toLocaleString() : new Date().toLocaleString(),
+          title: inv.investmentType || 'Investment',
+          details: `Expected Return: ₱${parseFloat(inv.expectedReturn || 0).toLocaleString()}`,
+          amount: `-₱${parseFloat(inv.amount || 0).toLocaleString()}`,
+          status: inv.status || 'Active',
+          statusClass: 'status-approved'
+        });
       });
-    });
+    }
     
     // Add redemptions
-    redemptions.forEach(red => {
-      allTransactions.push({
-        type: 'redemption',
-        typeIcon: '🎫',
-        typeLabel: 'Code Redemption',
-        typeColor: '#ff9800',
-        timestamp: red.timestamp,
-        date: new Date(red.timestamp).toLocaleString(),
-        title: `Code: ${red.codeInput}`,
-        details: red.reward,
-        amount: `+₱${extractAmountFromReward(red.reward)}`,
-        status: 'Completed',
-        statusClass: 'status-completed'
+    if (redemptions && redemptions.length) {
+      redemptions.forEach(red => {
+        allTransactions.push({
+          type: 'redemption',
+          typeIcon: '🎫',
+          typeLabel: 'Code Redemption',
+          typeColor: '#ff9800',
+          timestamp: red.timestamp,
+          date: red.timestamp ? new Date(red.timestamp).toLocaleString() : new Date().toLocaleString(),
+          title: `Code: ${red.codeInput || 'N/A'}`,
+          details: red.reward || '',
+          amount: '+₱' + (red.reward ? red.reward.match(/\d+/) || '0' : '0'),
+          status: 'Completed',
+          statusClass: 'status-completed'
+        });
       });
-    });
+    }
     
     // Add recharges
-    recharges.forEach(rec => {
-      let amountDisplay = rec.status === 'Approved' ? `+₱${parseFloat(rec.amount).toLocaleString()}` : `₱${parseFloat(rec.amount).toLocaleString()}`;
-      allTransactions.push({
-        type: 'recharge',
-        typeIcon: '💰',
-        typeLabel: 'Recharge',
-        typeColor: '#2196f3',
-        timestamp: rec.timestamp,
-        date: new Date(rec.timestamp).toLocaleString(),
-        title: `${rec.method} Recharge`,
-        details: rec.reference ? `Reference: ${rec.reference}` : '',
-        amount: amountDisplay,
-        status: rec.status,
-        statusClass: getRechargeStatusClass(rec.status)
+    if (recharges && recharges.length) {
+      recharges.forEach(rec => {
+        let amountDisplay = rec.status === 'Approved' ? `+₱${parseFloat(rec.amount || 0).toLocaleString()}` : `₱${parseFloat(rec.amount || 0).toLocaleString()}`;
+        allTransactions.push({
+          type: 'recharge',
+          typeIcon: '💰',
+          typeLabel: 'Recharge',
+          typeColor: '#2196f3',
+          timestamp: rec.timestamp,
+          date: rec.timestamp ? new Date(rec.timestamp).toLocaleString() : new Date().toLocaleString(),
+          title: `${rec.method || 'Unknown'} Recharge`,
+          details: rec.reference ? `Reference: ${rec.reference}` : '',
+          amount: amountDisplay,
+          status: rec.status || 'Pending',
+          statusClass: rec.status === 'Approved' ? 'status-approved' : 'status-pending'
+        });
       });
-    });
+    }
     
     // Add withdrawals
-    withdrawals.forEach(wd => {
-      let amountDisplay = wd.status === 'Completed' || wd.status === 'Approved' ? `-₱${parseFloat(wd.amount).toLocaleString()}` : `₱${parseFloat(wd.amount).toLocaleString()}`;
-      allTransactions.push({
-        type: 'withdrawal',
-        typeIcon: '💸',
-        typeLabel: 'Withdrawal',
-        typeColor: '#f44336',
-        timestamp: wd.timestamp,
-        date: new Date(wd.timestamp).toLocaleString(),
-        title: `${wd.method} Withdrawal`,
-        details: wd.receiverName ? `To: ${wd.receiverName} (${wd.receiverNumber})` : '',
-        amount: amountDisplay,
-        status: wd.status,
-        statusClass: getWithdrawalStatusClass(wd.status)
+    if (withdrawals && withdrawals.length) {
+      withdrawals.forEach(wd => {
+        let amountDisplay = (wd.status === 'Completed' || wd.status === 'Approved') ? `-₱${parseFloat(wd.amount || 0).toLocaleString()}` : `₱${parseFloat(wd.amount || 0).toLocaleString()}`;
+        allTransactions.push({
+          type: 'withdrawal',
+          typeIcon: '💸',
+          typeLabel: 'Withdrawal',
+          typeColor: '#f44336',
+          timestamp: wd.timestamp,
+          date: wd.timestamp ? new Date(wd.timestamp).toLocaleString() : new Date().toLocaleString(),
+          title: `${wd.method || 'Unknown'} Withdrawal`,
+          details: wd.receiverName ? `To: ${wd.receiverName}` : '',
+          amount: amountDisplay,
+          status: wd.status || 'Pending',
+          statusClass: wd.status === 'Completed' ? 'status-completed' : 'status-pending'
+        });
       });
-    });
+    }
     
     // Sort by timestamp (newest first)
     allTransactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -152,12 +166,25 @@ async function loadTransactionHistory() {
     
   } catch (error) {
     console.error("Load transaction history error:", error);
-    container.innerHTML = `<div class="empty-orders"><i class="fas fa-exclamation-circle" style="font-size: 4rem; color: #e63946;"></i><p>Failed to load transactions. Please try again.</p><button class="btn-primary-apple" onclick="loadTransactionHistory()">Try Again</button></div>`;
+    container.innerHTML = `<div class="empty-orders"><i class="fas fa-exclamation-circle" style="font-size: 4rem; color: #e63946;"></i><p>Failed to load transactions. Error: ${error.message}</p><button class="btn-primary-apple" onclick="loadTransactionHistory()">Try Again</button></div>`;
+  }
+}
+
+// Safe fetch function with POST support
+async function safeFetch(action, phone) {
+  try {
+    let url = `${GOOGLE_SHEETS_URL}?action=${action}&phone=${encodeURIComponent(phone)}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error(`Error fetching ${action}:`, error);
+    return [];
   }
 }
 
 function renderTransactionCard(t) {
-  let amountClass = t.amount.startsWith('+') ? 'amount-positive' : (t.amount.startsWith('-') ? 'amount-negative' : '');
+  let amountClass = t.amount.toString().startsWith('+') ? 'amount-positive' : (t.amount.toString().startsWith('-') ? 'amount-negative' : '');
   
   return `
     <div class="transaction-card" data-type="${t.type}">
@@ -195,45 +222,6 @@ function filterTransactions(type) {
   }
 }
 
-// Fetch functions
-async function fetchUserOrders() {
-  const formData = new URLSearchParams();
-  formData.append("action", "getUserOrders");
-  formData.append("phone", currentUser.phone);
-  const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-  return await response.json();
-}
-
-async function fetchUserInvestments() {
-  const formData = new URLSearchParams();
-  formData.append("action", "getUserCreditInvestments");
-  formData.append("phone", currentUser.phone);
-  const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-  return await response.json();
-}
-
-async function fetchUserRedemptions() {
-  const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUserRedemptions&phone=${currentUser.phone}`);
-  return await response.json();
-}
-
-async function fetchUserRecharges() {
-  const formData = new URLSearchParams();
-  formData.append("action", "getUserRecharges");
-  formData.append("phone", currentUser.phone);
-  const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-  return await response.json();
-}
-
-async function fetchUserWithdrawals() {
-  const formData = new URLSearchParams();
-  formData.append("action", "getUserWithdrawals");
-  formData.append("phone", currentUser.phone);
-  const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-  return await response.json();
-}
-
-// Helper functions
 function getStatusClass(status) {
   const s = (status || "Pending").toLowerCase();
   if (s === 'pending') return 'status-pending';
@@ -241,32 +229,4 @@ function getStatusClass(status) {
   if (s === 'completed') return 'status-completed';
   if (s === 'cancelled') return 'status-cancelled';
   return 'status-pending';
-}
-
-function getInvestmentStatusClass(status, maturityDate) {
-  if (status === 'Completed' || status === 'Matured') return 'status-completed';
-  if (maturityDate && new Date(maturityDate) <= new Date()) return 'status-completed';
-  return 'status-approved';
-}
-
-function getRechargeStatusClass(status) {
-  const s = (status || "Pending").toLowerCase();
-  if (s === 'pending') return 'status-pending';
-  if (s === 'approved') return 'status-approved';
-  if (s === 'cancelled') return 'status-cancelled';
-  return 'status-pending';
-}
-
-function getWithdrawalStatusClass(status) {
-  const s = (status || "Pending").toLowerCase();
-  if (s === 'pending') return 'status-pending';
-  if (s === 'processing') return 'status-processing';
-  if (s === 'completed') return 'status-completed';
-  if (s === 'rejected') return 'status-cancelled';
-  return 'status-pending';
-}
-
-function extractAmountFromReward(reward) {
-  const match = reward.match(/₱(\d+)/);
-  return match ? match[1] : '0';
 }
