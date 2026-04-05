@@ -86,7 +86,7 @@ async function loadAdminRedemptions() {
     redemptions.forEach(redemption => {
       html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
-    html += '</tbody>}</table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions. <button class="btn-secondary-apple" onclick="loadAdminRedemptions()">Try Again</button></div>';
@@ -134,7 +134,7 @@ async function loadPromoCodes() {
       `;
     });
     
-    html += '</tbody>}</table>';
+    html += '</tbody></table>';
     container.innerHTML = html;
     
   } catch (error) {
