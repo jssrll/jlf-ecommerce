@@ -33,44 +33,44 @@
 
 <div class="header">
   <div class="container">
-<div class="nav">
-  <!-- Logo -->
-  <div class="logo">JLF</div>
-  
-  <!-- Navigation Links (Home, Shop, etc.) -->
-  <div class="nav-links" id="navLinks">
-    <a href="#" data-page="home" class="nav-link active">Home</a>
-    <a href="#" data-page="shop" class="nav-link">Shop</a>
-    <a href="#" data-page="featured" class="nav-link">Featured</a>
-    <a href="#" data-page="orders" class="nav-link">Transactions</a>
-    <a href="#" data-page="help" class="nav-link">Help</a>
-  </div>
-  
-  <!-- All Icons in One Row -->
-  <div class="nav-actions">
-    <div class="settings-icon" id="settingsIcon">
-      <i class="fas fa-cog"></i>
+    <div class="nav">
+      <!-- Logo -->
+      <div class="logo">JLF</div>
+      
+      <!-- Navigation Links (Home, Shop, etc.) -->
+      <div class="nav-links" id="navLinks">
+        <a href="#" data-page="home" class="nav-link active">Home</a>
+        <a href="#" data-page="shop" class="nav-link">Shop</a>
+        <a href="#" data-page="featured" class="nav-link">Featured</a>
+        <a href="#" data-page="orders" class="nav-link">Transactions</a>
+        <a href="#" data-page="help" class="nav-link">Help</a>
+      </div>
+      
+      <!-- All Icons in One Row -->
+      <div class="nav-actions">
+        <div class="settings-icon" id="settingsIcon">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="announcement-icon" id="announcementIcon">
+          <i class="fas fa-bell"></i>
+          <span class="announcement-badge" id="announcementBadge" style="display: none;">0</span>
+        </div>
+        <div class="recharge-icon" id="rechargeIcon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="withdraw-icon" id="withdrawIcon">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <div class="cart-icon" id="cartIconBtn">
+          <i class="fas fa-bag-shopping"></i>
+          <span class="cart-count" id="cartCountBadge">0</span>
+        </div>
+        <div class="account-icon" id="accountIcon">
+          <i class="fas fa-user-circle"></i>
+          <span class="user-name" id="userNameDisplay"></span>
+        </div>
+      </div>
     </div>
-    <div class="announcement-icon" id="announcementIcon">
-      <i class="fas fa-bell"></i>
-      <span class="announcement-badge" id="announcementBadge" style="display: none;">0</span>
-    </div>
-    <div class="recharge-icon" id="rechargeIcon">
-      <i class="fas fa-wallet"></i>
-    </div>
-    <div class="withdraw-icon" id="withdrawIcon">
-      <i class="fas fa-money-bill-wave"></i>
-    </div>
-    <div class="cart-icon" id="cartIconBtn">
-      <i class="fas fa-bag-shopping"></i>
-      <span class="cart-count" id="cartCountBadge">0</span>
-    </div>
-    <div class="account-icon" id="accountIcon">
-      <i class="fas fa-user-circle"></i>
-      <span class="user-name" id="userNameDisplay"></span>
-    </div>
-  </div>
-</div>
   </div>
 </div>
 
@@ -243,20 +243,20 @@
     </div>
   </div>
 
-<!-- ORDERS PAGE - TRANSACTION HISTORY -->
-<div id="ordersPage" class="page">
-  <div class="page-hero">
-    <h1><i class="fas fa-history"></i> Transaction History</h1>
-    <p>View all your transactions in one place - Orders, Investments, Redemptions, Recharges & Withdrawals</p>
-  </div>
-  <div id="ordersContainer" class="orders-container">
-    <div class="empty-orders">
-      <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
-      <p>No transactions yet. Start shopping!</p>
-      <button class="btn-primary-apple" onclick="switchPage('shop')" style="margin-top: 20px;">Shop Now</button>
+  <!-- ORDERS PAGE - TRANSACTION HISTORY -->
+  <div id="ordersPage" class="page">
+    <div class="page-hero">
+      <h1><i class="fas fa-history"></i> Transaction History</h1>
+      <p>View all your transactions in one place - Orders, Investments, Redemptions, Recharges & Withdrawals</p>
+    </div>
+    <div id="ordersContainer" class="orders-container">
+      <div class="empty-orders">
+        <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
+        <p>No transactions yet. Start shopping!</p>
+        <button class="btn-primary-apple" onclick="switchPage('shop')" style="margin-top: 20px;">Shop Now</button>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- SETTINGS PAGE -->
   <div id="settingsPage" class="page">
@@ -280,6 +280,7 @@
       <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">📷 QR Scanner</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('announcements')">📢 Announcements</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('bugreports')">🐛 Bug Reports</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('promocodes')">🎫 Promo Codes</button>
     </div>
     <div id="adminOrdersTab" class="admin-tab active">
       <div class="admin-actions">
@@ -453,6 +454,53 @@
         
         <div id="adminBugReportsContainer" class="admin-bugreports-container">
           <div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bug reports...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Promo Codes Tab - ONE-TIME USE CODES -->
+    <div id="adminPromocodesTab" class="admin-tab">
+      <div class="qr-scanner-container">
+        <h2><i class="fas fa-ticket-alt"></i> One-Time Use Promo Codes</h2>
+        <p class="scanner-subtitle">Create and manage unique promo codes that can only be used ONCE</p>
+        
+        <!-- Add New Code Form -->
+        <div class="scanner-section">
+          <h3><i class="fas fa-plus-circle"></i> Create New Promo Code</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Code (e.g., WELCOME50)</label>
+              <input type="text" id="newPromoCode" placeholder="ENTER CODE" style="text-transform: uppercase;">
+            </div>
+            <div class="form-group">
+              <label>Reward Amount (₱)</label>
+              <input type="number" id="newPromoReward" placeholder="Amount in ₱" min="1">
+            </div>
+            <div class="form-group">
+              <label>Expiry Date (optional)</label>
+              <input type="date" id="newPromoExpiry">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" id="newPromoDesc" placeholder="e.g., Welcome Bonus">
+            </div>
+          </div>
+          <button class="btn-primary-apple full-width" onclick="createPromoCode()">
+            <i class="fas fa-plus"></i> Create Promo Code (One-Time Use)
+          </button>
+        </div>
+        
+        <!-- List of All Codes -->
+        <div class="scanner-section">
+          <h3><i class="fas fa-list"></i> All Promo Codes</h3>
+          <div class="admin-actions">
+            <button class="btn-secondary-apple" onclick="loadPromoCodes()">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+          </div>
+          <div id="promoCodesContainer" class="promo-codes-list">
+            <div class="loading-state">Loading promo codes...</div>
+          </div>
         </div>
       </div>
     </div>

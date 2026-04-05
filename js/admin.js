@@ -53,6 +53,9 @@ function switchAdminTab(tabName) {
     } else if (tabName === 'announcements') {
         console.log("📢 Loading Announcements...");
         loadRecentAnnouncements();
+    } else if (tabName === 'promocodes') {
+        console.log("🎫 Loading Promo Codes...");
+        loadPromoCodes();
     }
 }
 
@@ -83,7 +86,7 @@ async function loadAdminRedemptions() {
     redemptions.forEach(redemption => {
       html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
     });
-    html += '</tbody></table>';
+    html += '</tbody>}</table>';
     container.innerHTML = html;
   } catch (error) {
     container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions. <button class="btn-secondary-apple" onclick="loadAdminRedemptions()">Try Again</button></div>';
@@ -91,3 +94,118 @@ async function loadAdminRedemptions() {
 }
 
 function refreshAdminRedemptions() { if(isAdmin) loadAdminRedemptions(); }
+
+// ========================================
+// PROMO CODES ADMIN FUNCTIONS
+// ========================================
+
+async function loadPromoCodes() {
+  if (!isAdmin) return;
+  
+  const container = document.getElementById("promoCodesContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllPromoCodes`);
+    const codes = await response.json();
+    
+    if (!codes || codes.length === 0) {
+      container.innerHTML = '<div class="empty-state">No promo codes found. Create your first one!</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead><tr><th>Code</th><th>Reward</th><th>Status</th><th>Redeemed By</th><th>Expiry</th><th>Action</th></tr></thead><tbody>';
+    
+    codes.forEach(code => {
+      const statusClass = code.status === 'used' ? 'status-completed' : 'status-pending';
+      html += `
+        <tr>
+          <td><code>${code.code}</code></td>
+          <td>₱${code.reward}</td>
+          <td><span class="status-badge ${statusClass}">${code.status}</span></td>
+          <td>${code.redeemedBy || '-'}<br><small>${code.redeemedByPhone || ''}</small></td>
+          <td>${code.expiryDate || 'No expiry'}</td>
+          <td>
+            ${code.status === 'unused' ? `<button class="btn-secondary-apple" onclick="deletePromoCode('${code.code}')" style="background:#dc2626;color:white;">Delete</button>` : '-'}
+          </td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody>}</table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load promo codes error:", error);
+    container.innerHTML = '<div class="empty-state">Failed to load codes</div>';
+  }
+}
+
+async function createPromoCode() {
+  const code = document.getElementById("newPromoCode").value.trim().toUpperCase();
+  const reward = document.getElementById("newPromoReward").value;
+  const expiryDate = document.getElementById("newPromoExpiry").value;
+  const description = document.getElementById("newPromoDesc").value;
+  
+  if (!code || !reward) {
+    showToast("Please enter code and reward amount", 1500);
+    return;
+  }
+  
+  const btn = event.target;
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addPromoCode");
+    formData.append("code", code);
+    formData.append("reward", reward);
+    formData.append("expiryDate", expiryDate);
+    formData.append("description", description);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`✅ Promo code "${code}" created! One-time use only.`, 2000);
+      document.getElementById("newPromoCode").value = "";
+      document.getElementById("newPromoReward").value = "";
+      document.getElementById("newPromoExpiry").value = "";
+      document.getElementById("newPromoDesc").value = "";
+      loadPromoCodes();
+    } else {
+      showToast(result.message, 1500);
+    }
+  } catch (error) {
+    showToast("Failed to create code", 1500);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+async function deletePromoCode(code) {
+  if (!confirm(`Delete promo code "${code}"? This cannot be undone.`)) return;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "deletePromoCode");
+    formData.append("code", code);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast("Promo code deleted", 1500);
+      loadPromoCodes();
+    } else {
+      showToast(result.message, 1500);
+    }
+  } catch (error) {
+    showToast("Failed to delete", 1500);
+  }
+}

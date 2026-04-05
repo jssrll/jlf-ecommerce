@@ -92,8 +92,11 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
-// CODE REDEMPTION
+// ONE-TIME USE CODE REDEMPTION
 // ========================================
+
+let isRedeeming = false;
+
 async function redeemCode() {
   if (!currentUser || isAdmin) {
     showToast("Please login to redeem codes", 1500);
@@ -101,8 +104,13 @@ async function redeemCode() {
     return;
   }
   
+  if (isRedeeming) {
+    showToast("Please wait, processing your redemption...", 1500);
+    return;
+  }
+  
   const codeInput = document.getElementById("redemptionCode");
-  const code = codeInput.value.trim();
+  const code = codeInput.value.trim().toUpperCase();
   const messageDiv = document.getElementById("codeMessage");
   
   if (!code) {
@@ -110,55 +118,44 @@ async function redeemCode() {
     return;
   }
   
-  if (promoCodeRewards[code]) {
-    const reward = promoCodeRewards[code];
-    const redeemBtn = document.querySelector('#featuredPage .btn-primary-apple');
-    const originalBtnText = redeemBtn.innerHTML;
+  isRedeeming = true;
+  const redeemBtn = document.querySelector('#featuredPage .btn-primary-apple');
+  const originalBtnText = redeemBtn.innerHTML;
+  redeemBtn.disabled = true;
+  redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redeeming...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "redeemOneTimeCode");
+    formData.append("code", code);
+    formData.append("accountId", currentUser.id);
+    formData.append("phone", currentUser.phone);
+    formData.append("fullName", currentUser.name);
     
-    redeemBtn.disabled = true;
-    redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redeeming...';
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
     
-    try {
-      const formData = new URLSearchParams();
-      formData.append("action", "updateBalance");
-      formData.append("phone", currentUser.phone);
-      formData.append("amount", reward.value);
-      formData.append("operation", "add");
+    if (result.success) {
+      currentUser.balance = result.newBalance;
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
       
-      const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-      const result = await response.json();
+      messageDiv.innerHTML = `<div class="code-message success">✓ ${result.message}</div>`;
+      codeInput.value = "";
+      setTimeout(() => { messageDiv.innerHTML = ""; }, 4000);
       
-      if (result.success) {
-        currentUser.balance = result.newBalance;
-        localStorage.setItem("nova_user", JSON.stringify(currentUser));
-        
-        const logData = new URLSearchParams();
-        logData.append("action", "addRedemption");
-        logData.append("timestamp", new Date().toISOString());
-        logData.append("accountId", currentUser.id);
-        logData.append("fullName", currentUser.name);
-        logData.append("phone", currentUser.phone);
-        logData.append("codeInput", code);
-        logData.append("reward", `${reward.value} peso credit - ${reward.message}`);
-        
-        fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData }).catch(err => console.error("Logging error:", err));
-        
-        messageDiv.innerHTML = `<div class="code-message success">✓ ${reward.message} Your credit balance: ₱${currentUser.balance}</div>`;
-        codeInput.value = "";
-        setTimeout(() => { messageDiv.innerHTML = ""; }, 3000);
-        updateAllBalanceDisplays();
-      } else {
-        showToast(result.message || "Redemption failed", 1500);
-      }
-    } catch (error) {
-      console.error("Redemption error:", error);
-      showToast("Redemption failed. Please try again.", 1500);
-    } finally {
-      redeemBtn.disabled = false;
-      redeemBtn.innerHTML = originalBtnText;
+      updateAllBalanceDisplays();
+      showToast(result.message, 3000);
+    } else {
+      messageDiv.innerHTML = `<div class="code-message error">✗ ${result.message}</div>`;
+      setTimeout(() => { messageDiv.innerHTML = ""; }, 3000);
+      showToast(result.message, 2500);
     }
-  } else {
-    messageDiv.innerHTML = `<div class="code-message error">✗ Invalid code. Please try again.</div>`;
-    setTimeout(() => { messageDiv.innerHTML = ""; }, 2000);
+  } catch (error) {
+    console.error("Redemption error:", error);
+    showToast("Redemption failed. Please try again.", 1500);
+  } finally {
+    isRedeeming = false;
+    redeemBtn.disabled = false;
+    redeemBtn.innerHTML = originalBtnText;
   }
 }
