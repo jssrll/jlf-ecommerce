@@ -80,7 +80,7 @@ function renderFeaturedProducts() {
   if (isAdmin) return;
   const featuredGrid = document.getElementById("featuredGrid");
   if (!featuredGrid) return;
-  const featured = products.filter(p => p.name === "Maribel Kwitis" || p.name === "TS Thunder Sawa 500 Rounds" || p.name === "TS Special DK Sawa 500 Rounds");
+  const featured = products.filter(p => p.name === "Roman Candle" || p.name === "Sky Rocket" || p.name === "Sparklers Pack");
   featuredGrid.innerHTML = featured.map(prod => `<div class="product-card-apple">
       <div class="product-img-apple" style="font-size: 4rem; background: #f5f5f7;">${prod.image}</div>
       <div class="product-info-apple">
@@ -92,9 +92,8 @@ function renderFeaturedProducts() {
 }
 
 // ========================================
-// CODE REDEMPTION - GLOBAL ONE-TIME USE
+// CODE REDEMPTION
 // ========================================
-
 async function redeemCode() {
   if (!currentUser || isAdmin) {
     showToast("Please login to redeem codes", 1500);
@@ -111,35 +110,15 @@ async function redeemCode() {
     return;
   }
   
-  console.log("🔍 Checking code:", code);
-  
-  // Check if code exists in promoCodeRewards
   if (promoCodeRewards[code]) {
     const reward = promoCodeRewards[code];
     const redeemBtn = document.querySelector('#featuredPage .btn-primary-apple');
     const originalBtnText = redeemBtn.innerHTML;
     
     redeemBtn.disabled = true;
-    redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validating code...';
+    redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redeeming...';
     
     try {
-      // FIRST: Check if code has been used by ANYONE globally
-      const checkResponse = await fetch(`${GOOGLE_SHEETS_URL}?action=checkGlobalCodeRedemption&code=${encodeURIComponent(code)}`);
-      const checkResult = await checkResponse.json();
-      
-      console.log("Check result:", checkResult);
-      
-      if (!checkResult.canRedeem) {
-        messageDiv.innerHTML = `<div class="code-message error">${checkResult.message || "This code has already been used!"}</div>`;
-        redeemBtn.disabled = false;
-        redeemBtn.innerHTML = originalBtnText;
-        setTimeout(() => { messageDiv.innerHTML = ""; }, 3000);
-        return;
-      }
-      
-      // SECOND: Add credit to user balance
-      redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redeeming...';
-      
       const formData = new URLSearchParams();
       formData.append("action", "updateBalance");
       formData.append("phone", currentUser.phone);
@@ -149,13 +128,10 @@ async function redeemCode() {
       const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
       const result = await response.json();
       
-      console.log("Update balance result:", result);
-      
       if (result.success) {
         currentUser.balance = result.newBalance;
         localStorage.setItem("nova_user", JSON.stringify(currentUser));
         
-        // THIRD: Record redemption in sheet
         const logData = new URLSearchParams();
         logData.append("action", "addRedemption");
         logData.append("timestamp", new Date().toISOString());
@@ -165,13 +141,12 @@ async function redeemCode() {
         logData.append("codeInput", code);
         logData.append("reward", `${reward.value} peso credit - ${reward.message}`);
         
-        await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData });
+        fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData }).catch(err => console.error("Logging error:", err));
         
         messageDiv.innerHTML = `<div class="code-message success">✓ ${reward.message} Your credit balance: ₱${currentUser.balance}</div>`;
         codeInput.value = "";
         setTimeout(() => { messageDiv.innerHTML = ""; }, 3000);
         updateAllBalanceDisplays();
-        showToast(`🎉 ${reward.message} New balance: ₱${currentUser.balance}`, 3000);
       } else {
         showToast(result.message || "Redemption failed", 1500);
       }
@@ -183,7 +158,6 @@ async function redeemCode() {
       redeemBtn.innerHTML = originalBtnText;
     }
   } else {
-    console.log("❌ Invalid code entered:", code);
     messageDiv.innerHTML = `<div class="code-message error">✗ Invalid code. Please try again.</div>`;
     setTimeout(() => { messageDiv.innerHTML = ""; }, 2000);
   }
