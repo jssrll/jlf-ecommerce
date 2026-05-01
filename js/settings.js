@@ -69,6 +69,21 @@ function changeFontSize(size) {
     showToast(`Font size changed to ${size}`, 1500);
 }
 
+// Add this at the top of settings.js
+function toggleDarkMode() {
+    const settings = loadSettings();
+    settings.darkMode = !settings.darkMode;
+    saveSettings(settings);
+    
+    if (settings.darkMode) {
+        document.body.classList.add('dark');
+        showToast("Dark mode enabled", 1500);
+    } else {
+        document.body.classList.remove('dark');
+        showToast("Dark mode disabled", 1500);
+    }
+}
+
 // Toggle Compact Mode
 function toggleCompactMode() {
     const settings = loadSettings();
