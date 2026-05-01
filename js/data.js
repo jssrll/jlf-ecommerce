@@ -33,37 +33,3 @@ const products = [
   { id: 22, name: "el", category: "Others", price: 79, image: "🌊", description: "1 pcs per order" },
   { id: 23, name: "al", category: "Others", price: 159, image: "🌊", description: "1 pcs per order" }
 ];
-
-// ========================================
-// PROMO CODES DATABASE
-// ========================================
-const promoCodeRewards = {
-  // #1 Peso Codes
-  "L5@P6^Z2": { type: "peso", value: 1, message: "You won ₱1 credit!" },
-  "V8!H9%T1": { type: "peso", value: 1, message: "You won ₱1 credit!" },
-  "kU3#C1$S7": { type: "peso", value: 1, message: "You won ₱1 credit!" },
-  "G2&Q4!Y6": { type: "peso", value: 1, message: "You won ₱1 credit!" },
-  
-  // #2 Peso Codes
-  "J1!R6%T8": { type: "peso", value: 2, message: "You won ₱2 credit!" },
-  "Z8#D2$N5": { type: "peso", value: 2, message: "You won ₱2 credit!" },
-  
-  // #5 Peso Codes
-  "U8@M7^P6": { type: "peso", value: 5, message: "You won ₱5 credit!" },
-  "C7!Z4%N1": { type: "peso", value: 5, message: "You won ₱5 credit!" },
-  
-  // #10 Peso Codes
-  "A4@K2^T3": { type: "peso", value: 10, message: "You won ₱10 credit!" },
-  "M3!L6%H7": { type: "peso", value: 10, message: "You won ₱10 credit!" },
-  
-  // #50 Peso Codes
-  "B7!mQ3$pR": { type: "peso", value: 50, message: "You won ₱50 credit!" },
-  
-  // #100 Peso Codes
-  "sR5$D8!oG": { type: "peso", value: 100, message: "You won ₱100 credit!" },
-  
-  // Fireworks Special Codes
-  "FIREWORK2024": { type: "peso", value: 50, message: "🎆 You won ₱50 fireworks credit! 🎇" },
-  "NYE2025": { type: "peso", value: 100, message: "🎉 New Year Special! ₱100 credit added! 🎉" },
-  "SPARKLE": { type: "peso", value: 20, message: "✨ Sparkle credit added! ₱20 ✨" }
-};
