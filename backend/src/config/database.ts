@@ -88,7 +88,6 @@ export async function appendToSheet(
   row: (string | number)[]
 ): Promise<boolean> {
   try {
-    // Check if sheet exists, create if not
     const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId: SPREADSHEET_ID,
     });

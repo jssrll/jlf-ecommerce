@@ -36,7 +36,7 @@ export async function login(req: Request, res: Response) {
     }
     
     const token = jwt.sign(
-      { phone: result.user?.phone, role: 'user' },
+      { phone: result.user?.phone, accountId: result.user?.accountId, name: result.user?.name, role: 'user' },
       process.env.JWT_SECRET!,
       { expiresIn: '24h' }
     );
@@ -69,7 +69,7 @@ export async function register(req: Request, res: Response) {
     }
     
     const token = jwt.sign(
-      { phone: data.phone, role: 'user' },
+      { phone: data.phone, accountId: data.accountId, name: data.name, role: 'user' },
       process.env.JWT_SECRET!,
       { expiresIn: '24h' }
     );

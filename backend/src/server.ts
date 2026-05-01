@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import authRoutes from './routes/auth.routes.js';
 import shopRoutes from './routes/shop.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import publicRoutes from './routes/public.routes.js';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ app.use(cors({
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
+  windowMs: 60 * 1000,
   max: 100,
   message: { success: false, message: 'Too many requests' },
 });
@@ -30,6 +31,7 @@ app.use('/api', limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/shop', shopRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/public', publicRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

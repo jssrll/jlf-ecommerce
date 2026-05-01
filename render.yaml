@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: jlf-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: JWT_SECRET
+        value: jlf_super_secret_key_change_in_production_2024
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: https://jlf-frontend.onrender.com
+      - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
+        sync: false
+      - key: GOOGLE_PRIVATE_KEY
+        sync: false
+      - key: SPREADSHEET_ID
+        sync: false
+
+  - type: static
+    name: jlf-frontend
+    rootDir: .
+    buildCommand: null
+    staticPublishPath: .
+    envVars:
+      - key: BACKEND_URL
+        value: https://jlf-backend.onrender.com
