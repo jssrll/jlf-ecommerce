@@ -3,5 +3,8 @@
     "api/sheets.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "installCommand": ""
 }
