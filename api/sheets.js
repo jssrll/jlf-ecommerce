@@ -1,12 +1,13 @@
 export default async function handler(req, res) {
   const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL;
+  const ADMIN_PHONE = process.env.ADMIN_PHONE || "101007101007";
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "101007101007";
 
   try {
     let url;
     let fetchOptions = {};
 
     if (req.method === 'GET') {
-      // Handle GET requests (query params)
       const { action, ...params } = req.query;
       url = new URL(GOOGLE_SHEETS_URL);
       url.searchParams.set('action', action);
@@ -14,11 +15,9 @@ export default async function handler(req, res) {
         url.searchParams.set(key, value);
       });
     } else if (req.method === 'POST') {
-      // Handle POST requests (form body)
       const body = req.body;
       const formData = new URLSearchParams();
       
-      // Add all body fields as form data
       Object.entries(body).forEach(([key, value]) => {
         formData.append(key, value);
       });
@@ -31,8 +30,6 @@ export default async function handler(req, res) {
         },
         body: formData.toString(),
       };
-    } else {
-      return res.status(405).json({ success: false, error: 'Method not allowed' });
     }
 
     const response = await fetch(url.toString(), fetchOptions);
