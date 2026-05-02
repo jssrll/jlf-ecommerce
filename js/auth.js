@@ -1,7 +1,3 @@
-// ========================================
-// AUTHENTICATION FUNCTIONS
-// ========================================
-
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -58,49 +54,33 @@ function switchTab(tabName) {
   }
 }
 
-// ========================================
-// REAL-TIME BALANCE UPDATE FUNCTIONS - 1 SECONDS
-// ========================================
-
 function stopRealTimeBalanceCheck() {
   if (balanceCheckInterval) {
     clearInterval(balanceCheckInterval);
     balanceCheckInterval = null;
-    console.log("⏹️ Balance check stopped");
   }
 }
 
 function startRealTimeBalanceCheck() {
-  // Stop any existing interval first
   if (balanceCheckInterval) {
     clearInterval(balanceCheckInterval);
     balanceCheckInterval = null;
   }
   
-  // Only start if user is logged in and not admin
   if (currentUser && !isAdmin) {
-    console.log("🚀 Starting real-time balance check every 1 seconds for user:", currentUser.phone);
-    
-    // Run immediately on start
     refreshUserBalance();
-    
-    // Then run every 1 seconds
     balanceCheckInterval = setInterval(() => {
       if (currentUser && !isAdmin) {
-        console.log("🔄 Auto-refreshing balance at:", new Date().toLocaleTimeString());
         refreshUserBalance();
       } else if (!currentUser || isAdmin) {
-        // Stop if user logged out or became admin
         stopRealTimeBalanceCheck();
       }
-    }, 1000); // 1 seconds
+    }, 1000);
   }
 }
 
 async function refreshUserBalance() {
-  if (!currentUser || isAdmin) {
-    return;
-  }
+  if (!currentUser || isAdmin) return;
   
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
@@ -114,9 +94,7 @@ async function refreshUserBalance() {
       if (oldBalance !== newBalance) {
         currentUser.balance = newBalance;
         localStorage.setItem("nova_user", JSON.stringify(currentUser));
-        console.log(`💰 Balance updated: ₱${oldBalance.toLocaleString()} → ₱${newBalance.toLocaleString()}`);
         
-        // Show toast for balance change
         if (newBalance > oldBalance) {
           showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added! New balance: ₱${newBalance.toLocaleString()}`, 3000);
         } else if (newBalance < oldBalance) {
@@ -126,33 +104,23 @@ async function refreshUserBalance() {
         updateAllBalanceDisplays();
       }
     }
-  } catch (error) {
-    console.error("❌ Refresh balance error:", error);
-  }
+  } catch (error) {}
 }
 
 function updateAllBalanceDisplays() {
-  // Update profile modal balance
   const profileBalance = document.getElementById("profileBalance");
   if (profileBalance && currentUser && !isAdmin) {
     profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
   }
   
-  // Update cart UI if function exists
   if (typeof renderCartUI === 'function') renderCartUI();
   
-  // Update user name display
   const userNameDisplay = document.getElementById("userNameDisplay");
   if (userNameDisplay && currentUser && !isAdmin) {
     userNameDisplay.innerText = currentUser.name.split(' ')[0];
   }
-  
-  console.log("💳 Balance displays updated: ₱" + (currentUser?.balance || 0).toLocaleString());
 }
 
-// ========================================
-// LOGIN FUNCTION - WITH ADMIN CHECK
-// ========================================
 async function handleLogin(event) {
   event.preventDefault();
   let phone = document.getElementById("loginPhone").value.trim();
@@ -167,16 +135,12 @@ async function handleLogin(event) {
   loginBtn.disabled = true;
   loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
   
-  // CHECK FOR HARCODED ADMIN FIRST
+  // Admin login
   if (phone === ADMIN_PHONE && password === ADMIN_PASSWORD) {
-    console.log("✅ Admin login successful");
-    
     stopRealTimeBalanceCheck();
-    
     isAdmin = true;
     currentUser = null;
     localStorage.removeItem("nova_user");
-    
     cart = [];
     if (typeof updateCartBadge === 'function') updateCartBadge();
     if (typeof saveCartToLocal === 'function') saveCartToLocal();
@@ -198,7 +162,7 @@ async function handleLogin(event) {
     return;
   }
   
-  // NORMAL USER LOGIN - Check Google Sheets
+  // User login via API
   try {
     const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
     const users = await response.json();
@@ -224,16 +188,19 @@ async function handleLogin(event) {
       
       isAdmin = false;
       
-      const logData = new URLSearchParams();
-      logData.append("action", "addLoginLog");
-      logData.append("timestamp", new Date().toISOString());
-      logData.append("accountId", currentUser.id);
-      logData.append("fullName", currentUser.name);
-      logData.append("phone", currentUser.phone);
-      logData.append("password", currentUser.password);
-      logData.append("status", "Success");
-      
-      fetch(GOOGLE_SHEETS_URL, { method: "POST", body: logData }).catch(err => console.error("Login logging error:", err));
+      fetch(GOOGLE_SHEETS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          action: "addLoginLog",
+          timestamp: new Date().toISOString(),
+          accountId: currentUser.id,
+          fullName: currentUser.name,
+          phone: currentUser.phone,
+          password: currentUser.password,
+          status: "Success"
+        })
+      }).catch(() => {});
       
       localStorage.setItem("nova_user", JSON.stringify(currentUser));
       document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
@@ -246,7 +213,6 @@ async function handleLogin(event) {
       closeAccountModal();
       if (typeof renderCartUI === 'function') renderCartUI();
       
-      // START REAL-TIME BALANCE CHECK (10 seconds)
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -254,7 +220,6 @@ async function handleLogin(event) {
       showToast("Invalid phone number or password", 1500);
     }
   } catch (error) {
-    console.error("Login error:", error);
     showToast("Login failed. Please try again.", 1500);
   } finally {
     loginBtn.disabled = false;
@@ -262,9 +227,6 @@ async function handleLogin(event) {
   }
 }
 
-// ========================================
-// REGISTER FUNCTION
-// ========================================
 async function handleRegister(event) {
   event.preventDefault();
   const name = document.getElementById("regFullName").value.trim();
@@ -297,25 +259,24 @@ async function handleRegister(event) {
   loadingIndicator.style.display = "block";
   
   try {
-    const formData = new URLSearchParams();
-    formData.append("action", "addUser");
-    formData.append("name", name);
-    formData.append("phone", phone);
-    formData.append("password", password);
-    formData.append("accountId", accountId);
-    formData.append("timestamp", new Date().toISOString());
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const response = await fetch(GOOGLE_SHEETS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        action: "addUser",
+        name: name,
+        phone: phone,
+        password: password,
+        accountId: accountId,
+        timestamp: new Date().toISOString()
+      })
+    });
     const result = await response.json();
     
     if (result.success) {
       currentUser = {
-        id: accountId,
-        name: name,
-        phone: phone,
-        password: password,
-        balance: 0,
-        joined: joinedDate
+        id: accountId, name: name, phone: phone,
+        password: password, balance: 0, joined: joinedDate
       };
       
       isAdmin = false;
@@ -328,7 +289,6 @@ async function handleRegister(event) {
       closeAccountModal();
       document.getElementById("registerForm").reset();
       
-      // START REAL-TIME BALANCE CHECK FOR NEW USER (10 seconds)
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -336,7 +296,6 @@ async function handleRegister(event) {
       showToast(result.message || "Registration failed. Phone may already exist.", 1500);
     }
   } catch (error) {
-    console.error("Registration error:", error);
     showToast("Registration failed. Please try again.", 1500);
   } finally {
     registerBtn.disabled = false;
@@ -346,9 +305,7 @@ async function handleRegister(event) {
 }
 
 function logout() {
-  // Stop balance check on logout
   stopRealTimeBalanceCheck();
-  
   currentUser = null;
   isAdmin = false;
   localStorage.removeItem("nova_user");
