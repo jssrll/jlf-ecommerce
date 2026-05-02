@@ -1,38 +1,35 @@
 export default async function handler(req, res) {
   const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL;
-  const ADMIN_PHONE = process.env.ADMIN_PHONE || "101007101007";
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "101007101007";
 
   try {
-    let url;
+    let fetchUrl;
     let fetchOptions = {};
 
     if (req.method === 'GET') {
       const { action, ...params } = req.query;
-      url = new URL(GOOGLE_SHEETS_URL);
-      url.searchParams.set('action', action);
+      fetchUrl = new URL(GOOGLE_SHEETS_URL);
+      fetchUrl.searchParams.set('action', action);
       Object.entries(params).forEach(([key, value]) => {
-        url.searchParams.set(key, value);
+        fetchUrl.searchParams.set(key, value);
       });
     } else if (req.method === 'POST') {
       const body = req.body;
       const formData = new URLSearchParams();
-      
       Object.entries(body).forEach(([key, value]) => {
         formData.append(key, value);
       });
 
-      url = GOOGLE_SHEETS_URL;
+      fetchUrl = GOOGLE_SHEETS_URL;
       fetchOptions = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString(),
       };
+    } else {
+      return res.status(405).json({ success: false, error: 'Method not allowed' });
     }
 
-    const response = await fetch(url.toString(), fetchOptions);
+    const response = await fetch(fetchUrl.toString(), fetchOptions);
     const data = await response.json();
     res.json(data);
   } catch (error) {
