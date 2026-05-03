@@ -5,28 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JLF Fireworks - Premium Pyrotechnics</title>
   
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  <!-- Landing Page Styles -->
   <link rel="stylesheet" href="css/landing.css">
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   
   <!-- NAVIGATION -->
-  <nav class="landing-nav" id="navbar">
+  <nav class="landing-nav">
     <div class="landing-container">
       <a href="#" class="nav-logo">JLF</a>
-      <button class="burger-btn" id="burgerBtn" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-links" id="navMenu">
+      <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#testimonials">Testimonials</a>
@@ -48,6 +38,22 @@
           <div class="hero-buttons">
             <a href="#features" class="btn-primary">Learn More</a>
             <a href="mailto:jlfworks.official@gmail.com" class="btn-secondary">Contact Support</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-stats">
+            <div class="stat-box">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Products</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">49+</span>
+              <span class="stat-label">Happy Customers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label">Support</span>
+            </div>
           </div>
         </div>
       </div>
@@ -95,8 +101,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Safe & Certified</h3>
-          <p>All products undergo strict quality control for safety and reliability.</p>
+          <h3>Quality Certified</h3>
+          <p>All products undergo strict quality control for safety and performance.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-headset"></i></div>
@@ -196,7 +202,7 @@
         <p class="section-label">Visit Us</p>
         <h2>Our physical <span class="text-red">store location</span></h2>
       </div>
-      <div class="location-info-only">
+      <div class="location-info-centered">
         <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
         <h3>JLF Fireworks Store</h3>
         <p>Centro 1, Camansihan<br>Calapan City, Oriental Mindoro</p>
@@ -243,25 +249,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Burger Menu Script -->
-  <script>
-    const burgerBtn = document.getElementById('burgerBtn');
-    const navMenu = document.getElementById('navMenu');
-
-    burgerBtn.addEventListener('click', () => {
-      burgerBtn.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('#navMenu a').forEach(link => {
-      link.addEventListener('click', () => {
-        burgerBtn.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
-    });
-  </script>
 
 </body>
 </html>
