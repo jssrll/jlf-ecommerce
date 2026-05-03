@@ -18,15 +18,19 @@
 <body>
   
   <!-- NAVIGATION -->
-  <nav class="landing-nav">
+  <nav class="landing-nav" id="navbar">
     <div class="landing-container">
       <a href="#" class="nav-logo">JLF</a>
-      <div class="nav-links">
+      <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navMenu">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#location">Location</a>
-        <a href="#get-started" class="nav-cta">Get Started</a>
       </div>
     </div>
   </nav>
@@ -36,24 +40,18 @@
     <div class="landing-container">
       <div class="hero-grid">
         <div class="hero-text">
-          <p class="hero-label">🔥 Premium Pyrotechnics</p>
           <h1 class="hero-heading">JLF <span class="text-red">Fireworks</span></h1>
           <p class="hero-subtitle">
             Quality is our top priority. From small celebrations to grand events, 
             we provide safe, certified, and high-quality fireworks for every occasion.
           </p>
           <div class="hero-buttons">
-            <a href="index.html" class="btn-primary">Enter Store →</a>
-            <a href="#features" class="btn-secondary">Learn More</a>
+            <a href="#features" class="btn-primary">Learn More</a>
+            <a href="mailto:jlfworks.official@gmail.com" class="btn-secondary">Contact Support</a>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-emoji">🎆</div>
-          <div class="hero-floating">
-            <span class="float-badge">200+ Products</span>
-            <span class="float-badge">DTI Certified</span>
-            <span class="float-badge">24/7 Support</span>
-          </div>
+          <div class="hero-emoji">🧨</div>
         </div>
       </div>
     </div>
@@ -62,21 +60,21 @@
   <!-- SCROLL TICKER -->
   <div class="ticker-bar">
     <div class="ticker-track">
-      <span>🎇 Safe & Certified Products</span>
+      <span>Safe & Certified Products</span>
       <span>·</span>
-      <span>🚀 Free Delivery on Orders ₱1,999+</span>
+      <span>Free Delivery on Orders ₱1,999+</span>
       <span>·</span>
-      <span>🎁 Exclusive Promo Codes Available</span>
+      <span>Exclusive Promo Codes Available</span>
       <span>·</span>
-      <span>⭐ Trusted by 49+ Happy Customers</span>
+      <span>Trusted by 49+ Happy Customers</span>
       <span>·</span>
-      <span>🎇 Safe & Certified Products</span>
+      <span>Safe & Certified Products</span>
       <span>·</span>
-      <span>🚀 Free Delivery on Orders ₱1,999+</span>
+      <span>Free Delivery on Orders ₱1,999+</span>
       <span>·</span>
-      <span>🎁 Exclusive Promo Codes Available</span>
+      <span>Exclusive Promo Codes Available</span>
       <span>·</span>
-      <span>⭐ Trusted by 49+ Happy Customers</span>
+      <span>Trusted by 49+ Happy Customers</span>
     </div>
   </div>
 
@@ -100,8 +98,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>DTI Certified Safe</h3>
-          <p>All products are DTI-certified and undergo strict quality control for safety.</p>
+          <h3>Safe & Certified</h3>
+          <p>All products undergo strict quality control for safety and reliability.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-headset"></i></div>
@@ -141,7 +139,7 @@
           <div class="step-number">02</div>
           <div class="step-content">
             <h3>Shop Fireworks</h3>
-            <p>Browse 200+ products across 5 categories. Filter by type and find your perfect fireworks.</p>
+            <p>Browse 50+ products across 5 categories. Filter by type and find your perfect fireworks.</p>
           </div>
         </div>
         <div class="step-item">
@@ -172,7 +170,7 @@
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="stars">★★★★★</div>
-          <p>"Ayyy grabe wala ako masabi. The best SAWA! Ang ganda ng putok Quality👌"</p>
+          <p>"Ayyy grabe wala ako masabi. The best SAWA! Ang ganda ng putok Quality"</p>
           <h4>— Bobby D.</h4>
         </div>
         <div class="testimonial-card">
@@ -201,24 +199,12 @@
         <p class="section-label">Visit Us</p>
         <h2>Our physical <span class="text-red">store location</span></h2>
       </div>
-      <div class="location-grid">
-        <div class="location-info">
-          <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
-          <h3>JLF Fireworks Store</h3>
-          <p>Centro 1, Camansihan<br>Calapan City, Oriental Mindoro</p>
-          <p class="location-hours">🕐 8:00 AM – 6:00 PM Daily</p>
-          <p class="location-contact">📞 0963 386 3860</p>
-        </div>
-        <div class="location-embed">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5!2d121.2!3d13.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDI0JzAwLjAiTiAxMjHCsDEyJzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890" 
-            width="100%" 
-            height="300" 
-            style="border:0; border-radius: 16px;" 
-            allowfullscreen="" 
-            loading="lazy">
-          </iframe>
-        </div>
+      <div class="location-info-only">
+        <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>JLF Fireworks Store</h3>
+        <p>Centro 1, Camansihan<br>Calapan City, Oriental Mindoro</p>
+        <p class="location-hours">8:00 AM – 6:00 PM Daily</p>
+        <p class="location-contact">0963 386 3860</p>
       </div>
     </div>
   </section>
@@ -234,9 +220,8 @@
         </p>
         <div class="cta-buttons">
           <a href="index.html" class="btn-primary btn-large">
-            Get Started Now <i class="fas fa-arrow-right"></i>
+            Get Started Now
           </a>
-          <a href="index.html#help" class="btn-outline">Contact Support</a>
         </div>
       </div>
     </div>
@@ -251,12 +236,6 @@
           <p>Premium fireworks and pyrotechnics for unforgettable celebrations.</p>
         </div>
         <div class="footer-links">
-          <h4>Quick Links</h4>
-          <a href="index.html">Shop</a>
-          <a href="index.html#featured">Rewards</a>
-          <a href="index.html#help">Support</a>
-        </div>
-        <div class="footer-links">
           <h4>Contact</h4>
           <a href="mailto:jlfworks.official@gmail.com">jlfworks.official@gmail.com</a>
           <a href="tel:09633863860">0963 386 3860</a>
@@ -267,6 +246,25 @@
       </div>
     </div>
   </footer>
+
+  <!-- Burger Menu Script -->
+  <script>
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    burgerBtn.addEventListener('click', () => {
+      burgerBtn.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerBtn.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
 
 </body>
 </html>

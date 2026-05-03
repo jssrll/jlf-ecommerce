@@ -635,3 +635,153 @@ body {
     min-width: auto;
   }
 }
+
+/* ========================================
+   NAVIGATION - with burger menu
+   ======================================== */
+.landing-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 250, 249, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 16px 0;
+}
+
+.landing-nav .landing-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: linear-gradient(135deg, #1d1d1f, #86868b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Burger Button */
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 101;
+}
+
+.burger-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #1d1d1f;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.burger-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #e63946;
+}
+
+/* Location info only (no map) */
+.location-info-only {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.location-info-only .location-icon {
+  font-size: 3rem;
+  color: #e63946;
+  margin-bottom: 16px;
+}
+
+.location-info-only h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.location-info-only p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.location-info-only .location-hours {
+  margin-top: 16px;
+  font-weight: 600;
+  color: white !important;
+}
+
+.location-info-only .location-contact {
+  margin-top: 8px;
+  font-weight: 500;
+  color: white !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .burger-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+}
