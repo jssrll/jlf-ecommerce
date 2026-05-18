@@ -1,10 +1,12 @@
-// JLF Fireworks - Service Worker (CSP Compliant Version)
-const CACHE_NAME = 'jlf-cache-v1';
+// JLF Fireworks - Service Worker (CSP Compliant Version with Cache Busting)
+const CACHE_NAME = 'jlf-cache-v3';  // Updated version number for cache busting
+
 const urlsToCache = [
   '/',
   '/index.html',
   '/landing.html',
   '/css/style.css',
+  '/css/settings.css',  // Added settings.css
   '/css/landing.css',
   '/js/config.js',
   '/js/helpers.js',
@@ -38,23 +40,25 @@ const urlsToCache = [
 
 // Install event - cache static assets
 self.addEventListener('install', event => {
-  console.log('🔧 Service Worker installing...');
+  console.log('🔧 Service Worker v3 installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('📦 Caching static assets');
+        console.log('📦 Caching static assets for v3');
         return cache.addAll(urlsToCache);
       })
       .catch(err => console.log('⚠️ Cache addAll failed:', err))
   );
+  // Force activate immediately
   self.skipWaiting();
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up all old caches
 self.addEventListener('activate', event => {
-  console.log('🚀 Service Worker activating...');
+  console.log('🚀 Service Worker v3 activating - clearing old caches...');
   event.waitUntil(
     caches.keys().then(cacheNames => {
+      console.log('🗑️ Found caches:', cacheNames);
       return Promise.all(
         cacheNames.map(cache => {
           if (cache !== CACHE_NAME) {
@@ -63,9 +67,11 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      console.log('✅ All old caches cleared, claiming clients...');
+      return self.clients.claim();
     })
   );
-  self.clients.claim();
 });
 
 // Fetch event - network-first strategy for API, cache-first for static
@@ -98,23 +104,22 @@ self.addEventListener('fetch', event => {
     return;
   }
   
-  // For static assets - cache first, then network
+  // For static assets - network first, then cache (for fresh content)
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200) {
-            return response;
-          }
+        // Cache the new response
+        if (response && response.status === 200) {
           const clonedResponse = response.clone();
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, clonedResponse);
           });
-          return response;
-        });
+        }
+        return response;
+      })
+      .catch(() => {
+        // If network fails, try cache
+        return caches.match(event.request);
       })
   );
 });
