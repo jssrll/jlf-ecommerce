@@ -8,18 +8,6 @@
     document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
   </script>
   
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    connect-src 'self' https://script.google.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://ik.imagekit.io;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;
-    img-src 'self' data: https: https://ik.imagekit.io;
-    frame-src 'self';
-    worker-src 'self';
-  ">
-
   <!-- Cache Control - Force fresh load -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
@@ -34,8 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <link rel="stylesheet" href="css/settings.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -208,7 +195,7 @@
     <div id="productsContainer" class="products-grid-apple"></div>
   </div>
 
-  <!-- FEATURED PAGE - Code Redemption & Investment Section (UPDATED) -->
+  <!-- FEATURED PAGE - Code Redemption & Investment Section (UPDATED - Single Option) -->
   <div id="featuredPage" class="page">
     <div class="page-hero">
       <h1>Rewards & Investment</h1>
@@ -227,7 +214,7 @@
       </div>
     </div>
 
-    <!-- Investment Section - Single Option (UPDATED) -->
+    <!-- Investment Section - Single Option -->
     <div class="investment-section-featured">
       <h2><i class="fas fa-chart-line"></i> Investment Options</h2>
       <p class="investment-subtitle">Grow your balance with fixed-return investments</p>
@@ -266,159 +253,9 @@
     </div>
   </div>
 
-  <!-- SETTINGS PAGE -->
+  <!-- SETTINGS PAGE (ORIGINAL - NO CHANGES) -->
   <div id="settingsPage" class="page">
-    <div class="page-hero">
-      <h1><i class="fas fa-sliders-h"></i> Settings</h1>
-      <p>Customize your account preferences and app settings</p>
-    </div>
-    
-    <div class="settings-container">
-      <!-- Account Settings -->
-      <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-user-cog"></i>
-          <h2>Account Settings</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item" onclick="openChangePassword()">
-            <div class="settings-item-icon"><i class="fas fa-key"></i></div>
-            <div class="settings-item-content">
-              <h3>Change Password</h3>
-              <p>Update your account password</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-          
-          <div class="settings-item" onclick="openUpdateProfile()">
-            <div class="settings-item-icon"><i class="fas fa-user-edit"></i></div>
-            <div class="settings-item-content">
-              <h3>Update Profile</h3>
-              <p>Change your name or contact information</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Notification Settings -->
-      <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-bell"></i>
-          <h2>Notifications</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item toggle-item">
-            <div class="settings-item-icon"><i class="fas fa-bell"></i></div>
-            <div class="settings-item-content">
-              <h3>Push Notifications</h3>
-              <p>Receive order updates and announcements</p>
-            </div>
-            <div class="settings-item-toggle">
-              <label class="switch">
-                <input type="checkbox" id="pushNotificationsToggle">
-                <span class="slider round"></span>
-              </label>
-            </div>
-          </div>
-          
-          <div class="settings-item toggle-item">
-            <div class="settings-item-icon"><i class="fas fa-envelope"></i></div>
-            <div class="settings-item-content">
-              <h3>Email Notifications</h3>
-              <p>Receive promotional emails and offers</p>
-            </div>
-            <div class="settings-item-toggle">
-              <label class="switch">
-                <input type="checkbox" id="emailNotificationsToggle">
-                <span class="slider round"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- App Settings -->
-      <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-mobile-alt"></i>
-          <h2>App Settings</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item" onclick="clearAppCache()">
-            <div class="settings-item-icon"><i class="fas fa-database"></i></div>
-            <div class="settings-item-content">
-              <h3>Clear Cache</h3>
-              <p>Clear temporary app data</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-          
-          <div class="settings-item" onclick="openAboutPage()">
-            <div class="settings-item-icon"><i class="fas fa-info-circle"></i></div>
-            <div class="settings-item-content">
-              <h3>About JLF Fireworks</h3>
-              <p>App version and legal information</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-          
-          <div class="settings-item" onclick="reportBug()">
-            <div class="settings-item-icon"><i class="fas fa-bug"></i></div>
-            <div class="settings-item-content">
-              <h3>Report a Bug</h3>
-              <p>Help us improve the app</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Privacy & Security -->
-      <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-shield-alt"></i>
-          <h2>Privacy & Security</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item" onclick="openPrivacyPolicy()">
-            <div class="settings-item-icon"><i class="fas fa-lock"></i></div>
-            <div class="settings-item-content">
-              <h3>Privacy Policy</h3>
-              <p>How we protect your data</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-          
-          <div class="settings-item" onclick="openTermsOfService()">
-            <div class="settings-item-icon"><i class="fas fa-file-contract"></i></div>
-            <div class="settings-item-content">
-              <h3>Terms of Service</h3>
-              <p>Our terms and conditions</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Danger Zone -->
-      <div class="settings-section danger-zone">
-        <div class="settings-section-header">
-          <i class="fas fa-exclamation-triangle"></i>
-          <h2>Danger Zone</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item" onclick="confirmDeleteAccount()">
-            <div class="settings-item-icon"><i class="fas fa-trash-alt"></i></div>
-            <div class="settings-item-content">
-              <h3>Delete Account</h3>
-              <p>Permanently delete your account and all data</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="mainContent"></div>
   </div>
 
   <!-- ADMIN PAGE -->
@@ -856,45 +693,6 @@
 </div>
 
 <script>
-// Settings page helper functions
-function openChangePassword() { showToast('Password change feature coming soon'); }
-function openUpdateProfile() { showToast('Profile update feature coming soon'); }
-function clearAppCache() { 
-    if('caches' in window) { caches.keys().then(function(names) { for(let name of names) caches.delete(name); }); }
-    localStorage.clear();
-    showToast('Cache cleared successfully');
-    setTimeout(() => location.reload(), 1500);
-}
-function openAboutPage() { showToast('JLF Fireworks v1.0.0'); }
-function reportBug() { showToast('Report a bug - Contact support at jlfworks.official@gmail.com'); }
-function openPrivacyPolicy() { showToast('Privacy policy available on request'); }
-function openTermsOfService() { showToast('Terms of service available on request'); }
-function confirmDeleteAccount() {
-    if(confirm('⚠️ WARNING: This action is permanent! Are you sure?')) {
-        let confirmation = prompt('Type "CONFIRM" to delete your account:');
-        if(confirmation === 'CONFIRM') { showToast('Account deletion request submitted to admin'); }
-    }
-}
-function showToast(message) {
-    let toast = document.getElementById('toastMsg');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3000);
-}
-function closeCartDrawer() {
-    document.getElementById('cartDrawer').classList.remove('open');
-    document.getElementById('cartOverlay').classList.remove('active');
-}
-function checkout() { showToast('Please login to checkout'); }
-
-// Save notification preferences
-document.addEventListener('DOMContentLoaded', function() {
-    const pushToggle = document.getElementById('pushNotificationsToggle');
-    const emailToggle = document.getElementById('emailNotificationsToggle');
-    if(pushToggle) { pushToggle.addEventListener('change', function() { localStorage.setItem('pushNotifications', this.checked); showToast(this.checked ? 'Push notifications enabled' : 'Push notifications disabled'); }); }
-    if(emailToggle) { emailToggle.addEventListener('change', function() { localStorage.setItem('emailNotifications', this.checked); showToast(this.checked ? 'Email notifications enabled' : 'Email notifications disabled'); }); }
-});
-
 // DIRECT FIX FOR QR SCANNER TAB
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -904,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
             qrTabBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('📷 QR Scanner button clicked');
+                console.log('📷 QR Scanner button clicked - DIRECT FIX');
                 document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
                 document.querySelectorAll('.admin-tab').forEach(tab => {
@@ -915,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (qrTab) {
                     qrTab.classList.add('active');
                     qrTab.style.display = 'block';
+                    console.log('✅ QR Scanner tab displayed');
                     if (typeof loadRecentScans === 'function') loadRecentScans();
                 }
             });
@@ -1003,6 +802,36 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Main App -->
 <script src="js/app.js"></script>
 
-<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(r=>console.log('✅ Service Worker registered')).catch(e=>console.log('❌ Service Worker failed'))});}</script>
+<script>
+// Helper functions for cart and settings
+function showToast(message) {
+    let toast = document.getElementById('toastMsg');
+    toast.textContent = message;
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+function closeCartDrawer() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('active');
+}
+
+function checkout() {
+    if(localStorage.getItem('loggedInUser')) {
+        if(typeof window.processCheckout === 'function') window.processCheckout();
+        else showToast('Checkout feature coming soon');
+    } else {
+        showToast('Please login first');
+        openAccountModal();
+    }
+}
+
+// Service worker
+if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message));
+    });
+}
+</script>
 </body>
 </html>
