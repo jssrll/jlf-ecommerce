@@ -7,6 +7,19 @@
     document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
     document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
   </script>
+  
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    connect-src 'self' https://script.google.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://ik.imagekit.io;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;
+    img-src 'self' data: https: https://ik.imagekit.io;
+    frame-src 'self';
+    worker-src 'self';
+  ">
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>JLF | Pyrotechnics</title>
@@ -17,6 +30,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -189,11 +203,11 @@
     <div id="productsContainer" class="products-grid-apple"></div>
   </div>
 
-  <!-- FEATURED PAGE - Code Redemption & Bond Investment Section -->
+  <!-- FEATURED PAGE - Code Redemption & Investment Section (UPDATED) -->
   <div id="featuredPage" class="page">
     <div class="page-hero">
       <h1>Rewards & Investment</h1>
-      <p>Redeem exclusive codes and grow your credit balance with smart bond investments</p>
+      <p>Redeem exclusive codes and grow your credit balance with smart investments</p>
     </div>
 
     <!-- Code Redemption Section -->
@@ -208,39 +222,24 @@
       </div>
     </div>
 
-    <!-- Bond Investment Section - Two Options -->
+    <!-- Investment Section - Single Option (UPDATED) -->
     <div class="investment-section-featured">
-      <h2><i class="fas fa-chart-pie"></i> Bond Investment Options</h2>
-      <p class="investment-subtitle">Choose your investment term and earn guaranteed returns!</p>
+      <h2><i class="fas fa-chart-line"></i> Investment Options</h2>
+      <p class="investment-subtitle">Grow your balance with fixed-return investments</p>
       
       <div class="investment-grid-featured" id="investmentGridFeatured">
         <div class="investment-card-featured">
           <div class="investment-icon-featured">📈</div>
-          <h3>Bond Investment - Option 1</h3>
-          <p>Short-term bond with fixed returns</p>
+          <h3>Investment Option</h3>
+          <p>Medium-term investment with competitive returns</p>
           <div class="investment-details-featured">
-            <span class="return-highlight">Return: 3%</span>
-            <span>Duration: 90 days (3 months)</span>
+            <span class="return-highlight">Return: 5%</span>
+            <span>Duration: 180 days (6 months)</span>
             <span>Min: ₱500</span>
           </div>
           <div class="investment-input-featured">
-            <input type="number" id="bondAmountOption1" placeholder="Amount in ₱ (min ₱500)">
-            <button class="btn-secondary-apple" onclick="investInBondOption1()">Invest in Option 1</button>
-          </div>
-        </div>
-
-        <div class="investment-card-featured">
-          <div class="investment-icon-featured">📊</div>
-          <h3>Bond Investment - Option 2</h3>
-          <p>Long-term bond with higher returns</p>
-          <div class="investment-details-featured">
-            <span class="return-highlight">Return: 6%</span>
-            <span>Duration: 150 days (5 months)</span>
-            <span>Min: ₱500</span>
-          </div>
-          <div class="investment-input-featured">
-            <input type="number" id="bondAmountOption2" placeholder="Amount in ₱ (min ₱500)">
-            <button class="btn-secondary-apple" onclick="investInBondOption2()">Invest in Option 2</button>
+            <input type="number" id="investmentAmount" placeholder="Amount in ₱ (min ₱500)">
+            <button class="btn-secondary-apple" onclick="investInInvestmentOption()">Invest Now</button>
           </div>
         </div>
       </div>
@@ -264,7 +263,157 @@
 
   <!-- SETTINGS PAGE -->
   <div id="settingsPage" class="page">
-    <div id="mainContent"></div>
+    <div class="page-hero">
+      <h1><i class="fas fa-sliders-h"></i> Settings</h1>
+      <p>Customize your account preferences and app settings</p>
+    </div>
+    
+    <div class="settings-container">
+      <!-- Account Settings -->
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="fas fa-user-cog"></i>
+          <h2>Account Settings</h2>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item" onclick="openChangePassword()">
+            <div class="settings-item-icon"><i class="fas fa-key"></i></div>
+            <div class="settings-item-content">
+              <h3>Change Password</h3>
+              <p>Update your account password</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+          
+          <div class="settings-item" onclick="openUpdateProfile()">
+            <div class="settings-item-icon"><i class="fas fa-user-edit"></i></div>
+            <div class="settings-item-content">
+              <h3>Update Profile</h3>
+              <p>Change your name or contact information</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification Settings -->
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="fas fa-bell"></i>
+          <h2>Notifications</h2>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item toggle-item">
+            <div class="settings-item-icon"><i class="fas fa-bell"></i></div>
+            <div class="settings-item-content">
+              <h3>Push Notifications</h3>
+              <p>Receive order updates and announcements</p>
+            </div>
+            <div class="settings-item-toggle">
+              <label class="switch">
+                <input type="checkbox" id="pushNotificationsToggle">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="settings-item toggle-item">
+            <div class="settings-item-icon"><i class="fas fa-envelope"></i></div>
+            <div class="settings-item-content">
+              <h3>Email Notifications</h3>
+              <p>Receive promotional emails and offers</p>
+            </div>
+            <div class="settings-item-toggle">
+              <label class="switch">
+                <input type="checkbox" id="emailNotificationsToggle">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Settings -->
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="fas fa-mobile-alt"></i>
+          <h2>App Settings</h2>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item" onclick="clearAppCache()">
+            <div class="settings-item-icon"><i class="fas fa-database"></i></div>
+            <div class="settings-item-content">
+              <h3>Clear Cache</h3>
+              <p>Clear temporary app data</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+          
+          <div class="settings-item" onclick="openAboutPage()">
+            <div class="settings-item-icon"><i class="fas fa-info-circle"></i></div>
+            <div class="settings-item-content">
+              <h3>About JLF Fireworks</h3>
+              <p>App version and legal information</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+          
+          <div class="settings-item" onclick="reportBug()">
+            <div class="settings-item-icon"><i class="fas fa-bug"></i></div>
+            <div class="settings-item-content">
+              <h3>Report a Bug</h3>
+              <p>Help us improve the app</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Privacy & Security -->
+      <div class="settings-section">
+        <div class="settings-section-header">
+          <i class="fas fa-shield-alt"></i>
+          <h2>Privacy & Security</h2>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item" onclick="openPrivacyPolicy()">
+            <div class="settings-item-icon"><i class="fas fa-lock"></i></div>
+            <div class="settings-item-content">
+              <h3>Privacy Policy</h3>
+              <p>How we protect your data</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+          
+          <div class="settings-item" onclick="openTermsOfService()">
+            <div class="settings-item-icon"><i class="fas fa-file-contract"></i></div>
+            <div class="settings-item-content">
+              <h3>Terms of Service</h3>
+              <p>Our terms and conditions</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="settings-section danger-zone">
+        <div class="settings-section-header">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h2>Danger Zone</h2>
+        </div>
+        <div class="settings-list">
+          <div class="settings-item" onclick="confirmDeleteAccount()">
+            <div class="settings-item-icon"><i class="fas fa-trash-alt"></i></div>
+            <div class="settings-item-content">
+              <h3>Delete Account</h3>
+              <p>Permanently delete your account and all data</p>
+            </div>
+            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ADMIN PAGE -->
@@ -280,7 +429,7 @@
       <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Investments</button>
       <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">QR Scanner</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('announcements')">Announcements</button>
       <button class="admin-tab-btn" onclick="switchAdminTab('bugreports')">Bug Reports</button>
@@ -313,8 +462,8 @@
       <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
     </div>
     <div id="adminInvestmentsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Bond Investments</button></div>
-      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading bond investments...</div></div>
+      <div class="admin-actions"><button class="btn-secondary-apple" onclick="loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Investments</button></div>
+      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div></div>
     </div>
 
     <!-- QR Scanner Tab Content -->
@@ -702,6 +851,45 @@
 </div>
 
 <script>
+// Settings page helper functions
+function openChangePassword() { showToast('Password change feature coming soon'); }
+function openUpdateProfile() { showToast('Profile update feature coming soon'); }
+function clearAppCache() { 
+    if('caches' in window) { caches.keys().then(function(names) { for(let name of names) caches.delete(name); }); }
+    localStorage.clear();
+    showToast('Cache cleared successfully');
+    setTimeout(() => location.reload(), 1500);
+}
+function openAboutPage() { showToast('JLF Fireworks v1.0.0'); }
+function reportBug() { showToast('Report a bug - Contact support at jlfworks.official@gmail.com'); }
+function openPrivacyPolicy() { showToast('Privacy policy available on request'); }
+function openTermsOfService() { showToast('Terms of service available on request'); }
+function confirmDeleteAccount() {
+    if(confirm('⚠️ WARNING: This action is permanent! Are you sure?')) {
+        let confirmation = prompt('Type "CONFIRM" to delete your account:');
+        if(confirmation === 'CONFIRM') { showToast('Account deletion request submitted to admin'); }
+    }
+}
+function showToast(message) {
+    let toast = document.getElementById('toastMsg');
+    toast.textContent = message;
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3000);
+}
+function closeCartDrawer() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('active');
+}
+function checkout() { showToast('Please login to checkout'); }
+
+// Save notification preferences
+document.addEventListener('DOMContentLoaded', function() {
+    const pushToggle = document.getElementById('pushNotificationsToggle');
+    const emailToggle = document.getElementById('emailNotificationsToggle');
+    if(pushToggle) { pushToggle.addEventListener('change', function() { localStorage.setItem('pushNotifications', this.checked); showToast(this.checked ? 'Push notifications enabled' : 'Push notifications disabled'); }); }
+    if(emailToggle) { emailToggle.addEventListener('change', function() { localStorage.setItem('emailNotifications', this.checked); showToast(this.checked ? 'Email notifications enabled' : 'Email notifications disabled'); }); }
+});
+
 // DIRECT FIX FOR QR SCANNER TAB
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -711,7 +899,7 @@
             qrTabBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('📷 QR Scanner button clicked - DIRECT FIX');
+                console.log('📷 QR Scanner button clicked');
                 document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
                 document.querySelectorAll('.admin-tab').forEach(tab => {
@@ -722,7 +910,6 @@
                 if (qrTab) {
                     qrTab.classList.add('active');
                     qrTab.style.display = 'block';
-                    console.log('✅ QR Scanner tab displayed');
                     if (typeof loadRecentScans === 'function') loadRecentScans();
                 }
             });
@@ -732,11 +919,17 @@
 </script>
 
 <!-- Cart Sidebar -->
-<div id="cartOverlay" class="cart-overlay"></div>
+<div id="cartOverlay" class="cart-overlay" onclick="closeCartDrawer()"></div>
 <div id="cartDrawer" class="cart-drawer">
-  <div class="cart-header"><span>Shopping Cart</span><button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button></div>
-  <div id="cartItemsList" class="cart-items-list"><div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks!</div></div>
-  <div class="cart-footer"><div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div><button class="checkout-btn" id="checkoutBtn">Checkout →</button></div>
+  <div class="cart-header">
+    <span><i class="fas fa-shopping-bag"></i> Shopping Cart</span>
+    <button class="close-cart" onclick="closeCartDrawer()"><i class="fas fa-times-circle"></i></button>
+  </div>
+  <div id="cartItemsList" class="cart-items-list"><div class="empty-cart-msg"><i class="fas fa-shopping-cart"></i><p>Your cart is empty. Add some fireworks!</p></div></div>
+  <div class="cart-footer">
+    <div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout →</button>
+  </div>
 </div>
 <div id="toastMsg" class="toast-msg">Item added to cart</div>
 

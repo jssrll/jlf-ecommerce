@@ -1,231 +1,242 @@
-// ========================================
-// BOND INVESTMENT FUNCTIONS
-// ========================================
+// ============================================
+// JLF FIREWORKS - INVESTMENT MODULE
+// Readable, unminified version
+// ============================================
 
-async function investInBondOption1() {
-  if (!currentUser || isAdmin) {
-    showToast("Please login to invest", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const amount = parseFloat(document.getElementById("bondAmountOption1").value);
-  
-  if (isNaN(amount) || amount < 500) {
-    showToast("Minimum investment is ₱500", 1500);
-    return;
-  }
-  
-  if (amount > (currentUser.balance || 0)) {
-    showToast(`Insufficient credit balance! You have ₱${(currentUser.balance || 0).toLocaleString()}`, 2000);
-    return;
-  }
-  
-  const returnRate = 0.03;
-  const expectedReturn = amount * returnRate;
-  const durationDays = 90;
-  const maturityDate = new Date();
-  maturityDate.setDate(maturityDate.getDate() + durationDays);
-  
-  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 1?\n\nReturn: 3%\nDuration: ${durationDays} days (3 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
-  if (!confirmMsg) return;
-  
-  const investBtn = document.querySelector('#bondAmountOption1').parentElement.querySelector('button');
-  const originalText = investBtn.innerHTML;
-  if (investBtn) {
-    investBtn.disabled = true;
-    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateBalance");
-    formData.append("phone", currentUser.phone);
-    formData.append("amount", amount);
-    formData.append("operation", "deduct");
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (!result.success) {
-      showToast(result.message || "Failed to process investment", 1500);
-      return;
-    }
-    
-    currentUser.balance = result.newBalance;
-    localStorage.setItem("nova_user", JSON.stringify(currentUser));
-    
-    await recordCreditInvestment("Bond Investment - Option 1 (3% / 90 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
-    
-    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 1! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
-    document.getElementById("bondAmountOption1").value = "";
-    updateAllBalanceDisplays();
-    await loadCreditInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Investment error:", error);
-    showToast("Investment failed. Please try again.", 1500);
-  } finally {
-    if (investBtn) {
-      investBtn.disabled = false;
-      investBtn.innerHTML = originalText;
-    }
-  }
+// Investment configuration
+const INVESTMENT_CONFIG = {
+    returnRate: 0.05,      // 5% return
+    durationDays: 180,     // 6 months
+    minAmount: 500,
+    name: 'Investment Option'
+};
+
+// Initialize investments from localStorage
+function loadInvestments() {
+    const investments = loadFromLocalStorage('jlf_investments', []);
+    AppState.investments = investments;
+    return investments;
 }
 
-async function investInBondOption2() {
-  if (!currentUser || isAdmin) {
-    showToast("Please login to invest", 1500);
-    openAccountModal();
-    return;
-  }
-  
-  const amount = parseFloat(document.getElementById("bondAmountOption2").value);
-  
-  if (isNaN(amount) || amount < 500) {
-    showToast("Minimum investment is ₱500", 1500);
-    return;
-  }
-  
-  if (amount > (currentUser.balance || 0)) {
-    showToast(`Insufficient credit balance! You have ₱${(currentUser.balance || 0).toLocaleString()}`, 2000);
-    return;
-  }
-  
-  const returnRate = 0.06;
-  const expectedReturn = amount * returnRate;
-  const durationDays = 150;
-  const maturityDate = new Date();
-  maturityDate.setDate(maturityDate.getDate() + durationDays);
-  
-  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 2?\n\nReturn: 6%\nDuration: ${durationDays} days (5 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
-  if (!confirmMsg) return;
-  
-  const investBtn = document.querySelector('#bondAmountOption2').parentElement.querySelector('button');
-  const originalText = investBtn.innerHTML;
-  if (investBtn) {
-    investBtn.disabled = true;
-    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-  }
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "updateBalance");
-    formData.append("phone", currentUser.phone);
-    formData.append("amount", amount);
-    formData.append("operation", "deduct");
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    
-    if (!result.success) {
-      showToast(result.message || "Failed to process investment", 1500);
-      return;
-    }
-    
-    currentUser.balance = result.newBalance;
-    localStorage.setItem("nova_user", JSON.stringify(currentUser));
-    
-    await recordCreditInvestment("Bond Investment - Option 2 (6% / 150 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
-    
-    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 2! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
-    document.getElementById("bondAmountOption2").value = "";
-    updateAllBalanceDisplays();
-    await loadCreditInvestmentHistory();
-    
-  } catch (error) {
-    console.error("Investment error:", error);
-    showToast("Investment failed. Please try again.", 1500);
-  } finally {
-    if (investBtn) {
-      investBtn.disabled = false;
-      investBtn.innerHTML = originalText;
-    }
-  }
+// Save investments to localStorage
+function saveInvestments(investments) {
+    saveToLocalStorage('jlf_investments', investments);
+    AppState.investments = investments;
 }
 
-async function recordCreditInvestment(investmentType, amount, expectedReturn, maturityDate, durationDays) {
-  if (!currentUser || isAdmin) return false;
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "addCreditInvestment");
-    formData.append("timestamp", new Date().toISOString());
-    formData.append("accountId", currentUser.id);
-    formData.append("fullName", currentUser.name);
-    formData.append("phone", currentUser.phone);
-    formData.append("investmentType", investmentType);
-    formData.append("amount", amount);
-    formData.append("expectedReturn", expectedReturn);
-    formData.append("status", "Active");
-    formData.append("maturityDate", maturityDate);
-    formData.append("durationDays", durationDays);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const result = await response.json();
-    return result.success;
-  } catch (error) {
-    console.error("Record investment error:", error);
-    return false;
-  }
-}
-
-async function loadCreditInvestmentHistory() {
-  if (!currentUser || isAdmin) return;
-  
-  const container = document.getElementById("investmentHistoryContainerFeatured");
-  if (!container) return;
-  
-  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
-  
-  try {
-    const formData = new URLSearchParams();
-    formData.append("action", "getUserCreditInvestments");
-    formData.append("phone", currentUser.phone);
-    
-    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
-    const investments = await response.json();
-    
-    if (!investments || investments.length === 0) {
-      container.innerHTML = '<div class="empty-state">No investments yet. Start investing with your credit balance!</div>';
-      return;
+// Invest in investment option
+async function investInInvestmentOption() {
+    // Check if user is logged in
+    if (!isLoggedIn()) {
+        showToast('Please login first to invest');
+        openAccountModal();
+        return;
     }
     
-    container.innerHTML = investments.map(inv => {
-      let statusClass = '';
-      let statusText = inv.status || 'Active';
-      switch(statusText.toLowerCase()) {
-        case 'active': statusClass = 'active'; break;
-        case 'completed': statusClass = 'completed'; break;
-        case 'matured': statusClass = 'matured'; break;
-        default: statusClass = 'active';
-      }
-      
-      const maturityDate = inv.maturityDate ? new Date(inv.maturityDate) : null;
-      const isMatured = maturityDate && maturityDate <= new Date();
-      
-      let returnText = '';
-      if (inv.investmentType.includes('3%')) returnText = '3% (90 days)';
-      else if (inv.investmentType.includes('6%')) returnText = '6% (150 days)';
-      
-      return `
-        <div class="investment-item-featured">
-          <div class="investment-header-featured">
-            <span class="investment-type-featured">${inv.investmentType}</span>
-            <span class="investment-status-featured ${isMatured ? 'matured' : statusClass}">${isMatured ? 'Matured' : statusText}</span>
-          </div>
-          <div class="investment-details-featured-list">
-            <div>📅 ${new Date(inv.timestamp).toLocaleDateString()}</div>
-            <div>💰 Amount: ₱${parseFloat(inv.amount).toLocaleString()}</div>
-            <div>📈 Expected Return: ₱${parseFloat(inv.expectedReturn).toLocaleString()} (${returnText})</div>
-            ${inv.maturityDate ? `<div>⏰ Matures: ${new Date(inv.maturityDate).toLocaleDateString()}</div>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
+    const amountInput = document.getElementById('investmentAmount');
+    const amount = parseFloat(amountInput?.value);
     
-  } catch (error) {
-    console.error("Load investments error:", error);
-    container.innerHTML = '<div class="empty-state">Failed to load investments. Please try again.</div>';
-  }
+    // Validation
+    if (!amount || amount < INVESTMENT_CONFIG.minAmount) {
+        showToast(`Minimum investment amount is ₱${INVESTMENT_CONFIG.minAmount}`);
+        return;
+    }
+    
+    const currentUser = getCurrentUser();
+    const userBalance = currentUser.creditBalance || 0;
+    
+    if (amount > userBalance) {
+        showToast(`Insufficient balance. Your current balance is ${formatCurrency(userBalance)}`);
+        return;
+    }
+    
+    // Calculate returns
+    const returnAmount = amount * INVESTMENT_CONFIG.returnRate;
+    const totalReturn = amount + returnAmount;
+    const maturityDate = new Date();
+    maturityDate.setDate(maturityDate.getDate() + INVESTMENT_CONFIG.durationDays);
+    
+    // Create investment record
+    const investment = {
+        id: generateId(),
+        userId: currentUser.accountId,
+        userName: currentUser.fullName,
+        amount: amount,
+        returnRate: INVESTMENT_CONFIG.returnRate,
+        returnAmount: returnAmount,
+        totalReturn: totalReturn,
+        startDate: new Date().toISOString(),
+        maturityDate: maturityDate.toISOString(),
+        durationDays: INVESTMENT_CONFIG.durationDays,
+        status: 'active', // active, matured, withdrawn
+        createdAt: new Date().toISOString()
+    };
+    
+    // Confirm investment
+    const confirmMsg = `Confirm Investment:
+    
+Amount: ${formatCurrency(amount)}
+Return Rate: ${INVESTMENT_CONFIG.returnRate * 100}%
+Return Amount: ${formatCurrency(returnAmount)}
+Total Return: ${formatCurrency(totalReturn)}
+Duration: ${INVESTMENT_CONFIG.durationDays} days
+Maturity Date: ${maturityDate.toLocaleDateString()}
+
+Investment will be deducted from your balance now.
+Returns will be credited at maturity.
+
+Proceed?`;
+    
+    if (!confirm(confirmMsg)) {
+        return;
+    }
+    
+    // Disable button and show loading
+    const button = event?.target;
+    const originalText = button?.innerHTML;
+    if (button) {
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    }
+    
+    try {
+        // Deduct amount from user balance
+        const users = loadFromLocalStorage('jlf_users', []);
+        const userIndex = users.findIndex(u => u.accountId === currentUser.accountId);
+        
+        if (userIndex !== -1) {
+            users[userIndex].creditBalance = (users[userIndex].creditBalance || 0) - amount;
+            saveToLocalStorage('jlf_users', users);
+            
+            // Update current user
+            const updatedUser = users[userIndex];
+            localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+            AppState.currentUser = updatedUser;
+            
+            // Save investment
+            const investments = loadInvestments();
+            investments.push(investment);
+            saveInvestments(investments);
+            
+            // Add transaction record
+            addTransaction({
+                type: 'investment',
+                action: 'invest',
+                amount: amount,
+                returnRate: INVESTMENT_CONFIG.returnRate,
+                maturityDate: investment.maturityDate,
+                investmentId: investment.id,
+                date: new Date().toISOString()
+            });
+            
+            showToast(`Investment successful! ₱${amount.toFixed(2)} invested.`, 3000);
+            
+            // Clear input
+            if (amountInput) amountInput.value = '';
+            
+            // Update UI
+            updateUserDisplay();
+            if (typeof updateProfileModal === 'function') updateProfileModal();
+            
+            // Refresh orders page if open
+            if (document.getElementById('ordersPage')?.classList.contains('active')) {
+                if (typeof loadOrders === 'function') loadOrders();
+            }
+        }
+    } catch (error) {
+        console.error('Investment error:', error);
+        showToast('Investment failed. Please try again.');
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.innerHTML = originalText || 'Invest Now';
+        }
+    }
 }
+
+// Check for matured investments and process returns
+function checkMaturedInvestments() {
+    const investments = loadInvestments();
+    const users = loadFromLocalStorage('jlf_users', []);
+    let hasUpdates = false;
+    const now = new Date();
+    
+    for (const investment of investments) {
+        if (investment.status === 'active') {
+            const maturityDate = new Date(investment.maturityDate);
+            if (maturityDate <= now) {
+                // Investment has matured - add returns to user balance
+                const userIndex = users.findIndex(u => u.accountId === investment.userId);
+                if (userIndex !== -1) {
+                    users[userIndex].creditBalance = (users[userIndex].creditBalance || 0) + investment.totalReturn;
+                    investment.status = 'matured';
+                    investment.maturedDate = now.toISOString();
+                    hasUpdates = true;
+                    
+                    // Add transaction record for returns
+                    addTransaction({
+                        type: 'investment',
+                        action: 'matured',
+                        amount: investment.totalReturn,
+                        investmentId: investment.id,
+                        originalAmount: investment.amount,
+                        returnAmount: investment.returnAmount,
+                        date: now.toISOString()
+                    });
+                }
+            }
+        }
+    }
+    
+    if (hasUpdates) {
+        saveToLocalStorage('jlf_users', users);
+        saveInvestments(investments);
+        
+        // Update current user if logged in
+        const currentUser = getCurrentUser();
+        if (currentUser) {
+            const updatedUser = users.find(u => u.accountId === currentUser.accountId);
+            if (updatedUser) {
+                localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+                updateUserDisplay();
+            }
+        }
+        
+        showToast('You have matured investments! Returns have been added to your balance.', 5000);
+    }
+}
+
+// Get user's active investments
+function getUserActiveInvestments(userId) {
+    const investments = loadInvestments();
+    return investments.filter(i => i.userId === userId && i.status === 'active');
+}
+
+// Get user's investment history
+function getUserInvestmentHistory(userId) {
+    const investments = loadInvestments();
+    return investments.filter(i => i.userId === userId).sort((a, b) => 
+        new Date(b.createdAt) - new Date(a.createdAt)
+    );
+}
+
+// Add transaction helper
+function addTransaction(transaction) {
+    const transactions = loadFromLocalStorage('jlf_transactions', []);
+    transactions.unshift({
+        ...transaction,
+        id: generateId(),
+        timestamp: new Date().toISOString()
+    });
+    saveToLocalStorage('jlf_transactions', transactions);
+}
+
+// Run maturity check on page load
+setTimeout(() => {
+    checkMaturedInvestments();
+}, 1000);
+
+// Run maturity check every hour
+setInterval(() => {
+    checkMaturedInvestments();
+}, 3600000);
