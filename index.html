@@ -5,7 +5,13 @@
   <script>
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
     document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
-    document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('selectstart', function(e) {
+      // Only block text selection on non-interactive elements
+      var tag = e.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON' || tag === 'A' || tag === 'SELECT') return;
+      e.preventDefault();
+      return false;
+    });
   </script>
   
   <!-- Cache Control - Force fresh load -->
