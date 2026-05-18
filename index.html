@@ -178,11 +178,17 @@
     </div>
   </div>
 
-  <!-- SHOP PAGE - Fireworks Products -->
+  <!-- SHOP PAGE - Fireworks Products (WITH REMOVE BUTTON ON SEARCH BAR) -->
   <div id="shopPage" class="page">
     <div class="page-hero"><h1>Fireworks Collection</h1><p>Choose from our wide selection of premium pyrotechnics for every celebration</p></div>
     <div class="filters-bar-apple">
-      <div class="search-box-apple"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search fireworks..."></div>
+      <div class="search-box-apple">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search fireworks...">
+        <button id="clearSearchBtn" class="clear-search-btn" style="display: none;" onclick="clearSearch()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
       <div class="category-filter-apple" id="categoryFilter">
         <button class="cat-btn-apple active" data-cat="all">All</button>
         <button class="cat-btn-apple" data-cat="Aerial">Aerial</button>
@@ -501,13 +507,34 @@
     </div>
   </div>
 
-  <!-- HELP PAGE -->
+  <!-- HELP PAGE - UPDATED WITH ADDITIONAL CONTACTS -->
   <div id="helpPage" class="page">
     <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7. How can we assist you today?</p></div>
     
     <div class="support-grid-apple">
-      <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><p>Chat with our support team instantly</p><button class="btn-secondary-apple" onclick="startChat()">Start Chat</button></div>
-      <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlfworks.official@gmail.com</p><p>Response within 24 hours</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
+      <div class="support-card-apple">
+        <i class="fas fa-headset"></i>
+        <h3>Live Chat</h3>
+        <p>Chat with our support team instantly</p>
+        <button class="btn-secondary-apple" onclick="startChat()">Start Chat</button>
+      </div>
+      
+      <div class="support-card-apple">
+        <i class="fas fa-envelope"></i>
+        <h3>Email Support</h3>
+        <p>jlfworks.official@gmail.com</p>
+        <p>jessrell1010@gmail.com</p>
+        <p>Response within 24 hours</p>
+        <button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button>
+      </div>
+      
+      <div class="support-card-apple">
+        <i class="fas fa-phone-alt"></i>
+        <h3>Phone Support</h3>
+        <p>0963 386 3860</p>
+        <p>Mon-Fri, 8:00 AM - 6:00 PM</p>
+        <button class="btn-secondary-apple" onclick="makePhoneCall()">Call Now</button>
+      </div>
     </div>
 
     <div class="faq-section-apple"><h2>Frequently Asked Questions</h2>
@@ -529,7 +556,7 @@
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>I forgot my password. What should I do?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Currently, please contact our support team for password recovery. We're working on an automated password reset feature.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I redeem promo codes?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Go to the Featured page, enter your code in the Code Redemption section, and click Redeem. Your credits will be added instantly if the code is valid.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>What is my Account ID for?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Your Account ID is a unique 9-digit number used to identify your account. It's required for admin assistance.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I contact customer support?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can reach us through: Live Chat: Available on our website & Email: jlfworks.official@gmail.com</div></div>
+        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I contact customer support?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can reach us through: Live Chat: Available on our website, Email: jlfworks.official@gmail.com / jessrell1010@gmail.com, Phone: 0963 386 3860</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>What are your support hours?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">We're available 24/7 through our live chat and email support. Phone support is available Monday to Friday, 8:00 AM to 6:00 PM.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>Where is your physical store located?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Our store is located at Brgy. Camansihan, Calapan City, Oriental Mindoro. Store hours are 8:00 AM to 6:00 PM daily.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I become a reseller?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">We welcome resellers! Please contact our support team for reseller inquiries and wholesale pricing.</div></div>
@@ -720,6 +747,88 @@
         }
     });
 })();
+
+// Search bar clear button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    
+    if (searchInput && clearBtn) {
+        // Show/hide clear button based on input value
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+        });
+    }
+});
+
+// Clear search function
+function clearSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    
+    if (searchInput) {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+        searchInput.dispatchEvent(new Event('keyup'));
+        
+        // Hide clear button
+        if (clearBtn) {
+            clearBtn.style.display = 'none';
+        }
+        
+        // Trigger product filter
+        if (typeof filterProducts === 'function') {
+            filterProducts();
+        }
+    }
+}
+
+// Help page functions
+function startChat() {
+    window.open('https://m.me/jlfworks', '_blank');
+}
+
+function sendEmail() {
+    window.location.href = 'mailto:jlfworks.official@gmail.com?cc=jessrell1010@gmail.com&subject=JLF%20Fireworks%20Support%20Request';
+}
+
+function makePhoneCall() {
+    window.location.href = 'tel:09633863860';
+}
+
+// Helper functions for cart and settings
+function showToast(message) {
+    let toast = document.getElementById('toastMsg');
+    toast.textContent = message;
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+function closeCartDrawer() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('active');
+}
+
+function checkout() {
+    if(localStorage.getItem('loggedInUser')) {
+        if(typeof window.processCheckout === 'function') window.processCheckout();
+        else showToast('Checkout feature coming soon');
+    } else {
+        showToast('Please login first');
+        openAccountModal();
+    }
+}
+
+// Service worker
+if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message));
+    });
+}
 </script>
 
 <!-- Cart Sidebar -->
@@ -802,36 +911,5 @@
 <!-- Main App -->
 <script src="js/app.js"></script>
 
-<script>
-// Helper functions for cart and settings
-function showToast(message) {
-    let toast = document.getElementById('toastMsg');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3000);
-}
-
-function closeCartDrawer() {
-    document.getElementById('cartDrawer').classList.remove('open');
-    document.getElementById('cartOverlay').classList.remove('active');
-}
-
-function checkout() {
-    if(localStorage.getItem('loggedInUser')) {
-        if(typeof window.processCheckout === 'function') window.processCheckout();
-        else showToast('Checkout feature coming soon');
-    } else {
-        showToast('Please login first');
-        openAccountModal();
-    }
-}
-
-// Service worker
-if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>{
-        navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message));
-    });
-}
-</script>
 </body>
 </html>
