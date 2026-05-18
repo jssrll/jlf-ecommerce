@@ -1,203 +1,231 @@
 /* ========================================
-   UPGRADES CSS v2 - Additional Styles
+   MYSTERY BOX SECTION - SURPRISE ME
+   Fixed styling for proper display
    ======================================== */
 
-/* Safety Section on Featured Page */
-.safety-section-featured {
-    text-align: center;
-    margin: 30px auto;
-    padding: 20px;
+.mystery-box-section {
+    position: relative;
+    margin: 60px 0 40px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-.btn-safety-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: white;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 980px;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.btn-safety-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #16213e, #1a1a2e);
-}
-
-/* Copy Account ID Button */
-.copy-id-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px 12px;
-    border-radius: 20px;
-    transition: 0.2s;
-    font-size: 0.7rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #86868b;
-    margin-left: 8px;
-}
-
-.copy-id-btn:hover {
-    background: #e9e9ef;
-    color: #e63946;
-}
-
-.copy-id-btn.copied {
-    background: #4caf50;
-    color: white;
-}
-
-/* Haptic feedback simulation (visual indicator) */
-.haptic-feedback {
-    animation: hapticPulse 0.2s ease-in-out;
-}
-
-@keyframes hapticPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.97); }
-    100% { transform: scale(1); }
-}
-
-/* Balance Watcher Indicator */
-.balance-watcher-indicator {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.6rem;
-    font-family: monospace;
-    z-index: 99;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.balance-watcher-indicator.show {
-    opacity: 1;
-}
-
-/* Product Images - Uniform styling */
-.product-img-apple img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Toast with haptic feedback */
-.toast-msg.haptic {
-    animation: hapticToast 0.3s ease;
-}
-
-@keyframes hapticToast {
-    0%, 100% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.05); }
-}
-
-/* Offline indicator */
-.offline-indicator {
-    position: fixed;
+.mystery-stars {
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    background: #e63946;
-    color: white;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.mystery-star {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: starTwinkle var(--d, 3s) infinite ease-in-out;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+.mystery-box-header {
     text-align: center;
-    padding: 5px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.mystery-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e63946, #ff6a3d);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
     font-size: 0.7rem;
-    z-index: 1000;
-    transform: translateY(-100%);
-    transition: transform 0.3s;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    animation: pulse 2s infinite;
 }
 
-.offline-indicator.show {
-    transform: translateY(0);
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; transform: scale(0.98); }
 }
 
-/* Transaction History Filters - Enhanced */
-.transaction-filters {
+.mystery-box-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.mystery-box-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.mystery-box-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 25px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
-    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.filter-btn {
-    background: transparent;
-    border: 1px solid #e9e9ef;
-    padding: 8px 16px;
-    border-radius: 980px;
+.mystery-box-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.mystery-box-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    animation: bounce 2s infinite;
+    min-width: 70px;
+    text-align: center;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.mystery-box-info {
+    flex: 1;
+}
+
+.mystery-box-info h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.mystery-note {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.mystery-note i {
+    margin-right: 6px;
+    color: #ff9800;
+}
+
+.mystery-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ff9800;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-mystery {
+    background: linear-gradient(135deg, #e63946, #ff6a3d);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 0.8rem;
-    transition: 0.2s;
-    font-family: inherit;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
 }
 
-.filter-btn:hover {
-    background: #f5f5f7;
+.btn-mystery:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
 }
 
-.filter-btn.active {
-    background: #1d1d1f;
-    color: white;
-    border-color: #1d1d1f;
+.btn-mystery:active {
+    transform: scale(0.98);
 }
 
-/* Dark mode support for new features */
-body.dark .copy-id-btn {
-    color: #a1a1a6;
+.btn-mystery:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
-body.dark .copy-id-btn:hover {
-    background: #3a3a3c;
-    color: #e63946;
+/* Loading state for mystery box button */
+.btn-mystery.loading {
+    pointer-events: none;
+    opacity: 0.7;
 }
 
-body.dark .transaction-id {
-    background: #3a3a3c;
-    color: #a1a1a6;
+/* Responsive */
+@media (max-width: 768px) {
+    .mystery-box-section {
+        padding: 30px 20px;
+        margin: 40px 0;
+    }
+
+    .mystery-box-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .mystery-box-header p {
+        font-size: 0.8rem;
+    }
+
+    .mystery-box-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .mystery-box-icon {
+        font-size: 2.5rem;
+        min-width: auto;
+    }
+
+    .mystery-price {
+        font-size: 1.5rem;
+    }
+
+    .btn-mystery {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+    }
+    
+    .mystery-box-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .mystery-note {
+        font-size: 0.75rem;
+    }
 }
 
-body.dark .order-again-btn {
-    border-color: #3a3a3c;
-    color: #e5e5ea;
+/* Dark mode support */
+body.dark .mystery-box-section {
+    background: linear-gradient(135deg, #0a0a1a, #0f0f1f);
 }
 
-body.dark .order-again-btn:hover {
-    background: #e63946;
-    border-color: #e63946;
-    color: white;
-}
-
-body.dark .filter-btn {
-    color: #e5e5ea;
-    border-color: #3a3a3c;
-}
-
-body.dark .filter-btn:hover {
-    background: #3a3a3c;
-}
-
-body.dark .filter-btn.active {
-    background: #e63946;
-    border-color: #e63946;
-}
-
-body.dark .safety-section-featured .btn-safety-link {
-    background: linear-gradient(135deg, #2a2a3e, #26263e);
-}
-
-body.dark .safety-section-featured .btn-safety-link:hover {
-    background: linear-gradient(135deg, #26263e, #2a2a3e);
+body.dark .mystery-box-card {
+    background: rgba(0, 0, 0, 0.3);
 }

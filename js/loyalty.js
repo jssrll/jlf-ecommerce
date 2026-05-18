@@ -1,6 +1,8 @@
 // ========================================
-// LOYALTY QR CODE FUNCTIONS
+// LOYALTY QR CODE FUNCTIONS - FIXED
 // ========================================
+
+let isProcessingScan = false;
 
 async function generateUserQRCode() {
     if (!currentUser || isAdmin) return;
@@ -123,8 +125,11 @@ function startLoyaltyAutoRefresh() {
 }
 
 // ========================================
-// ADMIN QR SCANNER FUNCTIONS
+// ADMIN QR SCANNER FUNCTIONS - FIXED
 // ========================================
+
+let currentStream = null;
+let scanInterval = null;
 
 function startQrScanner() {
     const video = document.getElementById("qrVideo");
@@ -145,6 +150,7 @@ function startQrScanner() {
             if (stopBtn) stopBtn.style.display = "inline-block";
             
             startScanningInterval();
+            showToast("Camera started. Point at QR code.", 2000);
         })
         .catch(err => {
             console.error("Camera error:", err);
@@ -182,6 +188,8 @@ function startScanningInterval() {
 }
 
 async function scanQRFromVideo() {
+    if (isProcessingScan) return;
+    
     const video = document.getElementById("qrVideo");
     if (!video || !video.videoWidth || !video.videoHeight) return;
     
@@ -215,6 +223,10 @@ async function scanQRFromVideo() {
 
 async function processQrFileUpload(file) {
     if (!file) return;
+    if (isProcessingScan) {
+        showToast("Please wait, processing previous scan...", 1500);
+        return;
+    }
     
     const reader = new FileReader();
     reader.onload = async (e) => {
@@ -246,6 +258,13 @@ async function processQrFileUpload(file) {
 }
 
 async function processQrScan(qrData) {
+    if (isProcessingScan) {
+        showScanResult("Processing previous scan...", true);
+        return;
+    }
+    
+    isProcessingScan = true;
+    
     const parts = qrData.split('_');
     let accountId = qrData;
     let phone = '';
@@ -277,6 +296,8 @@ async function processQrScan(qrData) {
                 </div>
             `);
             
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            
             loadRecentScans();
             
             if (currentUser && (currentUser.id === accountId || currentUser.phone === phone)) {
@@ -289,6 +310,8 @@ async function processQrScan(qrData) {
     } catch (error) {
         console.error("Scan error:", error);
         showScanResult("Error processing scan. Please try again.", true);
+    } finally {
+        isProcessingScan = false;
     }
 }
 
@@ -344,19 +367,35 @@ function setupQrScannerUI() {
     const uploadArea = document.getElementById("uploadArea");
     
     if (startScannerBtn) {
-        startScannerBtn.addEventListener("click", startQrScanner);
+        startScannerBtn.removeEventListener('click', startQrScanner);
+        startScannerBtn.addEventListener('click', startQrScanner);
     }
     if (stopScannerBtn) {
-        stopScannerBtn.addEventListener("click", stopQrScanner);
+        stopScannerBtn.removeEventListener('click', stopQrScanner);
+        stopScannerBtn.addEventListener('click', stopQrScanner);
     }
     if (qrFileInput) {
-        qrFileInput.addEventListener("change", (e) => {
-            if (e.target.files[0]) processQrFileUpload(e.target.files[0]);
-        });
+        qrFileInput.removeEventListener('change', handleFileChange);
+        qrFileInput.addEventListener('change', handleFileChange);
     }
     if (uploadArea) {
-        uploadArea.addEventListener("click", () => {
-            if (qrFileInput) qrFileInput.click();
-        });
+        uploadArea.removeEventListener('click', handleUploadClick);
+        uploadArea.addEventListener('click', handleUploadClick);
     }
 }
+
+function handleFileChange(e) {
+    if (e.target.files[0]) processQrFileUpload(e.target.files[0]);
+}
+
+function handleUploadClick() {
+    const qrFileInput = document.getElementById("qrFileInput");
+    if (qrFileInput) qrFileInput.click();
+}
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        setupQrScannerUI();
+    }, 500);
+});
