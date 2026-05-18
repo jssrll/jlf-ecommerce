@@ -130,6 +130,26 @@
       </div>
     </div>
 
+    <!-- SURPRISE ME - Mystery Box -->
+    <div class="mystery-box-section">
+      <div class="mystery-box-header">
+        <span class="mystery-badge">✨ NEW</span>
+        <h2>Surprise Me!</h2>
+        <p>Can't decide? Let us pick for you! Get a <strong>mystery box</strong> — a random premium fireworks product delivered to your door.</p>
+      </div>
+      <div class="mystery-box-card">
+        <div class="mystery-box-icon">🎁</div>
+        <div class="mystery-box-info">
+          <h3>Mystery Fireworks Box</h3>
+          <p class="mystery-note"><i class="fas fa-info-circle"></i> This is a <strong>random product</strong> — the surprise is part of the fun! Could be any item from our collection.</p>
+          <span class="mystery-price">₱499</span>
+        </div>
+        <button class="btn-mystery" onclick="addMysteryBox()">
+          <i class="fas fa-dice"></i> Surprise Me!
+        </button>
+      </div>
+    </div>
+
     <div class="features-apple">
       <div class="feature-block">
         <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
@@ -212,6 +232,18 @@
         </div>
         <div id="codeMessage" class="code-message"></div>
       </div>
+    </div>
+
+    <!-- Fireworks Safety Link -->
+    <div class="safety-banner">
+      <div class="safety-banner-icon">🛡️</div>
+      <div class="safety-banner-text">
+        <h3>Fireworks Safety Guide</h3>
+        <p>Stay safe this celebration season. Read our complete safety guide and education before using any fireworks.</p>
+      </div>
+      <a href="safety.html" target="_blank" class="btn-safety-link">
+        <i class="fas fa-shield-alt"></i> Read Safety Guide
+      </a>
     </div>
 
     <!-- Investment Section - Single Option -->
@@ -732,7 +764,7 @@
   <div id="cartItemsList" class="cart-items-list"><div class="empty-cart-msg"><i class="fas fa-shopping-cart"></i><p>Your cart is empty. Add some fireworks!</p></div></div>
   <div class="cart-footer">
     <div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div>
-    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout →</button>
+    <button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout →</button>
   </div>
 </div>
 <div id="toastMsg" class="toast-msg">Item added to cart</div>
@@ -803,32 +835,119 @@
 <script src="js/app.js"></script>
 
 <script>
-// Helper functions for cart and settings
-function showToast(message) {
-    let toast = document.getElementById('toastMsg');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3000);
+// ---- TOAST ----
+function showToast(message, duration) {
+  let toast = document.getElementById('toastMsg');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), duration || 1800);
 }
 
+// ---- CART DRAWER ----
 function closeCartDrawer() {
-    document.getElementById('cartDrawer').classList.remove('open');
-    document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  if (typeof updateIconActiveState === 'function') updateIconActiveState();
 }
 
+// ---- CHECKOUT (delegates to cart.js placeOrder) ----
 function checkout() {
-    if (typeof placeOrder === 'function') {
-        placeOrder();
-    } else {
-        showToast('Checkout unavailable. Please refresh.');
-    }
+  if (typeof placeOrder === 'function') placeOrder();
+  else showToast('Checkout unavailable. Please refresh.');
 }
 
-// Service worker
-if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>{
-        navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message));
-    });
+// ---- MYSTERY BOX ----
+function addMysteryBox() {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to add to cart", 1500);
+    if (typeof openAccountModal === 'function') openAccountModal();
+    return;
+  }
+  // Pick a random product
+  const rand = products[Math.floor(Math.random() * products.length)];
+  const mysteryItem = {
+    id: 9999,
+    name: `Mystery Box (${rand.category})`,
+    price: 499,
+    image: '🎁',
+    quantity: 1
+  };
+  const existing = cart.find(i => i.id === 9999);
+  if (existing) {
+    showToast("You already have a Mystery Box in your cart!", 1500);
+    return;
+  }
+  cart.push(mysteryItem);
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+  if (typeof saveCartToLocal === 'function') saveCartToLocal();
+  if (typeof renderCartUI === 'function') renderCartUI();
+  if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+  showToast('🎁 Mystery Box added to cart! Good luck!', 2000);
+}
+
+// ---- KEYBOARD SHORTCUTS ----
+document.addEventListener('keydown', function(e) {
+  // Skip if typing in an input/textarea
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+  // Skip modified keys
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  const key = e.key.toLowerCase();
+
+  if (key === '?') {
+    showKeyboardHelp();
+  } else if (key === 'c') {
+    const drawer = document.getElementById('cartDrawer');
+    if (drawer && drawer.classList.contains('open')) {
+      closeCartDrawer();
+    } else {
+      if (typeof openCartDrawer === 'function') openCartDrawer();
+      else { document.getElementById('cartDrawer')?.classList.add('open'); document.getElementById('cartOverlay')?.classList.add('open'); }
+    }
+  } else if (key === 's') {
+    if (typeof switchPage === 'function') switchPage('shop');
+    setTimeout(() => { const si = document.getElementById('searchInput'); if (si) si.focus(); }, 200);
+  } else if (key === 'escape') {
+    closeCartDrawer();
+    const modals = document.querySelectorAll('.modal.show');
+    modals.forEach(m => m.classList.remove('show'));
+  }
+});
+
+function showKeyboardHelp() {
+  const existing = document.getElementById('kbHelpModal');
+  if (existing) { existing.remove(); return; }
+  const div = document.createElement('div');
+  div.id = 'kbHelpModal';
+  div.className = 'modal show';
+  div.innerHTML = `
+    <div class="modal-content" style="max-width:360px;">
+      <div class="modal-header">
+        <h2><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+        <button class="close-modal" onclick="document.getElementById('kbHelpModal').remove()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <table style="width:100%;border-collapse:collapse;">
+          <tr><td style="padding:8px 0;"><kbd style="background:#f5f5f7;border:1px solid #ddd;border-radius:4px;padding:2px 8px;font-family:monospace;">?</kbd></td><td style="padding:8px;">Show this help</td></tr>
+          <tr><td style="padding:8px 0;"><kbd style="background:#f5f5f7;border:1px solid #ddd;border-radius:4px;padding:2px 8px;font-family:monospace;">C</kbd></td><td style="padding:8px;">Toggle cart</td></tr>
+          <tr><td style="padding:8px 0;"><kbd style="background:#f5f5f7;border:1px solid #ddd;border-radius:4px;padding:2px 8px;font-family:monospace;">S</kbd></td><td style="padding:8px;">Go to shop & focus search</td></tr>
+          <tr><td style="padding:8px 0;"><kbd style="background:#f5f5f7;border:1px solid #ddd;border-radius:4px;padding:2px 8px;font-family:monospace;">Esc</kbd></td><td style="padding:8px;">Close modals / cart</td></tr>
+        </table>
+      </div>
+      <div class="modal-footer" style="padding:16px;text-align:center;">
+        <button class="btn-primary-apple" onclick="document.getElementById('kbHelpModal').remove()">Got it!</button>
+      </div>
+    </div>`;
+  document.body.appendChild(div);
+  div.addEventListener('click', e => { if (e.target === div) div.remove(); });
+}
+
+// ---- SERVICE WORKER ----
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message));
+  });
 }
 </script>
 </body>

@@ -1,5 +1,4 @@
-// NOTE: pendingCheckout is managed via window._pendingCheckout
-// so that cart.js and auth.js always share the same flag.
+let pendingCheckout = false; // Track if checkout was waiting for login
 
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
@@ -16,6 +15,7 @@ function openAccountModal() {
 }
 
 function closeAccountModal() {
+  pendingCheckout = false; // Clear pending checkout when modal closed manually
   const modal = document.getElementById("accountModal");
   modal.classList.remove("show");
 }
@@ -78,7 +78,7 @@ function startRealTimeBalanceCheck() {
       } else if (!currentUser || isAdmin) {
         stopRealTimeBalanceCheck();
       }
-    }, 1000);
+    }, 5000);
   }
 }
 
@@ -342,15 +342,11 @@ async function handleRegister(event) {
 }
 
 // Check if a checkout was pending (after login/register)
-// Uses window._pendingCheckout shared with cart.js
 function checkPendingCheckout() {
-  if (window._pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
-    window._pendingCheckout = false;
+  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
+    pendingCheckout = false;
     setTimeout(() => {
-      if (typeof openCartDrawer === 'function') openCartDrawer();
-      setTimeout(() => {
-        if (typeof placeOrder === 'function') placeOrder();
-      }, 200);
+      if (typeof placeOrder === 'function') placeOrder();
     }, 300);
   }
 }
@@ -359,7 +355,6 @@ function logout() {
   stopRealTimeBalanceCheck();
   currentUser = null;
   isAdmin = false;
-  window._pendingCheckout = false;
   localStorage.removeItem("nova_user");
   document.getElementById("userNameDisplay").innerText = "";
   closeProfileModal();
@@ -368,6 +363,17 @@ function logout() {
   if (typeof updateCartBadge === 'function') updateCartBadge();
   if (typeof saveCartToLocal === 'function') saveCartToLocal();
   if (typeof renderCartUI === 'function') renderCartUI();
+  
+  // Clear transaction page immediately so no data is left visible
+  const ordersContainer = document.getElementById("ordersContainer");
+  if (ordersContainer) {
+    ordersContainer.innerHTML = `
+      <div class="empty-orders">
+        <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
+        <p>Please login to view your transactions.</p>
+        <button class="btn-primary-apple" onclick="openAccountModal()" style="margin-top: 20px;">Login</button>
+      </div>`;
+  }
   
   document.querySelectorAll('.nav-link').forEach(link => {
     link.style.display = 'block';

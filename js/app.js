@@ -305,6 +305,13 @@ function init() {
   window.refreshAdminBugReports = refreshAdminBugReports;
   // Update icon active state
   updateIconActiveState();
+  // New features
+  window.copyAccountId = copyAccountId;
+  window.orderAgain = orderAgain;
+  window.hapticFeedback = hapticFeedback;
+  window.openCartDrawer = openCartDrawer;
+  window.loadMoreTransactions = loadMoreTransactions;
+  window.addMysteryBox = addMysteryBox;
 }
 
 document.addEventListener('DOMContentLoaded', init);
