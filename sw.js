@@ -5,7 +5,6 @@ const urlsToCache = [
   '/index.html',
   '/landing.html',
   '/css/style.css',
-  '/css/settings.css',
   '/css/landing.css',
   '/js/config.js',
   '/js/helpers.js',
@@ -37,44 +36,85 @@ const urlsToCache = [
   '/favicon.ico'
 ];
 
+// Install event - cache static assets
 self.addEventListener('install', event => {
-  console.log('Service Worker installing...');
+  console.log('🔧 Service Worker installing...');
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache).catch(err => console.log('Cache warning:', err)))
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('📦 Caching static assets');
+        return cache.addAll(urlsToCache);
+      })
+      .catch(err => console.log('⚠️ Cache addAll failed:', err))
   );
   self.skipWaiting();
 });
 
+// Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  console.log('Service Worker activating...');
+  console.log('🚀 Service Worker activating...');
   event.waitUntil(
     caches.keys().then(cacheNames => {
-      return Promise.all(cacheNames.map(cache => {
-        if (cache !== CACHE_NAME) return caches.delete(cache);
-      }));
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            console.log('🗑️ Deleting old cache:', cache);
+            return caches.delete(cache);
+          }
+        })
+      );
     })
   );
   self.clients.claim();
 });
 
+// Fetch event - network-first strategy for API, cache-first for static
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // CRITICAL: Do NOT intercept external resources
+  // CRITICAL FIX: Do NOT intercept external resources
+  // Let the browser handle them directly (respects CSP)
   if (url.origin !== self.location.origin) {
+    // For external requests (Google Fonts, Font Awesome, CDNs), just fetch normally
+    // Don't try to cache or modify them
     return;
   }
   
   // For API calls - network first
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match(event.request))
+      fetch(event.request)
+        .then(response => {
+          const clonedResponse = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, clonedResponse);
+          });
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request);
+        })
     );
     return;
   }
   
-  // For static assets - cache first
+  // For static assets - cache first, then network
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (!response || response.status !== 200) {
+            return response;
+          }
+          const clonedResponse = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, clonedResponse);
+          });
+          return response;
+        });
+      })
   );
 });
