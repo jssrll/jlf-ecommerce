@@ -22,11 +22,8 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="css/style.css?v=6">
-<link rel="stylesheet" href="css/upgrades.css?v=3">
-<link rel="stylesheet" href="css/mystery-box.css?v=2">
-<link rel="stylesheet" href="css/keyboard-help.css?v=1">
-<link rel="stylesheet" href="css/transaction-id.css?v=1">
+<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/upgrades.css?v=1">
 
 <!-- PWA Manifest -->
 <link rel="manifest" href="manifest.json">
@@ -91,6 +88,7 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
       </div>
     </div>
 
+    <!-- Best Sellers -->
     <div class="featured-showcase">
       <div class="showcase-header">
         <h2>Best Sellers</h2>
@@ -101,25 +99,25 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
           <div class="showcase-icon">🧨</div>
           <h3>Maribel Kwitis</h3>
           <span class="price">₱129</span>
-          <button class="btn-small-primary" onclick="window.addToCart(1)">Add to Cart</button>
+          <button class="btn-small-primary add-to-cart-btn" data-id="1">Add to Cart</button>
         </div>
         <div class="showcase-item">
           <div class="showcase-icon">🧨</div>
           <h3>TS Thunder Sawa 500 Rounds</h3>
           <span class="price">₱749</span>
-          <button class="btn-small-primary" onclick="window.addToCart(5)">Add to Cart</button>
+          <button class="btn-small-primary add-to-cart-btn" data-id="5">Add to Cart</button>
         </div>
         <div class="showcase-item">
           <div class="showcase-icon">🧨</div>
           <h3>TS Special DK Sawa 500 Rounds</h3>
           <span class="price">₱789</span>
-          <button class="btn-small-primary" onclick="window.addToCart(6)">Add to Cart</button>
+          <button class="btn-small-primary add-to-cart-btn" data-id="6">Add to Cart</button>
         </div>
         <div class="showcase-item">
           <div class="showcase-icon">🧨</div>
           <h3>TS Super Thunder Sawa 500 Rounds</h3>
           <span class="price">₱799</span>
-          <button class="btn-small-primary" onclick="window.addToCart(7)">Add to Cart</button>
+          <button class="btn-small-primary add-to-cart-btn" data-id="7">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -136,19 +134,10 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
         <div class="mystery-box-icon">🎁</div>
         <div class="mystery-box-info">
           <h3>Mystery Fireworks Box</h3>
-          <p class="mystery-note">
-            <i class="fas fa-dice"></i>
-            This Mystery Box contains <strong>RANDOM products</strong> from our collection. Could be anything — could be everything you need!
-          </p>
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:8px;">
-            <span class="mystery-price">₱499</span>
-            <span style="color:rgba(255,255,255,0.5); font-size:13px;">Free delivery on orders ₱1999+</span>
-          </div>
+          <p class="mystery-note"><i class="fas fa-dice"></i> Contains RANDOM products from our collection!</p>
+          <div><span class="mystery-price">₱499</span></div>
         </div>
-        <button class="btn-mystery" onclick="window.addMysteryBox()">
-          <i class="fas fa-dice"></i>
-          Try Your Luck!
-        </button>
+        <button class="btn-mystery" id="mysteryBoxBtn"><i class="fas fa-dice"></i> Try Your Luck!</button>
       </div>
     </div>
 
@@ -156,59 +145,29 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
       <div class="feature-block">
         <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
         <h3>Free Express Delivery</h3>
-        <p>On all orders ₱1999+. Guaranteed free delivery/meet-up.</p>
-        <a href="#" onclick="window.switchPage('featured')">Learn more <i class="fas fa-chevron-right"></i></a>
+        <p>On all orders ₱1999+</p>
+        <a href="#" data-page="featured" class="feature-link">Learn more →</a>
       </div>
       <div class="feature-block">
         <div class="feature-icon"><i class="fas fa-gift"></i></div>
         <h3>Exclusive Codes</h3>
-        <p>Redeem special codes for instant credits</p>
-        <a href="#" onclick="window.switchPage('featured')">Learn more <i class="fas fa-chevron-right"></i></a>
+        <p>Redeem special codes for credits</p>
+        <a href="#" data-page="featured" class="feature-link">Learn more →</a>
       </div>
       <div class="feature-block">
         <div class="feature-icon"><i class="fas fa-headset"></i></div>
         <h3>24/7 Support</h3>
-        <p>We're here to help with your celebrations</p>
-        <a href="#" onclick="window.switchPage('help')">Learn more <i class="fas fa-chevron-right"></i></a>
-      </div>
-    </div>
-
-    <div class="how-it-works">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step"><div class="step-number">1</div><i class="fas fa-user-plus"></i><h3>Create Account</h3><p>Sign up in seconds</p></div>
-        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-        <div class="step"><div class="step-number">2</div><i class="fas fa-shopping-cart"></i><h3>Shop Fireworks</h3><p>Choose your favorites</p></div>
-        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-        <div class="step"><div class="step-number">3</div><i class="fas fa-ticket-alt"></i><h3>Redeem Codes</h3><p>Get instant credits</p></div>
-        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
-        <div class="step"><div class="step-number">4</div><i class="fas fa-fire"></i><h3>Light Up!</h3><p>Enjoy your celebration</p></div>
-      </div>
-    </div>
-
-    <div class="stats-section">
-      <div class="stat"><div class="stat-number">49+</div><div class="stat-label">Happy Customers</div></div>
-      <div class="stat"><div class="stat-number">200+</div><div class="stat-label">Products Available</div></div>
-      <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Support Available</div></div>
-    </div>
-
-    <div class="testimonials-apple">
-      <h2>What Our Customers Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          <p>Ayyy grabe wala ako masabi. The best SAWA! Ang ganda ng putok Quality</p>
-          <h4>- Bobby D.</h4>
-        </div>
+        <p>We're here to help</p>
+        <a href="#" data-page="help" class="feature-link">Learn more →</a>
       </div>
     </div>
   </div>
 
   <!-- SHOP PAGE -->
   <div id="shopPage" class="page">
-    <div class="page-hero"><h1>Fireworks Collection</h1><p>Choose from our wide selection of premium pyrotechnics for every celebration</p></div>
+    <div class="page-hero"><h1>Fireworks Collection</h1></div>
     <div class="filters-bar-apple">
-      <div class="search-box-apple"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search fireworks..."></div>
+      <div class="search-box-apple"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search..."></div>
       <div class="category-filter-apple" id="categoryFilter">
         <button class="cat-btn-apple active" data-cat="all">All</button>
         <button class="cat-btn-apple" data-cat="Aerial">Aerial</button>
@@ -223,191 +182,71 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
 
   <!-- FEATURED PAGE -->
   <div id="featuredPage" class="page">
-    <div class="page-hero">
-      <h1>Rewards & Investment</h1>
-      <p>Redeem exclusive codes and grow your credit balance with smart investments</p>
-    </div>
-
+    <div class="page-hero"><h1>Rewards & Investment</h1></div>
     <div class="redemption-section-apple">
       <div class="code-card-apple">
-        <h2><i class="fas fa-ticket-alt"></i> Code Redemption</h2>
+        <h2>Code Redemption</h2>
         <div class="code-input-group-apple">
-          <input type="text" id="redemptionCode" placeholder="Enter your code">
-          <button class="btn-primary-apple" onclick="window.redeemCode()">Redeem</button>
+          <input type="text" id="redemptionCode" placeholder="Enter code">
+          <button class="btn-primary-apple" id="redeemCodeBtn">Redeem</button>
         </div>
-        <div id="codeMessage" class="code-message"></div>
+        <div id="codeMessage"></div>
       </div>
     </div>
-
-    <div class="safety-section-featured" style="text-align: center; margin: 30px auto;">
-      <a href="safety.html" class="btn-safety-link" style="display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-decoration: none; padding: 14px 28px; border-radius: 980px; font-weight: 600; transition: 0.2s;">
-        <i class="fas fa-shield-alt" style="font-size: 1.2rem;"></i>
-        🎓 Firework Safety Guide
-      </a>
-      <p style="font-size: 0.7rem; color: #86868b; margin-top: 12px;">Learn how to celebrate responsibly</p>
-    </div>
-
-    <div class="investment-section-featured">
-      <h2><i class="fas fa-chart-line"></i> Investment Options</h2>
-      <p class="investment-subtitle">Grow your balance with fixed-return investments</p>
-      <div class="investment-grid-featured" id="investmentGridFeatured">
-        <div class="investment-card-featured">
-          <div class="investment-icon-featured">📈</div>
-          <h3>Investment Option</h3>
-          <p>Medium-term investment with competitive returns</p>
-          <div class="investment-details-featured">
-            <span class="return-highlight">Return: 5%</span>
-            <span>Duration: 180 days (6 months)</span>
-            <span>Min: ₱500</span>
-          </div>
-          <div class="investment-input-featured">
-            <input type="number" id="investmentAmount" placeholder="Amount in ₱ (min ₱500)">
-            <button class="btn-secondary-apple" onclick="window.investInInvestmentOption()">Invest Now</button>
-          </div>
-        </div>
-      </div>
+    <div class="safety-section-featured" style="text-align:center;margin:30px">
+      <a href="safety.html" class="btn-safety-link">🎓 Firework Safety Guide</a>
     </div>
   </div>
 
   <!-- ORDERS PAGE -->
   <div id="ordersPage" class="page">
-    <div class="page-hero">
-      <h1><i class="fas fa-history"></i> Transaction History</h1>
-      <p>View all your transactions in one place - Orders, Investments, Redemptions, Recharges &amp; Withdrawals</p>
-    </div>
+    <div class="page-hero"><h1>Transaction History</h1></div>
     <div id="ordersContainer" class="orders-container">
-      <div class="empty-orders">
-        <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
-        <p>No transactions yet. Start shopping!</p>
-        <button class="btn-primary-apple" onclick="window.switchPage('shop')" style="margin-top: 20px;">Shop Now</button>
-      </div>
+      <div class="empty-orders"><i class="fas fa-receipt"></i><p>No transactions yet</p></div>
     </div>
   </div>
 
   <!-- SETTINGS PAGE -->
-  <div id="settingsPage" class="page">
-    <div id="mainContent"></div>
+  <div id="settingsPage" class="page"><div id="mainContent"></div></div>
+
+  <!-- HELP PAGE -->
+  <div id="helpPage" class="page">
+    <div class="page-hero"><h1>Customer Support</h1></div>
+    <div class="support-grid-apple">
+      <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><button class="btn-secondary-apple" id="startChatBtn">Start Chat</button></div>
+      <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><button class="btn-secondary-apple" id="sendEmailBtn">Send Email</button></div>
+    </div>
   </div>
 
   <!-- ADMIN PAGE -->
   <div id="adminPage" class="page">
-    <div class="page-hero">
-      <h1><i class="fas fa-code"></i> Admin Dashboard</h1>
-      <p>Manage orders, view logs, and monitor system activity</p>
-    </div>
+    <div class="page-hero"><h1>Admin Dashboard</h1></div>
     <div class="admin-tabs">
-      <button class="admin-tab-btn active" onclick="window.switchAdminTab('orders')">Orders Management</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('logs')">Login Logs</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('users')">User Management</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('redemptions')">Code Redemptions</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('recharges')">Recharge Requests</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('withdrawals')">Withdrawal Requests</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('investments')">Investments</button>
-      <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="window.switchAdminTab('qrscanner')">QR Scanner</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('announcements')">Announcements</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('bugreports')">Bug Reports</button>
-      <button class="admin-tab-btn" onclick="window.switchAdminTab('promocodes')">Promo Codes</button>
+      <button class="admin-tab-btn active" data-admin-tab="orders">Orders</button>
+      <button class="admin-tab-btn" data-admin-tab="logs">Logs</button>
+      <button class="admin-tab-btn" data-admin-tab="users">Users</button>
+      <button class="admin-tab-btn" data-admin-tab="recharges">Recharges</button>
+      <button class="admin-tab-btn" data-admin-tab="withdrawals">Withdrawals</button>
+      <button class="admin-tab-btn" data-admin-tab="qrscanner">QR Scanner</button>
+      <button class="admin-tab-btn" data-admin-tab="announcements">Announcements</button>
+      <button class="admin-tab-btn" data-admin-tab="promocodes">Promo Codes</button>
     </div>
-    <div id="adminOrdersTab" class="admin-tab active">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.refreshAdminOrders()"><i class="fas fa-sync-alt"></i> Refresh Orders</button></div>
-      <div id="adminOrdersContainer" class="admin-orders-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading orders...</div></div>
-    </div>
-    <div id="adminLogsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.refreshAdminLogs()"><i class="fas fa-sync-alt"></i> Refresh Logs</button></div>
-      <div id="adminLogsContainer" class="admin-logs-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading logs...</div></div>
-    </div>
-    <div id="adminUsersTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.refreshAdminUsers()"><i class="fas fa-sync-alt"></i> Refresh Users</button></div>
-      <div id="adminUsersContainer" class="admin-users-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading users...</div></div>
-    </div>
-    <div id="adminRedemptionsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.refreshAdminRedemptions()"><i class="fas fa-sync-alt"></i> Refresh Redemptions</button></div>
-      <div id="adminRedemptionsContainer" class="admin-redemptions-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div></div>
-    </div>
-    <div id="adminRechargesTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.loadAdminRecharges()"><i class="fas fa-sync-alt"></i> Refresh Recharges</button></div>
-      <div id="adminRechargesContainer" class="admin-recharges-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading recharge requests...</div></div>
-    </div>
-    <div id="adminWithdrawalsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.loadAdminWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh Withdrawals</button></div>
-      <div id="adminWithdrawalsContainer" class="admin-withdrawals-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading withdrawal requests...</div></div>
-    </div>
-    <div id="adminInvestmentsTab" class="admin-tab">
-      <div class="admin-actions"><button class="btn-secondary-apple" onclick="window.loadAdminCreditInvestments()"><i class="fas fa-sync-alt"></i> Refresh Investments</button></div>
-      <div id="adminInvestmentsContainer" class="admin-investments-container"><div style="text-align:center;padding:40px;"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div></div>
-    </div>
-
+    <div id="adminOrdersTab" class="admin-tab active"><div id="adminOrdersContainer">Loading...</div></div>
+    <div id="adminLogsTab" class="admin-tab"><div id="adminLogsContainer">Loading...</div></div>
+    <div id="adminUsersTab" class="admin-tab"><div id="adminUsersContainer">Loading...</div></div>
+    <div id="adminRechargesTab" class="admin-tab"><div id="adminRechargesContainer">Loading...</div></div>
+    <div id="adminWithdrawalsTab" class="admin-tab"><div id="adminWithdrawalsContainer">Loading...</div></div>
     <div id="adminQrScannerTab" class="admin-tab">
       <div class="qr-scanner-container">
-        <h2><i class="fas fa-qrcode"></i> Loyalty QR Scanner</h2>
-        <p class="scanner-subtitle">Scan customer's QR code to add 1 loyalty mark</p>
-        <div class="scanner-section">
-          <h3><i class="fas fa-camera"></i> Camera Scanner</h3>
-          <div class="video-container"><video id="qrVideo" playsinline autoplay style="width:100%;max-width:500px;margin:0 auto;display:block;"></video></div>
-          <div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">
-            <button class="btn-primary-apple" id="startScannerBtn"><i class="fas fa-play"></i> Start Camera</button>
-            <button class="btn-secondary-apple" id="stopScannerBtn" style="display:none;"><i class="fas fa-stop"></i> Stop Camera</button>
-          </div>
-        </div>
-        <div class="scanner-section">
-          <h3><i class="fas fa-upload"></i> Upload QR Code</h3>
-          <div class="upload-area" id="uploadArea" style="border:2px dashed #ccc;border-radius:16px;padding:40px;text-align:center;cursor:pointer;">
-            <i class="fas fa-qrcode" style="font-size:3rem;color:#e63946;margin-bottom:12px;display:block;"></i>
-            <p>Click or drag QR code image here</p>
-            <input type="file" id="qrFileInput" accept="image/*" hidden>
-            <button class="btn-primary-apple" onclick="document.getElementById('qrFileInput').click()" style="margin-top:10px;">Choose File</button>
-          </div>
-        </div>
-        <div id="qrScanResult" class="qr-scan-result" style="display:none;">
-          <div class="result-header"><i class="fas fa-check-circle"></i><h3>Scan Result</h3></div>
-          <div id="qrScanResultContent"></div>
-        </div>
-        <div class="recent-scans" style="margin-top:30px;">
-          <h3><i class="fas fa-history"></i> Recent Scans</h3>
-          <div id="recentScansContainer" class="recent-scans-list" style="max-height:300px;overflow-y:auto;"><div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading...</div></div>
-        </div>
+        <button class="btn-primary-apple" id="startScannerBtn">Start Camera</button>
+        <button class="btn-secondary-apple" id="stopScannerBtn" style="display:none">Stop Camera</button>
+        <video id="qrVideo" playsinline autoplay style="width:100%;max-width:500px;margin-top:20px"></video>
+        <div id="qrScanResult"></div>
+        <div id="recentScansContainer"></div>
       </div>
     </div>
-
-    <div id="adminAnnouncementsTab" class="admin-tab">
-      <div class="qr-scanner-container">
-        <h2><i class="fas fa-bullhorn"></i> Publish Announcement</h2>
-        <div class="scanner-section">
-          <div class="form-group"><label>Header</label><input type="text" id="annHeader" placeholder="Announcement title"></div>
-          <div class="form-group"><label>Content</label><textarea id="annContent" rows="3" placeholder="Announcement message"></textarea></div>
-          <button class="btn-primary-apple" onclick="window.publishAnnouncement()">Publish</button>
-        </div>
-        <div id="recentAnnouncementsList"></div>
-      </div>
-    </div>
-
-    <div id="adminBugreportsTab" class="admin-tab">
-      <div class="qr-scanner-container">
-        <h2><i class="fas fa-bug"></i> Bug Reports</h2>
-        <div id="adminBugReportsContainer"><div class="loading-state">Loading...</div></div>
-      </div>
-    </div>
-
-    <div id="adminPromocodesTab" class="admin-tab">
-      <div class="qr-scanner-container">
-        <h2>Promo Codes</h2>
-        <div id="promoCodesContainer"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HELP PAGE -->
-  <div id="helpPage" class="page">
-    <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7</p></div>
-    <div class="support-grid-apple">
-      <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><button class="btn-secondary-apple" onclick="window.startChat()">Start Chat</button></div>
-      <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><button class="btn-secondary-apple" onclick="window.sendEmail()">Send Email</button></div>
-    </div>
-    <div class="faq-section-apple"><h2>FAQ</h2>
-      <div class="faq-list-apple">
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="window.toggleFAQ(this)"><span>How to place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">Browse shop, add to cart, checkout with credit balance.</div></div>
-      </div>
-    </div>
+    <div id="adminAnnouncementsTab" class="admin-tab"><div id="recentAnnouncementsList">Loading...</div></div>
+    <div id="adminPromocodesTab" class="admin-tab"><div id="promoCodesContainer">Loading...</div></div>
   </div>
 
 </main>
@@ -417,87 +256,74 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
 <!-- MODALS -->
 <div id="accountModal" class="modal">
   <div class="modal-content">
-    <div class="modal-header"><h2>Account</h2><button class="close-modal" onclick="window.closeAccountModal()">&times;</button></div>
+    <div class="modal-header"><h2>Account</h2><button class="close-modal" id="closeAccountModalBtn">&times;</button></div>
     <div class="modal-tabs">
-      <button class="tab-btn active" onclick="window.switchTab('login')">Login</button>
-      <button class="tab-btn" onclick="window.switchTab('register')">Create Account</button>
+      <button class="tab-btn active" data-auth-tab="login">Login</button>
+      <button class="tab-btn" data-auth-tab="register">Create Account</button>
     </div>
     <div id="loginTab" class="tab-content active">
-      <form id="loginForm" onsubmit="window.handleLogin(event)">
+      <form id="loginForm">
         <div class="form-group"><label>Phone</label><input type="tel" id="loginPhone" placeholder="9XXXXXXXXX" required></div>
         <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required></div>
         <button type="submit" class="btn-primary-apple full-width" id="loginBtn">Login</button>
       </form>
     </div>
     <div id="registerTab" class="tab-content">
-      <form id="registerForm" onsubmit="window.handleRegister(event)">
+      <form id="registerForm">
         <div class="form-group"><label>Full Name</label><input type="text" id="regFullName" required></div>
         <div class="form-group"><label>Phone</label><input type="tel" id="regPhone" placeholder="9XXXXXXXXX" required></div>
         <div class="form-group"><label>Password</label><input type="password" id="regPassword" required></div>
         <div class="form-group"><label>Confirm Password</label><input type="password" id="regConfirmPassword" required></div>
         <button type="submit" class="btn-primary-apple full-width" id="registerBtn">Create Account</button>
-        <div id="registerLoading" class="loading-indicator" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Creating...</div>
       </form>
     </div>
   </div>
 </div>
 
 <div id="profileModal" class="modal">
-  <div class="modal-content profile-modal">
-    <div class="modal-header"><h2><i class="fas fa-user-circle"></i> My Profile</h2><button class="close-modal" onclick="window.closeProfileModal()">&times;</button></div>
+  <div class="modal-content">
+    <div class="modal-header"><h2>My Profile</h2><button class="close-modal" id="closeProfileModalBtn">&times;</button></div>
     <div class="profile-content">
-      <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
-      <div class="profile-info">
-        <div class="info-row"><span class="info-label"><i class="fas fa-user"></i> Name:</span><span class="info-value" id="profileName">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-id-card"></i> Account ID:</span><span class="info-value" id="profileId">-</span><button class="copy-id-btn" onclick="window.copyAccountId()"><i class="fas fa-copy"></i> Copy</button></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-phone"></i> Phone:</span><span class="info-value" id="profilePhone">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-calendar"></i> Joined:</span><span class="info-value" id="profileJoined">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-coins"></i> Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
-      </div>
-      <div class="loyalty-section">
-        <div class="loyalty-header"><i class="fas fa-qrcode"></i><h3>Loyalty QR</h3></div>
-        <div id="qrCodeContainer" class="qr-code-container"></div>
-        <div class="loyalty-card"><div id="loyaltyMarksContainer" class="loyalty-marks"></div></div>
-      </div>
-      <button class="btn-secondary-apple logout-profile-btn" onclick="window.logout()">Logout</button>
+      <p><strong>Name:</strong> <span id="profileName">-</span></p>
+      <p><strong>Account ID:</strong> <span id="profileId">-</span> <button id="copyIdBtn">Copy</button></p>
+      <p><strong>Phone:</strong> <span id="profilePhone">-</span></p>
+      <p><strong>Balance:</strong> <span id="profileBalance">₱0</span></p>
+      <div id="qrCodeContainer"></div>
+      <button id="logoutBtn">Logout</button>
     </div>
   </div>
 </div>
 
 <div id="announcementModal" class="modal">
-  <div class="modal-content announcement-modal">
-    <div class="modal-header"><h2>Announcements</h2><button class="close-modal" onclick="window.closeAnnouncementModal()">&times;</button></div>
-    <div id="announcementContainer" class="announcement-container"></div>
-    <div class="announcement-footer"><button class="btn-secondary-apple" onclick="window.markAllAnnouncementsRead()">Mark all read</button></div>
+  <div class="modal-content">
+    <div class="modal-header"><h2>Announcements</h2><button class="close-modal" id="closeAnnouncementModalBtn">&times;</button></div>
+    <div id="announcementContainer"></div>
   </div>
 </div>
 
-<div id="rechargeModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>Recharge</h2><button class="close-modal" onclick="window.closeRechargeModal()">&times;</button></div><div class="recharge-content"><div class="recharge-tabs"><button class="recharge-tab-btn active" onclick="window.switchRechargeTab('gcash')">GCash</button><button class="recharge-tab-btn" onclick="window.switchRechargeTab('cash')">Cash</button></div><div id="gcashTab" class="recharge-tab active"><div class="qr-container"><img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" class="qr-code"></div><div class="recharge-form"><input type="text" id="gcashRefNumber" placeholder="Reference #"><input type="number" id="gcashAmount" placeholder="Amount"><button class="btn-primary-apple" onclick="window.submitRecharge('gcash')">Submit</button></div></div><div id="cashTab" class="recharge-tab"><div class="recharge-form"><input type="number" id="cashAmount" placeholder="Amount"><button class="btn-primary-apple" onclick="window.submitRecharge('cash')">Submit</button></div></div></div></div></div>
+<div id="rechargeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><h2>Recharge</h2><button class="close-modal" id="closeRechargeModalBtn">&times;</button></div>
+    <div><input type="text" id="gcashRefNumber" placeholder="Reference #"><input type="number" id="gcashAmount" placeholder="Amount"><button id="submitRechargeBtn">Submit</button></div>
+  </div>
+</div>
 
-<div id="withdrawModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>Withdraw</h2><button class="close-modal" onclick="window.closeWithdrawModal()">&times;</button></div><div class="withdraw-content"><div class="withdraw-tabs"><button class="withdraw-tab-btn active" onclick="window.switchWithdrawTab('gcash')">GCash</button><button class="withdraw-tab-btn" onclick="window.switchWithdrawTab('cash')">Cash</button></div><div id="withdrawGcashTab" class="withdraw-tab active"><div class="withdraw-form"><input type="text" id="gcashReceiverName" placeholder="Receiver Name"><input type="tel" id="gcashReceiverNumber" placeholder="09XXXXXXXXX"><input type="number" id="withdrawGcashAmount" placeholder="Amount"><button class="btn-primary-apple" onclick="window.submitWithdraw('gcash')">Submit</button></div></div><div id="withdrawCashTab" class="withdraw-tab"><div class="withdraw-form"><input type="number" id="withdrawCashAmount" placeholder="Amount"><button class="btn-primary-apple" onclick="window.submitWithdraw('cash')">Submit</button></div></div></div></div></div>
+<div id="withdrawModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><h2>Withdraw</h2><button class="close-modal" id="closeWithdrawModalBtn">&times;</button></div>
+    <div><input type="text" id="gcashReceiverName" placeholder="Receiver Name"><input type="number" id="withdrawAmount" placeholder="Amount"><button id="submitWithdrawBtn">Submit</button></div>
+  </div>
+</div>
 
-<div id="cartOverlay" class="cart-overlay" onclick="window.closeCartDrawer()"></div>
+<!-- Cart Sidebar -->
+<div id="cartOverlay" class="cart-overlay"></div>
 <div id="cartDrawer" class="cart-drawer">
-  <div class="cart-header"><span>Shopping Cart</span><button class="close-cart" onclick="window.closeCartDrawer()">&times;</button></div>
-  <div id="cartItemsList" class="cart-items-list"></div>
-  <div class="cart-footer"><div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div><button class="checkout-btn" onclick="window.placeOrder()">Checkout</button></div>
+  <div class="cart-header"><span>Cart</span><button id="closeCartBtn">&times;</button></div>
+  <div id="cartItemsList"></div>
+  <div class="cart-footer"><span>Total: ₱<span id="cartTotalPrice">0</span></span><button id="checkoutBtn">Checkout</button></div>
 </div>
 
 <div id="toastMsg" class="toast-msg"></div>
-
-<!-- Download Popup -->
-<div id="downloadPopup" class="download-popup" style="display:none;">
-  <div class="download-popup-content">
-    <button class="download-popup-close" onclick="window.closeDownloadPopup()">&times;</button>
-    <div class="download-popup-icon"><i class="fas fa-fire"></i></div>
-    <h3>Install JLF Fireworks App</h3>
-    <p>Get the best experience with our app!</p>
-    <div class="download-popup-buttons">
-      <button class="download-btn-primary" id="installAppBtn">Install App</button>
-      <button class="download-btn-secondary" onclick="window.closeDownloadPopup()">Later</button>
-    </div>
-  </div>
-</div>
 
 <!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
@@ -535,91 +361,293 @@ document.addEventListener('selectstart', function(e) { e.preventDefault(); retur
 <script src="js/transaction-id.js"></script>
 <script src="js/app.js"></script>
 
+<!-- Main initialization script -->
 <script>
-// Global helper functions
-window.showToast = function(message, duration) {
-  var toast = document.getElementById('toastMsg');
-  if (!toast) return;
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(function() { toast.classList.remove('show'); }, duration || 1800);
-};
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('JLF Fireworks initializing...');
 
-window.closeCartDrawer = function() {
-  document.getElementById('cartDrawer')?.classList.remove('open');
-  document.getElementById('cartOverlay')?.classList.remove('open');
-  if (typeof updateIconActiveState === 'function') updateIconActiveState();
-};
+  // Helper functions
+  window.showToast = function(msg, duration) {
+    var toast = document.getElementById('toastMsg');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, duration || 1800);
+  };
 
-window.placeOrder = function() {
-  if (typeof window.checkout === 'function') window.checkout();
-  else if (typeof placeOrder === 'function') placeOrder();
-  else window.showToast('Checkout unavailable', 1500);
-};
+  window.closeCartDrawer = function() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  };
 
-window.copyAccountId = function() {
-  var idEl = document.getElementById('profileId');
-  if (!idEl) return;
-  var accountId = idEl.textContent.trim();
-  if (!accountId || accountId === '-') {
-    window.showToast('No Account ID to copy', 1500);
-    return;
-  }
-  navigator.clipboard.writeText(accountId).then(function() {
-    window.showToast('✅ Account ID copied!', 2000);
-  }).catch(function() {
-    window.showToast('Copy failed', 1500);
+  // Navigation
+  document.querySelectorAll('.nav-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var page = this.getAttribute('data-page');
+      if (typeof switchPage === 'function') switchPage(page);
+    });
   });
-};
 
-window.addMysteryBox = function() {
-  if (!window.currentUser || window.isAdmin) {
-    window.showToast('Please login first', 1500);
-    if (typeof openAccountModal === 'function') openAccountModal();
-    return;
-  }
-  var existing = cart.find(function(i) { return i.id === 9999; });
-  if (existing) {
-    window.showToast('Mystery Box already in cart', 1800);
-    return;
-  }
-  var categories = ['Aerial', 'Ground', 'Sparklers', 'Fountains'];
-  var randCat = categories[Math.floor(Math.random() * categories.length)];
-  cart.push({ id: 9999, name: '🎁 Mystery Box (' + randCat + ')', price: 499, image: '🎁', quantity: 1, category: 'Mystery' });
-  if (typeof updateCartBadge === 'function') updateCartBadge();
-  if (typeof saveCartToLocal === 'function') saveCartToLocal();
-  if (typeof renderCartUI === 'function') renderCartUI();
-  if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
-  window.showToast('🎁 Mystery Box added!', 2200);
-};
+  // Feature links
+  document.querySelectorAll('.feature-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var page = this.getAttribute('data-page');
+      if (typeof switchPage === 'function') switchPage(page);
+    });
+  });
 
-// Install button
-document.getElementById('installAppBtn')?.addEventListener('click', function() {
-  if (window.deferredPrompt) {
-    window.deferredPrompt.prompt();
-    window.deferredPrompt.userChoice.then(function() { window.deferredPrompt = null; });
-  } else {
-    window.showToast('Tap Share then Add to Home Screen', 3000);
-  }
-});
+  // Add to cart buttons
+  document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = parseInt(this.getAttribute('data-id'));
+      if (typeof addToCart === 'function') addToCart(id);
+    });
+  });
 
-// Keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  var key = e.key.toLowerCase();
-  if (key === '?') {
-    alert('Keyboard Shortcuts:\n\nC - Open Cart\nS - Search Products\nEsc - Close Modals');
-  } else if (key === 'c') {
-    var drawer = document.getElementById('cartDrawer');
-    if (drawer && drawer.classList.contains('open')) window.closeCartDrawer();
-    else { drawer?.classList.add('open'); document.getElementById('cartOverlay')?.classList.add('open'); }
-  } else if (key === 's') {
-    if (typeof switchPage === 'function') switchPage('shop');
-    setTimeout(function() { document.getElementById('searchInput')?.focus(); }, 200);
-  } else if (key === 'escape') {
-    window.closeCartDrawer();
-    document.querySelectorAll('.modal.show').forEach(function(m) { m.classList.remove('show'); });
+  // Category filters
+  document.querySelectorAll('.cat-btn-apple').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.cat-btn-apple').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      if (typeof setCategory === 'function') setCategory(this.getAttribute('data-cat'));
+    });
+  });
+
+  // Search input
+  var searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      if (typeof setSearchQuery === 'function') setSearchQuery(e.target.value);
+    });
   }
+
+  // Mystery box
+  var mysteryBtn = document.getElementById('mysteryBoxBtn');
+  if (mysteryBtn) {
+    mysteryBtn.addEventListener('click', function() {
+      if (typeof addMysteryBox === 'function') addMysteryBox();
+    });
+  }
+
+  // Redeem code
+  var redeemBtn = document.getElementById('redeemCodeBtn');
+  if (redeemBtn) {
+    redeemBtn.addEventListener('click', function() {
+      if (typeof redeemCode === 'function') redeemCode();
+    });
+  }
+
+  // Cart icon
+  var cartIcon = document.getElementById('cartIconBtn');
+  if (cartIcon) {
+    cartIcon.addEventListener('click', function() {
+      if (typeof openCartDrawer === 'function') openCartDrawer();
+    });
+  }
+
+  // Close cart
+  var closeCartBtn = document.getElementById('closeCartBtn');
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', function() {
+      window.closeCartDrawer();
+    });
+  }
+
+  var cartOverlay = document.getElementById('cartOverlay');
+  if (cartOverlay) {
+    cartOverlay.addEventListener('click', function() {
+      window.closeCartDrawer();
+    });
+  }
+
+  // Checkout
+  var checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function() {
+      if (typeof placeOrder === 'function') placeOrder();
+    });
+  }
+
+  // Account icon
+  var accountIcon = document.getElementById('accountIcon');
+  if (accountIcon) {
+    accountIcon.addEventListener('click', function() {
+      if (window.currentUser && !window.isAdmin) {
+        if (typeof openProfileModal === 'function') openProfileModal();
+      } else {
+        if (typeof openAccountModal === 'function') openAccountModal();
+      }
+    });
+  }
+
+  // Recharge icon
+  var rechargeIcon = document.getElementById('rechargeIcon');
+  if (rechargeIcon) {
+    rechargeIcon.addEventListener('click', function() {
+      if (typeof openRechargeModal === 'function') openRechargeModal();
+    });
+  }
+
+  // Withdraw icon
+  var withdrawIcon = document.getElementById('withdrawIcon');
+  if (withdrawIcon) {
+    withdrawIcon.addEventListener('click', function() {
+      if (typeof openWithdrawModal === 'function') openWithdrawModal();
+    });
+  }
+
+  // Settings icon
+  var settingsIcon = document.getElementById('settingsIcon');
+  if (settingsIcon) {
+    settingsIcon.addEventListener('click', function() {
+      if (typeof switchPage === 'function') switchPage('settings');
+    });
+  }
+
+  // Announcement icon
+  var announcementIcon = document.getElementById('announcementIcon');
+  if (announcementIcon) {
+    announcementIcon.addEventListener('click', function() {
+      if (typeof openAnnouncementModal === 'function') openAnnouncementModal();
+    });
+  }
+
+  // Copy ID button
+  var copyIdBtn = document.getElementById('copyIdBtn');
+  if (copyIdBtn) {
+    copyIdBtn.addEventListener('click', function() {
+      var idEl = document.getElementById('profileId');
+      if (idEl && idEl.textContent) {
+        navigator.clipboard.writeText(idEl.textContent).then(function() {
+          window.showToast('✅ Account ID copied!', 2000);
+        });
+      }
+    });
+  }
+
+  // Logout button
+  var logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+      if (typeof logout === 'function') logout();
+    });
+  }
+
+  // Login form
+  var loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (typeof handleLogin === 'function') handleLogin(e);
+    });
+  }
+
+  // Register form
+  var registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (typeof handleRegister === 'function') handleRegister(e);
+    });
+  }
+
+  // Auth tabs
+  document.querySelectorAll('[data-auth-tab]').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var tabName = this.getAttribute('data-auth-tab');
+      if (typeof switchTab === 'function') switchTab(tabName);
+    });
+  });
+
+  // Admin tabs
+  document.querySelectorAll('[data-admin-tab]').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var tabName = this.getAttribute('data-admin-tab');
+      document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.getElementById('admin' + tabName.charAt(0).toUpperCase() + tabName.slice(1) + 'Tab').classList.add('active');
+      if (typeof switchAdminTab === 'function') switchAdminTab(tabName);
+    });
+  });
+
+  // QR Scanner
+  var startScannerBtn = document.getElementById('startScannerBtn');
+  if (startScannerBtn) {
+    startScannerBtn.addEventListener('click', function() {
+      if (typeof startQrScanner === 'function') startQrScanner();
+    });
+  }
+
+  var stopScannerBtn = document.getElementById('stopScannerBtn');
+  if (stopScannerBtn) {
+    stopScannerBtn.addEventListener('click', function() {
+      if (typeof stopQrScanner === 'function') stopQrScanner();
+    });
+  }
+
+  // Help buttons
+  var startChatBtn = document.getElementById('startChatBtn');
+  if (startChatBtn) {
+    startChatBtn.addEventListener('click', function() {
+      window.showToast('Connecting to live chat...', 1500);
+    });
+  }
+
+  var sendEmailBtn = document.getElementById('sendEmailBtn');
+  if (sendEmailBtn) {
+    sendEmailBtn.addEventListener('click', function() {
+      window.location.href = 'mailto:jlfworks.official@gmail.com';
+    });
+  }
+
+  // Modal close buttons
+  var closeAccountModalBtn = document.getElementById('closeAccountModalBtn');
+  if (closeAccountModalBtn) {
+    closeAccountModalBtn.addEventListener('click', function() {
+      document.getElementById('accountModal').classList.remove('show');
+    });
+  }
+
+  var closeProfileModalBtn = document.getElementById('closeProfileModalBtn');
+  if (closeProfileModalBtn) {
+    closeProfileModalBtn.addEventListener('click', function() {
+      document.getElementById('profileModal').classList.remove('show');
+    });
+  }
+
+  var closeAnnouncementModalBtn = document.getElementById('closeAnnouncementModalBtn');
+  if (closeAnnouncementModalBtn) {
+    closeAnnouncementModalBtn.addEventListener('click', function() {
+      document.getElementById('announcementModal').classList.remove('show');
+    });
+  }
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    var key = e.key.toLowerCase();
+    if (key === '?') {
+      alert('Keyboard Shortcuts:\n\nC - Open Cart\nS - Search Products\nEsc - Close Modals');
+    } else if (key === 'c') {
+      var drawer = document.getElementById('cartDrawer');
+      if (drawer && drawer.classList.contains('open')) window.closeCartDrawer();
+      else if (typeof openCartDrawer === 'function') openCartDrawer();
+    } else if (key === 's') {
+      if (typeof switchPage === 'function') switchPage('shop');
+      setTimeout(function() {
+        var si = document.getElementById('searchInput');
+        if (si) si.focus();
+      }, 200);
+    } else if (key === 'escape') {
+      window.closeCartDrawer();
+      document.querySelectorAll('.modal.show').forEach(function(m) {
+        m.classList.remove('show');
+      });
+    }
+  });
+
+  console.log('JLF Fireworks ready!');
 });
 </script>
 
