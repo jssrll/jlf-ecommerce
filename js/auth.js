@@ -1,4 +1,5 @@
-let pendingCheckout = false; // Track if checkout was waiting for login
+// NOTE: pendingCheckout is managed via window._pendingCheckout
+// so that cart.js and auth.js always share the same flag.
 
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
@@ -15,7 +16,6 @@ function openAccountModal() {
 }
 
 function closeAccountModal() {
-  pendingCheckout = false; // Clear pending checkout when modal closed manually
   const modal = document.getElementById("accountModal");
   modal.classList.remove("show");
 }
@@ -342,11 +342,15 @@ async function handleRegister(event) {
 }
 
 // Check if a checkout was pending (after login/register)
+// Uses window._pendingCheckout shared with cart.js
 function checkPendingCheckout() {
-  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
-    pendingCheckout = false;
+  if (window._pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
+    window._pendingCheckout = false;
     setTimeout(() => {
-      if (typeof placeOrder === 'function') placeOrder();
+      if (typeof openCartDrawer === 'function') openCartDrawer();
+      setTimeout(() => {
+        if (typeof placeOrder === 'function') placeOrder();
+      }, 200);
     }, 300);
   }
 }
@@ -355,6 +359,7 @@ function logout() {
   stopRealTimeBalanceCheck();
   currentUser = null;
   isAdmin = false;
+  window._pendingCheckout = false;
   localStorage.removeItem("nova_user");
   document.getElementById("userNameDisplay").innerText = "";
   closeProfileModal();
