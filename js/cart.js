@@ -121,51 +121,66 @@ function renderCartUI() {
 // ========================================
 // CART DRAWER - FIXED
 // ========================================
-let isCartClosing = false; // Prevent race condition
+
+function openCartDrawer() {
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  if (!overlay || !drawer) return;
+  overlay.classList.add('open');
+  drawer.classList.add('open');
+  renderCartUI();
+  // Update icon state if function exists
+  if (typeof updateIconActiveState === 'function') updateIconActiveState();
+}
+
+function closeCartDrawer() {
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  if (!overlay || !drawer) return;
+  // Remove classes immediately — no race condition, no setTimeout needed
+  overlay.classList.remove('open');
+  drawer.classList.remove('open');
+  // Update icon state if function exists
+  if (typeof updateIconActiveState === 'function') updateIconActiveState();
+}
 
 function initCartDrawer() {
   const cartIcon = document.getElementById('cartIconBtn');
   const overlay = document.getElementById('cartOverlay');
-  const drawer = document.getElementById('cartDrawer');
   const closeBtn = document.getElementById('closeCartBtn');
   const checkoutBtn = document.getElementById('checkoutBtn');
-  
-  function openDrawer() { 
-    isCartClosing = false;
-    overlay.classList.add('open'); 
-    drawer.classList.add('open'); 
-    renderCartUI(); 
-  }
-  
-  function closeDrawer() { 
-    if (isCartClosing) return; // Prevent double-firing
-    isCartClosing = true;
-    
-    overlay.classList.remove('open'); 
-    drawer.classList.remove('open');
-    
-    // Force remove after transition ends (safety cleanup)
-    setTimeout(() => {
-      overlay.classList.remove('open');
-      drawer.classList.remove('open');
-      isCartClosing = false;
-    }, 350);
-  }
-  
-  if (cartIcon) cartIcon.addEventListener('click', openDrawer);
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // Stop click from reaching overlay
-      closeDrawer();
+
+  if (cartIcon) {
+    cartIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openCartDrawer();
     });
   }
-  if (overlay) overlay.addEventListener('click', closeDrawer);
-  
+
+  // Close button: stop propagation so it doesn't bubble to overlay
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeCartDrawer();
+    });
+  }
+
+  // Overlay click closes the drawer
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      // Only close if clicking the overlay itself, not the drawer inside it
+      if (e.target === overlay) {
+        closeCartDrawer();
+      }
+    });
+  }
+
   if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', async () => {
+    checkoutBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
       if (checkoutBtn.disabled) return;
       const success = await placeOrder();
-      if (success) closeDrawer();
+      if (success) closeCartDrawer();
     });
   }
 }
@@ -173,13 +188,15 @@ function initCartDrawer() {
 // ========================================
 // PLACE ORDER FUNCTION - FIXED
 // ========================================
-let pendingCheckout = false; // Track if checkout was waiting for login
 
 async function placeOrder() {
   // Check if user is logged in
   if (!currentUser || isAdmin) {
     showToast("Please login to place order", 1500);
-    pendingCheckout = true; // Mark that we're waiting for login
+    // Use the SHARED pendingCheckout from auth.js (declared in state or auth scope)
+    // We set it on window so both auth.js and cart.js share the same reference
+    window._pendingCheckout = true;
+    closeCartDrawer();
     openAccountModal();
     return false;
   }
@@ -198,9 +215,11 @@ async function placeOrder() {
   }
   
   const checkoutBtn = document.getElementById("checkoutBtn");
-  const originalBtnText = checkoutBtn.innerHTML;
-  checkoutBtn.disabled = true;
-  checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  const originalBtnText = checkoutBtn ? checkoutBtn.innerHTML : '';
+  if (checkoutBtn) {
+    checkoutBtn.disabled = true;
+    checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
   
   const orderList = cart.map(item => `${item.name} x${item.quantity} (₱${item.price * item.quantity})`).join(", ");
   
@@ -216,8 +235,10 @@ async function placeOrder() {
     
     if (!balanceResult.success) {
       showToast(balanceResult.message || "Failed to process payment", 1500);
-      checkoutBtn.disabled = false;
-      checkoutBtn.innerHTML = originalBtnText;
+      if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.innerHTML = originalBtnText;
+      }
       return false;
     }
     
@@ -243,13 +264,13 @@ async function placeOrder() {
       saveCartToLocal();
       renderCartUI();
       
-      pendingCheckout = false;
+      window._pendingCheckout = false;
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
-      updateAllBalanceDisplays();
-      if (navigator.vibrate) navigator.vibrate([30, 50, 30]); // haptic success
+      if (typeof updateAllBalanceDisplays === 'function') updateAllBalanceDisplays();
       
       return true;
     } else {
+      // Refund on order failure
       const refundData = new URLSearchParams();
       refundData.append("action", "updateBalance");
       refundData.append("phone", currentUser.phone);
@@ -265,18 +286,23 @@ async function placeOrder() {
     showToast("Order failed. Please try again.", 1500);
     return false;
   } finally {
-    checkoutBtn.disabled = false;
-    checkoutBtn.innerHTML = originalBtnText;
+    if (checkoutBtn) {
+      checkoutBtn.disabled = false;
+      checkoutBtn.innerHTML = originalBtnText;
+    }
   }
 }
 
 // Auto-retry checkout after login if pending
+// Uses window._pendingCheckout so auth.js and cart.js share the same flag
 function checkPendingCheckout() {
-  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
-    pendingCheckout = false;
-    // Small delay to let the modal close first
+  if (window._pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
+    window._pendingCheckout = false;
     setTimeout(() => {
-      placeOrder();
+      openCartDrawer();
+      setTimeout(() => {
+        placeOrder();
+      }, 200);
     }, 300);
   }
 }

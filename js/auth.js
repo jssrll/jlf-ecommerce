@@ -1,5 +1,3 @@
-let pendingCheckout = false; // Track if checkout was waiting for login
-
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -15,7 +13,6 @@ function openAccountModal() {
 }
 
 function closeAccountModal() {
-  pendingCheckout = false; // Clear pending checkout when modal closed manually
   const modal = document.getElementById("accountModal");
   modal.classList.remove("show");
 }
@@ -78,7 +75,7 @@ function startRealTimeBalanceCheck() {
       } else if (!currentUser || isAdmin) {
         stopRealTimeBalanceCheck();
       }
-    }, 5000);
+    }, 1000);
   }
 }
 
@@ -241,9 +238,6 @@ async function handleLogin(event) {
       closeAccountModal();
       if (typeof renderCartUI === 'function') renderCartUI();
       
-      // CHECK PENDING CHECKOUT AFTER LOGIN
-      if (typeof checkPendingCheckout === 'function') checkPendingCheckout();
-      
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -323,9 +317,6 @@ async function handleRegister(event) {
       closeAccountModal();
       document.getElementById("registerForm").reset();
       
-      // CHECK PENDING CHECKOUT AFTER REGISTRATION
-      if (typeof checkPendingCheckout === 'function') checkPendingCheckout();
-      
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -341,16 +332,6 @@ async function handleRegister(event) {
   }
 }
 
-// Check if a checkout was pending (after login/register)
-function checkPendingCheckout() {
-  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
-    pendingCheckout = false;
-    setTimeout(() => {
-      if (typeof placeOrder === 'function') placeOrder();
-    }, 300);
-  }
-}
-
 function logout() {
   stopRealTimeBalanceCheck();
   currentUser = null;
@@ -363,17 +344,6 @@ function logout() {
   if (typeof updateCartBadge === 'function') updateCartBadge();
   if (typeof saveCartToLocal === 'function') saveCartToLocal();
   if (typeof renderCartUI === 'function') renderCartUI();
-  
-  // Clear transaction page immediately so no data is left visible
-  const ordersContainer = document.getElementById("ordersContainer");
-  if (ordersContainer) {
-    ordersContainer.innerHTML = `
-      <div class="empty-orders">
-        <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
-        <p>Please login to view your transactions.</p>
-        <button class="btn-primary-apple" onclick="openAccountModal()" style="margin-top: 20px;">Login</button>
-      </div>`;
-  }
   
   document.querySelectorAll('.nav-link').forEach(link => {
     link.style.display = 'block';
