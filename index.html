@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Immediate right-click protection (loads before anything else) -->
+  <!-- Immediate right-click protection -->
   <script>
     document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
     document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
     document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
   </script>
   
-  <!-- ============================================= -->
-  <!-- CONTENT SECURITY POLICY FIX -->
-  <!-- ============================================= -->
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     connect-src 'self' https://script.google.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://ik.imagekit.io;
@@ -39,7 +37,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- JLF Fireworks Favicon -->
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
@@ -208,7 +206,6 @@
       <h1>Rewards & Investment</h1>
       <p>Redeem exclusive codes and grow your credit balance with smart bond investments</p>
     </div>
-
     <div class="redemption-section-apple">
       <div class="code-card-apple">
         <h2><i class="fas fa-ticket-alt"></i> Code Redemption</h2>
@@ -219,11 +216,9 @@
         <div id="codeMessage" class="code-message"></div>
       </div>
     </div>
-
     <div class="investment-section-featured">
       <h2><i class="fas fa-chart-pie"></i> Bond Investment Options</h2>
       <p class="investment-subtitle">Choose your investment term and earn guaranteed returns!</p>
-      
       <div class="investment-grid-featured" id="investmentGridFeatured">
         <div class="investment-card-featured">
           <div class="investment-icon-featured">📈</div>
@@ -239,7 +234,6 @@
             <button class="btn-secondary-apple" onclick="investInBondOption1()">Invest in Option 1</button>
           </div>
         </div>
-
         <div class="investment-card-featured">
           <div class="investment-icon-featured">📊</div>
           <h3>Bond Investment - Option 2</h3>
@@ -279,138 +273,63 @@
       <h1><i class="fas fa-sliders-h"></i> Settings</h1>
       <p>Customize your account preferences and app settings</p>
     </div>
-    
     <div class="settings-container">
       <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-user-cog"></i>
-          <h2>Account Settings</h2>
-        </div>
+        <div class="settings-section-header"><i class="fas fa-user-cog"></i><h2>Account Settings</h2></div>
         <div class="settings-list">
           <div class="settings-item" onclick="openChangePassword()">
             <div class="settings-item-icon"><i class="fas fa-key"></i></div>
-            <div class="settings-item-content">
-              <h3>Change Password</h3>
-              <p>Update your account password</p>
-            </div>
+            <div class="settings-item-content"><h3>Change Password</h3><p>Update your account password</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
           <div class="settings-item" onclick="openUpdateProfile()">
             <div class="settings-item-icon"><i class="fas fa-user-edit"></i></div>
-            <div class="settings-item-content">
-              <h3>Update Profile</h3>
-              <p>Change your name or contact information</p>
-            </div>
+            <div class="settings-item-content"><h3>Update Profile</h3><p>Change your name or contact information</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
       </div>
-
       <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-bell"></i>
-          <h2>Notifications</h2>
-        </div>
+        <div class="settings-section-header"><i class="fas fa-bell"></i><h2>Notifications</h2></div>
         <div class="settings-list">
           <div class="settings-item toggle-item">
             <div class="settings-item-icon"><i class="fas fa-bell"></i></div>
-            <div class="settings-item-content">
-              <h3>Push Notifications</h3>
-              <p>Receive order updates and announcements</p>
-            </div>
-            <div class="settings-item-toggle">
-              <label class="switch">
-                <input type="checkbox" id="pushNotificationsToggle">
-                <span class="slider round"></span>
-              </label>
-            </div>
+            <div class="settings-item-content"><h3>Push Notifications</h3><p>Receive order updates and announcements</p></div>
+            <div class="settings-item-toggle"><label class="switch"><input type="checkbox" id="pushNotificationsToggle"><span class="slider round"></span></label></div>
           </div>
           <div class="settings-item toggle-item">
             <div class="settings-item-icon"><i class="fas fa-envelope"></i></div>
-            <div class="settings-item-content">
-              <h3>Email Notifications</h3>
-              <p>Receive promotional emails and offers</p>
-            </div>
-            <div class="settings-item-toggle">
-              <label class="switch">
-                <input type="checkbox" id="emailNotificationsToggle">
-                <span class="slider round"></span>
-              </label>
-            </div>
+            <div class="settings-item-content"><h3>Email Notifications</h3><p>Receive promotional emails and offers</p></div>
+            <div class="settings-item-toggle"><label class="switch"><input type="checkbox" id="emailNotificationsToggle"><span class="slider round"></span></label></div>
           </div>
         </div>
       </div>
-
       <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-mobile-alt"></i>
-          <h2>App Settings</h2>
-        </div>
+        <div class="settings-section-header"><i class="fas fa-mobile-alt"></i><h2>App Settings</h2></div>
         <div class="settings-list">
           <div class="settings-item" onclick="clearAppCache()">
             <div class="settings-item-icon"><i class="fas fa-database"></i></div>
-            <div class="settings-item-content">
-              <h3>Clear Cache</h3>
-              <p>Clear temporary app data</p>
-            </div>
+            <div class="settings-item-content"><h3>Clear Cache</h3><p>Clear temporary app data</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
           <div class="settings-item" onclick="openAboutPage()">
             <div class="settings-item-icon"><i class="fas fa-info-circle"></i></div>
-            <div class="settings-item-content">
-              <h3>About JLF Fireworks</h3>
-              <p>App version and legal information</p>
-            </div>
+            <div class="settings-item-content"><h3>About JLF Fireworks</h3><p>App version and legal information</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
           <div class="settings-item" onclick="reportBug()">
             <div class="settings-item-icon"><i class="fas fa-bug"></i></div>
-            <div class="settings-item-content">
-              <h3>Report a Bug</h3>
-              <p>Help us improve the app</p>
-            </div>
+            <div class="settings-item-content"><h3>Report a Bug</h3><p>Help us improve the app</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
       </div>
-
-      <div class="settings-section">
-        <div class="settings-section-header">
-          <i class="fas fa-shield-alt"></i>
-          <h2>Privacy & Security</h2>
-        </div>
-        <div class="settings-list">
-          <div class="settings-item" onclick="openPrivacyPolicy()">
-            <div class="settings-item-icon"><i class="fas fa-lock"></i></div>
-            <div class="settings-item-content">
-              <h3>Privacy Policy</h3>
-              <p>How we protect your data</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-          <div class="settings-item" onclick="openTermsOfService()">
-            <div class="settings-item-icon"><i class="fas fa-file-contract"></i></div>
-            <div class="settings-item-content">
-              <h3>Terms of Service</h3>
-              <p>Our terms and conditions</p>
-            </div>
-            <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-      </div>
-
       <div class="settings-section danger-zone">
-        <div class="settings-section-header">
-          <i class="fas fa-exclamation-triangle"></i>
-          <h2>Danger Zone</h2>
-        </div>
+        <div class="settings-section-header"><i class="fas fa-exclamation-triangle"></i><h2>Danger Zone</h2></div>
         <div class="settings-list">
           <div class="settings-item" onclick="confirmDeleteAccount()">
             <div class="settings-item-icon"><i class="fas fa-trash-alt"></i></div>
-            <div class="settings-item-content">
-              <h3>Delete Account</h3>
-              <p>Permanently delete your account and all data</p>
-            </div>
+            <div class="settings-item-content"><h3>Delete Account</h3><p>Permanently delete your account and all data</p></div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
         </div>
@@ -418,61 +337,36 @@
     </div>
   </div>
 
-  <!-- ADMIN PAGE -->
+  <!-- ADMIN PAGE (simplified) -->
   <div id="adminPage" class="page">
-    <div class="page-hero">
-      <h1><i class="fas fa-code"></i> Admin Dashboard</h1>
-      <p>Manage orders, view logs, and monitor system activity</p>
-    </div>
+    <div class="page-hero"><h1><i class="fas fa-code"></i> Admin Dashboard</h1><p>Manage orders, view logs, and monitor system activity</p></div>
     <div class="admin-tabs">
-      <button class="admin-tab-btn active" onclick="switchAdminTab('orders')">Orders Management</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('logs')">Login Logs</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('users')">User Management</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('redemptions')">Code Redemptions</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharge Requests</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawal Requests</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('investments')">Bond Investments</button>
-      <button class="admin-tab-btn" id="qrScannerTabBtn" onclick="switchAdminTab('qrscanner')">QR Scanner</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('announcements')">Announcements</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('bugreports')">Bug Reports</button>
-      <button class="admin-tab-btn" onclick="switchAdminTab('promocodes')">Promo Codes</button>
+      <button class="admin-tab-btn active" onclick="switchAdminTab('orders')">Orders</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('users')">Users</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('recharges')">Recharges</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('withdrawals')">Withdrawals</button>
+      <button class="admin-tab-btn" id="qrScannerTabBtn">QR Scanner</button>
     </div>
-    <div id="adminOrdersTab" class="admin-tab active"><div id="adminOrdersContainer"></div></div>
-    <div id="adminLogsTab" class="admin-tab"><div id="adminLogsContainer"></div></div>
-    <div id="adminUsersTab" class="admin-tab"><div id="adminUsersContainer"></div></div>
-    <div id="adminRedemptionsTab" class="admin-tab"><div id="adminRedemptionsContainer"></div></div>
-    <div id="adminRechargesTab" class="admin-tab"><div id="adminRechargesContainer"></div></div>
-    <div id="adminWithdrawalsTab" class="admin-tab"><div id="adminWithdrawalsContainer"></div></div>
-    <div id="adminInvestmentsTab" class="admin-tab"><div id="adminInvestmentsContainer"></div></div>
-    <div id="adminQrScannerTab" class="admin-tab"><div class="qr-scanner-container"></div></div>
-    <div id="adminAnnouncementsTab" class="admin-tab"><div class="qr-scanner-container"></div></div>
-    <div id="adminBugreportsTab" class="admin-tab"><div id="adminBugReportsContainer"></div></div>
-    <div id="adminPromocodesTab" class="admin-tab"><div id="promoCodesContainer"></div></div>
+    <div id="adminOrdersTab" class="admin-tab active"><div id="adminOrdersContainer"><p>Loading orders...</p></div></div>
+    <div id="adminUsersTab" class="admin-tab"><div id="adminUsersContainer"><p>Loading users...</p></div></div>
+    <div id="adminRechargesTab" class="admin-tab"><div id="adminRechargesContainer"><p>Loading recharges...</p></div></div>
+    <div id="adminWithdrawalsTab" class="admin-tab"><div id="adminWithdrawalsContainer"><p>Loading withdrawals...</p></div></div>
+    <div id="adminQrScannerTab" class="admin-tab"><div class="qr-scanner-container"><h2>QR Scanner</h2><p>Scanner coming soon</p></div></div>
   </div>
 
   <!-- HELP PAGE -->
   <div id="helpPage" class="page">
-    <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7. How can we assist you today?</p></div>
-    
+    <div class="page-hero"><h1>Customer Support</h1><p>We're here to help you 24/7</p></div>
     <div class="support-grid-apple">
-      <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><p>Chat with our support team instantly</p><button class="btn-secondary-apple" onclick="startChat()">Start Chat</button></div>
+      <div class="support-card-apple"><i class="fas fa-headset"></i><h3>Live Chat</h3><button class="btn-secondary-apple" onclick="startChat()">Start Chat</button></div>
       <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlfworks.official@gmail.com</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
-    </div>
-
-    <div class="faq-section-apple">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-list-apple">
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I track my order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can track your order in the Orders page after logging into your account.</div></div>
-        <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How can I add credits to my account?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can recharge your balance by clicking the wallet icon next to your profile.</div></div>
-      </div>
     </div>
   </div>
 </main>
 
 <footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</p></footer>
 
-<!-- MODALS -->
+<!-- ACCOUNT MODAL - WORKING -->
 <div id="accountModal" class="modal">
   <div class="modal-content">
     <div class="modal-header"><h2>Account</h2><button class="close-modal" onclick="closeAccountModal()">&times;</button></div>
@@ -499,76 +393,18 @@
   </div>
 </div>
 
+<!-- PROFILE MODAL -->
 <div id="profileModal" class="modal">
   <div class="modal-content profile-modal">
     <div class="modal-header"><h2><i class="fas fa-user-circle"></i> My Profile</h2><button class="close-modal" onclick="closeProfileModal()">&times;</button></div>
     <div class="profile-content">
-      <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
       <div class="profile-info">
         <div class="info-row"><span class="info-label">Full Name:</span><span class="info-value" id="profileName">-</span></div>
         <div class="info-row"><span class="info-label">Account ID:</span><span class="info-value" id="profileId">-</span></div>
         <div class="info-row"><span class="info-label">Phone Number:</span><span class="info-value" id="profilePhone">-</span></div>
         <div class="info-row"><span class="info-label">Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
       </div>
-      <div class="loyalty-section">
-        <div class="loyalty-header"><i class="fas fa-qrcode"></i><h3>My Loyalty QR Code</h3></div>
-        <div id="qrCodeContainer" class="qr-code-container"></div>
-      </div>
-      <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-    </div>
-  </div>
-</div>
-
-<div id="announcementModal" class="modal">
-  <div class="modal-content announcement-modal">
-    <div class="modal-header"><h2><i class="fas fa-bullhorn"></i> Announcements</h2><button class="close-modal" onclick="closeAnnouncementModal()">&times;</button></div>
-    <div class="announcement-container" id="announcementContainer"></div>
-  </div>
-</div>
-
-<div id="rechargeModal" class="modal">
-  <div class="modal-content recharge-modal">
-    <div class="modal-header"><h2><i class="fas fa-wallet"></i> Recharge Balance</h2><button class="close-modal" onclick="closeRechargeModal()">&times;</button></div>
-    <div class="recharge-content">
-      <div class="recharge-tabs">
-        <button class="recharge-tab-btn active" onclick="switchRechargeTab('gcash')">GCash</button>
-        <button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button>
-      </div>
-      <div id="gcashTab" class="recharge-tab active">
-        <div class="qr-container">
-          <img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code">
-        </div>
-        <div class="recharge-form">
-          <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
-        </div>
-      </div>
-      <div id="cashTab" class="recharge-tab">
-        <div class="recharge-form">
-          <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="withdrawModal" class="modal">
-  <div class="modal-content withdraw-modal">
-    <div class="modal-header"><h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2><button class="close-modal" onclick="closeWithdrawModal()">&times;</button></div>
-    <div class="withdraw-content">
-      <div class="withdraw-tabs">
-        <button class="withdraw-tab-btn active" onclick="switchWithdrawTab('gcash')">GCash</button>
-        <button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button>
-      </div>
-      <div id="withdrawGcashTab" class="withdraw-tab active">
-        <div class="withdraw-form">
-          <button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button>
-        </div>
-      </div>
-      <div id="withdrawCashTab" class="withdraw-tab">
-        <div class="withdraw-form">
-          <button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button>
-        </div>
-      </div>
+      <button class="btn-secondary-apple" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
   </div>
 </div>
@@ -578,31 +414,18 @@
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-header">
     <span><i class="fas fa-shopping-bag"></i> Shopping Cart</span>
-    <button class="close-cart" id="closeCartBtn" onclick="closeCartDrawer()">
-      <i class="fas fa-times-circle"></i>
-    </button>
+    <button class="close-cart" onclick="closeCartDrawer()"><i class="fas fa-times-circle"></i></button>
   </div>
   <div id="cartItemsList" class="cart-items-list">
-    <div class="empty-cart-msg">
-      <i class="fas fa-shopping-cart"></i>
-      <p>Your cart is empty. Add some fireworks!</p>
-    </div>
+    <div class="empty-cart-msg"><i class="fas fa-shopping-cart"></i><p>Your cart is empty.</p></div>
   </div>
   <div class="cart-footer">
     <div class="total-row"><span>Total</span><span id="cartTotalPrice">₱0.00</span></div>
-    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout →</button>
+    <button class="checkout-btn" onclick="checkout()"><i class="fas fa-credit-card"></i> Checkout →</button>
   </div>
 </div>
 
-<div id="toastMsg" class="toast-msg">Item added to cart</div>
-<div id="downloadPopup" class="download-popup" style="display: none;">
-  <div class="download-popup-content">
-    <button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button>
-    <div class="download-popup-icon"><i class="fas fa-fire"></i></div>
-    <h3>Install JLF Fireworks App</h3>
-    <button class="download-btn-primary" id="installAppBtn"><i class="fas fa-download"></i> Install App</button>
-  </div>
-</div>
+<div id="toastMsg" class="toast-msg"></div>
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
@@ -623,166 +446,105 @@
 <script src="js/announcements.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/bug-report.js"></script>
-<script src="js/admin-bugreports.js"></script>
 <script src="js/admin-orders.js"></script>
 <script src="js/admin-users.js"></script>
-<script src="js/admin-logs.js"></script>
 <script src="js/admin-recharges.js"></script>
 <script src="js/admin-withdrawals.js"></script>
-<script src="js/admin-investments.js"></script>
-<script src="js/admin-announcements.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 
 <script>
-// ============================================
-// ACCOUNT/PROFILE CLICK FIX
-// ============================================
-(function() {
-    window.openAccountModal = function() {
-        const modal = document.getElementById('accountModal');
-        if (modal) modal.style.display = 'flex';
-    };
-    
-    window.openProfileModal = function() {
-        const modal = document.getElementById('profileModal');
-        if (modal) modal.style.display = 'flex';
-    };
-    
-    window.loadUserProfile = function() {
-        try {
-            const currentUser = localStorage.getItem('currentUser');
-            if (currentUser && currentUser !== 'undefined') {
-                const user = JSON.parse(currentUser);
-                const nameEl = document.getElementById('profileName');
-                const idEl = document.getElementById('profileId');
-                const phoneEl = document.getElementById('profilePhone');
-                const balanceEl = document.getElementById('profileBalance');
-                
-                if (nameEl) nameEl.textContent = user.fullName || user.name || '-';
-                if (idEl) idEl.textContent = user.accountId || user.id || '-';
-                if (phoneEl) phoneEl.textContent = user.phone || '-';
-                if (balanceEl) balanceEl.textContent = '₱' + (user.balance || 0).toLocaleString();
-            }
-        } catch(e) { console.log('Profile load error:', e); }
-    };
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        const accountIcon = document.getElementById('accountIcon');
-        if (accountIcon) {
-            const newIcon = accountIcon.cloneNode(true);
-            accountIcon.parentNode.replaceChild(newIcon, accountIcon);
-            
-            newIcon.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Account icon clicked');
-                const currentUser = localStorage.getItem('currentUser');
-                if (currentUser && currentUser !== 'undefined') {
-                    try {
-                        const user = JSON.parse(currentUser);
-                        if (user && user.accountId) {
-                            window.loadUserProfile();
-                            window.openProfileModal();
-                        } else {
-                            window.openAccountModal();
-                        }
-                    } catch(e) { window.openAccountModal(); }
-                } else {
-                    window.openAccountModal();
-                }
-            });
-        }
-        
-        const userNameDisplay = document.getElementById('userNameDisplay');
-        if (userNameDisplay) {
-            userNameDisplay.style.cursor = 'pointer';
-            userNameDisplay.addEventListener('click', function() {
-                const icon = document.getElementById('accountIcon');
-                if (icon) icon.click();
-            });
-        }
-    });
-})();
-
-// Modal close functions
-function closeAccountModal() { const m = document.getElementById('accountModal'); if(m) m.style.display = 'none'; }
-function closeProfileModal() { const m = document.getElementById('profileModal'); if(m) m.style.display = 'none'; }
-function closeAnnouncementModal() { const m = document.getElementById('announcementModal'); if(m) m.style.display = 'none'; }
-function closeRechargeModal() { const m = document.getElementById('rechargeModal'); if(m) m.style.display = 'none'; }
-function closeWithdrawModal() { const m = document.getElementById('withdrawModal'); if(m) m.style.display = 'none'; }
-
-document.addEventListener('click', function(e) {
-    if (e.target.classList && e.target.classList.contains('modal')) {
-        e.target.style.display = 'none';
-    }
-});
-
-// Utility functions
+// Helper functions
 function showToast(msg) {
     let toast = document.getElementById('toastMsg');
-    if(!toast) { toast = document.createElement('div'); toast.id = 'toastMsg'; toast.className = 'toast-msg'; document.body.appendChild(toast); }
     toast.textContent = msg;
     toast.style.display = 'block';
     setTimeout(() => toast.style.display = 'none', 3000);
 }
 
 function closeCartDrawer() {
-    document.getElementById('cartDrawer')?.classList.remove('open');
-    document.getElementById('cartOverlay')?.classList.remove('active');
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('active');
 }
 
-function checkout() { showToast('Please login to checkout'); }
-
-function openChangePassword() { showToast('Password change feature coming soon'); }
-function openUpdateProfile() { showToast('Profile update feature coming soon'); }
-function openAboutPage() { showToast('JLF Fireworks v1.0.0'); }
-function reportBug() { showToast('Contact support: jlfworks.official@gmail.com'); }
-function openPrivacyPolicy() { showToast('Privacy policy available on request'); }
-function openTermsOfService() { showToast('Terms of service available on request'); }
-
-function clearAppCache() {
-    if('caches' in window) { caches.keys().then(names => { for(let name of names) caches.delete(name); }); }
-    localStorage.clear();
-    showToast('Cache cleared');
-    setTimeout(() => location.reload(), 1500);
-}
-
-function confirmDeleteAccount() {
-    if(confirm('⚠️ Permanently delete your account?')) {
-        if(prompt('Type "CONFIRM" to delete:') === 'CONFIRM') showToast('Account deletion requested');
+function checkout() {
+    if(localStorage.getItem('loggedInUser')) {
+        if(typeof window.processCheckout === 'function') window.processCheckout();
+        else showToast('Checkout feature coming soon');
+    } else {
+        showToast('Please login first');
+        openAccountModal();
     }
 }
 
-// Save notification preferences
-document.addEventListener('DOMContentLoaded', function() {
-    const pushToggle = document.getElementById('pushNotificationsToggle');
-    const emailToggle = document.getElementById('emailNotificationsToggle');
-    if(pushToggle) pushToggle.addEventListener('change', function() { localStorage.setItem('pushNotifications', this.checked); showToast(this.checked ? 'Push notifications enabled' : 'Push notifications disabled'); });
-    if(emailToggle) emailToggle.addEventListener('change', function() { localStorage.setItem('emailNotifications', this.checked); showToast(this.checked ? 'Email notifications enabled' : 'Email notifications disabled'); });
+function openChangePassword() { showToast('Password change coming soon'); }
+function openUpdateProfile() { showToast('Profile update coming soon'); }
+function clearAppCache() { localStorage.clear(); showToast('Cache cleared'); setTimeout(() => location.reload(), 1000); }
+function openAboutPage() { showToast('JLF Fireworks v1.0'); }
+function reportBug() { showToast('Email: jlfworks.official@gmail.com'); }
+function confirmDeleteAccount() { if(confirm('Delete account?')) showToast('Contact admin to delete'); }
+
+// Open account modal function
+function openAccountModal() {
+    document.getElementById('accountModal').style.display = 'flex';
+}
+
+// Make sure account icon opens modal
+document.getElementById('accountIcon')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    if(localStorage.getItem('loggedInUser')) {
+        loadProfileModal();
+        document.getElementById('profileModal').style.display = 'flex';
+    } else {
+        openAccountModal();
+    }
+});
+
+// Settings icon
+document.getElementById('settingsIcon')?.addEventListener('click', function() {
+    if(localStorage.getItem('loggedInUser')) switchPage('settings');
+    else showToast('Please login first');
+});
+
+// Recharge icon
+document.getElementById('rechargeIcon')?.addEventListener('click', function() {
+    if(localStorage.getItem('loggedInUser')) openRechargeModal();
+    else showToast('Please login first');
+});
+
+// Withdraw icon
+document.getElementById('withdrawIcon')?.addEventListener('click', function() {
+    if(localStorage.getItem('loggedInUser')) openWithdrawModal();
+    else showToast('Please login first');
+});
+
+// Cart icon
+document.getElementById('cartIconBtn')?.addEventListener('click', function() {
+    updateCartDisplay();
+    document.getElementById('cartDrawer').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('active');
 });
 
 // QR Scanner tab fix
-(function() {
-    document.addEventListener('DOMContentLoaded', function() {
-        const qrTabBtn = document.getElementById('qrScannerTabBtn');
-        if(qrTabBtn) {
-            qrTabBtn.removeAttribute('onclick');
-            qrTabBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                document.querySelectorAll('.admin-tab').forEach(tab => { tab.classList.remove('active'); tab.style.display = 'none'; });
-                const qrTab = document.getElementById('adminQrScannerTab');
-                if(qrTab) { qrTab.classList.add('active'); qrTab.style.display = 'block'; }
-            });
-        }
-    });
-})();
+document.addEventListener('DOMContentLoaded', function() {
+    const qrTabBtn = document.getElementById('qrScannerTabBtn');
+    if(qrTabBtn) {
+        qrTabBtn.addEventListener('click', function() {
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('adminQrScannerTab').classList.add('active');
+        });
+    }
+});
 
-// Service Worker
-if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message)); }); }
+// Service worker
+if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip'));
+    });
+}
 </script>
 </body>
 </html>
