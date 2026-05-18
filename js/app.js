@@ -32,6 +32,8 @@ function updateIconActiveState() {
 
 // PAGE NAVIGATION
 function switchPage(pageName) {
+  console.log("Switching to page:", pageName);
+  
   document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
   const targetPage = document.getElementById(`${pageName}Page`);
   if (targetPage) targetPage.classList.add('active');
@@ -45,11 +47,32 @@ function switchPage(pageName) {
   });
   
   currentPage = pageName;
-  if (pageName === 'featured') loadFeaturedPage();
-  else if (pageName === 'shop') renderProducts();
-  else if (pageName === 'orders') loadTransactionHistory();
-  else if (pageName === 'settings') renderSettingsPage();
-  else if (pageName === 'admin') loadAdminData();
+  
+  // Load page-specific data
+  if (pageName === 'featured' && typeof loadFeaturedPage === 'function') {
+    loadFeaturedPage();
+  } else if (pageName === 'shop' && typeof renderProducts === 'function') {
+    renderProducts();
+  } else if (pageName === 'orders' && typeof loadTransactionHistory === 'function') {
+    if (currentUser && !isAdmin) {
+      loadTransactionHistory();
+    } else if (!currentUser) {
+      const ordersContainer = document.getElementById("ordersContainer");
+      if (ordersContainer) {
+        ordersContainer.innerHTML = `
+          <div class="empty-orders">
+            <i class="fas fa-receipt" style="font-size: 4rem; color: #e63946; margin-bottom: 20px;"></i>
+            <p>Please login to view your transactions.</p>
+            <button class="btn-primary-apple" onclick="openAccountModal()" style="margin-top: 20px;">Login / Register</button>
+          </div>
+        `;
+      }
+    }
+  } else if (pageName === 'settings' && typeof renderSettingsPage === 'function') {
+    renderSettingsPage();
+  } else if (pageName === 'admin' && isAdmin && typeof loadAdminData === 'function') {
+    loadAdminData();
+  }
   
   // Update icon active states
   updateIconActiveState();
@@ -89,34 +112,44 @@ async function addUserCredit(amount) {
   }
 }
 
-// ACCOUNT ICON
+// ICON INITIALIZATIONS
 function initAccountIcon() {
   const accountIcon = document.getElementById('accountIcon');
   if (accountIcon) {
-    accountIcon.addEventListener('click', () => {
+    // Remove existing listeners to avoid duplicates
+    const newIcon = accountIcon.cloneNode(true);
+    accountIcon.parentNode.replaceChild(newIcon, accountIcon);
+    
+    newIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (currentUser && !isAdmin) {
-        openProfileModal();
+        if (typeof openProfileModal === 'function') openProfileModal();
         updateIconActiveState();
       } else if (isAdmin) {
         showToast("Admin logged in. Logout to access user features.", 1500);
       } else {
-        openAccountModal();
+        if (typeof openAccountModal === 'function') openAccountModal();
         updateIconActiveState();
       }
     });
   }
 }
 
-// SETTINGS ICON
 function initSettingsIcon() {
   const settingsIcon = document.getElementById('settingsIcon');
   if (settingsIcon) {
-    settingsIcon.addEventListener('click', () => {
+    const newIcon = settingsIcon.cloneNode(true);
+    settingsIcon.parentNode.replaceChild(newIcon, settingsIcon);
+    
+    newIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (!isAdmin && currentUser) {
         switchPage('settings');
       } else if (!currentUser) {
         showToast("Please login first", 1500);
-        openAccountModal();
+        if (typeof openAccountModal === 'function') openAccountModal();
       } else if (isAdmin) {
         showToast("Admin mode. Cannot access settings.", 1500);
       }
@@ -124,43 +157,100 @@ function initSettingsIcon() {
   }
 }
 
-// RECHARGE ICON
 function initRechargeIcon() {
   const rechargeIcon = document.getElementById('rechargeIcon');
   if (rechargeIcon) {
-    rechargeIcon.addEventListener('click', () => { 
-      if (!isAdmin) {
-        openRechargeModal();
+    const newIcon = rechargeIcon.cloneNode(true);
+    rechargeIcon.parentNode.replaceChild(newIcon, rechargeIcon);
+    
+    newIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isAdmin && currentUser) {
+        if (typeof openRechargeModal === 'function') openRechargeModal();
         updateIconActiveState();
-      } else {
+      } else if (!currentUser) {
+        showToast("Please login first", 1500);
+        if (typeof openAccountModal === 'function') openAccountModal();
+      } else if (isAdmin) {
         showToast("Admin mode. Cannot recharge.", 1500);
       }
     });
   }
 }
 
-// WITHDRAW ICON
 function initWithdrawIcon() {
   const withdrawIcon = document.getElementById('withdrawIcon');
   if (withdrawIcon) {
-    withdrawIcon.addEventListener('click', () => { 
-      if (!isAdmin) {
-        openWithdrawModal();
+    const newIcon = withdrawIcon.cloneNode(true);
+    withdrawIcon.parentNode.replaceChild(newIcon, withdrawIcon);
+    
+    newIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isAdmin && currentUser) {
+        if (typeof openWithdrawModal === 'function') openWithdrawModal();
         updateIconActiveState();
-      } else {
+      } else if (!currentUser) {
+        showToast("Please login first", 1500);
+        if (typeof openAccountModal === 'function') openAccountModal();
+      } else if (isAdmin) {
         showToast("Admin mode. Cannot withdraw.", 1500);
       }
     });
   }
 }
 
+function initCartIcon() {
+  const cartIcon = document.getElementById('cartIconBtn');
+  if (cartIcon) {
+    const newIcon = cartIcon.cloneNode(true);
+    cartIcon.parentNode.replaceChild(newIcon, cartIcon);
+    
+    newIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof openCartDrawer === 'function') {
+        openCartDrawer();
+        updateIconActiveState();
+      }
+    });
+  }
+}
+
+function initAnnouncementIcon() {
+  const announcementIcon = document.getElementById("announcementIcon");
+  if (announcementIcon) {
+    const newIcon = announcementIcon.cloneNode(true);
+    announcementIcon.parentNode.replaceChild(newIcon, announcementIcon);
+    
+    newIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof openAnnouncementModal === 'function') {
+        openAnnouncementModal();
+        updateIconActiveState();
+      }
+    });
+  }
+}
+
 // HELP PAGE FUNCTIONS
-function startChat() { showToast("Connecting to live chat... (demo)", 1500); }
-function sendEmail() { window.location.href = "mailto:jlfworks.official@gmail.com"; }
+function startChat() { 
+  showToast("Connecting to live chat... (demo)", 1500); 
+}
+
+function sendEmail() { 
+  window.location.href = "mailto:jlfworks.official@gmail.com"; 
+}
+
 function toggleFAQ(element) {
   const faqItem = element.closest('.faq-item-apple');
-  faqItem.classList.toggle('active');
+  if (faqItem) {
+    faqItem.classList.toggle('active');
+  }
 }
+
 function initContactForm() {
   const form = document.getElementById("contactForm");
   if (form) {
@@ -172,146 +262,283 @@ function initContactForm() {
   }
 }
 
+// CART DRAWER INIT
+function initCartDrawer() {
+  const cartOverlay = document.getElementById('cartOverlay');
+  const closeCart = document.querySelector('.close-cart');
+  
+  if (cartOverlay) {
+    cartOverlay.addEventListener('click', () => {
+      document.getElementById('cartDrawer')?.classList.remove('open');
+      cartOverlay.classList.remove('open');
+      updateIconActiveState();
+    });
+  }
+  
+  if (closeCart) {
+    closeCart.addEventListener('click', () => {
+      document.getElementById('cartDrawer')?.classList.remove('open');
+      document.getElementById('cartOverlay')?.classList.remove('open');
+      updateIconActiveState();
+    });
+  }
+}
+
+// LOAD MORE TRANSACTIONS (for virtual scroll)
+function loadMoreTransactions() {
+  // This is handled by virtual-scroll.js now
+  console.log("Load more transactions triggered");
+}
+
+// HAPTIC FEEDBACK
+function hapticFeedback() {
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
+}
+
 // ========================================
 // INITIALIZATION
 // ========================================
 function init() {
-  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System, Announcements, and Settings...");
+  console.log("Initializing JLF Fireworks e-commerce app with all features...");
   
   // Load settings first
-  loadSettings();
+  if (typeof loadSettings === 'function') {
+    loadSettings();
+  }
   
+  // Load user from localStorage
   const savedUser = localStorage.getItem("nova_user");
   if (savedUser) {
     try {
       currentUser = JSON.parse(savedUser);
       isAdmin = false;
-      document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
-      startRealTimeBalanceCheck();
-    } catch(e) { currentUser = null; }
+      const userNameSpan = document.getElementById("userNameDisplay");
+      if (userNameSpan) {
+        userNameSpan.innerText = currentUser.name.split(' ')[0];
+      }
+      if (typeof startRealTimeBalanceCheck === 'function') {
+        startRealTimeBalanceCheck();
+      }
+      if (typeof startBalanceWatcher === 'function') {
+        startBalanceWatcher();
+      }
+    } catch(e) { 
+      console.error("Error loading user:", e);
+      currentUser = null; 
+    }
   }
   
-  loadCartFromLocal();
+  // Load cart
+  if (typeof loadCartFromLocal === 'function') {
+    loadCartFromLocal();
+  }
   
+  // Initialize navigation links
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
+    // Remove existing listeners
+    const newLink = link.cloneNode(true);
+    link.parentNode.replaceChild(newLink, link);
+    
+    newLink.addEventListener('click', (e) => {
       e.preventDefault();
-      const page = link.getAttribute('data-page');
-      switchPage(page);
+      const page = newLink.getAttribute('data-page');
+      if (page) {
+        switchPage(page);
+      }
     });
   });
   
+  // Initialize all icons
   initRechargeIcon();
   initWithdrawIcon();
   initSettingsIcon();
-  
-  switchPage('home');
-  initFilters();
-  initCartDrawer();
-  initContactForm();
   initAccountIcon();
+  initCartIcon();
+  initAnnouncementIcon();
   
-  setupQrScannerUI();
-  startLoyaltyAutoRefresh();
-  showDownloadPopup();
+  // Initialize cart drawer
+  initCartDrawer();
+  
+  // Initialize contact form
+  initContactForm();
+  
+  // Initialize filters and products
+  if (typeof initFilters === 'function') {
+    initFilters();
+  }
+  
+  // Initialize QR scanner UI
+  if (typeof setupQrScannerUI === 'function') {
+    setTimeout(() => {
+      setupQrScannerUI();
+    }, 500);
+  }
+  
+  // Start loyalty auto refresh
+  if (typeof startLoyaltyAutoRefresh === 'function') {
+    startLoyaltyAutoRefresh();
+  }
+  
+  // Show download popup
+  if (typeof showDownloadPopup === 'function') {
+    setTimeout(() => {
+      showDownloadPopup();
+    }, 5000);
+  }
   
   // Initialize Announcement System
-  loadReadAnnouncements();
-  fetchAnnouncements();
-  startAnnouncementAutoRefresh();
+  if (typeof loadReadAnnouncements === 'function') {
+    loadReadAnnouncements();
+  }
+  if (typeof fetchAnnouncements === 'function') {
+    fetchAnnouncements();
+  }
+  if (typeof startAnnouncementAutoRefresh === 'function') {
+    startAnnouncementAutoRefresh();
+  }
   
-  // Setup announcement icon click
-  const announcementIcon = document.getElementById("announcementIcon");
-  if (announcementIcon) {
-    announcementIcon.addEventListener("click", () => {
-      openAnnouncementModal();
-      updateIconActiveState();
+  // Install button
+  const installBtn = document.getElementById("installAppBtn");
+  if (installBtn) {
+    installBtn.addEventListener("click", () => {
+      if (typeof triggerInstall === 'function') {
+        triggerInstall();
+      }
     });
   }
   
-  const installBtn = document.getElementById("installAppBtn");
-  if (installBtn) {
-    installBtn.addEventListener("click", triggerInstall);
-  }
+  // Start with home page
+  switchPage('home');
   
-  // Global window exports
-  window.switchPage = switchPage;
-  window.addToCart = addToCart;
-  window.redeemCode = redeemCode;
-  window.startChat = startChat;
-  window.sendEmail = sendEmail;
-  window.toggleFAQ = toggleFAQ;
-  window.openAccountModal = openAccountModal;
-  window.closeAccountModal = closeAccountModal;
-  window.openProfileModal = openProfileModal;
-  window.closeProfileModal = closeProfileModal;
-  window.switchTab = switchTab;
-  window.handleLogin = handleLogin;
-  window.handleRegister = handleRegister;
-  window.logout = logout;
-  window.openRechargeModal = openRechargeModal;
-  window.closeRechargeModal = closeRechargeModal;
-  window.switchRechargeTab = switchRechargeTab;
-  window.submitRecharge = submitRecharge;
-  window.openWithdrawModal = openWithdrawModal;
-  window.closeWithdrawModal = closeWithdrawModal;
-  window.switchWithdrawTab = switchWithdrawTab;
-  window.submitWithdraw = submitWithdraw;
-  window.investInBondOption1 = investInBondOption1;
-  window.investInBondOption2 = investInBondOption2;
-  window.updateOrderStatus = updateOrderStatus;
-  window.updateRechargeStatus = updateRechargeStatus;
-  window.updateWithdrawalStatus = updateWithdrawalStatus;
-  window.switchAdminTab = switchAdminTab;
-  window.refreshAdminOrders = refreshAdminOrders;
-  window.refreshAdminLogs = refreshAdminLogs;
-  window.refreshAdminUsers = refreshAdminUsers;
-  window.refreshAdminRedemptions = refreshAdminRedemptions;
-  window.loadAdminRecharges = loadAdminRecharges;
-  window.loadAdminWithdrawals = loadAdminWithdrawals;
-  window.loadAdminCreditInvestments = loadAdminCreditInvestments;
-  window.loadTransactionHistory = loadTransactionHistory;
-  window.showDownloadPopup = showDownloadPopup;
-  window.closeDownloadPopup = closeDownloadPopup;
-  window.triggerInstall = triggerInstall;
-  window.startQrScanner = startQrScanner;
-  window.stopQrScanner = stopQrScanner;
-  window.processQrFileUpload = processQrFileUpload;
-  window.loadRecentScans = loadRecentScans;
-  // Announcement System Functions
-  window.openAnnouncementModal = openAnnouncementModal;
-  window.closeAnnouncementModal = closeAnnouncementModal;
-  window.markAnnouncementRead = markAnnouncementRead;
-  window.markAllAnnouncementsRead = markAllAnnouncementsRead;
-  window.publishAnnouncement = publishAnnouncement;
-  window.deleteAnnouncement = deleteAnnouncement;
-  window.loadRecentAnnouncements = loadRecentAnnouncements;
-  // Settings Functions
-  window.toggleDarkMode = toggleDarkMode;
-  window.changeFontSize = changeFontSize;
-  window.toggleCompactMode = toggleCompactMode;
-  window.toggleHighContrast = toggleHighContrast;
-  window.clearCache = clearCache;
-  window.resetAllSettings = resetAllSettings;
-  window.openTermsModal = openTermsModal;
-  window.openPrivacyModal = openPrivacyModal;
-  window.shareApp = shareApp;
-  window.openBugReportModal = openBugReportModal;
-  window.closeBugReportModal = closeBugReportModal;
-  window.submitBugReport = submitBugReport;
-  // Admin Bug Reports
-  window.loadAdminBugReports = loadAdminBugReports;
-  window.updateBugReportStatus = updateBugReportStatus;
-  window.refreshAdminBugReports = refreshAdminBugReports;
-  // Update icon active state
+  // Update icon states
   updateIconActiveState();
-  // New features
-  window.copyAccountId = copyAccountId;
-  window.orderAgain = orderAgain;
-  window.hapticFeedback = hapticFeedback;
-  window.openCartDrawer = openCartDrawer;
-  window.loadMoreTransactions = loadMoreTransactions;
-  window.addMysteryBox = addMysteryBox;
+  
+  console.log("JLF Fireworks App Initialized Successfully!");
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// ========================================
+// GLOBAL EXPORTS
+// ========================================
+
+// Core functions
+window.switchPage = switchPage;
+window.updateIconActiveState = updateIconActiveState;
+window.loadUserCredit = loadUserCredit;
+window.addUserCredit = addUserCredit;
+window.hapticFeedback = hapticFeedback;
+window.loadMoreTransactions = loadMoreTransactions;
+
+// Help page
+window.startChat = startChat;
+window.sendEmail = sendEmail;
+window.toggleFAQ = toggleFAQ;
+
+// Cart functions (from cart.js)
+window.addToCart = addToCart;
+window.updateQuantity = updateQuantity;
+window.removeFromCart = removeFromCart;
+window.openCartDrawer = openCartDrawer;
+window.placeOrder = placeOrder;
+
+// Auth functions (from auth.js)
+window.openAccountModal = openAccountModal;
+window.closeAccountModal = closeAccountModal;
+window.openProfileModal = openProfileModal;
+window.closeProfileModal = closeProfileModal;
+window.switchTab = switchTab;
+window.handleLogin = handleLogin;
+window.handleRegister = handleRegister;
+window.logout = logout;
+
+// Recharge functions (from recharge.js)
+window.openRechargeModal = openRechargeModal;
+window.closeRechargeModal = closeRechargeModal;
+window.switchRechargeTab = switchRechargeTab;
+window.submitRecharge = submitRecharge;
+
+// Withdraw functions (from withdraw.js)
+window.openWithdrawModal = openWithdrawModal;
+window.closeWithdrawModal = closeWithdrawModal;
+window.switchWithdrawTab = switchWithdrawTab;
+window.submitWithdraw = submitWithdraw;
+
+// Bond investment functions
+window.investInBondOption1 = investInBondOption1;
+window.investInBondOption2 = investInBondOption2;
+
+// Product functions (from products.js)
+window.redeemCode = redeemCode;
+window.addMysteryBox = addMysteryBox;
+
+// Admin functions
+window.updateOrderStatus = updateOrderStatus;
+window.updateRechargeStatus = updateRechargeStatus;
+window.updateWithdrawalStatus = updateWithdrawalStatus;
+window.switchAdminTab = switchAdminTab;
+window.refreshAdminOrders = refreshAdminOrders;
+window.refreshAdminLogs = refreshAdminLogs;
+window.refreshAdminUsers = refreshAdminUsers;
+window.refreshAdminRedemptions = refreshAdminRedemptions;
+window.loadAdminRecharges = loadAdminRecharges;
+window.loadAdminWithdrawals = loadAdminWithdrawals;
+window.loadAdminCreditInvestments = loadAdminCreditInvestments;
+window.loadAdminBugReports = loadAdminBugReports;
+window.updateBugReportStatus = updateBugReportStatus;
+window.refreshAdminBugReports = refreshAdminBugReports;
+
+// Transaction functions (from orders.js)
+window.loadTransactionHistory = loadTransactionHistory;
+window.clearTransactionHistory = clearTransactionHistory;
+window.orderAgainFromHistory = orderAgainFromHistory;
+
+// Transaction ID functions (from transaction-id.js)
+window.generateTransactionId = generateTransactionId;
+window.copyTransactionId = copyTransactionId;
+
+// Download popup
+window.showDownloadPopup = showDownloadPopup;
+window.closeDownloadPopup = closeDownloadPopup;
+window.triggerInstall = triggerInstall;
+
+// QR Scanner functions (from loyalty.js)
+window.startQrScanner = startQrScanner;
+window.stopQrScanner = stopQrScanner;
+window.processQrFileUpload = processQrFileUpload;
+window.loadRecentScans = loadRecentScans;
+
+// Announcement functions (from announcements.js)
+window.openAnnouncementModal = openAnnouncementModal;
+window.closeAnnouncementModal = closeAnnouncementModal;
+window.markAnnouncementRead = markAnnouncementRead;
+window.markAllAnnouncementsRead = markAllAnnouncementsRead;
+window.publishAnnouncement = publishAnnouncement;
+window.deleteAnnouncement = deleteAnnouncement;
+window.loadRecentAnnouncements = loadRecentAnnouncements;
+
+// Settings functions (from settings.js)
+window.toggleDarkMode = toggleDarkMode;
+window.changeFontSize = changeFontSize;
+window.toggleCompactMode = toggleCompactMode;
+window.toggleHighContrast = toggleHighContrast;
+window.clearCache = clearCache;
+window.resetAllSettings = resetAllSettings;
+window.openTermsModal = openTermsModal;
+window.openPrivacyModal = openPrivacyModal;
+window.shareApp = shareApp;
+
+// Bug Report functions (from bug-report.js)
+window.openBugReportModal = openBugReportModal;
+window.closeBugReportModal = closeBugReportModal;
+window.submitBugReport = submitBugReport;
+
+// Copy Account ID function
+window.copyAccountId = copyAccountId;
+
+// Start the app when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
