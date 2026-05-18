@@ -1,5 +1,5 @@
 // ========================================
-// AUTHENTICATION SYSTEM - WORKING VERSION
+// AUTHENTICATION SYSTEM - WITH PERSISTENT LOGIN
 // ========================================
 
 function openAccountModal() {
@@ -132,6 +132,38 @@ function updateAllBalanceDisplays() {
     if (userNameDisplay && currentUser && !isAdmin) {
         userNameDisplay.innerText = currentUser.name.split(' ')[0];
     }
+}
+
+// ========================================
+// RESTORE USER FROM LOCALSTORAGE
+// ========================================
+function restoreUserFromStorage() {
+    const savedUser = localStorage.getItem("nova_user");
+    if (savedUser) {
+        try {
+            const user = JSON.parse(savedUser);
+            currentUser = user;
+            isAdmin = false;
+            document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+            
+            // Show nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.style.display = 'block';
+            });
+            
+            // Restart balance check
+            startRealTimeBalanceCheck();
+            if (typeof startBalanceWatcher === 'function') startBalanceWatcher();
+            
+            console.log("User restored from storage:", currentUser.name);
+            return true;
+        } catch(e) {
+            console.error("Error restoring user:", e);
+            localStorage.removeItem("nova_user");
+            return false;
+        }
+    }
+    return false;
 }
 
 // ========================================
@@ -384,3 +416,4 @@ window.handleRegister = handleRegister;
 window.logout = logout;
 window.refreshUserBalance = refreshUserBalance;
 window.updateAllBalanceDisplays = updateAllBalanceDisplays;
+window.restoreUserFromStorage = restoreUserFromStorage;
