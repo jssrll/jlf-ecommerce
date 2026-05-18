@@ -1,1 +1,211 @@
-(function(_0xc7a5ac,_0x16dc1f){const _0x21f373=a8_0x1e04,_0x447edd=_0xc7a5ac();while(!![]){try{const _0x4ecfe7=-parseInt(_0x21f373(0xc4))/0x1*(parseInt(_0x21f373(0xb2))/0x2)+parseInt(_0x21f373(0x8e))/0x3*(parseInt(_0x21f373(0xbc))/0x4)+parseInt(_0x21f373(0xa4))/0x5*(parseInt(_0x21f373(0x1a4))/0x6)+-parseInt(_0x21f373(0x189))/0x7+parseInt(_0x21f373(0x87))/0x8*(parseInt(_0x21f373(0x130))/0x9)+-parseInt(_0x21f373(0x1ac))/0xa+parseInt(_0x21f373(0x12c))/0xb*(parseInt(_0x21f373(0x96))/0xc);if(_0x4ecfe7===_0x16dc1f)break;else _0x447edd['push'](_0x447edd['shift']());}catch(_0x4f5521){_0x447edd['push'](_0x447edd['shift']());}}}(a8_0x2536,0x7fc35));const a8_0x5d6cb7=(function(){let _0x5e2c1a=!![];return function(_0x4770db,_0x35636e){const _0x32d77d=_0x5e2c1a?function(){if(_0x35636e){const _0x119563=_0x35636e['apply'](_0x4770db,arguments);return _0x35636e=null,_0x119563;}}:function(){};return _0x5e2c1a=![],_0x32d77d;};}()),a8_0x244369=a8_0x5d6cb7(this,function(){const _0x482aab=a8_0x1e04;return a8_0x244369[_0x482aab(0xf9)+_0x482aab(0xcc)]()[_0x482aab(0x192)+'h'](_0x482aab(0x115)+')+)+)'+'+$')[_0x482aab(0xf9)+_0x482aab(0xcc)]()['const'+_0x482aab(0x7d)+'r'](a8_0x244369)[_0x482aab(0x192)+'h']('(((.+'+_0x482aab(0x1bb)+'+$');});a8_0x244369();const a8_0x35b190=(function(){let _0x3fc472=!![];return function(_0x321293,_0x5f2473){const _0xdec87b=_0x3fc472?function(){if(_0x5f2473){const _0x17d588=_0x5f2473['apply'](_0x321293,arguments);return _0x5f2473=null,_0x17d588;}}:function(){};return _0x3fc472=![],_0xdec87b;};}());(function(){a8_0x35b190(this,function(){const _0x57dc4f=a8_0x1e04,_0xfb83be=new RegExp(_0x57dc4f(0xa1)+_0x57dc4f(0xd0)+_0x57dc4f(0x9e)+')'),_0x72c738=new RegExp(_0x57dc4f(0xc3)+'*(?:['+_0x57dc4f(0x1c7)+_0x57dc4f(0x97)+_0x57dc4f(0x127)+_0x57dc4f(0x138)+_0x57dc4f(0x119),'i'),_0x16d983=a8_0x3cc1b4('init');!_0xfb83be[_0x57dc4f(0x11a)](_0x16d983+_0x57dc4f(0xb9))||!_0x72c738['test'](_0x16d983+_0x57dc4f(0xff))?_0x16d983('0'):a8_0x3cc1b4();})();}());const a8_0x5d6ac0=(function(){let _0x1f2e91=!![];return function(_0x376838,_0x1d35fb){const _0x11c7f5=_0x1f2e91?function(){const _0x353cbb=a8_0x1e04;if(_0x1d35fb){const _0x311391=_0x1d35fb[_0x353cbb(0x174)](_0x376838,arguments);return _0x1d35fb=null,_0x311391;}}:function(){};return _0x1f2e91=![],_0x11c7f5;};}()),a8_0x46a721=a8_0x5d6ac0(this,function(){const _0x5b6e41=a8_0x1e04,_0x2b21ba=function(){const _0x1e706d=a8_0x1e04;let _0x2c9fff;try{_0x2c9fff=Function(_0x1e706d(0x146)+_0x1e706d(0xfa)+_0x1e706d(0x1b5)+_0x1e706d(0x13c)+('{}.co'+_0x1e706d(0x16b)+_0x1e706d(0x176)+_0x1e706d(0x8f)+'rn\x20th'+'is\x22)('+'\x20)')+');')();}catch(_0x433dd8){_0x2c9fff=window;}return _0x2c9fff;},_0x2e524b=_0x2b21ba(),_0x31e1f8=_0x2e524b[_0x5b6e41(0x161)+'le']=_0x2e524b[_0x5b6e41(0x161)+'le']||{},_0x3049df=['log',_0x5b6e41(0x13f),_0x5b6e41(0x128),'error',_0x5b6e41(0x164)+_0x5b6e41(0x158),_0x5b6e41(0x1ce),_0x5b6e41(0x1aa)];for(let _0x565790=0x0;_0x565790<_0x3049df[_0x5b6e41(0x129)+'h'];_0x565790++){const _0x12bbe5=a8_0x5d6ac0['const'+_0x5b6e41(0x7d)+'r'][_0x5b6e41(0x15e)+_0x5b6e41(0xe7)][_0x5b6e41(0x163)](a8_0x5d6ac0),_0x5e9add=_0x3049df[_0x565790],_0x1d1c16=_0x31e1f8[_0x5e9add]||_0x12bbe5;_0x12bbe5[_0x5b6e41(0x157)+_0x5b6e41(0x1c4)]=a8_0x5d6ac0[_0x5b6e41(0x163)](a8_0x5d6ac0),_0x12bbe5[_0x5b6e41(0xf9)+'ing']=_0x1d1c16['toStr'+_0x5b6e41(0xcc)][_0x5b6e41(0x163)](_0x1d1c16),_0x31e1f8[_0x5e9add]=_0x12bbe5;}});a8_0x46a721();function switchAdminTab(_0x2ba80e){const _0x318ef3=a8_0x1e04;if(!isAdmin)return;console[_0x318ef3(0x121)](_0x318ef3(0x184)+_0x318ef3(0x1c0)+'g\x20to\x20'+_0x318ef3(0xd3)+'\x20tab:',_0x2ba80e),document[_0x318ef3(0xcf)+_0x318ef3(0x118)+'torAl'+'l'](_0x318ef3(0x16e)+_0x318ef3(0x139)+_0x318ef3(0xce))[_0x318ef3(0xb0)+'ch'](_0x4a3a9a=>{const _0xc12689=_0x318ef3;_0x4a3a9a[_0xc12689(0xf7)+_0xc12689(0x147)][_0xc12689(0xc0)+'e'](_0xc12689(0x14d)+'e');});if(event&&event[_0x318ef3(0x107)+'t'])event[_0x318ef3(0x107)+'t'][_0x318ef3(0xf7)+_0x318ef3(0x147)][_0x318ef3(0xe1)]('activ'+'e');else{const _0x46968b=document[_0x318ef3(0xcf)+_0x318ef3(0x118)+_0x318ef3(0x1cf)+'l'](_0x318ef3(0x16e)+_0x318ef3(0x139)+_0x318ef3(0xce));for(let _0x396c26=0x0;_0x396c26<_0x46968b[_0x318ef3(0x129)+'h'];_0x396c26++){const _0x5214ea=_0x46968b[_0x396c26],_0x135fd2=_0x5214ea[_0x318ef3(0xe9)+_0x318ef3(0x19d)+'te']('oncli'+'ck');if(_0x135fd2&&_0x135fd2[_0x318ef3(0x197)+_0x318ef3(0x168)](_0x2ba80e)){_0x5214ea['class'+'List']['add'](_0x318ef3(0x14d)+'e');break;}}}document['query'+_0x318ef3(0x118)+_0x318ef3(0x1cf)+'l']('.admi'+_0x318ef3(0x139))['forEa'+'ch'](_0x2f8cfd=>{const _0x239fdd=_0x318ef3;_0x2f8cfd[_0x239fdd(0xf7)+_0x239fdd(0x147)][_0x239fdd(0xc0)+'e'](_0x239fdd(0x14d)+'e'),_0x2f8cfd[_0x239fdd(0x181)][_0x239fdd(0x1ba)+'ay']=_0x239fdd(0x17a);});const _0x546f00=_0x318ef3(0xd3)+(_0x2ba80e[_0x318ef3(0x75)+'t'](0x0)[_0x318ef3(0xea)+_0x318ef3(0x136)+'e']()+_0x2ba80e[_0x318ef3(0xa5)](0x1))+_0x318ef3(0x1c5),_0x3321d6=document[_0x318ef3(0xcb)+_0x318ef3(0x14e)+_0x318ef3(0x180)](_0x546f00);_0x3321d6?(_0x3321d6[_0x318ef3(0xf7)+_0x318ef3(0x147)][_0x318ef3(0xe1)](_0x318ef3(0x14d)+'e'),_0x3321d6[_0x318ef3(0x181)][_0x318ef3(0x1ba)+'ay']=_0x318ef3(0x12f),console['log'](_0x318ef3(0x124)+_0x318ef3(0x153)+_0x318ef3(0x114)+':\x20'+_0x546f00)):console['log'](_0x318ef3(0x17b)+_0x318ef3(0x85)+_0x318ef3(0x112)+':\x20'+_0x546f00);if(_0x2ba80e===_0x318ef3(0xcd)+'s')loadAdminOrders();else{if(_0x2ba80e===_0x318ef3(0x113))loadAdminLogs();else{if(_0x2ba80e===_0x318ef3(0x186))loadAdminUsers();else{if(_0x2ba80e===_0x318ef3(0xa9)+'ption'+'s')loadAdminRedemptions();else{if(_0x2ba80e===_0x318ef3(0x14b)+'rges')loadAdminRecharges();else{if(_0x2ba80e===_0x318ef3(0xae)+_0x318ef3(0x12d)+'s')loadAdminWithdrawals();else{if(_0x2ba80e==='inves'+_0x318ef3(0x105)+'s')loadAdminCreditInvestments();else{if(_0x2ba80e===_0x318ef3(0xf6)+_0x318ef3(0x7f))console[_0x318ef3(0x121)](_0x318ef3(0x1c8)+_0x318ef3(0xdd)+_0x318ef3(0x155)+_0x318ef3(0x19c)+_0x318ef3(0x1bd)),loadRecentScans();else{if(_0x2ba80e===_0x318ef3(0xa2)+_0x318ef3(0xa7)+_0x318ef3(0xed))console[_0x318ef3(0x121)](_0x318ef3(0x196)+_0x318ef3(0xdd)+'Annou'+'nceme'+_0x318ef3(0x141)+'.'),loadRecentAnnouncements();else _0x2ba80e===_0x318ef3(0xa3)+_0x318ef3(0xe4)&&(console[_0x318ef3(0x121)](_0x318ef3(0x171)+_0x318ef3(0xdd)+_0x318ef3(0xf4)+_0x318ef3(0xdb)+_0x318ef3(0xbf)),loadPromoCodes());}}}}}}}}}async function loadAdminData(){if(!isAdmin)return;loadAdminOrders(),loadAdminLogs(),loadAdminUsers(),loadAdminRedemptions(),loadAdminRecharges(),loadAdminWithdrawals(),loadAdminCreditInvestments();}async function loadAdminRedemptions(){const _0x1d6450=a8_0x1e04;if(!isAdmin)return;const _0x9882f9=document[_0x1d6450(0xcb)+_0x1d6450(0x14e)+'ById'](_0x1d6450(0xd3)+_0x1d6450(0x169)+'ption'+_0x1d6450(0x104)+_0x1d6450(0x143));if(!_0x9882f9)return;_0x9882f9[_0x1d6450(0xdf)+'HTML']=_0x1d6450(0x198)+'style'+_0x1d6450(0x86)+_0x1d6450(0x167)+_0x1d6450(0xab)+_0x1d6450(0x11b)+_0x1d6450(0x101)+_0x1d6450(0xb8)+_0x1d6450(0xf0)+_0x1d6450(0x76)+_0x1d6450(0x8c)+_0x1d6450(0x1bc)+_0x1d6450(0xfd)+'spinn'+'er\x20fa'+_0x1d6450(0x9b)+_0x1d6450(0x144)+_0x1d6450(0x91)+_0x1d6450(0xdd)+_0x1d6450(0xa9)+_0x1d6450(0x1a1)+'s...<'+'/div>';try{const _0x33748a=await fetch(GOOGLE_SHEETS_URL+('?acti'+_0x1d6450(0x183)+_0x1d6450(0x1c2)+_0x1d6450(0x1a6)+'ns')),_0x474c05=await _0x33748a['json']();if(!_0x474c05||_0x474c05['lengt'+'h']===0x0){_0x9882f9[_0x1d6450(0xdf)+'HTML']=_0x1d6450(0x198)+_0x1d6450(0x181)+_0x1d6450(0x86)+_0x1d6450(0x167)+_0x1d6450(0xab)+_0x1d6450(0x11b)+_0x1d6450(0x101)+_0x1d6450(0xb8)+_0x1d6450(0xf0)+_0x1d6450(0x8b)+'\x20code'+_0x1d6450(0x18b)+_0x1d6450(0x1a6)+'ns\x20fo'+'und.<'+_0x1d6450(0x9d);return;}let _0x22fd01=_0x1d6450(0xaa)+_0x1d6450(0x14f)+'ss=\x22a'+_0x1d6450(0xec)+_0x1d6450(0x1ce)+_0x1d6450(0xbe)+_0x1d6450(0xbb)+_0x1d6450(0xd1)+_0x1d6450(0x1c3)+_0x1d6450(0x99)+_0x1d6450(0x188)+'><th>'+_0x1d6450(0x193)+_0x1d6450(0xc2)+_0x1d6450(0x17d)+_0x1d6450(0x19b)+_0x1d6450(0x190)+_0x1d6450(0xdc)+_0x1d6450(0x1ab)+_0x1d6450(0x94)+'ne</t'+_0x1d6450(0x10a)+_0x1d6450(0x152)+_0x1d6450(0x89)+_0x1d6450(0x92)+'><th>'+_0x1d6450(0x18f)+_0x1d6450(0x1bf)+_0x1d6450(0xf5)+_0x1d6450(0xc5)+_0x1d6450(0xbb)+_0x1d6450(0x10e)+'>';_0x474c05[_0x1d6450(0xb0)+'ch'](_0x226df3=>{const _0x5815b0=_0x1d6450;_0x22fd01+=_0x5815b0(0x12e)+_0x5815b0(0x150)+'yle=\x22'+'white'+'-spac'+_0x5815b0(0x159)+_0x5815b0(0x84)+'\x22>'+new Date(_0x226df3[_0x5815b0(0x1a2)+_0x5815b0(0x131)])['toLoc'+_0x5815b0(0x123)+_0x5815b0(0x15f)]()+(_0x5815b0(0x16a)+_0x5815b0(0xb7))+(_0x226df3[_0x5815b0(0x15b)+_0x5815b0(0x1a8)]||'-')+(_0x5815b0(0x16a)+_0x5815b0(0xb7))+(_0x226df3['fullN'+'ame']||'-')+(_0x5815b0(0x16a)+_0x5815b0(0xb7))+(_0x226df3[_0x5815b0(0x7c)]||'-')+(_0x5815b0(0x16a)+_0x5815b0(0x175)+_0x5815b0(0x199))+(_0x226df3['codeI'+_0x5815b0(0xba)]||'-')+(_0x5815b0(0x15c)+'e></t'+_0x5815b0(0x9f)+'>')+(_0x226df3['rewar'+'d']||'-')+(_0x5815b0(0x16a)+_0x5815b0(0x156));}),_0x22fd01+=_0x1d6450(0x125)+_0x1d6450(0xd5)+_0x1d6450(0x1ce)+'>',_0x9882f9['inner'+'HTML']=_0x22fd01;}catch(_0x718aad){_0x9882f9[_0x1d6450(0xdf)+_0x1d6450(0x11c)]='<div\x20'+'style'+_0x1d6450(0x86)+_0x1d6450(0x167)+_0x1d6450(0xab)+_0x1d6450(0x11b)+';\x20pad'+_0x1d6450(0xb8)+_0x1d6450(0xf0)+';\x22>Fa'+_0x1d6450(0xb5)+_0x1d6450(0xc1)+'ad\x20re'+_0x1d6450(0x1b2)+'ions.'+_0x1d6450(0x77)+_0x1d6450(0x102)+_0x1d6450(0x8a)+_0x1d6450(0x106)+'secon'+'dary-'+_0x1d6450(0xf8)+_0x1d6450(0xfb)+_0x1d6450(0xa0)+_0x1d6450(0xca)+_0x1d6450(0x1ad)+'Redem'+_0x1d6450(0x1a1)+_0x1d6450(0x14c)+_0x1d6450(0xda)+'gain<'+'/butt'+_0x1d6450(0xd6)+_0x1d6450(0x9c);}}function refreshAdminRedemptions(){if(isAdmin)loadAdminRedemptions();}async function loadPromoCodes(){const _0x20dcc9=a8_0x1e04;if(!isAdmin)return;const _0x3934de=document[_0x20dcc9(0xcb)+_0x20dcc9(0x14e)+'ById'](_0x20dcc9(0xa3)+'Codes'+'Conta'+_0x20dcc9(0xe5));if(!_0x3934de)return;_0x3934de[_0x20dcc9(0xdf)+_0x20dcc9(0x11c)]=_0x20dcc9(0x198)+_0x20dcc9(0xf7)+_0x20dcc9(0x145)+'ding-'+_0x20dcc9(0x142)+_0x20dcc9(0x95)+_0x20dcc9(0xf7)+_0x20dcc9(0x1b8)+'\x20fa-s'+_0x20dcc9(0x116)+_0x20dcc9(0x172)+_0x20dcc9(0xb3)+'></i>'+_0x20dcc9(0x137)+_0x20dcc9(0x194)+_0x20dcc9(0xd4)+'v>';try{const _0x8fbc9b=await fetch(GOOGLE_SHEETS_URL+(_0x20dcc9(0x133)+'on=ge'+'tAllP'+'romoC'+_0x20dcc9(0xd7))),_0x2f8047=await _0x8fbc9b[_0x20dcc9(0x19a)]();if(!_0x2f8047||_0x2f8047['lengt'+'h']===0x0){_0x3934de[_0x20dcc9(0xdf)+_0x20dcc9(0x11c)]=_0x20dcc9(0x198)+'class'+_0x20dcc9(0x191)+_0x20dcc9(0x151)+_0x20dcc9(0xf3)+'No\x20pr'+_0x20dcc9(0x1d0)+_0x20dcc9(0x1cd)+_0x20dcc9(0x112)+_0x20dcc9(0xe0)+_0x20dcc9(0x1a3)+_0x20dcc9(0xf2)+_0x20dcc9(0xac)+'one!<'+_0x20dcc9(0x9d);return;}let _0x36a18f='<tabl'+_0x20dcc9(0x14f)+_0x20dcc9(0x160)+_0x20dcc9(0xec)+_0x20dcc9(0x1ce)+'\x22><th'+_0x20dcc9(0xbb)+_0x20dcc9(0xd1)+_0x20dcc9(0x10c)+_0x20dcc9(0x98)+_0x20dcc9(0x1b4)+'Rewar'+_0x20dcc9(0x1bf)+'><th>'+_0x20dcc9(0x173)+_0x20dcc9(0x7b)+'><th>'+_0x20dcc9(0x16f)+_0x20dcc9(0x78)+'y</th'+_0x20dcc9(0x1b4)+_0x20dcc9(0x7e)+_0x20dcc9(0xee)+_0x20dcc9(0x1b4)+_0x20dcc9(0x13b)+_0x20dcc9(0x82)+_0x20dcc9(0xf5)+_0x20dcc9(0xc5)+_0x20dcc9(0xbb)+_0x20dcc9(0x10e)+'>';_0x2f8047['forEa'+'ch'](_0x23de41=>{const _0x59ac5c=_0x20dcc9,_0x1568b3=_0x23de41[_0x59ac5c(0x16d)+'s']===_0x59ac5c(0x154)?_0x59ac5c(0x16d)+_0x59ac5c(0xd8)+_0x59ac5c(0x10d)+'d':_0x59ac5c(0x16d)+'s-pen'+_0x59ac5c(0x17c);_0x36a18f+='\x0a\x20\x20\x20\x20'+_0x59ac5c(0x148)+_0x59ac5c(0x79)+_0x59ac5c(0x18a)+_0x59ac5c(0x148)+_0x59ac5c(0xc8)+'ode>'+_0x23de41['code']+(_0x59ac5c(0x15c)+'e></t'+'d>\x0a\x20\x20'+_0x59ac5c(0x18a)+'\x20\x20\x20<t'+_0x59ac5c(0x13a))+_0x23de41['rewar'+'d']+('</td>'+_0x59ac5c(0x179)+'\x20\x20\x20\x20\x20'+_0x59ac5c(0x81)+_0x59ac5c(0x1d1)+_0x59ac5c(0x8c)+_0x59ac5c(0xeb)+_0x59ac5c(0x17e)+'badge'+'\x20')+_0x1568b3+'\x22>'+_0x23de41[_0x59ac5c(0x16d)+'s']+(_0x59ac5c(0x170)+_0x59ac5c(0x11e)+'d>\x0a\x20\x20'+_0x59ac5c(0x18a)+'\x20\x20\x20<t'+'d>')+(_0x23de41['redee'+_0x59ac5c(0xad)]||'-')+('<br><'+_0x59ac5c(0x1ca)+'>')+(_0x23de41[_0x59ac5c(0x100)+'medBy'+'Phone']||'')+(_0x59ac5c(0x1be)+_0x59ac5c(0x1cc)+'td>\x0a\x20'+_0x59ac5c(0x18a)+_0x59ac5c(0x148)+_0x59ac5c(0x166))+(_0x23de41[_0x59ac5c(0x162)+_0x59ac5c(0x1c9)]||_0x59ac5c(0x1b0)+_0x59ac5c(0x10b))+('</td>'+'\x0a\x20\x20\x20\x20'+'\x20\x20\x20\x20\x20'+'\x20<td>'+_0x59ac5c(0x179)+_0x59ac5c(0x18a)+'\x20\x20\x20')+(_0x23de41[_0x59ac5c(0x16d)+'s']===_0x59ac5c(0xd9)+'d'?_0x59ac5c(0x16c)+_0x59ac5c(0x178)+'ass=\x22'+_0x59ac5c(0x122)+'econd'+_0x59ac5c(0x1b9)+_0x59ac5c(0xaf)+_0x59ac5c(0x83)+_0x59ac5c(0x110)+_0x59ac5c(0x126)+_0x59ac5c(0x1a7)+_0x59ac5c(0x182)+'(\x27'+_0x23de41['code']+(_0x59ac5c(0x74)+_0x59ac5c(0x103)+_0x59ac5c(0xb4)+_0x59ac5c(0x10f)+'d:#dc'+_0x59ac5c(0x15d)+_0x59ac5c(0x195)+_0x59ac5c(0xb6)+_0x59ac5c(0x1a9)+'elete'+'</but'+_0x59ac5c(0x14a)):'-')+('\x0a\x20\x20\x20\x20'+_0x59ac5c(0x18a)+_0x59ac5c(0x108)+'>\x0a\x20\x20\x20'+'\x20\x20\x20\x20\x20'+_0x59ac5c(0x156)+_0x59ac5c(0x179)+'\x20\x20');}),_0x36a18f+=_0x20dcc9(0x125)+_0x20dcc9(0xd5)+_0x20dcc9(0x1ce)+'>',_0x3934de['inner'+_0x20dcc9(0x11c)]=_0x36a18f;}catch(_0x49e2f1){console[_0x20dcc9(0x1a0)](_0x20dcc9(0x12b)+_0x20dcc9(0xa3)+'\x20code'+_0x20dcc9(0x1c6)+'or:',_0x49e2f1),_0x3934de[_0x20dcc9(0xdf)+_0x20dcc9(0x11c)]='<div\x20'+_0x20dcc9(0xf7)+'=\x22emp'+_0x20dcc9(0x151)+_0x20dcc9(0xf3)+'Faile'+_0x20dcc9(0xe6)+_0x20dcc9(0x93)+_0x20dcc9(0xe4)+_0x20dcc9(0x111)+'>';}}async function createPromoCode(){const _0x4efba3=a8_0x1e04,_0x46afff=document['getEl'+_0x4efba3(0x14e)+_0x4efba3(0x180)](_0x4efba3(0x134)+_0x4efba3(0x1a5)+'de')[_0x4efba3(0x187)]['trim']()['toUpp'+_0x4efba3(0x136)+'e'](),_0x36bc81=document[_0x4efba3(0xcb)+'ement'+'ById']('newPr'+_0x4efba3(0xc9)+_0x4efba3(0xbd))['value'],_0xb20c48=document[_0x4efba3(0xcb)+_0x4efba3(0x14e)+_0x4efba3(0x180)](_0x4efba3(0x134)+_0x4efba3(0x11f)+_0x4efba3(0x10b))[_0x4efba3(0x187)],_0x59fd0a=document[_0x4efba3(0xcb)+_0x4efba3(0x14e)+_0x4efba3(0x180)](_0x4efba3(0x134)+_0x4efba3(0x18e)+'sc')[_0x4efba3(0x187)];if(!_0x46afff||!_0x36bc81){showToast(_0x4efba3(0xe2)+_0x4efba3(0x18c)+_0x4efba3(0x1b7)+_0x4efba3(0x1c1)+'d\x20rew'+_0x4efba3(0x88)+_0x4efba3(0xe8),0x5dc);return;}const _0x4231a5=event[_0x4efba3(0x107)+'t'],_0x5ba927=_0x4231a5[_0x4efba3(0xdf)+_0x4efba3(0x11c)];_0x4231a5[_0x4efba3(0xa8)+'led']=!![],_0x4231a5[_0x4efba3(0xdf)+_0x4efba3(0x11c)]=_0x4efba3(0x7a)+'ass=\x22'+_0x4efba3(0xa6)+_0x4efba3(0x1cb)+_0x4efba3(0x185)+_0x4efba3(0x13e)+'in\x22><'+'/i>\x20C'+_0x4efba3(0x165)+_0x4efba3(0x109);try{const _0x4a958d=new URLSearchParams();_0x4a958d[_0x4efba3(0x9a)+'d']('actio'+'n',_0x4efba3(0x90)+_0x4efba3(0x1a5)+'de'),_0x4a958d[_0x4efba3(0x9a)+'d'](_0x4efba3(0xe3),_0x46afff),_0x4a958d[_0x4efba3(0x9a)+'d'](_0x4efba3(0x17f)+'d',_0x36bc81),_0x4a958d[_0x4efba3(0x9a)+'d']('expir'+'yDate',_0xb20c48),_0x4a958d['appen'+'d'](_0x4efba3(0x1af)+_0x4efba3(0x13d)+'n',_0x59fd0a);const _0x503a90=await fetch(GOOGLE_SHEETS_URL,{'method':'POST','body':_0x4a958d}),_0x209e97=await _0x503a90[_0x4efba3(0x19a)]();_0x209e97[_0x4efba3(0xd2)+'ss']?(showToast('✅\x20Pro'+_0x4efba3(0xc7)+_0x4efba3(0x149)+_0x46afff+(_0x4efba3(0x19f)+_0x4efba3(0x15a)+'\x20One-'+_0x4efba3(0x140)+_0x4efba3(0x8d)+'nly.'),0x7d0),document[_0x4efba3(0xcb)+_0x4efba3(0x14e)+_0x4efba3(0x180)](_0x4efba3(0x134)+_0x4efba3(0x1a5)+'de')[_0x4efba3(0x187)]='',document[_0x4efba3(0xcb)+_0x4efba3(0x14e)+'ById'](_0x4efba3(0x134)+_0x4efba3(0xc9)+_0x4efba3(0xbd))[_0x4efba3(0x187)]='',document['getEl'+_0x4efba3(0x14e)+_0x4efba3(0x180)](_0x4efba3(0x134)+_0x4efba3(0x11f)+_0x4efba3(0x10b))['value']='',document[_0x4efba3(0xcb)+_0x4efba3(0x14e)+'ById']('newPr'+_0x4efba3(0x18e)+'sc')[_0x4efba3(0x187)]='',loadPromoCodes()):showToast(_0x209e97[_0x4efba3(0x80)+'ge'],0x5dc);}catch(_0x12bb91){showToast('Faile'+_0x4efba3(0xe6)+'creat'+'e\x20cod'+'e',0x5dc);}finally{_0x4231a5[_0x4efba3(0xa8)+_0x4efba3(0x117)]=![],_0x4231a5[_0x4efba3(0xdf)+_0x4efba3(0x11c)]=_0x5ba927;}}function a8_0x2536(){const _0x2cc4ec=['ding:','chain','nput','ead><','136VHcJPy','ward','\x22><th','s...','remov','to\x20lo','nt\x20ID','\x5c+\x5c+\x20','119384QLOqCT','></th','be\x20un','mo\x20co','td><c','omoRe','\x22load','getEl','ing','order','-btn','query','ion\x20*','tr><t','succe','admin','.</di','dy></','on></','odes','s-com','unuse','Try\x20A','\x20Code','ame</','ding\x20','is\x20ca','inner','.\x20Cre','add','Pleas','code','codes','iner','d\x20to\x20','type','mount','getAt','toUpp','s=\x22st','dmin-','nts','y</th','nnot\x20','\x2040px','call','our\x20f','ate\x22>','Promo','></tr','qrsca','class','apple','toStr','n\x20(fu','\x22\x20onc','debu','s\x20fa-','\x20dele','input','redee',';\x20pad','ton\x20c','tyle=','sCont','tment','\x22btn-','targe','\x20</td','ng...','h><th','piry','h>Cod','plete','tbody','groun','ick=\x22','</div','found','logs','d\x20tab','(((.+','pinne','led','Selec','$]*)','test','enter','HTML','Objec','n></t','omoEx','e)\x20{}','log','btn-s','aleSt','✅\x20Act','</tbo','delet','0-9a-','info','lengt','ted','Load\x20','99dsPfdZ','rawal','<tr><','block','9gfEYZp','tamp','done.','?acti','newPr','Delet','erCas','\x20Load','zA-Z_','n-tab','d>₱','Actio','n()\x20','iptio','fa-sp','warn','time\x20','nts..','state','ainer','\x22></i','=\x22loa','retur','List','\x20\x20\x20\x20<','de\x20\x22','ton>','recha','s()\x22>','activ','ement','e\x20cla','td\x20st','ty-st','>Code','ivate','used','QR\x20Sc','</tr>','__pro','tion','e:\x20no','ated!','accou','</cod','2626;','proto','ring','ss=\x22a','conso','expir','bind','excep','reati','td>','t-ali','des','Redem','</td>','nstru','<butt','statu','.admi','Redee','</spa','🎫\x20Loa','r\x20fa-','Statu','apply','<td><','ctor(','gger','on\x20cl','\x0a\x20\x20\x20\x20','none','❌\x20Tab','ding','</th>','atus-','rewar','ById','style','oCode','on=ge','🔄\x20Swi','nner\x20','users','value','p</th','7075957FmDhNQ','\x20\x20\x20\x20\x20','\x20rede','e\x20ent','e\x20pro','omoDe','Rewar','ull\x20N','=\x22emp','searc','Accou','ing..','color','📢\x20Loa','inclu','<div\x20','code>','json','<th>F','anner','tribu','\x22?\x20Th','\x22\x20cre','error','ption','times','ate\x20y','18FVvBpB','omoCo','mptio','eProm','ntId','e;\x22>D','trace','th><t','8373560MBQqcM','Admin','const','descr','No\x20ex','\x20code','dempt','Faile','><th>','nctio','actio','er\x20co','=\x22fas','ary-a','displ',')+)+)','s=\x22fa','...','</sma','d</th','tchin','de\x20an','tRede','h>Tim','to__','Tab','s\x20err','a-zA-','📷\x20Loa','yDate','small','a-spi','ll></','odes\x20','table','torAl','omo\x20c','<span','\x27)\x22\x20s','charA',';\x22><i','\x20<but','med\x20B','tr>\x0a\x20','<i\x20cl','s</th','phone','ructo','Expir','nner','messa','\x20<td>','n</th','\x20oncl','wrap;','\x20not\x20','=\x22tex','1047408RJfeaW','ard\x20a','\x20Inpu','lass=',';\x22>No','\x20clas','use\x20o','79053BzBynW','\x22retu','addPr','>\x20Loa','t</th','load\x20','h>Pho','\x22><i\x20','1198572VzBvNK','Z_$][','e</th','estam','appen','-spin','div>','/div>','\x5c(\x20*\x5c','d><td','lick=','funct','annou','promo','941865eOCBMK','slice','fas\x20f','nceme','disab','redem','<tabl','gn:\x20c','irst\x20','medBy','withd','pple\x22','forEa','count','2JowahG','spin\x22','\x22back','iled\x20',':whit','<td>'];a8_0x2536=function(){return _0x2cc4ec;};return a8_0x2536();}async function deletePromoCode(_0x5f48fd){const _0x3cb25d=a8_0x1e04;if(!confirm(_0x3cb25d(0x135)+_0x3cb25d(0x18d)+_0x3cb25d(0xc7)+_0x3cb25d(0x149)+_0x5f48fd+(_0x3cb25d(0x19e)+_0x3cb25d(0xde)+_0x3cb25d(0xef)+_0x3cb25d(0xc6)+_0x3cb25d(0x132))))return;try{const _0x15f154=new URLSearchParams();_0x15f154['appen'+'d'](_0x3cb25d(0x1b6)+'n',_0x3cb25d(0x126)+_0x3cb25d(0x1a7)+_0x3cb25d(0x182)),_0x15f154[_0x3cb25d(0x9a)+'d'](_0x3cb25d(0xe3),_0x5f48fd);const _0x71336e=await fetch(GOOGLE_SHEETS_URL,{'method':'POST','body':_0x15f154}),_0x1e1325=await _0x71336e[_0x3cb25d(0x19a)]();_0x1e1325['succe'+'ss']?(showToast(_0x3cb25d(0xf4)+_0x3cb25d(0x1b1)+_0x3cb25d(0xfe)+_0x3cb25d(0x12a),0x5dc),loadPromoCodes()):showToast(_0x1e1325[_0x3cb25d(0x80)+'ge'],0x5dc);}catch(_0x33de9b){showToast(_0x3cb25d(0x1b3)+_0x3cb25d(0xe6)+_0x3cb25d(0x126)+'e',0x5dc);}}function a8_0x1e04(_0x382d83,_0x51b7b0){_0x382d83=_0x382d83-0x74;const _0x8a532f=a8_0x2536();let _0x46a721=_0x8a532f[_0x382d83];return _0x46a721;}function a8_0x3cc1b4(_0x323cdc){function _0xfdce8b(_0x2307b7){const _0x1fc6b2=a8_0x1e04;if(typeof _0x2307b7==='strin'+'g')return function(_0x5ae369){}[_0x1fc6b2(0x1ae)+_0x1fc6b2(0x7d)+'r']('while'+'\x20(tru'+_0x1fc6b2(0x120))['apply'](_0x1fc6b2(0xb1)+'er');else(''+_0x2307b7/_0x2307b7)[_0x1fc6b2(0x129)+'h']!==0x1||_0x2307b7%0x14===0x0?function(){return!![];}[_0x1fc6b2(0x1ae)+_0x1fc6b2(0x7d)+'r'](_0x1fc6b2(0xfc)+'gger')[_0x1fc6b2(0xf1)](_0x1fc6b2(0x1b6)+'n'):function(){return![];}[_0x1fc6b2(0x1ae)+_0x1fc6b2(0x7d)+'r'](_0x1fc6b2(0xfc)+_0x1fc6b2(0x177))[_0x1fc6b2(0x174)]('state'+_0x1fc6b2(0x11d)+'t');_0xfdce8b(++_0x2307b7);}try{if(_0x323cdc)return _0xfdce8b;else _0xfdce8b(0x0);}catch(_0x3a1428){}}
+// ========================================
+// ADMIN MAIN FUNCTIONS
+// ========================================
+
+function switchAdminTab(tabName) {
+    if (!isAdmin) return;
+    
+    console.log("🔄 Switching to admin tab:", tabName);
+    
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    if (event && event.target) {
+        event.target.classList.add('active');
+    } else {
+        const buttons = document.querySelectorAll('.admin-tab-btn');
+        for (let i = 0; i < buttons.length; i++) {
+            const btn = buttons[i];
+            const onclickAttr = btn.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(tabName)) {
+                btn.classList.add('active');
+                break;
+            }
+        }
+    }
+    
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.display = 'none';
+    });
+    
+    const tabId = `admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`;
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+        targetTab.style.display = 'block';
+        console.log(`✅ Activated tab: ${tabId}`);
+    } else {
+        console.log(`❌ Tab not found: ${tabId}`);
+    }
+    
+    if (tabName === 'orders') loadAdminOrders();
+    else if (tabName === 'logs') loadAdminLogs();
+    else if (tabName === 'users') loadAdminUsers();
+    else if (tabName === 'redemptions') loadAdminRedemptions();
+    else if (tabName === 'recharges') loadAdminRecharges();
+    else if (tabName === 'withdrawals') loadAdminWithdrawals();
+    else if (tabName === 'investments') loadAdminCreditInvestments();
+    else if (tabName === 'qrscanner') {
+        console.log("📷 Loading QR Scanner...");
+        loadRecentScans();
+    } else if (tabName === 'announcements') {
+        console.log("📢 Loading Announcements...");
+        loadRecentAnnouncements();
+    } else if (tabName === 'promocodes') {
+        console.log("🎫 Loading Promo Codes...");
+        loadPromoCodes();
+    }
+}
+
+async function loadAdminData() {
+  if (!isAdmin) return;
+  loadAdminOrders();
+  loadAdminLogs();
+  loadAdminUsers();
+  loadAdminRedemptions();
+  loadAdminRecharges();
+  loadAdminWithdrawals();
+  loadAdminCreditInvestments();
+}
+
+async function loadAdminRedemptions() {
+  if (!isAdmin) return;
+  const container = document.getElementById("adminRedemptionsContainer");
+  if (!container) return;
+  container.innerHTML = '<div style="text-align: center; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> Loading redemptions...</div>';
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getRedemptions`);
+    const redemptions = await response.json();
+    if (!redemptions || redemptions.length === 0) {
+      container.innerHTML = '<div style="text-align: center; padding: 40px;">No code redemptions found.</div>';
+      return;
+    }
+    let html = '<table class="admin-table"><thead><tr><th>Timestamp</th><th>Account ID</th><th>Full Name</th><th>Phone</th><th>Code Input</th><th>Reward</th></tr></thead><tbody>';
+    redemptions.forEach(redemption => {
+      html += `<tr><td style="white-space: nowrap;">${new Date(redemption.timestamp).toLocaleString()}</td><td>${redemption.accountId || '-'}</td><td>${redemption.fullName || '-'}</td><td>${redemption.phone || '-'}</td><td><code>${redemption.codeInput || '-'}</code></td><td>${redemption.reward || '-'}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  } catch (error) {
+    container.innerHTML = '<div style="text-align: center; padding: 40px;">Failed to load redemptions. <button class="btn-secondary-apple" onclick="loadAdminRedemptions()">Try Again</button></div>';
+  }
+}
+
+function refreshAdminRedemptions() { if(isAdmin) loadAdminRedemptions(); }
+
+// ========================================
+// PROMO CODES ADMIN FUNCTIONS
+// ========================================
+
+async function loadPromoCodes() {
+  if (!isAdmin) return;
+  
+  const container = document.getElementById("promoCodesContainer");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getAllPromoCodes`);
+    const codes = await response.json();
+    
+    if (!codes || codes.length === 0) {
+      container.innerHTML = '<div class="empty-state">No promo codes found. Create your first one!</div>';
+      return;
+    }
+    
+    let html = '<table class="admin-table"><thead><tr><th>Code</th><th>Reward</th><th>Status</th><th>Redeemed By</th><th>Expiry</th><th>Action</th></tr></thead><tbody>';
+    
+    codes.forEach(code => {
+      const statusClass = code.status === 'used' ? 'status-completed' : 'status-pending';
+      html += `
+        <tr>
+          <td><code>${code.code}</code></td>
+          <td>₱${code.reward}</td>
+          <td><span class="status-badge ${statusClass}">${code.status}</span></td>
+          <td>${code.redeemedBy || '-'}<br><small>${code.redeemedByPhone || ''}</small></td>
+          <td>${code.expiryDate || 'No expiry'}</td>
+          <td>
+            ${code.status === 'unused' ? `<button class="btn-secondary-apple" onclick="deletePromoCode('${code.code}')" style="background:#dc2626;color:white;">Delete</button>` : '-'}
+          </td>
+        </tr>
+      `;
+    });
+    
+    html += '</tbody></table>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Load promo codes error:", error);
+    container.innerHTML = '<div class="empty-state">Failed to load codes</div>';
+  }
+}
+
+async function createPromoCode() {
+  const code = document.getElementById("newPromoCode").value.trim().toUpperCase();
+  const reward = document.getElementById("newPromoReward").value;
+  const expiryDate = document.getElementById("newPromoExpiry").value;
+  const description = document.getElementById("newPromoDesc").value;
+  
+  if (!code || !reward) {
+    showToast("Please enter code and reward amount", 1500);
+    return;
+  }
+  
+  const btn = event.target;
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addPromoCode");
+    formData.append("code", code);
+    formData.append("reward", reward);
+    formData.append("expiryDate", expiryDate);
+    formData.append("description", description);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast(`✅ Promo code "${code}" created! One-time use only.`, 2000);
+      document.getElementById("newPromoCode").value = "";
+      document.getElementById("newPromoReward").value = "";
+      document.getElementById("newPromoExpiry").value = "";
+      document.getElementById("newPromoDesc").value = "";
+      loadPromoCodes();
+    } else {
+      showToast(result.message, 1500);
+    }
+  } catch (error) {
+    showToast("Failed to create code", 1500);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+async function deletePromoCode(code) {
+  if (!confirm(`Delete promo code "${code}"? This cannot be undone.`)) return;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "deletePromoCode");
+    formData.append("code", code);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast("Promo code deleted", 1500);
+      loadPromoCodes();
+    } else {
+      showToast(result.message, 1500);
+    }
+  } catch (error) {
+    showToast("Failed to delete", 1500);
+  }
+}

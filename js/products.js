@@ -1,1 +1,161 @@
-(function(_0x436057,_0x46cdc8){const _0x37dc1b=a21_0x5ce2,_0x5bd43b=_0x436057();while(!![]){try{const _0x21a408=parseInt(_0x37dc1b(0x253))/0x1*(parseInt(_0x37dc1b(0x1cf))/0x2)+parseInt(_0x37dc1b(0x19f))/0x3+-parseInt(_0x37dc1b(0x22e))/0x4+-parseInt(_0x37dc1b(0x203))/0x5+-parseInt(_0x37dc1b(0x1f2))/0x6+-parseInt(_0x37dc1b(0x22a))/0x7+-parseInt(_0x37dc1b(0x21b))/0x8*(-parseInt(_0x37dc1b(0x268))/0x9);if(_0x21a408===_0x46cdc8)break;else _0x5bd43b['push'](_0x5bd43b['shift']());}catch(_0x3ca4cb){_0x5bd43b['push'](_0x5bd43b['shift']());}}}(a21_0x28aa,0x90ee2));const a21_0x2eb9a7=(function(){let _0x34e109=!![];return function(_0x3e05ab,_0x490deb){const _0x14f97b=_0x34e109?function(){if(_0x490deb){const _0x49b6de=_0x490deb['apply'](_0x3e05ab,arguments);return _0x490deb=null,_0x49b6de;}}:function(){};return _0x34e109=![],_0x14f97b;};}()),a21_0x4797a5=a21_0x2eb9a7(this,function(){const _0x5be9f7=a21_0x5ce2;return a21_0x4797a5['toStr'+_0x5be9f7(0x26b)]()['searc'+'h'](_0x5be9f7(0x1e7)+_0x5be9f7(0x1a6)+'+$')[_0x5be9f7(0x218)+'ing']()[_0x5be9f7(0x256)+_0x5be9f7(0x1a1)+'r'](a21_0x4797a5)['searc'+'h']('(((.+'+_0x5be9f7(0x1a6)+'+$');});a21_0x4797a5();const a21_0x51d8f7=(function(){let _0x131f0a=!![];return function(_0x599a63,_0x583b3b){const _0x6467c3=_0x131f0a?function(){const _0x4ef9a6=a21_0x5ce2;if(_0x583b3b){const _0x5d8d2e=_0x583b3b[_0x4ef9a6(0x198)](_0x599a63,arguments);return _0x583b3b=null,_0x5d8d2e;}}:function(){};return _0x131f0a=![],_0x6467c3;};}());(function(){a21_0x51d8f7(this,function(){const _0xfab468=a21_0x5ce2,_0x3949a0=new RegExp('funct'+_0xfab468(0x24a)+_0xfab468(0x279)+')'),_0x35e8ce=new RegExp(_0xfab468(0x1af)+_0xfab468(0x265)+_0xfab468(0x1f5)+'Z_$]['+_0xfab468(0x1ca)+'zA-Z_'+_0xfab468(0x1df),'i'),_0x1c7685=a21_0x50855b(_0xfab468(0x189));!_0x3949a0[_0xfab468(0x1a8)](_0x1c7685+'chain')||!_0x35e8ce['test'](_0x1c7685+'input')?_0x1c7685('0'):a21_0x50855b();})();}());const a21_0x536372=(function(){let _0x2dbc1a=!![];return function(_0x2a959e,_0x502c79){const _0x2c9cb1=_0x2dbc1a?function(){const _0xdd1b5d=a21_0x5ce2;if(_0x502c79){const _0x5c633a=_0x502c79[_0xdd1b5d(0x198)](_0x2a959e,arguments);return _0x502c79=null,_0x5c633a;}}:function(){};return _0x2dbc1a=![],_0x2c9cb1;};}()),a21_0x4e8a64=a21_0x536372(this,function(){const _0x264487=a21_0x5ce2;let _0x26806f;try{const _0x8c4096=Function(_0x264487(0x1db)+_0x264487(0x260)+_0x264487(0x19a)+_0x264487(0x271)+(_0x264487(0x206)+_0x264487(0x209)+_0x264487(0x188)+_0x264487(0x1b3)+_0x264487(0x1f0)+'is\x22)('+'\x20)')+');');_0x26806f=_0x8c4096();}catch(_0x1cb713){_0x26806f=window;}const _0x1d5e65=_0x26806f[_0x264487(0x22b)+'le']=_0x26806f[_0x264487(0x22b)+'le']||{},_0x42decb=[_0x264487(0x229),_0x264487(0x192),_0x264487(0x238),_0x264487(0x19e),_0x264487(0x201)+_0x264487(0x240),_0x264487(0x259),_0x264487(0x269)];for(let _0x3b015c=0x0;_0x3b015c<_0x42decb[_0x264487(0x252)+'h'];_0x3b015c++){const _0x975d30=a21_0x536372['const'+_0x264487(0x1a1)+'r'][_0x264487(0x1d5)+_0x264487(0x195)][_0x264487(0x20d)](a21_0x536372),_0x4a9639=_0x42decb[_0x3b015c],_0x55a5d6=_0x1d5e65[_0x4a9639]||_0x975d30;_0x975d30[_0x264487(0x250)+_0x264487(0x235)]=a21_0x536372[_0x264487(0x20d)](a21_0x536372),_0x975d30['toStr'+_0x264487(0x26b)]=_0x55a5d6[_0x264487(0x218)+'ing'][_0x264487(0x20d)](_0x55a5d6),_0x1d5e65[_0x4a9639]=_0x975d30;}});a21_0x4e8a64();function a21_0x28aa(){const _0x4b1583=['le\x22\x20o','Redem','trim','roduc','-appl','\x5c+\x5c+\x20','\x20fa-p','essag','=\x22pro','\x22retu','value','messa','\x20</di','activ','a-id=','-id=\x22','k=\x22ad','style','le\x22>','ont-s','query','itle-','art-a','oduct','ropag','btn-a','/div>','rt-ap','ss=\x22p','anoth','price','e\x20wai','0-9a-','ntain','ory','\x20\x20\x20\x20\x20','all','20082kJkOKs','s=\x22pr','cat','ing\x20y','=\x22fon','.cat-','proto','targe','<div\x20','again','v>\x0a\x20\x20','y-app','retur','iv\x20cl','redee','\x20to\x20C','$]*)','\x20\x20\x20\x20<','torAl','pple\x22','\x20try\x20','appen','lers\x20','succe','(((.+','user','ackgr','toUpp','\x20data','\x22></i','t-pri','gger','edeem','rn\x20th','erCas','3699624uUDhlU','uredP','imeCo','a-zA-','>\x20Add','\x22\x20dat','gify','getAt',')\x22>Ad','Selec','</div','balan','des','getEl','dToCa','excep','\x20Cand','2975465LzwZoX','\x0a\x20\x20\x20\x20','g:\x2060','{}.co','POST','le=\x22f','nstru','e\x22>₱','List','e)\x20{}','bind','=\x22fas','apple','add','on>\x0a\x20','HTML','cts\x20m','o-car','data-','er\x20fi','✨\x20No\x20','toStr','fullN','map','5976DbdTmC','ation','tion.','state','lance','d\x20to\x20','add-t','ct-ca','\x20Try\x20','lease','\x20#f5f','ass=\x22','Objec','join','log','6836627aCwBAG','conso','lass=','ocess','1244560kZQKkT',':cent','=\x22gri','px;\x22>','stene','Sky\x20R','forEa','to__','led','tribu','info','funct','\x20fail','=\x22add','ing..','class','\x20\x20<bu','Pack','tion','mg-ap','\x20<div','>\x0a\x20\x20\x20','while','\x20clas','image','div\x20c','ntId','/-1;\x20','ion\x20*','count','ed.\x20P','uct-t','er\x20a\x20','remov','__pro','ement','lengt','57zrKaLG','inner','btn-p','const','age\x20.','\x20\x20<di','table','t-app',';\x22>','disab','text-','e\x20ent','\x20(tru','n\x20(fu','nclic','Pleas','sage\x20','tegor','*(?:[','hInpu','ple','29043LWuMBR','trace','toFix','ing','phone','produ','t-tit','-img-','ple\x22>','n()\x20','em;\x20b','ById','-to-c','entLi','categ','\x22><i\x20','Cart<','\x5c(\x20*\x5c','strin','ame','fo-ap','duct-','setIt','v\x20cla','align','e:\x204r','ple\x22\x20','\x20\x20\x20<d','=\x22cod','uct-i','ion','a-spi','er;\x20p','t-siz','filte','e-mes','in\x22><','inclu','toLow','card-','ctor(','init','searc','our\x20r','actio','d:\x20#f','to-ca','5f7;\x22','featu','umn:1','warn','addEv','name','type','ption','rt(','apply','/butt','nctio','\x22>\x0a\x20\x20','\x20erro','.add-','error','330678ZzucRF','fas\x20f','ructo','\x22prod','lus-c','\x20rede','click',')+)+)','ss\x22>✓','test','Roman'];a21_0x28aa=function(){return _0x4b1583;};return a21_0x28aa();}function getFilteredProducts(){const _0x2c8ec8=a21_0x5ce2;let _0x10f654=[...products];if(currentCategory!==_0x2c8ec8(0x1ce))_0x10f654=_0x10f654[_0x2c8ec8(0x182)+'r'](_0x12ed35=>_0x12ed35[_0x2c8ec8(0x276)+'ory']===currentCategory);if(searchQuery[_0x2c8ec8(0x1ac)]()!==''){const _0x54c4fd=searchQuery[_0x2c8ec8(0x1ac)]()[_0x2c8ec8(0x186)+_0x2c8ec8(0x1f1)+'e']();_0x10f654=_0x10f654[_0x2c8ec8(0x182)+'r'](_0x26ed7b=>_0x26ed7b[_0x2c8ec8(0x194)]['toLow'+_0x2c8ec8(0x1f1)+'e']()[_0x2c8ec8(0x185)+_0x2c8ec8(0x1fe)](_0x54c4fd)||_0x26ed7b['categ'+_0x2c8ec8(0x1cc)][_0x2c8ec8(0x186)+_0x2c8ec8(0x1f1)+'e']()['inclu'+_0x2c8ec8(0x1fe)](_0x54c4fd));}return _0x10f654;}function renderProducts(){const _0x35e676=a21_0x5ce2;if(isAdmin)return;const _0x108085=document['getEl'+_0x35e676(0x251)+_0x35e676(0x273)](_0x35e676(0x26d)+'ctsCo'+_0x35e676(0x1cb)+'er');if(!_0x108085)return;const _0x4ad7c4=getFilteredProducts();if(_0x4ad7c4[_0x35e676(0x252)+'h']===0x0){_0x108085[_0x35e676(0x254)+'HTML']='<div\x20'+_0x35e676(0x1bb)+_0x35e676(0x230)+'d-col'+_0x35e676(0x191)+_0x35e676(0x249)+_0x35e676(0x25d)+_0x35e676(0x280)+_0x35e676(0x22f)+_0x35e676(0x180)+'addin'+_0x35e676(0x205)+_0x35e676(0x231)+_0x35e676(0x217)+_0x35e676(0x26d)+_0x35e676(0x213)+'atch.'+_0x35e676(0x223)+_0x35e676(0x1c7)+_0x35e676(0x216)+'lter.'+_0x35e676(0x1fc)+'>';return;}let _0x2af3c5='';_0x4ad7c4['forEa'+'ch'](_0xe442a6=>{const _0x7e6426=_0x35e676;_0x2af3c5+=_0x7e6426(0x1d7)+'class'+'=\x22pro'+_0x7e6426(0x27d)+_0x7e6426(0x187)+'apple'+_0x7e6426(0x1f7)+_0x7e6426(0x1b8)+'\x22'+_0xe442a6['id']+(_0x7e6426(0x19b)+_0x7e6426(0x1cd)+_0x7e6426(0x242)+_0x7e6426(0x245)+_0x7e6426(0x1d0)+_0x7e6426(0x1c1)+_0x7e6426(0x26f)+'apple'+'\x22\x20sty'+_0x7e6426(0x208)+_0x7e6426(0x1bd)+'ize:\x20'+'4rem;'+'\x20back'+'groun'+_0x7e6426(0x18d)+'5f5f7'+_0x7e6426(0x25b))+_0xe442a6['image']+(_0x7e6426(0x1fc)+_0x7e6426(0x243)+'\x20\x20\x20\x20\x20'+_0x7e6426(0x1d7)+'class'+_0x7e6426(0x1b2)+_0x7e6426(0x27d)+'info-'+'apple'+_0x7e6426(0x19b)+'\x20\x20\x20\x20\x20'+_0x7e6426(0x17b)+_0x7e6426(0x1dc)+_0x7e6426(0x226)+'produ'+_0x7e6426(0x222)+_0x7e6426(0x264)+'y-app'+_0x7e6426(0x1bc))+escapeHtml(_0xe442a6[_0x7e6426(0x276)+_0x7e6426(0x1cc)])+(_0x7e6426(0x1fc)+_0x7e6426(0x243)+_0x7e6426(0x1cd)+'\x20\x20<di'+'v\x20cla'+_0x7e6426(0x1c6)+_0x7e6426(0x1ad)+_0x7e6426(0x26e)+'le-ap'+_0x7e6426(0x270))+escapeHtml(_0xe442a6[_0x7e6426(0x194)])+('</div'+'>\x0a\x20\x20\x20'+'\x20\x20\x20\x20\x20'+_0x7e6426(0x258)+_0x7e6426(0x27f)+_0x7e6426(0x1c6)+_0x7e6426(0x1ad)+_0x7e6426(0x1ed)+'ce-ap'+'ple\x22>'+'₱')+_0xe442a6[_0x7e6426(0x1c8)][_0x7e6426(0x26a)+'ed'](0x2)+('</div'+_0x7e6426(0x243)+_0x7e6426(0x1cd)+_0x7e6426(0x23e)+'tton\x20'+_0x7e6426(0x23d)+_0x7e6426(0x23b)+_0x7e6426(0x274)+_0x7e6426(0x1c0)+_0x7e6426(0x1e2)+_0x7e6426(0x1eb)+_0x7e6426(0x1b9))+_0xe442a6['id']+(_0x7e6426(0x277)+_0x7e6426(0x23d)+_0x7e6426(0x20e)+_0x7e6426(0x1b0)+_0x7e6426(0x1a3)+'ircle'+_0x7e6426(0x1ec)+_0x7e6426(0x1f6)+_0x7e6426(0x1de)+'art</'+'butto'+'n>\x0a\x20\x20'+'\x20\x20\x20\x20\x20'+_0x7e6426(0x1b6)+_0x7e6426(0x1d9)+'\x20\x20\x20\x20<'+_0x7e6426(0x1c4));}),_0x108085[_0x35e676(0x254)+'HTML']=_0x2af3c5,document[_0x35e676(0x1be)+_0x35e676(0x1fb)+'torAl'+'l'](_0x35e676(0x19d)+_0x35e676(0x18e)+_0x35e676(0x1c5)+_0x35e676(0x267))[_0x35e676(0x234)+'ch'](_0x5785f3=>{const _0x3b3995=_0x35e676;_0x5785f3[_0x3b3995(0x193)+'entLi'+_0x3b3995(0x232)+'r'](_0x3b3995(0x1a5),_0xd2e12b=>{const _0x43329f=_0x3b3995;_0xd2e12b['stopP'+_0x43329f(0x1c2)+_0x43329f(0x21c)]();const _0x1e9291=parseInt(_0x5785f3[_0x43329f(0x1f9)+_0x43329f(0x237)+'te'](_0x43329f(0x215)+'id'));addToCart(_0x1e9291);});});}function initFilters(){const _0x24c303=a21_0x5ce2;document[_0x24c303(0x1be)+_0x24c303(0x1fb)+'torAl'+'l']('.cat-'+_0x24c303(0x1c3)+'pple')[_0x24c303(0x234)+'ch'](_0x38f888=>{const _0x447f9e=_0x24c303;_0x38f888['addEv'+_0x447f9e(0x275)+'stene'+'r'](_0x447f9e(0x1a5),()=>{const _0x272484=_0x447f9e;document[_0x272484(0x1be)+_0x272484(0x1fb)+_0x272484(0x1e1)+'l'](_0x272484(0x1d4)+_0x272484(0x1c3)+'pple')[_0x272484(0x234)+'ch'](_0x11e38f=>_0x11e38f[_0x272484(0x23d)+_0x272484(0x20b)][_0x272484(0x24f)+'e'](_0x272484(0x1b7)+'e')),_0x38f888['class'+_0x272484(0x20b)][_0x272484(0x210)](_0x272484(0x1b7)+'e'),currentCategory=_0x38f888['getAt'+'tribu'+'te'](_0x272484(0x215)+_0x272484(0x1d1)),renderProducts();});});const _0x39dc88=document[_0x24c303(0x1ff)+_0x24c303(0x251)+_0x24c303(0x273)](_0x24c303(0x18a)+_0x24c303(0x266)+'t');_0x39dc88&&_0x39dc88[_0x24c303(0x193)+_0x24c303(0x275)+'stene'+'r']('input',_0x486a98=>{const _0x60a5ce=_0x24c303;searchQuery=_0x486a98[_0x60a5ce(0x1d6)+'t'][_0x60a5ce(0x1b4)],renderProducts();});}function a21_0x5ce2(_0x28ac1c,_0x497180){_0x28ac1c=_0x28ac1c-0x17a;const _0x5e36ed=a21_0x28aa();let _0x4e8a64=_0x5e36ed[_0x28ac1c];return _0x4e8a64;}function loadFeaturedPage(){const _0x40774b=a21_0x5ce2;if(isAdmin)return;renderFeaturedProducts();if(currentUser){if(typeof loadUserCredit===_0x40774b(0x239)+'ion')loadUserCredit();if(typeof loadCreditInvestmentHistory===_0x40774b(0x239)+_0x40774b(0x17e))loadCreditInvestmentHistory();}}function renderFeaturedProducts(){const _0x3785b0=a21_0x5ce2;if(isAdmin)return;const _0x5bcb7a=document[_0x3785b0(0x1ff)+_0x3785b0(0x251)+_0x3785b0(0x273)](_0x3785b0(0x190)+'redGr'+'id');if(!_0x5bcb7a)return;const _0x320314=products[_0x3785b0(0x182)+'r'](_0x54a740=>_0x54a740[_0x3785b0(0x194)]===_0x3785b0(0x1a9)+_0x3785b0(0x202)+'le'||_0x54a740[_0x3785b0(0x194)]===_0x3785b0(0x233)+'ocket'||_0x54a740[_0x3785b0(0x194)]==='Spark'+_0x3785b0(0x1e5)+_0x3785b0(0x23f));_0x5bcb7a[_0x3785b0(0x254)+_0x3785b0(0x212)]=_0x320314[_0x3785b0(0x21a)](_0x3b2316=>'<div\x20'+'class'+_0x3785b0(0x1b2)+_0x3785b0(0x27d)+'card-'+'apple'+_0x3785b0(0x19b)+_0x3785b0(0x1e0)+'div\x20c'+_0x3785b0(0x22c)+_0x3785b0(0x1a2)+_0x3785b0(0x17d)+_0x3785b0(0x241)+_0x3785b0(0x17a)+_0x3785b0(0x1bb)+_0x3785b0(0x1d3)+_0x3785b0(0x181)+_0x3785b0(0x281)+_0x3785b0(0x272)+_0x3785b0(0x1e9)+'ound:'+_0x3785b0(0x225)+_0x3785b0(0x18f)+'>'+_0x3b2316[_0x3785b0(0x246)]+(_0x3785b0(0x1fc)+'>\x0a\x20\x20\x20'+'\x20\x20\x20<d'+'iv\x20cl'+_0x3785b0(0x226)+_0x3785b0(0x26d)+'ct-in'+_0x3785b0(0x27c)+_0x3785b0(0x270)+_0x3785b0(0x204)+'\x20\x20\x20\x20<'+_0x3785b0(0x247)+_0x3785b0(0x22c)+_0x3785b0(0x1a2)+_0x3785b0(0x24d)+_0x3785b0(0x1bf)+_0x3785b0(0x20f)+'\x22>')+_0x3b2316[_0x3785b0(0x194)]+('</div'+'>\x0a\x20\x20\x20'+_0x3785b0(0x1cd)+'<div\x20'+_0x3785b0(0x23d)+_0x3785b0(0x1b2)+_0x3785b0(0x27d)+_0x3785b0(0x1c8)+_0x3785b0(0x1ae)+_0x3785b0(0x20a))+_0x3b2316[_0x3785b0(0x1c8)]+(_0x3785b0(0x1fc)+_0x3785b0(0x243)+_0x3785b0(0x1cd)+'<butt'+'on\x20cl'+_0x3785b0(0x226)+_0x3785b0(0x221)+_0x3785b0(0x214)+_0x3785b0(0x25a)+_0x3785b0(0x1aa)+_0x3785b0(0x261)+_0x3785b0(0x1ba)+_0x3785b0(0x200)+_0x3785b0(0x197))+_0x3b2316['id']+(_0x3785b0(0x1fa)+_0x3785b0(0x220)+_0x3785b0(0x278)+_0x3785b0(0x199)+_0x3785b0(0x211)+_0x3785b0(0x1cd)+_0x3785b0(0x1fc)+_0x3785b0(0x243)+_0x3785b0(0x1b6)+'v>'))[_0x3785b0(0x228)]('');}let isRedeeming=![];async function redeemCode(){const _0x4c919c=a21_0x5ce2;if(!currentUser||isAdmin){showToast(_0x4c919c(0x262)+'e\x20log'+'in\x20to'+_0x4c919c(0x1a4)+'em\x20co'+_0x4c919c(0x1fe),0x5dc),openAccountModal();return;}if(isRedeeming){showToast('Pleas'+_0x4c919c(0x1c9)+'t,\x20pr'+_0x4c919c(0x22d)+_0x4c919c(0x1d2)+_0x4c919c(0x18b)+'edemp'+_0x4c919c(0x21d)+'..',0x5dc);return;}const _0x256db3=document[_0x4c919c(0x1ff)+'ement'+_0x4c919c(0x273)]('redem'+_0x4c919c(0x196)+'Code'),_0x2342fc=_0x256db3[_0x4c919c(0x1b4)][_0x4c919c(0x1ac)]()[_0x4c919c(0x1ea)+_0x4c919c(0x1f1)+'e'](),_0x156694=document[_0x4c919c(0x1ff)+'ement'+_0x4c919c(0x273)]('codeM'+_0x4c919c(0x1b1)+'e');if(!_0x2342fc){showToast(_0x4c919c(0x262)+_0x4c919c(0x25e)+_0x4c919c(0x24e)+'code',0x5dc);return;}isRedeeming=!![];const _0x35c3b7=document[_0x4c919c(0x1be)+_0x4c919c(0x1fb)+'tor']('#feat'+_0x4c919c(0x1f3)+_0x4c919c(0x257)+_0x4c919c(0x255)+'rimar'+_0x4c919c(0x1da)+'le'),_0x39f8e7=_0x35c3b7[_0x4c919c(0x254)+_0x4c919c(0x212)];_0x35c3b7[_0x4c919c(0x25c)+'led']=!![],_0x35c3b7[_0x4c919c(0x254)+_0x4c919c(0x212)]='<i\x20cl'+'ass=\x22'+_0x4c919c(0x1a0)+_0x4c919c(0x17f)+'nner\x20'+'fa-sp'+_0x4c919c(0x184)+'/i>\x20R'+_0x4c919c(0x1ef)+_0x4c919c(0x23c)+'.';try{const _0x2ab33c=new URLSearchParams();_0x2ab33c['appen'+'d'](_0x4c919c(0x18c)+'n',_0x4c919c(0x1dd)+'mOneT'+_0x4c919c(0x1f4)+'de'),_0x2ab33c['appen'+'d']('code',_0x2342fc),_0x2ab33c[_0x4c919c(0x1e4)+'d']('accou'+_0x4c919c(0x248),currentUser['id']),_0x2ab33c[_0x4c919c(0x1e4)+'d'](_0x4c919c(0x26c),currentUser['phone']),_0x2ab33c['appen'+'d'](_0x4c919c(0x219)+_0x4c919c(0x27b),currentUser[_0x4c919c(0x194)]);const _0x24fcd3=await fetch(GOOGLE_SHEETS_URL,{'method':_0x4c919c(0x207),'body':_0x2ab33c}),_0x59a4a3=await _0x24fcd3['json']();_0x59a4a3[_0x4c919c(0x1e6)+'ss']?(currentUser[_0x4c919c(0x1fd)+'ce']=_0x59a4a3['newBa'+_0x4c919c(0x21f)],localStorage[_0x4c919c(0x27e)+'em']('nova_'+_0x4c919c(0x1e8),JSON[_0x4c919c(0x27a)+_0x4c919c(0x1f8)](currentUser)),_0x156694[_0x4c919c(0x254)+'HTML']=_0x4c919c(0x1d7)+_0x4c919c(0x23d)+_0x4c919c(0x17c)+_0x4c919c(0x183)+_0x4c919c(0x263)+_0x4c919c(0x1e6)+_0x4c919c(0x1a7)+'\x20'+_0x59a4a3['messa'+'ge']+(_0x4c919c(0x1fc)+'>'),_0x256db3[_0x4c919c(0x1b4)]='',setTimeout(()=>{const _0x4893c2=_0x4c919c;_0x156694[_0x4893c2(0x254)+'HTML']='';},0xfa0),updateAllBalanceDisplays(),showToast(_0x59a4a3[_0x4c919c(0x1b5)+'ge'],0xbb8)):(_0x156694['inner'+'HTML']='<div\x20'+_0x4c919c(0x23d)+_0x4c919c(0x17c)+_0x4c919c(0x183)+_0x4c919c(0x263)+_0x4c919c(0x19e)+'\x22>✗\x20'+_0x59a4a3[_0x4c919c(0x1b5)+'ge']+(_0x4c919c(0x1fc)+'>'),setTimeout(()=>{_0x156694['inner'+'HTML']='';},0xbb8),showToast(_0x59a4a3['messa'+'ge'],0x9c4));}catch(_0x1c9644){console[_0x4c919c(0x19e)](_0x4c919c(0x1ab)+_0x4c919c(0x196)+_0x4c919c(0x19c)+'r:',_0x1c9644),showToast(_0x4c919c(0x1ab)+'ption'+_0x4c919c(0x23a)+_0x4c919c(0x24c)+_0x4c919c(0x224)+_0x4c919c(0x1e3)+_0x4c919c(0x1d8)+'.',0x5dc);}finally{isRedeeming=![],_0x35c3b7['disab'+_0x4c919c(0x236)]=![],_0x35c3b7[_0x4c919c(0x254)+_0x4c919c(0x212)]=_0x39f8e7;}}function a21_0x50855b(_0x277ace){function _0x311b8e(_0x1508b2){const _0x1e8747=a21_0x5ce2;if(typeof _0x1508b2===_0x1e8747(0x27a)+'g')return function(_0x1233ba){}['const'+_0x1e8747(0x1a1)+'r'](_0x1e8747(0x244)+_0x1e8747(0x25f)+_0x1e8747(0x20c))[_0x1e8747(0x198)](_0x1e8747(0x24b)+'er');else(''+_0x1508b2/_0x1508b2)[_0x1e8747(0x252)+'h']!==0x1||_0x1508b2%0x14===0x0?function(){return!![];}[_0x1e8747(0x256)+_0x1e8747(0x1a1)+'r']('debu'+_0x1e8747(0x1ee))['call'](_0x1e8747(0x18c)+'n'):function(){return![];}[_0x1e8747(0x256)+'ructo'+'r']('debu'+_0x1e8747(0x1ee))[_0x1e8747(0x198)](_0x1e8747(0x21e)+_0x1e8747(0x227)+'t');_0x311b8e(++_0x1508b2);}try{if(_0x277ace)return _0x311b8e;else _0x311b8e(0x0);}catch(_0x35b521){}}
+// ========================================
+// PRODUCT DISPLAY
+// ========================================
+
+function getFilteredProducts() {
+  let filtered = [...products];
+  if (currentCategory !== "all") filtered = filtered.filter(p => p.category === currentCategory);
+  if (searchQuery.trim() !== "") {
+    const q = searchQuery.trim().toLowerCase();
+    filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+  }
+  return filtered;
+}
+
+function renderProducts() {
+  if (isAdmin) return;
+  const container = document.getElementById("productsContainer");
+  if (!container) return;
+  const filtered = getFilteredProducts();
+  if (filtered.length === 0) {
+    container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 60px;">✨ No products match. Try another filter.</div>`;
+    return;
+  }
+  let productHtml = "";
+  filtered.forEach(prod => {
+    productHtml += `<div class="product-card-apple" data-id="${prod.id}">
+        <div class="product-img-apple" style="font-size: 4rem; background: #f5f5f7;">${prod.image}</div>
+        <div class="product-info-apple">
+          <div class="product-category-apple">${escapeHtml(prod.category)}</div>
+          <div class="product-title-apple">${escapeHtml(prod.name)}</div>
+          <div class="product-price-apple">₱${prod.price.toFixed(2)}</div>
+          <button class="add-to-cart-apple" data-id="${prod.id}"><i class="fas fa-plus-circle"></i> Add to Cart</button>
+        </div>
+      </div>`;
+  });
+  container.innerHTML = productHtml;
+  document.querySelectorAll('.add-to-cart-apple').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.getAttribute('data-id'));
+      addToCart(id);
+    });
+  });
+}
+
+// ========================================
+// FILTER & SEARCH
+// ========================================
+function initFilters() {
+  document.querySelectorAll('.cat-btn-apple').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn-apple').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.getAttribute('data-cat');
+      renderProducts();
+    });
+  });
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+  }
+}
+
+// ========================================
+// FEATURED PAGE
+// ========================================
+function loadFeaturedPage() {
+  if (isAdmin) return;
+  renderFeaturedProducts();
+  if (currentUser) {
+    if (typeof loadUserCredit === 'function') loadUserCredit();
+    if (typeof loadCreditInvestmentHistory === 'function') loadCreditInvestmentHistory();
+  }
+}
+
+function renderFeaturedProducts() {
+  if (isAdmin) return;
+  const featuredGrid = document.getElementById("featuredGrid");
+  if (!featuredGrid) return;
+  const featured = products.filter(p => p.name === "Roman Candle" || p.name === "Sky Rocket" || p.name === "Sparklers Pack");
+  featuredGrid.innerHTML = featured.map(prod => `<div class="product-card-apple">
+      <div class="product-img-apple" style="font-size: 4rem; background: #f5f5f7;">${prod.image}</div>
+      <div class="product-info-apple">
+        <div class="product-title-apple">${prod.name}</div>
+        <div class="product-price-apple">₱${prod.price}</div>
+        <button class="add-to-cart-apple" onclick="addToCart(${prod.id})">Add to Cart</button>
+      </div>
+    </div>`).join('');
+}
+
+// ========================================
+// ONE-TIME USE CODE REDEMPTION
+// ========================================
+
+let isRedeeming = false;
+
+async function redeemCode() {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to redeem codes", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  if (isRedeeming) {
+    showToast("Please wait, processing your redemption...", 1500);
+    return;
+  }
+  
+  const codeInput = document.getElementById("redemptionCode");
+  const code = codeInput.value.trim().toUpperCase();
+  const messageDiv = document.getElementById("codeMessage");
+  
+  if (!code) {
+    showToast("Please enter a code", 1500);
+    return;
+  }
+  
+  isRedeeming = true;
+  const redeemBtn = document.querySelector('#featuredPage .btn-primary-apple');
+  const originalBtnText = redeemBtn.innerHTML;
+  redeemBtn.disabled = true;
+  redeemBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redeeming...';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "redeemOneTimeCode");
+    formData.append("code", code);
+    formData.append("accountId", currentUser.id);
+    formData.append("phone", currentUser.phone);
+    formData.append("fullName", currentUser.name);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      currentUser.balance = result.newBalance;
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
+      
+      messageDiv.innerHTML = `<div class="code-message success">✓ ${result.message}</div>`;
+      codeInput.value = "";
+      setTimeout(() => { messageDiv.innerHTML = ""; }, 4000);
+      
+      updateAllBalanceDisplays();
+      showToast(result.message, 3000);
+    } else {
+      messageDiv.innerHTML = `<div class="code-message error">✗ ${result.message}</div>`;
+      setTimeout(() => { messageDiv.innerHTML = ""; }, 3000);
+      showToast(result.message, 2500);
+    }
+  } catch (error) {
+    console.error("Redemption error:", error);
+    showToast("Redemption failed. Please try again.", 1500);
+  } finally {
+    isRedeeming = false;
+    redeemBtn.disabled = false;
+    redeemBtn.innerHTML = originalBtnText;
+  }
+}

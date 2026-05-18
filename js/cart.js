@@ -1,1 +1,239 @@
-(function(_0x2bf72b,_0x58fc3a){const _0x41bfad=a14_0x16c7,_0x23a569=_0x2bf72b();while(!![]){try{const _0x5814d9=parseInt(_0x41bfad(0xbf))/0x1*(parseInt(_0x41bfad(0xfb))/0x2)+-parseInt(_0x41bfad(0xc8))/0x3*(-parseInt(_0x41bfad(0xa2))/0x4)+-parseInt(_0x41bfad(0x13c))/0x5*(parseInt(_0x41bfad(0xa1))/0x6)+parseInt(_0x41bfad(0xe5))/0x7+parseInt(_0x41bfad(0x169))/0x8*(-parseInt(_0x41bfad(0x184))/0x9)+-parseInt(_0x41bfad(0x152))/0xa*(parseInt(_0x41bfad(0x132))/0xb)+-parseInt(_0x41bfad(0xe1))/0xc;if(_0x5814d9===_0x58fc3a)break;else _0x23a569['push'](_0x23a569['shift']());}catch(_0x1fbd69){_0x23a569['push'](_0x23a569['shift']());}}}(a14_0x5c15,0x3e0e2));const a14_0x50fa0c=(function(){let _0x45dbff=!![];return function(_0x214d97,_0x9c3a60){const _0x2c34ee=_0x45dbff?function(){const _0x8719dc=a14_0x16c7;if(_0x9c3a60){const _0x44dc70=_0x9c3a60[_0x8719dc(0x17d)](_0x214d97,arguments);return _0x9c3a60=null,_0x44dc70;}}:function(){};return _0x45dbff=![],_0x2c34ee;};}()),a14_0x157da0=a14_0x50fa0c(this,function(){const _0x21250c=a14_0x16c7;return a14_0x157da0['toStr'+_0x21250c(0x93)]()[_0x21250c(0xfd)+'h']('(((.+'+_0x21250c(0x100)+'+$')[_0x21250c(0x124)+_0x21250c(0x93)]()['const'+'ructo'+'r'](a14_0x157da0)[_0x21250c(0xfd)+'h']('(((.+'+_0x21250c(0x100)+'+$');});function a14_0x16c7(_0x68865f,_0x467de1){_0x68865f=_0x68865f-0x91;const _0x25fda3=a14_0x5c15();let _0xf24c55=_0x25fda3[_0x68865f];return _0xf24c55;}function a14_0x5c15(){const _0x55b29c=['cartT','const','\x5c+\x5c+\x20','lass=','in\x20to','\x20adde','torAl','g\x22>Yo','find','\x20try\x20','lease','apply','\x20<but','\x20have','rice','=\x22qty','\x20erro','count','126aWTKVI','ance:','g\x22\x20st','v\x20cla','nova_','getAt','forEa','user','gify','it)','=\x22car','tion','s=\x22ca','outBt',';\x22>','check','phone','\x20clas','join','ById','otal:','info','ity','ta-id','ta=\x22+','\x20fa-t','Insuf','ing','lengt','/butt','art-i','push','iv>','t-ite','toFix','nce','quant','e\x20log','ta=\x22-','Text','query','217878GCQDeo','4Qcwsun','trace','eBala','POST','input','\x20<div','ssful','size:','image','disab','\x5c(\x20*\x5c','rt-ms','reduc','alt\x22>','in\x22><','\x22>\x0a\x20\x20','remov','ountB','ss\x20pa','times','\x20\x20<di','ctor(','add','\x20\x20\x20\x20<','total','price','d=\x22','again','order','50311DIgwih','Pleas','messa','<butt','led','<i\x20cl','pty.\x20','actio','✅\x20Ord','1336983lPLDkd','\x20data','log','appen','\x20🎆','nctio','getEl','{}.co','table','Faile','accou','=\x22emp','verla','ficie','d\x20₱','\x20add\x20','addOr','fa-sp','tem-q','yle=\x22','e)\x20{}','balan','cartD','rt-it','toISO','3090744UCvKNA','\x20with','Price','setIt','1376200xVEpiS','n>\x0a\x20\x20','<div\x20','ome\x20i','\x20\x20\x20\x20\x20','\x20(tru','\x20to\x20c','</div','is\x22)(','d\x20to\x20','ion\x20*','\x22remo','yment','tamp','ur\x20ca','ropag','₱0.00','deduc','entLi','newBa','succe','rawer','16XvohhB','while','searc','adge','data-',')+)+)','open','ty\x22>\x0a','!\x20You','a-zA-','cartO','\x22><i\x20','.remo','ation','funct','/div>','roces','n\x20(fu','Pendi','state','strin','splic','der','-btn\x22','m-det','excep','Selec','e\x20ord','tribu','conso','\x0a\x20\x20\x20\x20','debu','List','Order','*(?:[','</i><','tton\x20','fullN','warn','bind','to__','toStr','otalP','ame','ed\x20₱','on\x20cl','er\x20pl','\x20cred','tn\x22\x20d','.qty-','itle\x22','cartC','\x20(Sav','items','\x22\x20dat','11XARSlP','stopP','fas\x20f','amoun','cart','name','nner\x20','gger','ata-i','rt\x20is','35WXdKNE','font-','map','\x20plac','updat','\x20empt','a-spi','</spa','retur','close','em-im','ails\x22','lance','\x20(₱','ndex','Objec','getIt','error','ve-it','init','Your\x20','\x202rem','1059880tgLQRa','class','json',',\x20nee','tem-t','zA-Z_','nt\x20ba','test','>\x0a\x20\x20\x20','ss=\x22c','some\x20','on>\x0a\x20','firew','orks!','ass=\x22','proto','tems\x20','HTML','stene','ructo','click','parse','/i>\x20P','98760xBzofT','inner','chain','__pro','aced\x20','addEv','ement','delta','tem-p'];a14_0x5c15=function(){return _0x55b29c;};return a14_0x5c15();}a14_0x157da0();const a14_0x20db9b=(function(){let _0x370b17=!![];return function(_0x154505,_0xdf3f37){const _0xb12351=_0x370b17?function(){const _0x275223=a14_0x16c7;if(_0xdf3f37){const _0x5092fe=_0xdf3f37[_0x275223(0x17d)](_0x154505,arguments);return _0xdf3f37=null,_0x5092fe;}}:function(){};return _0x370b17=![],_0xb12351;};}());(function(){a14_0x20db9b(this,function(){const _0x2c65af=a14_0x16c7,_0x5b41c5=new RegExp(_0x2c65af(0x109)+_0x2c65af(0xef)+_0x2c65af(0xac)+')'),_0x1353f7=new RegExp(_0x2c65af(0x174)+_0x2c65af(0x11d)+_0x2c65af(0x104)+'Z_$]['+'0-9a-'+_0x2c65af(0x157)+'$]*)','i'),_0x14ce84=a14_0xe5ab9b(_0x2c65af(0x14f));!_0x5b41c5[_0x2c65af(0x159)](_0x14ce84+_0x2c65af(0x16b))||!_0x1353f7[_0x2c65af(0x159)](_0x14ce84+_0x2c65af(0xa6))?_0x14ce84('0'):a14_0xe5ab9b();})();}());const a14_0x331c37=(function(){let _0x567b21=!![];return function(_0x31c46b,_0x58e8a4){const _0x1dcd16=_0x567b21?function(){const _0x2089cf=a14_0x16c7;if(_0x58e8a4){const _0x5ee31b=_0x58e8a4[_0x2089cf(0x17d)](_0x31c46b,arguments);return _0x58e8a4=null,_0x5ee31b;}}:function(){};return _0x567b21=![],_0x1dcd16;};}()),a14_0xf24c55=a14_0x331c37(this,function(){const _0x22c09e=a14_0x16c7;let _0x737b7d;try{const _0x1888e9=Function(_0x22c09e(0x144)+_0x22c09e(0x10c)+_0x22c09e(0xcd)+'n()\x20'+(_0x22c09e(0xcf)+'nstru'+_0x22c09e(0xb7)+'\x22retu'+'rn\x20th'+_0x22c09e(0xed)+'\x20)')+');');_0x737b7d=_0x1888e9();}catch(_0x26b89b){_0x737b7d=window;}const _0x205040=_0x737b7d[_0x22c09e(0x118)+'le']=_0x737b7d[_0x22c09e(0x118)+'le']||{},_0x48d704=[_0x22c09e(0xca),_0x22c09e(0x121),_0x22c09e(0x199),_0x22c09e(0x14d),_0x22c09e(0x114)+_0x22c09e(0x18f),_0x22c09e(0xd0),_0x22c09e(0xa3)];for(let _0x2ff6f9=0x0;_0x2ff6f9<_0x48d704[_0x22c09e(0x94)+'h'];_0x2ff6f9++){const _0x52a191=a14_0x331c37[_0x22c09e(0x173)+_0x22c09e(0x165)+'r'][_0x22c09e(0x161)+'type'][_0x22c09e(0x122)](a14_0x331c37),_0x26ad14=_0x48d704[_0x2ff6f9],_0x4d4464=_0x205040[_0x26ad14]||_0x52a191;_0x52a191[_0x22c09e(0x16c)+_0x22c09e(0x123)]=a14_0x331c37['bind'](a14_0x331c37),_0x52a191[_0x22c09e(0x124)+_0x22c09e(0x93)]=_0x4d4464[_0x22c09e(0x124)+'ing'][_0x22c09e(0x122)](_0x4d4464),_0x205040[_0x26ad14]=_0x52a191;}});a14_0xf24c55();function updateCartBadge(){const _0x3404b7=a14_0x16c7;if(isAdmin)return;const _0x3cf5a6=cart['reduc'+'e']((_0x29cb01,_0x5d64e6)=>_0x29cb01+_0x5d64e6[_0x3404b7(0x9c)+_0x3404b7(0x19a)],0x0),_0x5a8af1=document[_0x3404b7(0xce)+'ement'+_0x3404b7(0x197)](_0x3404b7(0x12e)+_0x3404b7(0xb3)+_0x3404b7(0xfe));if(_0x5a8af1)_0x5a8af1['inner'+_0x3404b7(0x9f)]=_0x3cf5a6;saveCartToLocal();}function saveCartToLocal(){const _0x294f38=a14_0x16c7;if(!isAdmin)localStorage[_0x294f38(0xe4)+'em'](_0x294f38(0x188)+_0x294f38(0x136),JSON[_0x294f38(0x10f)+_0x294f38(0x18c)](cart));}function loadCartFromLocal(){const _0x24fca7=a14_0x16c7;if(isAdmin){cart=[];return;}const _0x350048=localStorage[_0x24fca7(0x14c)+'em'](_0x24fca7(0x188)+_0x24fca7(0x136));cart=_0x350048?JSON[_0x24fca7(0x167)](_0x350048):[],updateCartBadge(),renderCartUI();}function addToCart(_0x6a0926){const _0x1939b6=a14_0x16c7;if(!currentUser||isAdmin){showToast(_0x1939b6(0xc0)+'e\x20log'+_0x1939b6(0x176)+_0x1939b6(0xd7)+_0x1939b6(0x130)+_0x1939b6(0xeb)+'art',0x5dc),openAccountModal();return;}const _0x1e132b=products['find'](_0x38ab6f=>_0x38ab6f['id']===_0x6a0926);if(!_0x1e132b)return;const _0x33aa78=cart[_0x1939b6(0x17a)](_0x3ee22e=>_0x3ee22e['id']===_0x6a0926);if(_0x33aa78)_0x33aa78[_0x1939b6(0x9c)+'ity']+=0x1;else cart[_0x1939b6(0x97)]({'id':_0x1e132b['id'],'name':_0x1e132b[_0x1939b6(0x137)],'price':_0x1e132b['price'],'image':_0x1e132b[_0x1939b6(0xaa)],'quantity':0x1});updateCartBadge(),saveCartToLocal(),renderCartUI(),showToast(_0x1e132b[_0x1939b6(0x137)]+(_0x1939b6(0x177)+_0x1939b6(0xee)+'cart!'+_0x1939b6(0xcc)));}function updateQuantity(_0x2ab163,_0x1115d8){const _0x43edf9=a14_0x16c7;if(isAdmin)return;const _0x21285a=cart['findI'+_0x43edf9(0x14a)](_0x37e44c=>_0x37e44c['id']===_0x2ab163);if(_0x21285a===-0x1)return;const _0xf5d11c=cart[_0x21285a][_0x43edf9(0x9c)+_0x43edf9(0x19a)]+_0x1115d8;if(_0xf5d11c<=0x0)cart[_0x43edf9(0x110)+'e'](_0x21285a,0x1);else cart[_0x21285a]['quant'+_0x43edf9(0x19a)]=_0xf5d11c;updateCartBadge(),saveCartToLocal(),renderCartUI();}function removeItem(_0x39985a){if(isAdmin)return;cart=cart['filte'+'r'](_0x1b64ca=>_0x1b64ca['id']!==_0x39985a),updateCartBadge(),saveCartToLocal(),renderCartUI();}function renderCartUI(){const _0x27041d=a14_0x16c7;if(isAdmin)return;const _0x178f5d=document[_0x27041d(0xce)+_0x27041d(0x16f)+'ById']('cartI'+'temsL'+'ist'),_0xe58f90=document[_0x27041d(0xce)+_0x27041d(0x16f)+'ById'](_0x27041d(0x172)+_0x27041d(0x125)+_0x27041d(0x180));if(!_0x178f5d)return;if(cart['lengt'+'h']===0x0){_0x178f5d['inner'+_0x27041d(0x163)]=_0x27041d(0xe7)+_0x27041d(0x153)+_0x27041d(0xd3)+'ty-ca'+_0x27041d(0xad)+_0x27041d(0x179)+_0x27041d(0xf3)+_0x27041d(0x13b)+_0x27041d(0x141)+'y.<br'+'>Add\x20'+_0x27041d(0x15c)+_0x27041d(0x15e)+_0x27041d(0x15f)+_0x27041d(0xec)+'>';if(_0xe58f90)_0xe58f90[_0x27041d(0x16a)+'Text']=_0x27041d(0xf5);return;}let _0x3853bd=0x0,_0x168334='';for(let _0x381146 of cart){_0x3853bd+=_0x381146[_0x27041d(0xbb)]*_0x381146[_0x27041d(0x9c)+_0x27041d(0x19a)],_0x168334+=_0x27041d(0xe7)+_0x27041d(0x153)+_0x27041d(0x18e)+_0x27041d(0x99)+'m\x22\x20da'+_0x27041d(0x19b)+'=\x22'+_0x381146['id']+(_0x27041d(0xb1)+_0x27041d(0xe9)+_0x27041d(0xa7)+_0x27041d(0x195)+_0x27041d(0x190)+_0x27041d(0xdf)+_0x27041d(0x146)+_0x27041d(0x186)+_0x27041d(0xdb)+_0x27041d(0x13d)+_0x27041d(0xa9)+_0x27041d(0x151)+_0x27041d(0x192))+_0x381146[_0x27041d(0xaa)]+(_0x27041d(0xec)+_0x27041d(0x15a)+_0x27041d(0xe9)+_0x27041d(0xe7)+'class'+'=\x22car'+_0x27041d(0x99)+_0x27041d(0x113)+_0x27041d(0x147)+_0x27041d(0x15a)+_0x27041d(0xe9)+_0x27041d(0xb6)+_0x27041d(0x187)+_0x27041d(0x15b)+_0x27041d(0x96)+_0x27041d(0x156)+_0x27041d(0x12d)+'>')+escapeHtml(_0x381146[_0x27041d(0x137)])+('</div'+'>\x0a\x20\x20\x20'+_0x27041d(0xe9)+_0x27041d(0xb6)+'v\x20cla'+'ss=\x22c'+_0x27041d(0x96)+_0x27041d(0x171)+'rice\x22'+'>₱')+_0x381146[_0x27041d(0xbb)]['toFix'+'ed'](0x2)+(_0x27041d(0xec)+_0x27041d(0x15a)+_0x27041d(0xe9)+'\x20\x20<di'+_0x27041d(0x187)+_0x27041d(0x15b)+'art-i'+_0x27041d(0xda)+_0x27041d(0x102)+_0x27041d(0xe9)+_0x27041d(0xe9)+'\x20\x20<bu'+_0x27041d(0x11f)+_0x27041d(0x153)+_0x27041d(0x181)+_0x27041d(0x112)+_0x27041d(0xc9)+'-id=\x22')+_0x381146['id']+(_0x27041d(0x131)+'a-del'+_0x27041d(0x9e)+'1\x22>-<'+_0x27041d(0x95)+_0x27041d(0x15d)+_0x27041d(0xe9)+'\x20\x20\x20\x20\x20'+'\x20<spa'+'n>')+_0x381146['quant'+_0x27041d(0x19a)]+(_0x27041d(0x143)+_0x27041d(0xe6)+_0x27041d(0xe9)+'\x20\x20\x20\x20\x20'+_0x27041d(0xc2)+_0x27041d(0x128)+_0x27041d(0x160)+'qty-b'+_0x27041d(0x12b)+_0x27041d(0x13a)+_0x27041d(0xbc))+_0x381146['id']+('\x22\x20dat'+'a-del'+_0x27041d(0x19c)+'1\x22>+<'+_0x27041d(0x95)+_0x27041d(0x15d)+_0x27041d(0xe9)+_0x27041d(0xe9)+_0x27041d(0x17e)+'ton\x20c'+_0x27041d(0x175)+_0x27041d(0xf0)+_0x27041d(0x14e)+'em\x22\x20d'+_0x27041d(0x13a)+'d=\x22')+_0x381146['id']+(_0x27041d(0x106)+_0x27041d(0x153)+'=\x22fas'+_0x27041d(0x91)+'rash-'+_0x27041d(0xaf)+_0x27041d(0x11e)+_0x27041d(0x95)+_0x27041d(0x15d)+'\x20\x20\x20\x20\x20'+'\x20\x20\x20\x20<'+_0x27041d(0x10a)+_0x27041d(0x119)+_0x27041d(0xb9)+_0x27041d(0x10a)+'\x0a\x20\x20\x20\x20'+'\x20\x20</d'+_0x27041d(0x98));}_0x178f5d[_0x27041d(0x16a)+_0x27041d(0x163)]=_0x168334;let _0x2b98f7=_0x3853bd;if(currentUser&&(currentUser[_0x27041d(0xdd)+'ce']||0x0)>0x0&&_0x2b98f7>0x0){const _0x37d6ec=Math['min'](currentUser[_0x27041d(0xdd)+'ce'],_0x2b98f7);_0x2b98f7=_0x2b98f7-_0x37d6ec;if(_0xe58f90)_0xe58f90[_0x27041d(0x16a)+_0x27041d(0x9f)]='₱'+_0x2b98f7[_0x27041d(0x9a)+'ed'](0x2)+(_0x27041d(0x12f)+_0x27041d(0x127))+_0x37d6ec+(_0x27041d(0xe2)+_0x27041d(0x12a)+_0x27041d(0x18d));}else{if(_0xe58f90)_0xe58f90[_0x27041d(0x16a)+_0x27041d(0x9f)]='₱'+_0x3853bd[_0x27041d(0x9a)+'ed'](0x2);}document[_0x27041d(0xa0)+_0x27041d(0x115)+_0x27041d(0x178)+'l'](_0x27041d(0x12c)+'btn')[_0x27041d(0x18a)+'ch'](_0x2c23ad=>{const _0x4a0aca=_0x27041d;_0x2c23ad['addEv'+'entLi'+_0x4a0aca(0x164)+'r'](_0x4a0aca(0x166),_0x5777c6=>{const _0x5d3513=_0x4a0aca;_0x5777c6['stopP'+_0x5d3513(0xf4)+_0x5d3513(0x108)]();const _0x454828=parseInt(_0x2c23ad[_0x5d3513(0x189)+'tribu'+'te'](_0x5d3513(0xff)+'id')),_0x253c41=parseInt(_0x2c23ad[_0x5d3513(0x189)+_0x5d3513(0x117)+'te'](_0x5d3513(0xff)+_0x5d3513(0x170)));if(!isNaN(_0x454828)&&!isNaN(_0x253c41))updateQuantity(_0x454828,_0x253c41);});}),document['query'+_0x27041d(0x115)+_0x27041d(0x178)+'l'](_0x27041d(0x107)+'ve-it'+'em')[_0x27041d(0x18a)+'ch'](_0x4d84fe=>{const _0x25b560=_0x27041d;_0x4d84fe[_0x25b560(0x16e)+_0x25b560(0xf7)+'stene'+'r'](_0x25b560(0x166),_0x2bfe06=>{const _0x57cbf5=_0x25b560;_0x2bfe06[_0x57cbf5(0x133)+_0x57cbf5(0xf4)+'ation']();const _0x538904=parseInt(_0x4d84fe[_0x57cbf5(0x189)+_0x57cbf5(0x117)+'te'](_0x57cbf5(0xff)+'id'));if(!isNaN(_0x538904))removeItem(_0x538904);});});}function initCartDrawer(){const _0x91396=a14_0x16c7,_0x3f39a0=document[_0x91396(0xce)+_0x91396(0x16f)+_0x91396(0x197)]('cartI'+'conBt'+'n'),_0x56dd8a=document[_0x91396(0xce)+'ement'+_0x91396(0x197)](_0x91396(0x105)+_0x91396(0xd4)+'y'),_0x3b9af6=document['getEl'+_0x91396(0x16f)+'ById'](_0x91396(0xde)+_0x91396(0xfa)),_0x2b14e3=document[_0x91396(0xce)+_0x91396(0x16f)+_0x91396(0x197)](_0x91396(0x145)+'CartB'+'tn'),_0x541a1b=document[_0x91396(0xce)+'ement'+_0x91396(0x197)](_0x91396(0x193)+'outBt'+'n');function _0x546194(){const _0x4ce121=_0x91396;_0x56dd8a[_0x4ce121(0x153)+_0x4ce121(0x11b)][_0x4ce121(0xb8)]('open'),_0x3b9af6[_0x4ce121(0x153)+_0x4ce121(0x11b)][_0x4ce121(0xb8)]('open'),renderCartUI();}function _0x5031ac(){const _0x1bff65=_0x91396;_0x56dd8a[_0x1bff65(0x153)+_0x1bff65(0x11b)][_0x1bff65(0xb2)+'e'](_0x1bff65(0x101)),_0x3b9af6[_0x1bff65(0x153)+'List'][_0x1bff65(0xb2)+'e'](_0x1bff65(0x101));}if(_0x3f39a0)_0x3f39a0['addEv'+'entLi'+_0x91396(0x164)+'r']('click',_0x546194);if(_0x2b14e3)_0x2b14e3['addEv'+'entLi'+_0x91396(0x164)+'r'](_0x91396(0x166),_0x5031ac);if(_0x56dd8a)_0x56dd8a['addEv'+_0x91396(0xf7)+'stene'+'r'](_0x91396(0x166),_0x5031ac);_0x541a1b&&_0x541a1b[_0x91396(0x16e)+_0x91396(0xf7)+_0x91396(0x164)+'r'](_0x91396(0x166),async()=>{const _0x58dc90=_0x91396;if(_0x541a1b[_0x58dc90(0xab)+_0x58dc90(0xc3)])return;const _0x4231de=await placeOrder();if(_0x4231de)_0x5031ac();});}async function placeOrder(){const _0x584ecd=a14_0x16c7;if(!currentUser||isAdmin)return showToast(_0x584ecd(0xc0)+_0x584ecd(0x9d)+'in\x20to'+_0x584ecd(0x13f)+_0x584ecd(0x116)+'er',0x5dc),openAccountModal(),![];if(cart[_0x584ecd(0x94)+'h']===0x0)return showToast(_0x584ecd(0x150)+'cart\x20'+'is\x20em'+_0x584ecd(0xc5)+'Add\x20s'+_0x584ecd(0xe8)+_0x584ecd(0x162)+'first'+'!',0x5dc),![];const _0x585f9e=cart[_0x584ecd(0xae)+'e']((_0x498b12,_0x38ccc2)=>_0x498b12+_0x38ccc2[_0x584ecd(0xbb)]*_0x38ccc2[_0x584ecd(0x9c)+_0x584ecd(0x19a)],0x0),_0x3b1541=currentUser[_0x584ecd(0xdd)+'ce']||0x0;if(_0x3b1541<_0x585f9e)return showToast(_0x584ecd(0x92)+_0x584ecd(0xd5)+_0x584ecd(0x158)+'lance'+_0x584ecd(0x103)+_0x584ecd(0x17f)+'\x20₱'+_0x3b1541+(_0x584ecd(0x155)+_0x584ecd(0xd6))+_0x585f9e,0x7d0),![];const _0x5c93de=document['getEl'+_0x584ecd(0x16f)+_0x584ecd(0x197)](_0x584ecd(0x193)+_0x584ecd(0x191)+'n'),_0x21334b=_0x5c93de[_0x584ecd(0x16a)+_0x584ecd(0x163)];_0x5c93de['disab'+'led']=!![],_0x5c93de['inner'+_0x584ecd(0x163)]=_0x584ecd(0xc4)+_0x584ecd(0x160)+_0x584ecd(0x134)+_0x584ecd(0x142)+_0x584ecd(0x138)+_0x584ecd(0xd9)+_0x584ecd(0xb0)+_0x584ecd(0x168)+_0x584ecd(0x10b)+'sing.'+'..';const _0x1afab0=cart[_0x584ecd(0x13e)](_0x5ad398=>_0x5ad398[_0x584ecd(0x137)]+'\x20x'+_0x5ad398[_0x584ecd(0x9c)+_0x584ecd(0x19a)]+_0x584ecd(0x149)+_0x5ad398[_0x584ecd(0xbb)]*_0x5ad398['quant'+_0x584ecd(0x19a)]+')')[_0x584ecd(0x196)](',\x20');try{const _0x15b541=new URLSearchParams();_0x15b541[_0x584ecd(0xcb)+'d'](_0x584ecd(0xc6)+'n',_0x584ecd(0x140)+_0x584ecd(0xa4)+_0x584ecd(0x9b)),_0x15b541[_0x584ecd(0xcb)+'d'](_0x584ecd(0x194),currentUser[_0x584ecd(0x194)]),_0x15b541[_0x584ecd(0xcb)+'d'](_0x584ecd(0x135)+'t',_0x585f9e),_0x15b541[_0x584ecd(0xcb)+'d']('opera'+_0x584ecd(0x18f),_0x584ecd(0xf6)+'t');const _0x50b938=await fetch(GOOGLE_SHEETS_URL,{'method':_0x584ecd(0xa5),'body':_0x15b541}),_0x2e6e05=await _0x50b938[_0x584ecd(0x154)]();if(!_0x2e6e05[_0x584ecd(0xf9)+'ss'])return showToast(_0x2e6e05[_0x584ecd(0xc1)+'ge']||_0x584ecd(0xd1)+'d\x20to\x20'+'proce'+_0x584ecd(0xb4)+_0x584ecd(0xf1),0x5dc),_0x5c93de[_0x584ecd(0xab)+_0x584ecd(0xc3)]=![],_0x5c93de[_0x584ecd(0x16a)+_0x584ecd(0x163)]=_0x21334b,![];const _0x641b25=new URLSearchParams();_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0xc6)+'n',_0x584ecd(0xd8)+_0x584ecd(0x111)),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0xb5)+_0x584ecd(0xf2),new Date()[_0x584ecd(0xe0)+'Strin'+'g']()),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0x120)+_0x584ecd(0x126),currentUser['name']),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0xd2)+'ntId',currentUser['id']),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0x194),currentUser[_0x584ecd(0x194)]),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0xbe)+_0x584ecd(0x11b),_0x1afab0),_0x641b25[_0x584ecd(0xcb)+'d'](_0x584ecd(0xba)+_0x584ecd(0xe3),_0x585f9e),_0x641b25[_0x584ecd(0xcb)+'d']('statu'+'s',_0x584ecd(0x10d)+'ng');const _0x371cd1=await fetch(GOOGLE_SHEETS_URL,{'method':'POST','body':_0x641b25}),_0x5ba578=await _0x371cd1[_0x584ecd(0x154)]();if(_0x5ba578[_0x584ecd(0xf9)+'ss'])return currentUser[_0x584ecd(0xdd)+'ce']=_0x2e6e05[_0x584ecd(0xf8)+_0x584ecd(0x148)],localStorage[_0x584ecd(0xe4)+'em'](_0x584ecd(0x188)+_0x584ecd(0x18b),JSON[_0x584ecd(0x10f)+_0x584ecd(0x18c)](currentUser)),cart=[],updateCartBadge(),saveCartToLocal(),renderCartUI(),showToast(_0x584ecd(0xc7)+_0x584ecd(0x129)+_0x584ecd(0x16d)+'succe'+_0x584ecd(0xa8)+'ly!\x20T'+_0x584ecd(0x198)+'\x20₱'+_0x585f9e+('.\x20Rem'+'ainin'+'g\x20bal'+_0x584ecd(0x185)+'\x20₱')+currentUser[_0x584ecd(0xdd)+'ce'],0xbb8),updateAllBalanceDisplays(),!![];else{const _0x4b8df9=new URLSearchParams();return _0x4b8df9['appen'+'d'](_0x584ecd(0xc6)+'n',_0x584ecd(0x140)+_0x584ecd(0xa4)+_0x584ecd(0x9b)),_0x4b8df9[_0x584ecd(0xcb)+'d'](_0x584ecd(0x194),currentUser[_0x584ecd(0x194)]),_0x4b8df9[_0x584ecd(0xcb)+'d'](_0x584ecd(0x135)+'t',_0x585f9e),_0x4b8df9[_0x584ecd(0xcb)+'d']('opera'+_0x584ecd(0x18f),_0x584ecd(0xb8)),await fetch(GOOGLE_SHEETS_URL,{'method':_0x584ecd(0xa5),'body':_0x4b8df9}),showToast(_0x5ba578[_0x584ecd(0xc1)+'ge']||_0x584ecd(0x11c)+'\x20fail'+'ed.\x20P'+_0x584ecd(0x17c)+_0x584ecd(0x17b)+_0x584ecd(0xbd)+'.',0x5dc),![];}}catch(_0x5bfdef){return console[_0x584ecd(0x14d)](_0x584ecd(0x11c)+_0x584ecd(0x182)+'r:',_0x5bfdef),showToast(_0x584ecd(0x11c)+'\x20fail'+'ed.\x20P'+_0x584ecd(0x17c)+_0x584ecd(0x17b)+_0x584ecd(0xbd)+'.',0x5dc),![];}finally{_0x5c93de[_0x584ecd(0xab)+_0x584ecd(0xc3)]=![],_0x5c93de[_0x584ecd(0x16a)+'HTML']=_0x21334b;}}function a14_0xe5ab9b(_0x2fa773){function _0x2477c6(_0x1425cb){const _0x88a78c=a14_0x16c7;if(typeof _0x1425cb==='strin'+'g')return function(_0x5aac9c){}['const'+'ructo'+'r'](_0x88a78c(0xfc)+_0x88a78c(0xea)+_0x88a78c(0xdc))[_0x88a78c(0x17d)](_0x88a78c(0x183)+'er');else(''+_0x1425cb/_0x1425cb)['lengt'+'h']!==0x1||_0x1425cb%0x14===0x0?function(){return!![];}['const'+'ructo'+'r'](_0x88a78c(0x11a)+'gger')['call']('actio'+'n'):function(){return![];}[_0x88a78c(0x173)+'ructo'+'r'](_0x88a78c(0x11a)+_0x88a78c(0x139))['apply'](_0x88a78c(0x10e)+_0x88a78c(0x14b)+'t');_0x2477c6(++_0x1425cb);}try{if(_0x2fa773)return _0x2477c6;else _0x2477c6(0x0);}catch(_0x1c7308){}}
+// ========================================
+// SHOPPING CART FUNCTIONS
+// ========================================
+
+function updateCartBadge() {
+  if (isAdmin) return;
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.getElementById("cartCountBadge");
+  if (badge) badge.innerText = totalItems;
+  saveCartToLocal();
+}
+
+function saveCartToLocal() { 
+  if (!isAdmin) localStorage.setItem("nova_cart", JSON.stringify(cart)); 
+}
+
+function loadCartFromLocal() {
+  if (isAdmin) {
+    cart = [];
+    return;
+  }
+  const saved = localStorage.getItem("nova_cart");
+  cart = saved ? JSON.parse(saved) : [];
+  updateCartBadge();
+  renderCartUI();
+}
+
+function addToCart(productId) {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to add items to cart", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  
+  const existing = cart.find(item => item.id === productId);
+  if (existing) existing.quantity += 1;
+  else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 });
+  updateCartBadge();
+  saveCartToLocal();
+  renderCartUI();
+  showToast(`${product.name} added to cart! 🎆`);
+}
+
+function updateQuantity(itemId, delta) {
+  if (isAdmin) return;
+  const idx = cart.findIndex(i => i.id === itemId);
+  if (idx === -1) return;
+  const newQty = cart[idx].quantity + delta;
+  if (newQty <= 0) cart.splice(idx, 1);
+  else cart[idx].quantity = newQty;
+  updateCartBadge();
+  saveCartToLocal();
+  renderCartUI();
+}
+
+function removeItem(itemId) {
+  if (isAdmin) return;
+  cart = cart.filter(i => i.id !== itemId);
+  updateCartBadge();
+  saveCartToLocal();
+  renderCartUI();
+}
+
+function renderCartUI() {
+  if (isAdmin) return;
+  const cartListDiv = document.getElementById("cartItemsList");
+  const totalSpan = document.getElementById("cartTotalPrice");
+  if (!cartListDiv) return;
+  if (cart.length === 0) {
+    cartListDiv.innerHTML = `<div class="empty-cart-msg">Your cart is empty.<br>Add some fireworks!</div>`;
+    if (totalSpan) totalSpan.innerText = "₱0.00";
+    return;
+  }
+  let total = 0;
+  let html = "";
+  for (let item of cart) {
+    total += item.price * item.quantity;
+    html += `<div class="cart-item" data-id="${item.id}">
+        <div class="cart-item-img" style="font-size: 2rem;">${item.image}</div>
+        <div class="cart-item-details">
+          <div class="cart-item-title">${escapeHtml(item.name)}</div>
+          <div class="cart-item-price">₱${item.price.toFixed(2)}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" data-id="${item.id}" data-delta="-1">-</button>
+            <span>${item.quantity}</span>
+            <button class="qty-btn" data-id="${item.id}" data-delta="+1">+</button>
+            <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>`;
+  }
+  cartListDiv.innerHTML = html;
+  let finalTotal = total;
+  if (currentUser && (currentUser.balance || 0) > 0 && finalTotal > 0) {
+    const creditToUse = Math.min(currentUser.balance, finalTotal);
+    finalTotal = finalTotal - creditToUse;
+    if (totalSpan) totalSpan.innerText = `₱${finalTotal.toFixed(2)} (Saved ₱${creditToUse} with credit)`;
+  } else {
+    if (totalSpan) totalSpan.innerText = `₱${total.toFixed(2)}`;
+  }
+  document.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.getAttribute('data-id'));
+      const delta = parseInt(btn.getAttribute('data-delta'));
+      if (!isNaN(id) && !isNaN(delta)) updateQuantity(id, delta);
+    });
+  });
+  document.querySelectorAll('.remove-item').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.getAttribute('data-id'));
+      if (!isNaN(id)) removeItem(id);
+    });
+  });
+}
+
+// ========================================
+// CART DRAWER
+// ========================================
+function initCartDrawer() {
+  const cartIcon = document.getElementById('cartIconBtn');
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  const closeBtn = document.getElementById('closeCartBtn');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  
+  function openDrawer() { overlay.classList.add('open'); drawer.classList.add('open'); renderCartUI(); }
+  function closeDrawer() { overlay.classList.remove('open'); drawer.classList.remove('open'); }
+  
+  if (cartIcon) cartIcon.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+  
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', async () => {
+      if (checkoutBtn.disabled) return;
+      const success = await placeOrder();
+      if (success) closeDrawer();
+    });
+  }
+}
+
+// ========================================
+// PLACE ORDER FUNCTION
+// ========================================
+async function placeOrder() {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to place order", 1500);
+    openAccountModal();
+    return false;
+  }
+  
+  if (cart.length === 0) {
+    showToast("Your cart is empty. Add some items first!", 1500);
+    return false;
+  }
+  
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const userBalance = currentUser.balance || 0;
+  
+  if (userBalance < total) {
+    showToast(`Insufficient balance! You have ₱${userBalance}, need ₱${total}`, 2000);
+    return false;
+  }
+  
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const originalBtnText = checkoutBtn.innerHTML;
+  checkoutBtn.disabled = true;
+  checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  
+  const orderList = cart.map(item => `${item.name} x${item.quantity} (₱${item.price * item.quantity})`).join(", ");
+  
+  try {
+    const balanceData = new URLSearchParams();
+    balanceData.append("action", "updateBalance");
+    balanceData.append("phone", currentUser.phone);
+    balanceData.append("amount", total);
+    balanceData.append("operation", "deduct");
+    
+    const balanceResponse = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: balanceData });
+    const balanceResult = await balanceResponse.json();
+    
+    if (!balanceResult.success) {
+      showToast(balanceResult.message || "Failed to process payment", 1500);
+      checkoutBtn.disabled = false;
+      checkoutBtn.innerHTML = originalBtnText;
+      return false;
+    }
+    
+    const orderData = new URLSearchParams();
+    orderData.append("action", "addOrder");
+    orderData.append("timestamp", new Date().toISOString());
+    orderData.append("fullName", currentUser.name);
+    orderData.append("accountId", currentUser.id);
+    orderData.append("phone", currentUser.phone);
+    orderData.append("orderList", orderList);
+    orderData.append("totalPrice", total);
+    orderData.append("status", "Pending");
+    
+    const orderResponse = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: orderData });
+    const orderResult = await orderResponse.json();
+    
+    if (orderResult.success) {
+      currentUser.balance = balanceResult.newBalance;
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
+      
+      cart = [];
+      updateCartBadge();
+      saveCartToLocal();
+      renderCartUI();
+      
+      showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
+      updateAllBalanceDisplays();
+      
+      return true;
+    } else {
+      const refundData = new URLSearchParams();
+      refundData.append("action", "updateBalance");
+      refundData.append("phone", currentUser.phone);
+      refundData.append("amount", total);
+      refundData.append("operation", "add");
+      await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: refundData });
+      
+      showToast(orderResult.message || "Order failed. Please try again.", 1500);
+      return false;
+    }
+  } catch (error) {
+    console.error("Order error:", error);
+    showToast("Order failed. Please try again.", 1500);
+    return false;
+  } finally {
+    checkoutBtn.disabled = false;
+    checkoutBtn.innerHTML = originalBtnText;
+  }
+}

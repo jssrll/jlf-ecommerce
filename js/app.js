@@ -1,1 +1,310 @@
-function a10_0x207f(){const _0x181631=['openR','.nav-','annou','ction','ById','gger','ransa','\x20mode','odal','orts','\x5c+\x5c+\x20','172590QVILAt','reset','conso','Contr','DOMCo','llAnn','splay','stopQ','d\x20to\x20','getIt','Accou','apply','alanc','tatus','updat','Initi','cial@','openA','preve','nctio','erIns','aw.','.\x20Can','publi','balan','drawa','submi','rScan','ameDi','0-9a-','ion1','ntent','markA','user','class','ion','\x20to\x20l','uncem','portM','eWith','\x5c(\x20*\x5c','\x20.wit','-icon',')+)+)','info','link','query','.rech','Pleas','funct','order','eport','115178jsuuZO','conta','inner','91EtDLpA','76116FjBmtE','ndOpt','llApp','4332bqVUqH','close',',\x20.se','name','loadA','appen','mail','argeT','not\x20a','ctor(','not\x20r','dminR','zA-Z_','rawIc','con','thin\x20','QrSca','switc','ge\x20se','ed\x20in','hWith','share','logou','Selec','24\x20ho','inBug','start','Profi','e\x20log','ownlo','ent\x20b','nt!\x20W','es.','clear','yModa','\x20sett','Cache','ntMod','con,\x20','Objec','oadPo','excep','remov','ain.','gify','ngs','recha','Annou','icon,','550IStqJc','6393843IuMZdC','credi','is\x22)(','lengt','ess\x20u','actio','click','tRech','\x20Anno','BugRe','s-ico','tting','t\x20err','rawMo','__pro','701257JILhDd','e)\x20{}','eBala','not\x20w','addTo','lStat','type','eRegi','ault','eRech','.acco','open','addEv','opera','or:','tment','init','$]*)','.faq-','leMod','ion\x20*','arge','ent-i','tRead','cemen','Mode','show','Z_$][','Conne','retur','rn\x20th','POST','to__','nts','gmail','echar','tall','ileUp','Repor','eComp','5gGOBmi','ctFor','Admin','state','ng\x20JL','ster','getAt','ner','e:\x20₱','call','ugRep','.page','inUse','nnoun','your\x20','Page','Btn','tInBo','setIt','.offi','eAnno','ortMo','n\x20(fu','ive\x20c','trigg','delet','test','1020paKKHc','ser\x20f','eHigh','mailt','arge-','nova_','add','dal','strin','bind','locat','error','rgeMo','\x20Curr','tModa','\x20logg','{}.co','nceme','toggl','refre','\x22retu','proce','userN','\x20adde','nstru','288naDCyR','ments','cartD','ge.','sendE','torAl','Scans','toStr','2uldoBa','unt-i','ructo','withd','urs.','Messa','Faile','Text','newBa','ement','href','add\x20c','ment','rawer','ntIco','ommer','respo','redee','h\x20QR\x20','red','mCode','amoun','ons','Credi','loadT','data-','openP','inves','lance','openB','const','ings.','ers','actMo','openT','eFont','debu','ounce','rst','n,\x20.c','App','Cart','item-','List','out\x20t','inLog','mo)','ry\x20ag','forEa','apple','in\x20fi','redit','ins','warn','Withd','shAdm','4198704hRHZNL','geMod','tion','AllSe','handl','page','drawT','featu','phone','conBt','ermsM','(((.+','profi','a-zA-','hPage','split','setti','stem,','accou','entLi','activ','ntDef','Statu','o\x20acc','ecent','nd\x20wi','getEl','ent','ithdr','ing','.\x20Ple','log','pup','loadR','Size','stene','ty\x20Sy','showD','t\x20bal'];a10_0x207f=function(){return _0x181631;};return a10_0x207f();}const a10_0x14e572=a10_0x1826;(function(_0x51597f,_0x52317c){const _0xaee902=a10_0x1826,_0x4fd9b4=_0x51597f();while(!![]){try{const _0x36a484=-parseInt(_0xaee902(0xd2))/0x1*(parseInt(_0xaee902(0x136))/0x2)+parseInt(_0xaee902(0x115))/0x3*(-parseInt(_0xaee902(0x1db))/0x4)+-parseInt(_0xaee902(0xfa))/0x5*(parseInt(_0xaee902(0x16e))/0x6)+-parseInt(_0xaee902(0x1d4))/0x7*(-parseInt(_0xaee902(0x12e))/0x8)+parseInt(_0xaee902(0x20d))/0x9+-parseInt(_0xaee902(0x1a0))/0xa*(-parseInt(_0xaee902(0x20c))/0xb)+-parseInt(_0xaee902(0x1d8))/0xc*(-parseInt(_0xaee902(0x1d7))/0xd);if(_0x36a484===_0x52317c)break;else _0x4fd9b4['push'](_0x4fd9b4['shift']());}catch(_0x305c5c){_0x4fd9b4['push'](_0x4fd9b4['shift']());}}}(a10_0x207f,0x6ba1d));const a10_0x3e5da0=(function(){let _0x36b5d9=!![];return function(_0x56a444,_0x34a23b){const _0x158948=_0x36b5d9?function(){if(_0x34a23b){const _0x20e2aa=_0x34a23b['apply'](_0x56a444,arguments);return _0x34a23b=null,_0x20e2aa;}}:function(){};return _0x36b5d9=![],_0x158948;};}()),a10_0x4da680=a10_0x3e5da0(this,function(){const _0x321591=a10_0x1826;return a10_0x4da680[_0x321591(0x135)+_0x321591(0x18b)]()['searc'+'h'](_0x321591(0x179)+_0x321591(0x1cb)+'+$')['toStr'+_0x321591(0x18b)]()[_0x321591(0x154)+_0x321591(0x138)+'r'](a10_0x4da680)['searc'+'h'](_0x321591(0x179)+')+)+)'+'+$');});a10_0x4da680();const a10_0x52970e=(function(){let _0x58f402=!![];return function(_0x1881a3,_0x4f53dc){const _0x5f19da=_0x58f402?function(){const _0x2432f9=a10_0x1826;if(_0x4f53dc){const _0x1cd46e=_0x4f53dc[_0x2432f9(0x1ab)](_0x1881a3,arguments);return _0x4f53dc=null,_0x1cd46e;}}:function(){};return _0x58f402=![],_0x5f19da;};}());(function(){a10_0x52970e(this,function(){const _0x2bbb0e=a10_0x1826,_0x2c369a=new RegExp(_0x2bbb0e(0x1d1)+_0x2bbb0e(0xe6)+_0x2bbb0e(0x1c8)+')'),_0x3e71ed=new RegExp(_0x2bbb0e(0x19f)+'*(?:['+_0x2bbb0e(0x17b)+_0x2bbb0e(0xed)+_0x2bbb0e(0x1bd)+_0x2bbb0e(0x1e7)+_0x2bbb0e(0xe3),'i'),_0x10417e=a10_0x210e20(_0x2bbb0e(0xe2));!_0x2c369a[_0x2bbb0e(0x114)](_0x10417e+'chain')||!_0x3e71ed['test'](_0x10417e+'input')?_0x10417e('0'):a10_0x210e20();})();}());const a10_0x43cd41=(function(){let _0x56776a=!![];return function(_0x2c4a49,_0x4c8049){const _0x1e293d=_0x56776a?function(){const _0x4dabe1=a10_0x1826;if(_0x4c8049){const _0x3ade7c=_0x4c8049[_0x4dabe1(0x1ab)](_0x2c4a49,arguments);return _0x4c8049=null,_0x3ade7c;}}:function(){};return _0x56776a=![],_0x1e293d;};}()),a10_0x31d30b=a10_0x43cd41(this,function(){const _0x32ac6f=a10_0x1826,_0x44bd47=function(){const _0x244013=a10_0x1826;let _0x7ea022;try{_0x7ea022=Function(_0x244013(0xef)+_0x244013(0x110)+_0x244013(0x1b3)+'n()\x20'+(_0x244013(0x125)+_0x244013(0x12d)+_0x244013(0x1e4)+_0x244013(0x129)+_0x244013(0xf0)+_0x244013(0x20f)+'\x20)')+');')();}catch(_0x59f8e5){_0x7ea022=window;}return _0x7ea022;},_0xb1f8d0=_0x44bd47(),_0x27a6a6=_0xb1f8d0[_0x32ac6f(0x1a2)+'le']=_0xb1f8d0[_0x32ac6f(0x1a2)+'le']||{},_0x25ebd3=[_0x32ac6f(0x18d),_0x32ac6f(0x16b),_0x32ac6f(0x1cc),'error',_0x32ac6f(0x204)+'tion','table','trace'];for(let _0xdeb384=0x0;_0xdeb384<_0x25ebd3[_0x32ac6f(0x210)+'h'];_0xdeb384++){const _0x122ae9=a10_0x43cd41[_0x32ac6f(0x154)+_0x32ac6f(0x138)+'r']['proto'+_0x32ac6f(0xd8)][_0x32ac6f(0x11e)](a10_0x43cd41),_0x529e7a=_0x25ebd3[_0xdeb384],_0x332c65=_0x27a6a6[_0x529e7a]||_0x122ae9;_0x122ae9[_0x32ac6f(0xd1)+_0x32ac6f(0xf2)]=a10_0x43cd41[_0x32ac6f(0x11e)](a10_0x43cd41),_0x122ae9[_0x32ac6f(0x135)+'ing']=_0x332c65[_0x32ac6f(0x135)+'ing'][_0x32ac6f(0x11e)](_0x332c65),_0x27a6a6[_0x529e7a]=_0x122ae9;}});a10_0x31d30b();function updateIconActiveState(){const _0x33d020=a10_0x1826;document['query'+'Selec'+_0x33d020(0x133)+'l']('.anno'+'uncem'+_0x33d020(0xe8)+_0x33d020(0x201)+_0x33d020(0x1cf)+_0x33d020(0x119)+_0x33d020(0x20b)+_0x33d020(0x1c9)+'hdraw'+_0x33d020(0x1ca)+_0x33d020(0x1dd)+'tting'+_0x33d020(0xcd)+_0x33d020(0x15d)+'art-i'+_0x33d020(0x201)+_0x33d020(0xdc)+_0x33d020(0x137)+_0x33d020(0x1e9))[_0x33d020(0x166)+'ch'](_0x1e40c1=>{const _0x5d1d09=_0x33d020;_0x1e40c1[_0x5d1d09(0x1c2)+_0x5d1d09(0x161)][_0x5d1d09(0x205)+'e']('activ'+'e');}),document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x197)+'nceme'+_0x33d020(0x200)+'al')?.[_0x33d020(0x1c2)+_0x33d020(0x161)]['conta'+_0x33d020(0x16a)](_0x33d020(0xec))&&document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x197)+_0x33d020(0x126)+_0x33d020(0x144)+'n')?.[_0x33d020(0x1c2)+'List'][_0x33d020(0x11b)](_0x33d020(0x182)+'e'),document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x209)+'rgeMo'+_0x33d020(0x11c))?.[_0x33d020(0x1c2)+'List'][_0x33d020(0x1d5)+_0x33d020(0x16a)]('show')&&document['getEl'+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x209)+'rgeIc'+'on')?.['class'+'List'][_0x33d020(0x11b)]('activ'+'e'),document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x139)+_0x33d020(0xd0)+_0x33d020(0x11c))?.[_0x33d020(0x1c2)+'List']['conta'+_0x33d020(0x16a)](_0x33d020(0xec))&&document['getEl'+'ement'+'ById'](_0x33d020(0x139)+_0x33d020(0x1e8)+'on')?.['class'+_0x33d020(0x161)][_0x33d020(0x11b)](_0x33d020(0x182)+'e'),currentPage===_0x33d020(0x17e)+_0x33d020(0x208)&&document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x17e)+'ngsIc'+'on')?.[_0x33d020(0x1c2)+_0x33d020(0x161)][_0x33d020(0x11b)](_0x33d020(0x182)+'e'),document['getEl'+'ement'+'ById'](_0x33d020(0x130)+_0x33d020(0x143))?.[_0x33d020(0x1c2)+_0x33d020(0x161)]['conta'+_0x33d020(0x16a)](_0x33d020(0xdd))&&document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)]('cartI'+_0x33d020(0x177)+'n')?.[_0x33d020(0x1c2)+_0x33d020(0x161)][_0x33d020(0x11b)](_0x33d020(0x182)+'e'),(document[_0x33d020(0x188)+_0x33d020(0x13f)+_0x33d020(0x199)](_0x33d020(0x17a)+_0x33d020(0xe5)+'al')?.[_0x33d020(0x1c2)+_0x33d020(0x161)][_0x33d020(0x1d5)+'ins'](_0x33d020(0xec))||document[_0x33d020(0x188)+'ement'+_0x33d020(0x199)](_0x33d020(0x180)+_0x33d020(0x200)+'al')?.['class'+_0x33d020(0x161)][_0x33d020(0x1d5)+_0x33d020(0x16a)](_0x33d020(0xec)))&&document[_0x33d020(0x188)+_0x33d020(0x13f)+'ById'](_0x33d020(0x180)+_0x33d020(0x144)+'n')?.[_0x33d020(0x1c2)+'List'][_0x33d020(0x11b)](_0x33d020(0x182)+'e');}function switchPage(_0x5c6cda){const _0x31cc7f=a10_0x1826;document[_0x31cc7f(0x1ce)+_0x31cc7f(0x1f2)+_0x31cc7f(0x133)+'l'](_0x31cc7f(0x105))[_0x31cc7f(0x166)+'ch'](_0x1fe31e=>_0x1fe31e['class'+'List']['remov'+'e']('activ'+'e'));const _0x55ad3c=document[_0x31cc7f(0x188)+'ement'+_0x31cc7f(0x199)](_0x5c6cda+_0x31cc7f(0x109));if(_0x55ad3c)_0x55ad3c['class'+'List'][_0x31cc7f(0x11b)](_0x31cc7f(0x182)+'e');document[_0x31cc7f(0x1ce)+_0x31cc7f(0x1f2)+_0x31cc7f(0x133)+'l'](_0x31cc7f(0x196)+_0x31cc7f(0x1cd))[_0x31cc7f(0x166)+'ch'](_0x247008=>{const _0x7ccf82=_0x31cc7f;_0x247008['class'+_0x7ccf82(0x161)][_0x7ccf82(0x205)+'e'](_0x7ccf82(0x182)+'e'),_0x247008['getAt'+'tribu'+'te'](_0x7ccf82(0x14f)+_0x7ccf82(0x173))===_0x5c6cda&&_0x247008['class'+_0x7ccf82(0x161)][_0x7ccf82(0x11b)](_0x7ccf82(0x182)+'e');}),currentPage=_0x5c6cda;if(_0x5c6cda===_0x31cc7f(0x175)+_0x31cc7f(0x149))loadFeaturedPage();else{if(_0x5c6cda==='shop')renderProducts();else{if(_0x5c6cda===_0x31cc7f(0x1d2)+'s')loadTransactionHistory();else{if(_0x5c6cda===_0x31cc7f(0x17e)+_0x31cc7f(0x208))renderSettingsPage();else{if(_0x5c6cda==='admin')loadAdminData();}}}}updateIconActiveState();}function loadUserCredit(){const _0x11603d=a10_0x1826;if(currentUser&&!isAdmin)return currentUser[_0x11603d(0x1b8)+'ce']||0x0;return 0x0;}async function addUserCredit(_0x3d0f03){const _0x56876f=a10_0x1826;if(!currentUser||isAdmin)return 0x0;try{const _0x49fbaa=new URLSearchParams();_0x49fbaa[_0x56876f(0x1e0)+'d']('actio'+'n',_0x56876f(0x1ae)+_0x56876f(0xd4)+'nce'),_0x49fbaa['appen'+'d'](_0x56876f(0x176),currentUser['phone']),_0x49fbaa['appen'+'d'](_0x56876f(0x14b)+'t',_0x3d0f03),_0x49fbaa[_0x56876f(0x1e0)+'d'](_0x56876f(0xdf)+_0x56876f(0x170),_0x56876f(0x11b));const _0x9f7cff=await fetch(GOOGLE_SHEETS_URL,{'method':_0x56876f(0xf1),'body':_0x49fbaa}),_0xeb277d=await _0x9f7cff['json']();if(_0xeb277d['succe'+'ss'])return currentUser[_0x56876f(0x1b8)+'ce']=_0xeb277d[_0x56876f(0x13e)+_0x56876f(0x152)],localStorage[_0x56876f(0x10c)+'em'](_0x56876f(0x11a)+'user',JSON[_0x56876f(0x11d)+_0x56876f(0x207)](currentUser)),showToast('₱'+_0x3d0f03+(_0x56876f(0x12c)+'d\x20to\x20'+_0x56876f(0x108)+_0x56876f(0x20e)+_0x56876f(0x194)+'ance!'+_0x56876f(0x122)+_0x56876f(0x1f9)+_0x56876f(0x1ac)+_0x56876f(0x102))+currentUser[_0x56876f(0x1b8)+'ce'],0x9c4),updateAllBalanceDisplays(),currentUser[_0x56876f(0x1b8)+'ce'];return 0x0;}catch(_0x46b56d){return console[_0x56876f(0x120)](_0x56876f(0x14d)+_0x56876f(0xcf)+_0x56876f(0xe0),_0x46b56d),showToast(_0x56876f(0x13c)+_0x56876f(0x1a8)+_0x56876f(0x141)+_0x56876f(0x169)+_0x56876f(0x18c)+'ase\x20t'+_0x56876f(0x165)+_0x56876f(0x206),0x5dc),0x0;}}function initAccountIcon(){const _0x463469=a10_0x1826,_0x35c035=document[_0x463469(0x188)+'ement'+_0x463469(0x199)](_0x463469(0x180)+_0x463469(0x144)+'n');_0x35c035&&_0x35c035[_0x463469(0xde)+_0x463469(0x181)+_0x463469(0x191)+'r']('click',()=>{const _0x3ed680=_0x463469;if(currentUser&&!isAdmin)openProfileModal(),updateIconActiveState();else isAdmin?showToast(_0x3ed680(0xfc)+_0x3ed680(0x124)+_0x3ed680(0x1ee)+'.\x20Log'+_0x3ed680(0x162)+_0x3ed680(0x185)+_0x3ed680(0x211)+_0x3ed680(0x116)+'eatur'+_0x3ed680(0x1fb),0x5dc):(openAccountModal(),updateIconActiveState());});}function initSettingsIcon(){const _0x439bd8=a10_0x1826,_0x5f5143=document[_0x439bd8(0x188)+_0x439bd8(0x13f)+_0x439bd8(0x199)](_0x439bd8(0x17e)+'ngsIc'+'on');_0x5f5143&&_0x5f5143[_0x439bd8(0xde)+'entLi'+'stene'+'r']('click',()=>{const _0x4dd27b=_0x439bd8;if(!isAdmin&&currentUser)switchPage(_0x4dd27b(0x17e)+_0x4dd27b(0x208));else{if(!currentUser)showToast(_0x4dd27b(0x1d0)+_0x4dd27b(0x1f7)+_0x4dd27b(0x168)+_0x4dd27b(0x15c),0x5dc),openAccountModal();else isAdmin&&showToast(_0x4dd27b(0xfc)+_0x4dd27b(0x19c)+'.\x20Can'+_0x4dd27b(0x1e3)+'ccess'+_0x4dd27b(0x1fe)+_0x4dd27b(0x155),0x5dc);}});}function initRechargeIcon(){const _0x4905d5=a10_0x1826,_0x22b2db=document[_0x4905d5(0x188)+_0x4905d5(0x13f)+_0x4905d5(0x199)](_0x4905d5(0x209)+'rgeIc'+'on');_0x22b2db&&_0x22b2db[_0x4905d5(0xde)+_0x4905d5(0x181)+_0x4905d5(0x191)+'r'](_0x4905d5(0xc9),()=>{const _0x336b41=_0x4905d5;!isAdmin?(openRechargeModal(),updateIconActiveState()):showToast(_0x336b41(0xfc)+'\x20mode'+_0x336b41(0x1b6)+_0x336b41(0x1e5)+_0x336b41(0xf5)+_0x336b41(0x131),0x5dc);});}function initWithdrawIcon(){const _0x1810d8=a10_0x1826,_0x44ba70=document['getEl'+_0x1810d8(0x13f)+_0x1810d8(0x199)]('withd'+'rawIc'+'on');_0x44ba70&&_0x44ba70['addEv'+_0x1810d8(0x181)+_0x1810d8(0x191)+'r'](_0x1810d8(0xc9),()=>{const _0x4ad74c=_0x1810d8;!isAdmin?(openWithdrawModal(),updateIconActiveState()):showToast(_0x4ad74c(0xfc)+'\x20mode'+'.\x20Can'+_0x4ad74c(0xd5)+_0x4ad74c(0x18a)+_0x4ad74c(0x1b5),0x5dc);});}function startChat(){const _0x2762c9=a10_0x1826;showToast(_0x2762c9(0xee)+'cting'+_0x2762c9(0x1c4)+_0x2762c9(0x111)+'hat..'+'.\x20(de'+_0x2762c9(0x164),0x5dc);}function sendEmail(){const _0xc67b82=a10_0x1826;window[_0xc67b82(0x11f)+_0xc67b82(0x1c3)][_0xc67b82(0x140)]=_0xc67b82(0x118)+'o:jlf'+'works'+_0xc67b82(0x10d)+_0xc67b82(0x1b0)+_0xc67b82(0xf4)+'.com';}function toggleFAQ(_0x32ea7f){const _0x3c2d61=a10_0x1826,_0xd69aad=_0x32ea7f[_0x3c2d61(0x1dc)+'st'](_0x3c2d61(0xe4)+_0x3c2d61(0x160)+_0x3c2d61(0x167));_0xd69aad['class'+'List'][_0x3c2d61(0x127)+'e'](_0x3c2d61(0x182)+'e');}function initContactForm(){const _0x71ee43=a10_0x1826,_0x1256b8=document[_0x71ee43(0x188)+'ement'+_0x71ee43(0x199)]('conta'+_0x71ee43(0xfb)+'m');_0x1256b8&&_0x1256b8[_0x71ee43(0xde)+_0x71ee43(0x181)+_0x71ee43(0x191)+'r'](_0x71ee43(0x1ba)+'t',_0x58f9de=>{const _0x170088=_0x71ee43;_0x58f9de[_0x170088(0x1b2)+_0x170088(0x183)+_0x170088(0xda)](),showToast(_0x170088(0x13b)+_0x170088(0x1ed)+_0x170088(0x1fa)+'e\x27ll\x20'+_0x170088(0x146)+_0x170088(0x187)+_0x170088(0x1ea)+_0x170088(0x1f3)+_0x170088(0x13a),0x7d0),_0x1256b8[_0x170088(0x1a1)]();});}function init(){const _0x2f10d4=a10_0x1826;console[_0x2f10d4(0x18d)](_0x2f10d4(0x1af)+'alizi'+_0x2f10d4(0xfe)+'F\x20Fir'+'ework'+'s\x20e-c'+_0x2f10d4(0x145)+'ce\x20ap'+'p\x20wit'+_0x2f10d4(0x148)+'Loyal'+_0x2f10d4(0x192)+_0x2f10d4(0x17f)+_0x2f10d4(0xcb)+'uncem'+'ents,'+'\x20and\x20'+'Setti'+'ngs..'+'.'),loadSettings();const _0x4fd53e=localStorage[_0x2f10d4(0x1a9)+'em'](_0x2f10d4(0x11a)+_0x2f10d4(0x1c1));if(_0x4fd53e)try{currentUser=JSON['parse'](_0x4fd53e),isAdmin=![],document[_0x2f10d4(0x188)+_0x2f10d4(0x13f)+_0x2f10d4(0x199)](_0x2f10d4(0x12b)+_0x2f10d4(0x1bc)+_0x2f10d4(0x1a6))[_0x2f10d4(0x1d6)+_0x2f10d4(0x13d)]=currentUser[_0x2f10d4(0x1de)][_0x2f10d4(0x17d)]('\x20')[0x0],startRealTimeBalanceCheck();}catch(_0x1cf253){currentUser=null;}loadCartFromLocal(),document[_0x2f10d4(0x1ce)+_0x2f10d4(0x1f2)+'torAl'+'l'](_0x2f10d4(0x196)+'link')[_0x2f10d4(0x166)+'ch'](_0x15e45b=>{const _0x4821c9=_0x2f10d4;_0x15e45b[_0x4821c9(0xde)+'entLi'+_0x4821c9(0x191)+'r'](_0x4821c9(0xc9),_0x2772ca=>{const _0x2201bb=_0x4821c9;_0x2772ca[_0x2201bb(0x1b2)+'ntDef'+_0x2201bb(0xda)]();const _0x10ee6a=_0x15e45b[_0x2201bb(0x100)+'tribu'+'te'](_0x2201bb(0x14f)+'page');switchPage(_0x10ee6a);});}),initRechargeIcon(),initWithdrawIcon(),initSettingsIcon(),switchPage('home'),initFilters(),initCartDrawer(),initContactForm(),initAccountIcon(),setupQrScannerUI(),startLoyaltyAutoRefresh(),showDownloadPopup(),loadReadAnnouncements(),fetchAnnouncements(),startAnnouncementAutoRefresh();const _0x59b785=document[_0x2f10d4(0x188)+_0x2f10d4(0x13f)+_0x2f10d4(0x199)](_0x2f10d4(0x197)+'nceme'+_0x2f10d4(0x144)+'n');_0x59b785&&_0x59b785['addEv'+_0x2f10d4(0x181)+_0x2f10d4(0x191)+'r']('click',()=>{openAnnouncementModal(),updateIconActiveState();});const _0x31336c=document[_0x2f10d4(0x188)+_0x2f10d4(0x13f)+'ById']('insta'+_0x2f10d4(0x1da)+_0x2f10d4(0x10a));_0x31336c&&_0x31336c['addEv'+_0x2f10d4(0x181)+_0x2f10d4(0x191)+'r'](_0x2f10d4(0xc9),triggerInstall),window[_0x2f10d4(0x1ec)+_0x2f10d4(0x17c)]=switchPage,window[_0x2f10d4(0xd6)+_0x2f10d4(0x15f)]=addToCart,window[_0x2f10d4(0x147)+_0x2f10d4(0x14a)]=redeemCode,window[_0x2f10d4(0x1f5)+'Chat']=startChat,window[_0x2f10d4(0x132)+_0x2f10d4(0x1e1)]=sendEmail,window[_0x2f10d4(0x127)+'eFAQ']=toggleFAQ,window[_0x2f10d4(0x1b1)+'ccoun'+_0x2f10d4(0x123)+'l']=openAccountModal,window['close'+_0x2f10d4(0x1aa)+_0x2f10d4(0x200)+'al']=closeAccountModal,window[_0x2f10d4(0x150)+'rofil'+'eModa'+'l']=openProfileModal,window[_0x2f10d4(0x1dc)+_0x2f10d4(0x1f6)+'leMod'+'al']=closeProfileModal,window[_0x2f10d4(0x1ec)+'hTab']=switchTab,window[_0x2f10d4(0x172)+'eLogi'+'n']=handleLogin,window['handl'+_0x2f10d4(0xd9)+_0x2f10d4(0xff)]=handleRegister,window[_0x2f10d4(0x1f1)+'t']=logout,window[_0x2f10d4(0x195)+_0x2f10d4(0xf5)+_0x2f10d4(0x16f)+'al']=openRechargeModal,window[_0x2f10d4(0x1dc)+'Recha'+_0x2f10d4(0x121)+_0x2f10d4(0x11c)]=closeRechargeModal,window[_0x2f10d4(0x1ec)+'hRech'+_0x2f10d4(0x1e2)+'ab']=switchRechargeTab,window[_0x2f10d4(0x1ba)+_0x2f10d4(0xca)+_0x2f10d4(0xe7)]=submitRecharge,window['openW'+'ithdr'+'awMod'+'al']=openWithdrawModal,window[_0x2f10d4(0x1dc)+_0x2f10d4(0x16c)+'rawMo'+_0x2f10d4(0x11c)]=closeWithdrawModal,window[_0x2f10d4(0x1ec)+_0x2f10d4(0x1ef)+_0x2f10d4(0x174)+'ab']=switchWithdrawTab,window['submi'+'tWith'+'draw']=submitWithdraw,window[_0x2f10d4(0x151)+_0x2f10d4(0x10b)+_0x2f10d4(0x1d9)+_0x2f10d4(0x1be)]=investInBondOption1,window[_0x2f10d4(0x151)+_0x2f10d4(0x10b)+'ndOpt'+'ion2']=investInBondOption2,window[_0x2f10d4(0x1ae)+'eOrde'+'rStat'+'us']=updateOrderStatus,window[_0x2f10d4(0x1ae)+_0x2f10d4(0xdb)+'argeS'+_0x2f10d4(0x1ad)]=updateRechargeStatus,window[_0x2f10d4(0x1ae)+_0x2f10d4(0x1c7)+_0x2f10d4(0x1b9)+_0x2f10d4(0xd7)+'us']=updateWithdrawalStatus,window['switc'+'hAdmi'+'nTab']=switchAdminTab,window[_0x2f10d4(0x128)+_0x2f10d4(0x16d)+'inOrd'+_0x2f10d4(0x156)]=refreshAdminOrders,window[_0x2f10d4(0x128)+_0x2f10d4(0x16d)+_0x2f10d4(0x163)+'s']=refreshAdminLogs,window[_0x2f10d4(0x128)+_0x2f10d4(0x16d)+_0x2f10d4(0x106)+'rs']=refreshAdminUsers,window[_0x2f10d4(0x128)+_0x2f10d4(0x16d)+'inRed'+'empti'+_0x2f10d4(0x14c)]=refreshAdminRedemptions,window[_0x2f10d4(0x1df)+_0x2f10d4(0x1e6)+'echar'+'ges']=loadAdminRecharges,window[_0x2f10d4(0x1df)+'dminW'+_0x2f10d4(0x18a)+'awals']=loadAdminWithdrawals,window[_0x2f10d4(0x1df)+'dminC'+_0x2f10d4(0x169)+'Inves'+_0x2f10d4(0xe1)+'s']=loadAdminCreditInvestments,window[_0x2f10d4(0x14e)+_0x2f10d4(0x19b)+_0x2f10d4(0x198)+'Histo'+'ry']=loadTransactionHistory,window[_0x2f10d4(0x193)+_0x2f10d4(0x1f8)+'adPop'+'up']=showDownloadPopup,window[_0x2f10d4(0x1dc)+'Downl'+_0x2f10d4(0x203)+_0x2f10d4(0x18e)]=closeDownloadPopup,window[_0x2f10d4(0x112)+_0x2f10d4(0x1b4)+_0x2f10d4(0xf6)]=triggerInstall,window[_0x2f10d4(0x1f5)+_0x2f10d4(0x1eb)+'nner']=startQrScanner,window[_0x2f10d4(0x1a7)+_0x2f10d4(0x1bb)+_0x2f10d4(0x101)]=stopQrScanner,window[_0x2f10d4(0x12a)+'ssQrF'+_0x2f10d4(0xf7)+'load']=processQrFileUpload,window[_0x2f10d4(0x18f)+_0x2f10d4(0x186)+_0x2f10d4(0x134)]=loadRecentScans,window[_0x2f10d4(0x1b1)+_0x2f10d4(0x107)+_0x2f10d4(0xea)+_0x2f10d4(0x123)+'l']=openAnnouncementModal,window[_0x2f10d4(0x1dc)+_0x2f10d4(0x20a)+_0x2f10d4(0x126)+_0x2f10d4(0x200)+'al']=closeAnnouncementModal,window[_0x2f10d4(0x1c0)+_0x2f10d4(0x107)+_0x2f10d4(0xea)+_0x2f10d4(0xe9)]=markAnnouncementRead,window[_0x2f10d4(0x1c0)+_0x2f10d4(0x1a5)+_0x2f10d4(0x15b)+_0x2f10d4(0x12f)+'Read']=markAllAnnouncementsRead,window[_0x2f10d4(0x1b7)+'shAnn'+'ounce'+_0x2f10d4(0x142)]=publishAnnouncement,window[_0x2f10d4(0x113)+_0x2f10d4(0x10e)+_0x2f10d4(0x1c5)+_0x2f10d4(0x189)]=deleteAnnouncement,window['loadR'+'ecent'+_0x2f10d4(0x20a)+_0x2f10d4(0x126)+_0x2f10d4(0xf3)]=loadRecentAnnouncements,window[_0x2f10d4(0x127)+'eDark'+_0x2f10d4(0xeb)]=toggleDarkMode,window['chang'+_0x2f10d4(0x159)+_0x2f10d4(0x190)]=changeFontSize,window[_0x2f10d4(0x127)+_0x2f10d4(0xf9)+_0x2f10d4(0x157)+'de']=toggleCompactMode,window[_0x2f10d4(0x127)+_0x2f10d4(0x117)+_0x2f10d4(0x1a3)+'ast']=toggleHighContrast,window[_0x2f10d4(0x1fc)+_0x2f10d4(0x1ff)]=clearCache,window[_0x2f10d4(0x1a1)+_0x2f10d4(0x171)+_0x2f10d4(0xce)+'s']=resetAllSettings,window[_0x2f10d4(0x158)+_0x2f10d4(0x178)+_0x2f10d4(0x19d)]=openTermsModal,window[_0x2f10d4(0x150)+'rivac'+_0x2f10d4(0x1fd)+'l']=openPrivacyModal,window[_0x2f10d4(0x1f0)+_0x2f10d4(0x15e)]=shareApp,window[_0x2f10d4(0x153)+_0x2f10d4(0x104)+_0x2f10d4(0x10f)+_0x2f10d4(0x11c)]=openBugReportModal,window['close'+_0x2f10d4(0xcc)+_0x2f10d4(0x1c6)+_0x2f10d4(0x19d)]=closeBugReportModal,window[_0x2f10d4(0x1ba)+'tBugR'+_0x2f10d4(0x1d3)]=submitBugReport,window[_0x2f10d4(0x1df)+'dminB'+_0x2f10d4(0x104)+_0x2f10d4(0x19e)]=loadAdminBugReports,window[_0x2f10d4(0x1ae)+'eBugR'+_0x2f10d4(0x1d3)+_0x2f10d4(0x184)+'s']=updateBugReportStatus,window[_0x2f10d4(0x128)+_0x2f10d4(0x16d)+_0x2f10d4(0x1f4)+_0x2f10d4(0xf8)+'ts']=refreshAdminBugReports,updateIconActiveState();}document[a10_0x14e572(0xde)+a10_0x14e572(0x181)+'stene'+'r'](a10_0x14e572(0x1a4)+a10_0x14e572(0x1bf)+'Loade'+'d',init);function a10_0x1826(_0x36f464,_0x2650d4){_0x36f464=_0x36f464-0xc8;const _0x4b83e6=a10_0x207f();let _0x31d30b=_0x4b83e6[_0x36f464];return _0x31d30b;}function a10_0x210e20(_0x51c000){function _0x32fa76(_0x11e65d){const _0x354354=a10_0x1826;if(typeof _0x11e65d===_0x354354(0x11d)+'g')return function(_0x4df3db){}[_0x354354(0x154)+'ructo'+'r']('while'+'\x20(tru'+_0x354354(0xd3))[_0x354354(0x1ab)]('count'+'er');else(''+_0x11e65d/_0x11e65d)['lengt'+'h']!==0x1||_0x11e65d%0x14===0x0?function(){return!![];}[_0x354354(0x154)+_0x354354(0x138)+'r'](_0x354354(0x15a)+_0x354354(0x19a))[_0x354354(0x103)](_0x354354(0xc8)+'n'):function(){return![];}[_0x354354(0x154)+_0x354354(0x138)+'r'](_0x354354(0x15a)+_0x354354(0x19a))[_0x354354(0x1ab)](_0x354354(0xfd)+_0x354354(0x202)+'t');_0x32fa76(++_0x11e65d);}try{if(_0x51c000)return _0x32fa76;else _0x32fa76(0x0);}catch(_0x84fd35){}}
+// ========================================
+// JLF FIREWORKS - MAIN APPLICATION
+// ========================================
+
+// UPDATE ICON ACTIVE STATE
+function updateIconActiveState() {
+  // Remove active class from all icons
+  document.querySelectorAll('.announcement-icon, .recharge-icon, .withdraw-icon, .settings-icon, .cart-icon, .account-icon').forEach(icon => {
+    icon.classList.remove('active');
+  });
+  
+  // Add active class based on current state
+  if (document.getElementById('announcementModal')?.classList.contains('show')) {
+    document.getElementById('announcementIcon')?.classList.add('active');
+  } 
+  if (document.getElementById('rechargeModal')?.classList.contains('show')) {
+    document.getElementById('rechargeIcon')?.classList.add('active');
+  }
+  if (document.getElementById('withdrawModal')?.classList.contains('show')) {
+    document.getElementById('withdrawIcon')?.classList.add('active');
+  }
+  if (currentPage === 'settings') {
+    document.getElementById('settingsIcon')?.classList.add('active');
+  }
+  if (document.getElementById('cartDrawer')?.classList.contains('open')) {
+    document.getElementById('cartIconBtn')?.classList.add('active');
+  }
+  if (document.getElementById('profileModal')?.classList.contains('show') || document.getElementById('accountModal')?.classList.contains('show')) {
+    document.getElementById('accountIcon')?.classList.add('active');
+  }
+}
+
+// PAGE NAVIGATION
+function switchPage(pageName) {
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  const targetPage = document.getElementById(`${pageName}Page`);
+  if (targetPage) targetPage.classList.add('active');
+  
+  // Update active nav link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-page') === pageName) {
+      link.classList.add('active');
+    }
+  });
+  
+  currentPage = pageName;
+  if (pageName === 'featured') loadFeaturedPage();
+  else if (pageName === 'shop') renderProducts();
+  else if (pageName === 'orders') loadTransactionHistory();
+  else if (pageName === 'settings') renderSettingsPage();
+  else if (pageName === 'admin') loadAdminData();
+  
+  // Update icon active states
+  updateIconActiveState();
+}
+
+// CREDIT FUNCTIONS
+function loadUserCredit() {
+  if (currentUser && !isAdmin) return currentUser.balance || 0;
+  return 0;
+}
+
+async function addUserCredit(amount) {
+  if (!currentUser || isAdmin) return 0;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateBalance");
+    formData.append("phone", currentUser.phone);
+    formData.append("amount", amount);
+    formData.append("operation", "add");
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (result.success) {
+      currentUser.balance = result.newBalance;
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
+      showToast(`₱${amount} added to your credit balance! Current balance: ₱${currentUser.balance}`, 2500);
+      updateAllBalanceDisplays();
+      return currentUser.balance;
+    }
+    return 0;
+  } catch (error) {
+    console.error("Credit error:", error);
+    showToast("Failed to add credit. Please try again.", 1500);
+    return 0;
+  }
+}
+
+// ACCOUNT ICON
+function initAccountIcon() {
+  const accountIcon = document.getElementById('accountIcon');
+  if (accountIcon) {
+    accountIcon.addEventListener('click', () => {
+      if (currentUser && !isAdmin) {
+        openProfileModal();
+        updateIconActiveState();
+      } else if (isAdmin) {
+        showToast("Admin logged in. Logout to access user features.", 1500);
+      } else {
+        openAccountModal();
+        updateIconActiveState();
+      }
+    });
+  }
+}
+
+// SETTINGS ICON
+function initSettingsIcon() {
+  const settingsIcon = document.getElementById('settingsIcon');
+  if (settingsIcon) {
+    settingsIcon.addEventListener('click', () => {
+      if (!isAdmin && currentUser) {
+        switchPage('settings');
+      } else if (!currentUser) {
+        showToast("Please login first", 1500);
+        openAccountModal();
+      } else if (isAdmin) {
+        showToast("Admin mode. Cannot access settings.", 1500);
+      }
+    });
+  }
+}
+
+// RECHARGE ICON
+function initRechargeIcon() {
+  const rechargeIcon = document.getElementById('rechargeIcon');
+  if (rechargeIcon) {
+    rechargeIcon.addEventListener('click', () => { 
+      if (!isAdmin) {
+        openRechargeModal();
+        updateIconActiveState();
+      } else {
+        showToast("Admin mode. Cannot recharge.", 1500);
+      }
+    });
+  }
+}
+
+// WITHDRAW ICON
+function initWithdrawIcon() {
+  const withdrawIcon = document.getElementById('withdrawIcon');
+  if (withdrawIcon) {
+    withdrawIcon.addEventListener('click', () => { 
+      if (!isAdmin) {
+        openWithdrawModal();
+        updateIconActiveState();
+      } else {
+        showToast("Admin mode. Cannot withdraw.", 1500);
+      }
+    });
+  }
+}
+
+// HELP PAGE FUNCTIONS
+function startChat() { showToast("Connecting to live chat... (demo)", 1500); }
+function sendEmail() { window.location.href = "mailto:jlfworks.official@gmail.com"; }
+function toggleFAQ(element) {
+  const faqItem = element.closest('.faq-item-apple');
+  faqItem.classList.toggle('active');
+}
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      showToast("Message sent! We'll respond within 24 hours.", 2000);
+      form.reset();
+    });
+  }
+}
+
+// ========================================
+// INITIALIZATION
+// ========================================
+function init() {
+  console.log("Initializing JLF Fireworks e-commerce app with QR Loyalty System, Announcements, and Settings...");
+  
+  // Load settings first
+  loadSettings();
+  
+  const savedUser = localStorage.getItem("nova_user");
+  if (savedUser) {
+    try {
+      currentUser = JSON.parse(savedUser);
+      isAdmin = false;
+      document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+      startRealTimeBalanceCheck();
+    } catch(e) { currentUser = null; }
+  }
+  
+  loadCartFromLocal();
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const page = link.getAttribute('data-page');
+      switchPage(page);
+    });
+  });
+  
+  initRechargeIcon();
+  initWithdrawIcon();
+  initSettingsIcon();
+  
+  switchPage('home');
+  initFilters();
+  initCartDrawer();
+  initContactForm();
+  initAccountIcon();
+  
+  setupQrScannerUI();
+  startLoyaltyAutoRefresh();
+  showDownloadPopup();
+  
+  // Initialize Announcement System
+  loadReadAnnouncements();
+  fetchAnnouncements();
+  startAnnouncementAutoRefresh();
+  
+  // Setup announcement icon click
+  const announcementIcon = document.getElementById("announcementIcon");
+  if (announcementIcon) {
+    announcementIcon.addEventListener("click", () => {
+      openAnnouncementModal();
+      updateIconActiveState();
+    });
+  }
+  
+  const installBtn = document.getElementById("installAppBtn");
+  if (installBtn) {
+    installBtn.addEventListener("click", triggerInstall);
+  }
+  
+  // Global window exports
+  window.switchPage = switchPage;
+  window.addToCart = addToCart;
+  window.redeemCode = redeemCode;
+  window.startChat = startChat;
+  window.sendEmail = sendEmail;
+  window.toggleFAQ = toggleFAQ;
+  window.openAccountModal = openAccountModal;
+  window.closeAccountModal = closeAccountModal;
+  window.openProfileModal = openProfileModal;
+  window.closeProfileModal = closeProfileModal;
+  window.switchTab = switchTab;
+  window.handleLogin = handleLogin;
+  window.handleRegister = handleRegister;
+  window.logout = logout;
+  window.openRechargeModal = openRechargeModal;
+  window.closeRechargeModal = closeRechargeModal;
+  window.switchRechargeTab = switchRechargeTab;
+  window.submitRecharge = submitRecharge;
+  window.openWithdrawModal = openWithdrawModal;
+  window.closeWithdrawModal = closeWithdrawModal;
+  window.switchWithdrawTab = switchWithdrawTab;
+  window.submitWithdraw = submitWithdraw;
+  window.investInBondOption1 = investInBondOption1;
+  window.investInBondOption2 = investInBondOption2;
+  window.updateOrderStatus = updateOrderStatus;
+  window.updateRechargeStatus = updateRechargeStatus;
+  window.updateWithdrawalStatus = updateWithdrawalStatus;
+  window.switchAdminTab = switchAdminTab;
+  window.refreshAdminOrders = refreshAdminOrders;
+  window.refreshAdminLogs = refreshAdminLogs;
+  window.refreshAdminUsers = refreshAdminUsers;
+  window.refreshAdminRedemptions = refreshAdminRedemptions;
+  window.loadAdminRecharges = loadAdminRecharges;
+  window.loadAdminWithdrawals = loadAdminWithdrawals;
+  window.loadAdminCreditInvestments = loadAdminCreditInvestments;
+  window.loadTransactionHistory = loadTransactionHistory;
+  window.showDownloadPopup = showDownloadPopup;
+  window.closeDownloadPopup = closeDownloadPopup;
+  window.triggerInstall = triggerInstall;
+  window.startQrScanner = startQrScanner;
+  window.stopQrScanner = stopQrScanner;
+  window.processQrFileUpload = processQrFileUpload;
+  window.loadRecentScans = loadRecentScans;
+  // Announcement System Functions
+  window.openAnnouncementModal = openAnnouncementModal;
+  window.closeAnnouncementModal = closeAnnouncementModal;
+  window.markAnnouncementRead = markAnnouncementRead;
+  window.markAllAnnouncementsRead = markAllAnnouncementsRead;
+  window.publishAnnouncement = publishAnnouncement;
+  window.deleteAnnouncement = deleteAnnouncement;
+  window.loadRecentAnnouncements = loadRecentAnnouncements;
+  // Settings Functions
+  window.toggleDarkMode = toggleDarkMode;
+  window.changeFontSize = changeFontSize;
+  window.toggleCompactMode = toggleCompactMode;
+  window.toggleHighContrast = toggleHighContrast;
+  window.clearCache = clearCache;
+  window.resetAllSettings = resetAllSettings;
+  window.openTermsModal = openTermsModal;
+  window.openPrivacyModal = openPrivacyModal;
+  window.shareApp = shareApp;
+  window.openBugReportModal = openBugReportModal;
+  window.closeBugReportModal = closeBugReportModal;
+  window.submitBugReport = submitBugReport;
+  // Admin Bug Reports
+  window.loadAdminBugReports = loadAdminBugReports;
+  window.updateBugReportStatus = updateBugReportStatus;
+  window.refreshAdminBugReports = refreshAdminBugReports;
+  // Update icon active state
+  updateIconActiveState();
+}
+
+document.addEventListener('DOMContentLoaded', init);

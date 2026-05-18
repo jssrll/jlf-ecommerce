@@ -1,1 +1,353 @@
-(function(_0x74a00,_0x1d7ee9){const _0x1b0d31=a11_0x5304,_0x5a0cec=_0x74a00();while(!![]){try{const _0x1e3591=-parseInt(_0x1b0d31(0x10b))/0x1+parseInt(_0x1b0d31(0x1a7))/0x2+parseInt(_0x1b0d31(0xe4))/0x3+parseInt(_0x1b0d31(0x1a3))/0x4+-parseInt(_0x1b0d31(0x1c6))/0x5+-parseInt(_0x1b0d31(0x189))/0x6*(-parseInt(_0x1b0d31(0x178))/0x7)+parseInt(_0x1b0d31(0x176))/0x8*(-parseInt(_0x1b0d31(0x125))/0x9);if(_0x1e3591===_0x1d7ee9)break;else _0x5a0cec['push'](_0x5a0cec['shift']());}catch(_0x2649a2){_0x5a0cec['push'](_0x5a0cec['shift']());}}}(a11_0x1cf8,0xb4be2));const a11_0x180ef0=(function(){let _0x24de27=!![];return function(_0x2ecf88,_0x3c9163){const _0x35b58d=_0x24de27?function(){const _0x4b7dc1=a11_0x5304;if(_0x3c9163){const _0x42d992=_0x3c9163[_0x4b7dc1(0x13e)](_0x2ecf88,arguments);return _0x3c9163=null,_0x42d992;}}:function(){};return _0x24de27=![],_0x35b58d;};}()),a11_0x42fd86=a11_0x180ef0(this,function(){const _0x4c4c4d=a11_0x5304;return a11_0x42fd86[_0x4c4c4d(0x132)+_0x4c4c4d(0x192)]()[_0x4c4c4d(0xff)+'h']('(((.+'+')+)+)'+'+$')['toStr'+_0x4c4c4d(0x192)]()[_0x4c4c4d(0x130)+'ructo'+'r'](a11_0x42fd86)[_0x4c4c4d(0xff)+'h'](_0x4c4c4d(0xdc)+')+)+)'+'+$');});a11_0x42fd86();const a11_0x16fe04=(function(){let _0x1d0f01=!![];return function(_0x5aa55a,_0x37b944){const _0x3169e7=_0x1d0f01?function(){const _0x2bce26=a11_0x5304;if(_0x37b944){const _0x740bd7=_0x37b944[_0x2bce26(0x13e)](_0x5aa55a,arguments);return _0x37b944=null,_0x740bd7;}}:function(){};return _0x1d0f01=![],_0x3169e7;};}());(function(){a11_0x16fe04(this,function(){const _0x3954d5=a11_0x5304,_0x4f203f=new RegExp(_0x3954d5(0x182)+_0x3954d5(0x13c)+'\x5c(\x20*\x5c'+')'),_0x1af237=new RegExp(_0x3954d5(0x191)+'*(?:['+'a-zA-'+_0x3954d5(0x11a)+_0x3954d5(0x12a)+'zA-Z_'+_0x3954d5(0x1a1),'i'),_0x1cbc69=a11_0x2ffb8b('init');!_0x4f203f[_0x3954d5(0x17a)](_0x1cbc69+_0x3954d5(0xfe))||!_0x1af237[_0x3954d5(0x17a)](_0x1cbc69+_0x3954d5(0x12c))?_0x1cbc69('0'):a11_0x2ffb8b();})();}());const a11_0x476e3e=(function(){let _0x3c65c0=!![];return function(_0x5e61f4,_0x43ba20){const _0x2898a1=_0x3c65c0?function(){const _0x3d61c7=a11_0x5304;if(_0x43ba20){const _0x4c0f43=_0x43ba20[_0x3d61c7(0x13e)](_0x5e61f4,arguments);return _0x43ba20=null,_0x4c0f43;}}:function(){};return _0x3c65c0=![],_0x2898a1;};}()),a11_0x5e26df=a11_0x476e3e(this,function(){const _0x420679=a11_0x5304,_0x286799=function(){const _0x36a085=a11_0x5304;let _0x558904;try{_0x558904=Function(_0x36a085(0x126)+_0x36a085(0x10f)+_0x36a085(0x148)+'n()\x20'+('{}.co'+_0x36a085(0x1bd)+'ctor('+'\x22retu'+'rn\x20th'+_0x36a085(0xfb)+'\x20)')+');')();}catch(_0x5337ba){_0x558904=window;}return _0x558904;},_0xd64af7=_0x286799(),_0x19cb08=_0xd64af7[_0x420679(0x150)+'le']=_0xd64af7[_0x420679(0x150)+'le']||{},_0x58d63c=[_0x420679(0x167),_0x420679(0x19f),_0x420679(0xee),_0x420679(0x184),_0x420679(0xea)+_0x420679(0xef),_0x420679(0x16f),_0x420679(0x136)];for(let _0x2a2c05=0x0;_0x2a2c05<_0x58d63c[_0x420679(0x19e)+'h'];_0x2a2c05++){const _0x52cd84=a11_0x476e3e[_0x420679(0x130)+_0x420679(0x1be)+'r'][_0x420679(0xf0)+_0x420679(0x102)][_0x420679(0xfd)](a11_0x476e3e),_0x111cb0=_0x58d63c[_0x2a2c05],_0x262a90=_0x19cb08[_0x111cb0]||_0x52cd84;_0x52cd84[_0x420679(0xd9)+_0x420679(0x141)]=a11_0x476e3e[_0x420679(0xfd)](a11_0x476e3e),_0x52cd84[_0x420679(0x132)+_0x420679(0x192)]=_0x262a90[_0x420679(0x132)+'ing'][_0x420679(0xfd)](_0x262a90),_0x19cb08[_0x111cb0]=_0x52cd84;}});a11_0x5e26df();function openAccountModal(){const _0x5225cd=a11_0x5304,_0x2f5716=document[_0x5225cd(0xe5)+_0x5225cd(0x117)+_0x5225cd(0x1b6)](_0x5225cd(0x1b5)+'ntMod'+'al');_0x2f5716['class'+_0x5225cd(0x156)][_0x5225cd(0x11c)](_0x5225cd(0x134)),document[_0x5225cd(0xe5)+_0x5225cd(0x117)+_0x5225cd(0x1b6)](_0x5225cd(0x1ac)+_0x5225cd(0x1b7))[_0x5225cd(0x17c)](),document['getEl'+_0x5225cd(0x117)+'ById']('regis'+_0x5225cd(0x173)+'rm')[_0x5225cd(0x17c)]();const _0x3db590=document[_0x5225cd(0xe5)+'ement'+'ById'](_0x5225cd(0xe8)+_0x5225cd(0xf1)+'n');_0x3db590&&(_0x3db590['disab'+_0x5225cd(0x1bc)]=![],_0x3db590[_0x5225cd(0x174)+_0x5225cd(0x121)]=_0x5225cd(0x1ad)+_0x5225cd(0x1c0)+'ount');const _0xd92f30=document['getEl'+_0x5225cd(0x117)+_0x5225cd(0x1b6)](_0x5225cd(0xe8)+_0x5225cd(0x11d)+'ading');if(_0xd92f30)_0xd92f30[_0x5225cd(0x15c)][_0x5225cd(0x171)+'ay']=_0x5225cd(0x140);}function closeAccountModal(){const _0x2c4c7d=a11_0x5304,_0x255970=document[_0x2c4c7d(0xe5)+_0x2c4c7d(0x117)+_0x2c4c7d(0x1b6)]('accou'+_0x2c4c7d(0x1c3)+'al');_0x255970[_0x2c4c7d(0x106)+_0x2c4c7d(0x156)][_0x2c4c7d(0x14f)+'e'](_0x2c4c7d(0x134));}function openProfileModal(){const _0x5d92ab=a11_0x5304;if(!currentUser||isAdmin){if(!currentUser)openAccountModal();return;}document['getEl'+_0x5d92ab(0x117)+_0x5d92ab(0x1b6)](_0x5d92ab(0x1c9)+'leNam'+'e')[_0x5d92ab(0x174)+_0x5d92ab(0x187)]=currentUser[_0x5d92ab(0x194)],document[_0x5d92ab(0xe5)+_0x5d92ab(0x117)+_0x5d92ab(0x1b6)](_0x5d92ab(0x1c9)+'leId')['inner'+'Text']=currentUser['id'],document[_0x5d92ab(0xe5)+'ement'+_0x5d92ab(0x1b6)](_0x5d92ab(0x1c9)+'lePho'+'ne')[_0x5d92ab(0x174)+_0x5d92ab(0x187)]=currentUser[_0x5d92ab(0x18e)],document[_0x5d92ab(0xe5)+_0x5d92ab(0x117)+_0x5d92ab(0x1b6)](_0x5d92ab(0x1c9)+_0x5d92ab(0x1b4)+_0x5d92ab(0x18d))[_0x5d92ab(0x174)+'Text']=currentUser[_0x5d92ab(0x158)+'d']||new Date()[_0x5d92ab(0x1c2)+_0x5d92ab(0xd2)+'teStr'+_0x5d92ab(0x192)](),document[_0x5d92ab(0xe5)+_0x5d92ab(0x117)+'ById']('profi'+'leBal'+_0x5d92ab(0x13a))['inner'+_0x5d92ab(0x121)]='₱'+(currentUser[_0x5d92ab(0xf2)+'ce']||0x0)['toLoc'+_0x5d92ab(0x127)+_0x5d92ab(0x161)]();if(typeof generateUserQRCode===_0x5d92ab(0x182)+_0x5d92ab(0x195))generateUserQRCode();if(typeof loadUserLoyalty===_0x5d92ab(0x182)+_0x5d92ab(0x195))loadUserLoyalty();const _0x5a4890=document['getEl'+'ement'+_0x5d92ab(0x1b6)](_0x5d92ab(0x1c9)+'leMod'+'al');_0x5a4890[_0x5d92ab(0x106)+_0x5d92ab(0x156)][_0x5d92ab(0x11c)]('show');}function closeProfileModal(){const _0x7e7491=a11_0x5304,_0x14079d=document[_0x7e7491(0xe5)+_0x7e7491(0x117)+'ById'](_0x7e7491(0x1c9)+_0x7e7491(0x1b1)+'al');_0x14079d[_0x7e7491(0x106)+_0x7e7491(0x156)][_0x7e7491(0x14f)+'e'](_0x7e7491(0x134));}function switchTab(_0x418ee2){const _0x5e81a1=a11_0x5304;document[_0x5e81a1(0x164)+_0x5e81a1(0x1bb)+_0x5e81a1(0x104)+'l'](_0x5e81a1(0xe2)+_0x5e81a1(0x162))[_0x5e81a1(0x15e)+'ch'](_0x5d0c1c=>_0x5d0c1c[_0x5e81a1(0x106)+_0x5e81a1(0x156)]['remov'+'e'](_0x5e81a1(0x186)+'e')),document['query'+'Selec'+_0x5e81a1(0x104)+'l'](_0x5e81a1(0xe2)+_0x5e81a1(0x114)+'nt')[_0x5e81a1(0x15e)+'ch'](_0x17203c=>_0x17203c['class'+'List'][_0x5e81a1(0x14f)+'e'](_0x5e81a1(0x186)+'e')),_0x418ee2===_0x5e81a1(0x1ac)?(document[_0x5e81a1(0x164)+_0x5e81a1(0x1bb)+_0x5e81a1(0x128)](_0x5e81a1(0xe2)+_0x5e81a1(0x131)+'irst-'+_0x5e81a1(0x1b9))[_0x5e81a1(0x106)+_0x5e81a1(0x156)][_0x5e81a1(0x11c)](_0x5e81a1(0x186)+'e'),document['getEl'+_0x5e81a1(0x117)+_0x5e81a1(0x1b6)](_0x5e81a1(0x1ac)+_0x5e81a1(0x1a5))[_0x5e81a1(0x106)+_0x5e81a1(0x156)][_0x5e81a1(0x11c)](_0x5e81a1(0x186)+'e')):(document[_0x5e81a1(0x164)+_0x5e81a1(0x1bb)+'tor'](_0x5e81a1(0xe2)+'btn:l'+_0x5e81a1(0xd4)+_0x5e81a1(0xf4))['class'+_0x5e81a1(0x156)][_0x5e81a1(0x11c)](_0x5e81a1(0x186)+'e'),document[_0x5e81a1(0xe5)+'ement'+_0x5e81a1(0x1b6)](_0x5e81a1(0xe8)+'terTa'+'b')[_0x5e81a1(0x106)+_0x5e81a1(0x156)][_0x5e81a1(0x11c)](_0x5e81a1(0x186)+'e'));}function a11_0x5304(_0x5e9efb,_0x5173dd){_0x5e9efb=_0x5e9efb-0xd1;const _0x22eb11=a11_0x1cf8();let _0x5e26df=_0x22eb11[_0x5e9efb];return _0x5e26df;}function stopRealTimeBalanceCheck(){balanceCheckInterval&&(clearInterval(balanceCheckInterval),balanceCheckInterval=null);}function startRealTimeBalanceCheck(){balanceCheckInterval&&(clearInterval(balanceCheckInterval),balanceCheckInterval=null),currentUser&&!isAdmin&&(refreshUserBalance(),balanceCheckInterval=setInterval(()=>{if(currentUser&&!isAdmin)refreshUserBalance();else(!currentUser||isAdmin)&&stopRealTimeBalanceCheck();},0x3e8));}function a11_0x1cf8(){const _0x2d3a30=['input','nfirm','ck,\x20','💸\x20-₱','const','btn:f','toStr','on=ve','show','code\x20','trace','.\x20Try','ancel','catio','ance','ng...','ion\x20*','ifica','apply','essfu','none','to__','preve','in\x22><','value','home','fa-sp','ed.\x20P','nctio','\x20phon','again','e\x20fil','necti','k\x20con','legra','remov','conso','Phone','ameDi','json','\x20try\x20','nova_','List','ntDef','joine','g\x20in.','ount\x20','in.','style','id\x20co','forEa','iled.','on=ge','ring','btn','A\x20Ver','query','2FA&p','ur\x20Te','log','\x20has\x20','one\x20n','setIt','XXXXX','2FA\x20c','✅\x20Acc','\x20Plea','table','&pass','displ','Strin','terFo','inner','Pleas','8QcgqTq','Passw','93422pnuikl','Inval','test','one=','reset','ault','ord','t\x20mat','ields','\x20or\x20p','funct','ords\x20','error','Login','activ','Text','splay','648XdITJW','e\x20num','teStr','nner\x20','ned','phone','disab','on=re','\x5c+\x5c+\x20','ing','!\x0aYou','name','ion','call','\x20dedu','regCo','link','&code','e\x20ent','split','trati','lengt','warn','me\x20ba','$]*)','on\x20fa','3932UGXVCe','ntId','Tab','to\x20yo','1203468zYrlVX','state','🔐\x20Adm','reati','rror.','login','Creat','\x20fail','quest','admin','leMod','toISO','Regis','leJoi','accou','ById','Form','\x20Chec','child','lenco','Selec','led','nstru','ructo','me,\x20','e\x20Acc','min!\x20','toLoc','ntMod','find','ease\x20','1574735fILuEc','💰\x20+₱','in\x202F','profi','sswor','gify','Objec','all\x20f','aleDa','09XXX','ast-c','trim','sent\x20','FA&ph','strin','__pro','Welco','oggin','(((.+','messa','er&ph','lly','ID:\x20','userN','.tab-','Logge','145638FkTneN','getEl','floor','e)\x20{}','regis','\x20agai','excep','l\x20in\x20','regFu','a-spi','info','tion','proto','terBt','balan','\x20(tru','hild','rm-ur','2FA\x20e','eItem','succe','fas\x20f','2FA\x20f','is\x22)(','se\x20tr','bind','chain','searc','\x20code','gger','type','lease','torAl','ailed','class','?acti','me\x20Ad','block','er\x20a\x20','492110aKidVx','leBal','\x20succ','ass=\x22','n\x20(fu','<i\x20cl','POST','actio','been\x20','conte','while','y\x20aga','ement','hone=','d\x20out','Z_$][','\x20adde','add','terLo','ading','user','creat','HTML','.nav-','appli','\x0aA\x206-','4907268KXIBwG','retur','aleSt','tor','enter','0-9a-','/i>\x20C'];a11_0x1cf8=function(){return _0x2d3a30;};return a11_0x1cf8();}async function refreshUserBalance(){const _0x4c1b94=a11_0x5304;if(!currentUser||isAdmin)return;try{const _0x528752=await fetch(GOOGLE_SHEETS_URL+(_0x4c1b94(0x107)+_0x4c1b94(0x160)+'tUser'+'s')),_0x4db168=await _0x528752[_0x4c1b94(0x153)](),_0x449179=_0x4db168[_0x4c1b94(0x1c4)](_0x10222b=>_0x10222b[_0x4c1b94(0x18e)]===currentUser[_0x4c1b94(0x18e)]);if(_0x449179){const _0x227dc6=currentUser[_0x4c1b94(0xf2)+'ce']||0x0,_0x28ac73=_0x449179[_0x4c1b94(0xf2)+'ce']||0x0;if(_0x227dc6!==_0x28ac73){currentUser[_0x4c1b94(0xf2)+'ce']=_0x28ac73,localStorage[_0x4c1b94(0x16a)+'em'](_0x4c1b94(0x155)+'user',JSON[_0x4c1b94(0xd8)+_0x4c1b94(0x1cb)](currentUser));if(_0x28ac73>_0x227dc6)showToast(_0x4c1b94(0x1c7)+(_0x28ac73-_0x227dc6)['toLoc'+_0x4c1b94(0x127)+_0x4c1b94(0x161)]()+(_0x4c1b94(0x11b)+'d!'),0xbb8);else _0x28ac73<_0x227dc6&&showToast(_0x4c1b94(0x12f)+(_0x227dc6-_0x28ac73)[_0x4c1b94(0x1c2)+'aleSt'+_0x4c1b94(0x161)]()+(_0x4c1b94(0x197)+'cted.'),0xbb8);updateAllBalanceDisplays();}}}catch(_0x12c6f8){}}function updateAllBalanceDisplays(){const _0x95ad=a11_0x5304,_0x4cbf7c=document[_0x95ad(0xe5)+'ement'+_0x95ad(0x1b6)]('profi'+_0x95ad(0x10c)+_0x95ad(0x13a));_0x4cbf7c&&currentUser&&!isAdmin&&(_0x4cbf7c['inner'+'HTML']='₱'+(currentUser[_0x95ad(0xf2)+'ce']||0x0)[_0x95ad(0x1c2)+'aleSt'+_0x95ad(0x161)]());if(typeof renderCartUI==='funct'+'ion')renderCartUI();const _0x18ee3a=document[_0x95ad(0xe5)+_0x95ad(0x117)+'ById'](_0x95ad(0xe1)+'ameDi'+_0x95ad(0x188));_0x18ee3a&&currentUser&&!isAdmin&&(_0x18ee3a[_0x95ad(0x174)+_0x95ad(0x187)]=currentUser['name'][_0x95ad(0x19c)]('\x20')[0x0]);}function doAdminLogin(_0x243f0d){const _0x5a6e88=a11_0x5304;stopRealTimeBalanceCheck(),isAdmin=!![],currentUser=null,localStorage[_0x5a6e88(0x14f)+_0x5a6e88(0xf7)]('nova_'+_0x5a6e88(0x11f)),cart=[];if(typeof updateCartBadge===_0x5a6e88(0x182)+_0x5a6e88(0x195))updateCartBadge();if(typeof saveCartToLocal==='funct'+_0x5a6e88(0x195))saveCartToLocal();if(typeof renderCartUI===_0x5a6e88(0x182)+_0x5a6e88(0x195))renderCartUI();showToast(_0x5a6e88(0xda)+_0x5a6e88(0x108)+_0x5a6e88(0x1c1)+'👑',0x7d0),closeAccountModal(),document['query'+_0x5a6e88(0x1bb)+'torAl'+'l']('.nav-'+'link')['forEa'+'ch'](_0x1d7e91=>{const _0x42ca3b=_0x5a6e88;_0x1d7e91[_0x42ca3b(0x15c)][_0x42ca3b(0x171)+'ay']='none';}),document[_0x5a6e88(0xe5)+'ement'+'ById']('userN'+_0x5a6e88(0x152)+_0x5a6e88(0x188))['inner'+_0x5a6e88(0x187)]='';if(typeof loadAdminData==='funct'+_0x5a6e88(0x195))loadAdminData();if(typeof switchPage==='funct'+_0x5a6e88(0x195))switchPage(_0x5a6e88(0x1b0));_0x243f0d[_0x5a6e88(0x18f)+_0x5a6e88(0x1bc)]=![],_0x243f0d[_0x5a6e88(0x174)+'HTML']='Login';}async function handleLogin(_0x5bf22e){const _0xe7a2fa=a11_0x5304;_0x5bf22e[_0xe7a2fa(0x142)+_0xe7a2fa(0x157)+_0xe7a2fa(0x17d)]();let _0xfb0b85=document[_0xe7a2fa(0xe5)+'ement'+'ById'](_0xe7a2fa(0x1ac)+_0xe7a2fa(0x151))[_0xe7a2fa(0x144)][_0xe7a2fa(0xd5)]();const _0x2fa2a9=document[_0xe7a2fa(0xe5)+_0xe7a2fa(0x117)+'ById'](_0xe7a2fa(0x1ac)+_0xe7a2fa(0x177)+_0xe7a2fa(0x17e))[_0xe7a2fa(0x144)],_0x1ba537=document[_0xe7a2fa(0xe5)+_0xe7a2fa(0x117)+_0xe7a2fa(0x1b6)]('login'+'Btn');if(!_0xfb0b85||!_0x2fa2a9){showToast('Pleas'+_0xe7a2fa(0x14b)+'l\x20in\x20'+_0xe7a2fa(0xd1)+_0xe7a2fa(0x180),0x5dc);return;}_0x1ba537[_0xe7a2fa(0x18f)+_0xe7a2fa(0x1bc)]=!![],_0x1ba537['inner'+_0xe7a2fa(0x121)]=_0xe7a2fa(0x110)+_0xe7a2fa(0x10e)+_0xe7a2fa(0xf9)+'a-spi'+_0xe7a2fa(0x18c)+'fa-sp'+_0xe7a2fa(0x143)+'/i>\x20L'+_0xe7a2fa(0xdb)+_0xe7a2fa(0x159)+'..';if(_0xfb0b85===ADMIN_PHONE&&_0x2fa2a9===ADMIN_PASSWORD){try{const _0x2fff2f=await fetch(GOOGLE_SHEETS_URL+(_0xe7a2fa(0x107)+_0xe7a2fa(0x190)+_0xe7a2fa(0x1af)+_0xe7a2fa(0x165)+_0xe7a2fa(0x118))+encodeURIComponent(_0xfb0b85)+(_0xe7a2fa(0x170)+'word=')+encodeURIComponent(_0x2fa2a9)),_0x489bff=await _0x2fff2f['json']();if(_0x489bff[_0xe7a2fa(0xf8)+'ss']){const _0x511354=prompt(_0xe7a2fa(0x1a9)+_0xe7a2fa(0x1c8)+_0xe7a2fa(0x163)+_0xe7a2fa(0x13d)+'tion\x0a'+_0xe7a2fa(0x124)+'digit'+_0xe7a2fa(0x100)+_0xe7a2fa(0x168)+_0xe7a2fa(0x113)+_0xe7a2fa(0xd6)+_0xe7a2fa(0x1a6)+_0xe7a2fa(0x166)+_0xe7a2fa(0x14e)+'m.\x0aPl'+_0xe7a2fa(0x1c5)+_0xe7a2fa(0x129)+'\x20the\x20'+_0xe7a2fa(0x135)+'below'+':');if(!_0x511354){showToast(_0xe7a2fa(0x16c)+_0xe7a2fa(0x138)+_0xe7a2fa(0x1bc),0x5dc),_0x1ba537[_0xe7a2fa(0x18f)+_0xe7a2fa(0x1bc)]=![],_0x1ba537['inner'+_0xe7a2fa(0x121)]='Login';return;}const _0x336796=await fetch(GOOGLE_SHEETS_URL+(_0xe7a2fa(0x107)+_0xe7a2fa(0x133)+'rify2'+_0xe7a2fa(0xd7)+_0xe7a2fa(0x17b))+encodeURIComponent(_0xfb0b85)+(_0xe7a2fa(0x19a)+'=')+encodeURIComponent(_0x511354)),_0x4b2ce2=await _0x336796[_0xe7a2fa(0x153)]();_0x4b2ce2[_0xe7a2fa(0xf8)+'ss']?doAdminLogin(_0x1ba537):(showToast(_0x4b2ce2[_0xe7a2fa(0xdd)+'ge']||_0xe7a2fa(0x179)+_0xe7a2fa(0x15d)+'de',0x7d0),_0x1ba537['disab'+_0xe7a2fa(0x1bc)]=![],_0x1ba537[_0xe7a2fa(0x174)+'HTML']=_0xe7a2fa(0x185));}else showToast(_0xe7a2fa(0xfa)+_0xe7a2fa(0x105)+_0xe7a2fa(0x137)+_0xe7a2fa(0xe9)+'n.',0x5dc),_0x1ba537[_0xe7a2fa(0x18f)+_0xe7a2fa(0x1bc)]=![],_0x1ba537['inner'+'HTML']=_0xe7a2fa(0x185);}catch(_0xc02098){showToast(_0xe7a2fa(0xf6)+_0xe7a2fa(0x1ab)+_0xe7a2fa(0x1b8)+_0xe7a2fa(0x14d)+_0xe7a2fa(0x14c)+'on.',0x5dc),_0x1ba537[_0xe7a2fa(0x18f)+'led']=![],_0x1ba537['inner'+_0xe7a2fa(0x121)]='Login';}return;}try{const _0x1612f9=await fetch(GOOGLE_SHEETS_URL+(_0xe7a2fa(0x107)+'on=lo'+'ginUs'+_0xe7a2fa(0xde)+_0xe7a2fa(0x17b))+encodeURIComponent(_0xfb0b85)+('&pass'+'word=')+encodeURIComponent(_0x2fa2a9)),_0x2e37ac=await _0x1612f9[_0xe7a2fa(0x153)]();if(_0x2e37ac[_0xe7a2fa(0xf8)+'ss']){const _0x4a48ee=_0x2e37ac['user'];currentUser={'id':_0x4a48ee[_0xe7a2fa(0x1b5)+_0xe7a2fa(0x1a4)],'name':_0x4a48ee[_0xe7a2fa(0x194)],'phone':_0x4a48ee[_0xe7a2fa(0x18e)],'password':_0x2fa2a9,'balance':_0x4a48ee['balan'+'ce']||0x0,'joined':new Date()['toLoc'+_0xe7a2fa(0xd2)+_0xe7a2fa(0x18b)+_0xe7a2fa(0x192)]()},isAdmin=![],localStorage[_0xe7a2fa(0x16a)+'em'](_0xe7a2fa(0x155)+_0xe7a2fa(0x11f),JSON[_0xe7a2fa(0xd8)+_0xe7a2fa(0x1cb)](currentUser)),document[_0xe7a2fa(0xe5)+'ement'+_0xe7a2fa(0x1b6)]('userN'+_0xe7a2fa(0x152)+_0xe7a2fa(0x188))[_0xe7a2fa(0x174)+_0xe7a2fa(0x187)]=currentUser['name'][_0xe7a2fa(0x19c)]('\x20')[0x0],document[_0xe7a2fa(0x164)+_0xe7a2fa(0x1bb)+_0xe7a2fa(0x104)+'l'](_0xe7a2fa(0x122)+_0xe7a2fa(0x199))[_0xe7a2fa(0x15e)+'ch'](_0x55e207=>{const _0x22a7de=_0xe7a2fa;_0x55e207['style'][_0x22a7de(0x171)+'ay']=_0x22a7de(0x109);}),showToast(_0xe7a2fa(0xda)+_0xe7a2fa(0x1a0)+_0xe7a2fa(0x12e)+_0x4a48ee[_0xe7a2fa(0x194)]+'!',0x7d0),closeAccountModal();if(typeof renderCartUI===_0xe7a2fa(0x182)+_0xe7a2fa(0x195))renderCartUI();startRealTimeBalanceCheck();if(typeof switchPage===_0xe7a2fa(0x182)+_0xe7a2fa(0x195))switchPage(_0xe7a2fa(0x145));}else showToast(_0x2e37ac['messa'+'ge']||_0xe7a2fa(0x179)+'id\x20ph'+_0xe7a2fa(0x169)+'umber'+_0xe7a2fa(0x181)+'asswo'+'rd',0x5dc);}catch(_0x23894b){showToast('Login'+_0xe7a2fa(0x1ae)+_0xe7a2fa(0x147)+_0xe7a2fa(0x103)+_0xe7a2fa(0x154)+_0xe7a2fa(0x14a)+'.',0x5dc);}finally{_0x1ba537[_0xe7a2fa(0x18f)+_0xe7a2fa(0x1bc)]=![],_0x1ba537[_0xe7a2fa(0x174)+'HTML']='Login';}}async function handleRegister(_0x265796){const _0xd33aad=a11_0x5304;_0x265796['preve'+_0xd33aad(0x157)+_0xd33aad(0x17d)]();const _0x4fb6c0=document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)](_0xd33aad(0xec)+'llNam'+'e')[_0xd33aad(0x144)][_0xd33aad(0xd5)](),_0x555a74=document[_0xd33aad(0xe5)+_0xd33aad(0x117)+'ById']('regPh'+'one')[_0xd33aad(0x144)]['trim'](),_0x32db28=document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)]('regPa'+_0xd33aad(0x1ca)+'d')[_0xd33aad(0x144)],_0x16b2a8=document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)](_0xd33aad(0x198)+_0xd33aad(0x12d)+_0xd33aad(0x177)+'ord')['value'],_0x104e5f=document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)]('regis'+_0xd33aad(0xf1)+'n'),_0x1b173e=document['getEl'+_0xd33aad(0x117)+_0xd33aad(0x1b6)](_0xd33aad(0xe8)+_0xd33aad(0x11d)+_0xd33aad(0x11e));if(!_0x4fb6c0||!_0x555a74||!_0x32db28){showToast('Pleas'+_0xd33aad(0x14b)+_0xd33aad(0xeb)+'all\x20f'+_0xd33aad(0x180),0x5dc);return;}if(_0x32db28!==_0x16b2a8){showToast(_0xd33aad(0x177)+_0xd33aad(0x183)+'do\x20no'+_0xd33aad(0x17f)+'ch',0x5dc);return;}if(!/^09\d{9}$/[_0xd33aad(0x17a)](_0x555a74)&&!/^\d{10}$/[_0xd33aad(0x17a)](_0x555a74)){showToast(_0xd33aad(0x175)+_0xd33aad(0x19b)+_0xd33aad(0x10a)+'valid'+_0xd33aad(0x149)+_0xd33aad(0x18a)+'ber\x20('+_0xd33aad(0xd3)+_0xd33aad(0x16b)+'X)',0x5dc);return;}const _0x26b046=Math[_0xd33aad(0xe6)](0x5f5e100+Math['rando'+'m']()*0x35a4e900)['toStr'+_0xd33aad(0x192)](),_0xbe2811=new Date()[_0xd33aad(0x1c2)+_0xd33aad(0xd2)+'teStr'+_0xd33aad(0x192)]();_0x104e5f[_0xd33aad(0x18f)+_0xd33aad(0x1bc)]=!![],_0x104e5f[_0xd33aad(0x174)+_0xd33aad(0x121)]=_0xd33aad(0x110)+_0xd33aad(0x10e)+_0xd33aad(0xf9)+_0xd33aad(0xed)+_0xd33aad(0x18c)+_0xd33aad(0x146)+_0xd33aad(0x143)+_0xd33aad(0x12b)+_0xd33aad(0x1aa)+_0xd33aad(0x13b),_0x1b173e[_0xd33aad(0x15c)]['displ'+'ay']=_0xd33aad(0x109);try{const _0x28dcc3=await fetch(GOOGLE_SHEETS_URL,{'method':_0xd33aad(0x111),'headers':{'Content-Type':_0xd33aad(0x123)+_0xd33aad(0x139)+'n/x-w'+'ww-fo'+_0xd33aad(0xf5)+_0xd33aad(0x1ba)+'ded'},'body':new URLSearchParams({'action':'addUs'+'er','name':_0x4fb6c0,'phone':_0x555a74,'password':_0x32db28,'accountId':_0x26b046,'timestamp':new Date()[_0xd33aad(0x1b2)+_0xd33aad(0x172)+'g']()})}),_0xce4759=await _0x28dcc3[_0xd33aad(0x153)]();if(_0xce4759[_0xd33aad(0xf8)+'ss']){currentUser={'id':_0x26b046,'name':_0x4fb6c0,'phone':_0x555a74,'password':_0x32db28,'balance':0x0,'joined':_0xbe2811},isAdmin=![];if(typeof createUserLoyalty===_0xd33aad(0x182)+_0xd33aad(0x195))await createUserLoyalty();localStorage['setIt'+'em'](_0xd33aad(0x155)+_0xd33aad(0x11f),JSON[_0xd33aad(0xd8)+_0xd33aad(0x1cb)](currentUser)),document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)](_0xd33aad(0xe1)+'ameDi'+_0xd33aad(0x188))[_0xd33aad(0x174)+_0xd33aad(0x187)]=currentUser[_0xd33aad(0x194)]['split']('\x20')[0x0],showToast(_0xd33aad(0x16d)+_0xd33aad(0x15a)+_0xd33aad(0x120)+'ed!\x0a\x0a'+_0xd33aad(0xda)+_0xd33aad(0x1bf)+_0x4fb6c0+(_0xd33aad(0x193)+'r\x20Acc'+_0xd33aad(0x15a)+_0xd33aad(0xe0))+_0x26b046,0xfa0),closeAccountModal(),document[_0xd33aad(0xe5)+_0xd33aad(0x117)+_0xd33aad(0x1b6)](_0xd33aad(0xe8)+_0xd33aad(0x173)+'rm')[_0xd33aad(0x17c)](),startRealTimeBalanceCheck();if(typeof switchPage===_0xd33aad(0x182)+_0xd33aad(0x195))switchPage(_0xd33aad(0x145));}else showToast(_0xce4759[_0xd33aad(0xdd)+'ge']||_0xd33aad(0x1b3)+_0xd33aad(0x19d)+_0xd33aad(0x1a2)+'iled.',0x5dc);}catch(_0x13e829){showToast('Regis'+_0xd33aad(0x19d)+_0xd33aad(0x1a2)+_0xd33aad(0x15f)+_0xd33aad(0x16e)+_0xd33aad(0xfc)+_0xd33aad(0x116)+_0xd33aad(0x15b),0x5dc);}finally{_0x104e5f['disab'+_0xd33aad(0x1bc)]=![],_0x104e5f[_0xd33aad(0x174)+_0xd33aad(0x121)]='Creat'+'e\x20Acc'+'ount',_0x1b173e[_0xd33aad(0x15c)]['displ'+'ay']=_0xd33aad(0x140);}}function logout(){const _0x409750=a11_0x5304;stopRealTimeBalanceCheck(),currentUser=null,isAdmin=![],localStorage[_0x409750(0x14f)+_0x409750(0xf7)](_0x409750(0x155)+_0x409750(0x11f)),document[_0x409750(0xe5)+'ement'+'ById']('userN'+'ameDi'+_0x409750(0x188))['inner'+_0x409750(0x187)]='',closeProfileModal(),showToast(_0x409750(0xe3)+_0x409750(0x119)+_0x409750(0x10d)+_0x409750(0x13f)+_0x409750(0xdf),0x5dc),cart=[];if(typeof updateCartBadge===_0x409750(0x182)+_0x409750(0x195))updateCartBadge();if(typeof saveCartToLocal===_0x409750(0x182)+_0x409750(0x195))saveCartToLocal();if(typeof renderCartUI===_0x409750(0x182)+'ion')renderCartUI();document[_0x409750(0x164)+_0x409750(0x1bb)+'torAl'+'l'](_0x409750(0x122)+_0x409750(0x199))[_0x409750(0x15e)+'ch'](_0x3fbfa6=>{const _0x15e1ba=_0x409750;_0x3fbfa6[_0x15e1ba(0x15c)][_0x15e1ba(0x171)+'ay']='block';});if(typeof switchPage==='funct'+_0x409750(0x195))switchPage(_0x409750(0x145));}function a11_0x2ffb8b(_0x5d5713){function _0x4f1d1a(_0x3cbce5){const _0x131145=a11_0x5304;if(typeof _0x3cbce5===_0x131145(0xd8)+'g')return function(_0x2c4e48){}[_0x131145(0x130)+_0x131145(0x1be)+'r'](_0x131145(0x115)+_0x131145(0xf3)+_0x131145(0xe7))[_0x131145(0x13e)]('count'+'er');else(''+_0x3cbce5/_0x3cbce5)[_0x131145(0x19e)+'h']!==0x1||_0x3cbce5%0x14===0x0?function(){return!![];}[_0x131145(0x130)+_0x131145(0x1be)+'r']('debu'+_0x131145(0x101))[_0x131145(0x196)](_0x131145(0x112)+'n'):function(){return![];}[_0x131145(0x130)+_0x131145(0x1be)+'r']('debu'+_0x131145(0x101))[_0x131145(0x13e)](_0x131145(0x1a8)+_0x131145(0x1cc)+'t');_0x4f1d1a(++_0x3cbce5);}try{if(_0x5d5713)return _0x4f1d1a;else _0x4f1d1a(0x0);}catch(_0x511d07){}}
+function openAccountModal() {
+  const modal = document.getElementById("accountModal");
+  modal.classList.add("show");
+  document.getElementById("loginForm").reset();
+  document.getElementById("registerForm").reset();
+  const registerBtn = document.getElementById("registerBtn");
+  if (registerBtn) {
+    registerBtn.disabled = false;
+    registerBtn.innerHTML = "Create Account";
+  }
+  const loadingIndicator = document.getElementById("registerLoading");
+  if (loadingIndicator) loadingIndicator.style.display = "none";
+}
+
+function closeAccountModal() {
+  const modal = document.getElementById("accountModal");
+  modal.classList.remove("show");
+}
+
+function openProfileModal() {
+  if (!currentUser || isAdmin) {
+    if (!currentUser) openAccountModal();
+    return;
+  }
+  
+  document.getElementById("profileName").innerText = currentUser.name;
+  document.getElementById("profileId").innerText = currentUser.id;
+  document.getElementById("profilePhone").innerText = currentUser.phone;
+  document.getElementById("profileJoined").innerText = currentUser.joined || new Date().toLocaleDateString();
+  document.getElementById("profileBalance").innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
+  
+  if (typeof generateUserQRCode === 'function') generateUserQRCode();
+  if (typeof loadUserLoyalty === 'function') loadUserLoyalty();
+  
+  const modal = document.getElementById("profileModal");
+  modal.classList.add("show");
+}
+
+function closeProfileModal() {
+  const modal = document.getElementById("profileModal");
+  modal.classList.remove("show");
+}
+
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  
+  if (tabName === 'login') {
+    document.querySelector('.tab-btn:first-child').classList.add('active');
+    document.getElementById('loginTab').classList.add('active');
+  } else {
+    document.querySelector('.tab-btn:last-child').classList.add('active');
+    document.getElementById('registerTab').classList.add('active');
+  }
+}
+
+function stopRealTimeBalanceCheck() {
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+    balanceCheckInterval = null;
+  }
+}
+
+function startRealTimeBalanceCheck() {
+  if (balanceCheckInterval) {
+    clearInterval(balanceCheckInterval);
+    balanceCheckInterval = null;
+  }
+  
+  if (currentUser && !isAdmin) {
+    refreshUserBalance();
+    balanceCheckInterval = setInterval(() => {
+      if (currentUser && !isAdmin) {
+        refreshUserBalance();
+      } else if (!currentUser || isAdmin) {
+        stopRealTimeBalanceCheck();
+      }
+    }, 1000);
+  }
+}
+
+async function refreshUserBalance() {
+  if (!currentUser || isAdmin) return;
+  
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUsers`);
+    const users = await response.json();
+    const updatedUser = users.find(u => u.phone === currentUser.phone);
+    
+    if (updatedUser) {
+      const oldBalance = currentUser.balance || 0;
+      const newBalance = updatedUser.balance || 0;
+      
+      if (oldBalance !== newBalance) {
+        currentUser.balance = newBalance;
+        localStorage.setItem("nova_user", JSON.stringify(currentUser));
+        
+        if (newBalance > oldBalance) {
+          showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added!`, 3000);
+        } else if (newBalance < oldBalance) {
+          showToast(`💸 -₱${(oldBalance - newBalance).toLocaleString()} deducted.`, 3000);
+        }
+        
+        updateAllBalanceDisplays();
+      }
+    }
+  } catch (error) {}
+}
+
+function updateAllBalanceDisplays() {
+  const profileBalance = document.getElementById("profileBalance");
+  if (profileBalance && currentUser && !isAdmin) {
+    profileBalance.innerHTML = `₱${(currentUser.balance || 0).toLocaleString()}`;
+  }
+  
+  if (typeof renderCartUI === 'function') renderCartUI();
+  
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  if (userNameDisplay && currentUser && !isAdmin) {
+    userNameDisplay.innerText = currentUser.name.split(' ')[0];
+  }
+}
+
+// ========================================
+// ADMIN 2FA LOGIN HELPER
+// ========================================
+function doAdminLogin(loginBtn) {
+  stopRealTimeBalanceCheck();
+  isAdmin = true;
+  currentUser = null;
+  localStorage.removeItem("nova_user");
+  cart = [];
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+  if (typeof saveCartToLocal === 'function') saveCartToLocal();
+  if (typeof renderCartUI === 'function') renderCartUI();
+  
+  showToast("Welcome Admin! 👑", 2000);
+  closeAccountModal();
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.style.display = 'none';
+  });
+  document.getElementById("userNameDisplay").innerText = "";
+  
+  if (typeof loadAdminData === 'function') loadAdminData();
+  if (typeof switchPage === 'function') switchPage('admin');
+  
+  loginBtn.disabled = false;
+  loginBtn.innerHTML = "Login";
+}
+
+// ========================================
+// LOGIN FUNCTION - WITH ADMIN 2FA
+// ========================================
+async function handleLogin(event) {
+  event.preventDefault();
+  let phone = document.getElementById("loginPhone").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const loginBtn = document.getElementById("loginBtn");
+  
+  if (!phone || !password) {
+    showToast("Please fill in all fields", 1500);
+    return;
+  }
+  
+  loginBtn.disabled = true;
+  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+  
+  // ========================================
+  // ADMIN LOGIN WITH 2FA
+  // ========================================
+  if (phone === ADMIN_PHONE && password === ADMIN_PASSWORD) {
+    try {
+      const res = await fetch(`${GOOGLE_SHEETS_URL}?action=request2FA&phone=${encodeURIComponent(phone)}&password=${encodeURIComponent(password)}`);
+      const data = await res.json();
+      
+      if (data.success) {
+        const otpCode = prompt("🔐 Admin 2FA Verification\n\nA 6-digit code has been sent to your Telegram.\nPlease enter the code below:");
+        
+        if (!otpCode) {
+          showToast("2FA cancelled", 1500);
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = "Login";
+          return;
+        }
+        
+        const verifyRes = await fetch(`${GOOGLE_SHEETS_URL}?action=verify2FA&phone=${encodeURIComponent(phone)}&code=${encodeURIComponent(otpCode)}`);
+        const verifyData = await verifyRes.json();
+        
+        if (verifyData.success) {
+          doAdminLogin(loginBtn);
+        } else {
+          showToast(verifyData.message || "Invalid code", 2000);
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = "Login";
+        }
+      } else {
+        showToast("2FA failed. Try again.", 1500);
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = "Login";
+      }
+    } catch(e) {
+      showToast("2FA error. Check connection.", 1500);
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = "Login";
+    }
+    return;
+  }
+  
+  // ========================================
+  // NORMAL USER LOGIN - via hashed endpoint
+  // ========================================
+  try {
+    const response = await fetch(`${GOOGLE_SHEETS_URL}?action=loginUser&phone=${encodeURIComponent(phone)}&password=${encodeURIComponent(password)}`);
+    const result = await response.json();
+    
+    if (result.success) {
+      const user = result.user;
+      currentUser = {
+        id: user.accountId,
+        name: user.name,
+        phone: user.phone,
+        password: password,
+        balance: user.balance || 0,
+        joined: new Date().toLocaleDateString()
+      };
+      
+      isAdmin = false;
+      
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
+      document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.style.display = 'block';
+      });
+      
+      showToast(`Welcome back, ${user.name}!`, 2000);
+      closeAccountModal();
+      if (typeof renderCartUI === 'function') renderCartUI();
+      
+      startRealTimeBalanceCheck();
+      
+      if (typeof switchPage === 'function') switchPage('home');
+    } else {
+      showToast(result.message || "Invalid phone number or password", 1500);
+    }
+  } catch (error) {
+    showToast("Login failed. Please try again.", 1500);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = "Login";
+  }
+}
+
+// ========================================
+// REGISTER FUNCTION
+// ========================================
+async function handleRegister(event) {
+  event.preventDefault();
+  const name = document.getElementById("regFullName").value.trim();
+  const phone = document.getElementById("regPhone").value.trim();
+  const password = document.getElementById("regPassword").value;
+  const confirmPassword = document.getElementById("regConfirmPassword").value;
+  const registerBtn = document.getElementById("registerBtn");
+  const loadingIndicator = document.getElementById("registerLoading");
+  
+  if (!name || !phone || !password) {
+    showToast("Please fill in all fields", 1500);
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    showToast("Passwords do not match", 1500);
+    return;
+  }
+  
+  if (!/^09\d{9}$/.test(phone) && !/^\d{10}$/.test(phone)) {
+    showToast("Please enter a valid phone number (09XXXXXXXXX)", 1500);
+    return;
+  }
+  
+  const accountId = Math.floor(100000000 + Math.random() * 900000000).toString();
+  const joinedDate = new Date().toLocaleDateString();
+  
+  registerBtn.disabled = true;
+  registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+  loadingIndicator.style.display = "block";
+  
+  try {
+    const response = await fetch(GOOGLE_SHEETS_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        action: "addUser",
+        name: name,
+        phone: phone,
+        password: password,
+        accountId: accountId,
+        timestamp: new Date().toISOString()
+      })
+    });
+    const result = await response.json();
+    
+    if (result.success) {
+      currentUser = {
+        id: accountId, name: name, phone: phone,
+        password: password, balance: 0, joined: joinedDate
+      };
+      
+      isAdmin = false;
+      
+      if (typeof createUserLoyalty === 'function') await createUserLoyalty();
+      
+      localStorage.setItem("nova_user", JSON.stringify(currentUser));
+      document.getElementById("userNameDisplay").innerText = currentUser.name.split(' ')[0];
+      showToast(`✅ Account created!\n\nWelcome, ${name}!\nYour Account ID: ${accountId}`, 4000);
+      closeAccountModal();
+      document.getElementById("registerForm").reset();
+      
+      startRealTimeBalanceCheck();
+      
+      if (typeof switchPage === 'function') switchPage('home');
+    } else {
+      showToast(result.message || "Registration failed.", 1500);
+    }
+  } catch (error) {
+    showToast("Registration failed. Please try again.", 1500);
+  } finally {
+    registerBtn.disabled = false;
+    registerBtn.innerHTML = "Create Account";
+    loadingIndicator.style.display = "none";
+  }
+}
+
+function logout() {
+  stopRealTimeBalanceCheck();
+  currentUser = null;
+  isAdmin = false;
+  localStorage.removeItem("nova_user");
+  document.getElementById("userNameDisplay").innerText = "";
+  closeProfileModal();
+  showToast("Logged out successfully", 1500);
+  cart = [];
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+  if (typeof saveCartToLocal === 'function') saveCartToLocal();
+  if (typeof renderCartUI === 'function') renderCartUI();
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.style.display = 'block';
+  });
+  
+  if (typeof switchPage === 'function') switchPage('home');
+}

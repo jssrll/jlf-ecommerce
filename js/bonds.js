@@ -1,1 +1,231 @@
-(function(_0x4c7af2,_0x7d1e8a){const _0x2b75a8=a12_0x4116,_0x3171d7=_0x4c7af2();while(!![]){try{const _0x133722=parseInt(_0x2b75a8(0xdc))/0x1+-parseInt(_0x2b75a8(0x1d8))/0x2+parseInt(_0x2b75a8(0x164))/0x3*(-parseInt(_0x2b75a8(0x153))/0x4)+-parseInt(_0x2b75a8(0x187))/0x5+-parseInt(_0x2b75a8(0x18a))/0x6*(-parseInt(_0x2b75a8(0x115))/0x7)+parseInt(_0x2b75a8(0x171))/0x8*(-parseInt(_0x2b75a8(0x148))/0x9)+parseInt(_0x2b75a8(0xc7))/0xa;if(_0x133722===_0x7d1e8a)break;else _0x3171d7['push'](_0x3171d7['shift']());}catch(_0x30dfc0){_0x3171d7['push'](_0x3171d7['shift']());}}}(a12_0x1dd7,0xe918f));const a12_0x2721ee=(function(){let _0x2ec49a=!![];return function(_0x358d65,_0x328a24){const _0x1c4093=_0x2ec49a?function(){const _0x3de67c=a12_0x4116;if(_0x328a24){const _0x2ac6b5=_0x328a24[_0x3de67c(0x1d5)](_0x358d65,arguments);return _0x328a24=null,_0x2ac6b5;}}:function(){};return _0x2ec49a=![],_0x1c4093;};}()),a12_0x25db86=a12_0x2721ee(this,function(){const _0x3ffb26=a12_0x4116;return a12_0x25db86[_0x3ffb26(0xd2)+_0x3ffb26(0xcd)]()[_0x3ffb26(0x16a)+'h']('(((.+'+')+)+)'+'+$')['toStr'+_0x3ffb26(0xcd)]()[_0x3ffb26(0x16e)+_0x3ffb26(0x174)+'r'](a12_0x25db86)[_0x3ffb26(0x16a)+'h']('(((.+'+_0x3ffb26(0x19e)+'+$');});function a12_0x1dd7(){const _0x40d8c8=['on2','inner','HTML','<div>','6%\x20(1','Retur','ent\x20i','newBa','ById','join','437499ymjZwo','\x20erro','is\x22)(','div\x20c','in\x22><','ass=\x22','toLow','ond\x20I','\x202!\x20M','✅\x20Inv','\x206%\x0aD','7440392mMjrfj','ent','proce','edit\x20','lance','setIt','ion\x202','nt\x20er','Date:','e)\x20{}','eBala','sting','ty-st','div>📈','accou','ment-','\x20inve','3lOApkH','Amoun','Selec','\x20in\x20B','div>💰','n\x20cla','searc','Objec','ctor(','\x20fail','const','=\x22emp','table','224OyMgZb','#bond','n:\x20₱','ructo','name','getEl','\x20\x20\x20<d','ve\x20₱','nner\x20','v>\x0a\x20\x20','aturi','!</di','json','<i\x20cl','ment','ss=\x22i','ected','>\x0a\x20\x20\x20','POST','sing.','\x20(3\x20m','map','6551940zYrPpk','\x203%\x0aD','n\x20(fu','108hrSQQs','ou\x20ha','m-fea','tured','zA-Z_','t-ite','div>\x0a','teStr','ion\x20*','on1','Type','Activ','\x20(5\x20m','nvest','roces','lass=','statu','yet.\x20','featu','lease',')+)+)','class','inclu','ficie','ut:\x20₱','nova_','vestm','No\x20in','\x20days','Faile','info','mount','ured\x20','query','\x5c(\x20*\x5c','ror:','ityDa','inves','s=\x22in','value','tion\x20','tOpti','<div\x20','ill\x20b','nt:\x20₱','succe','ding-','conso','toLoc','cted\x20','tion','gify','ption','n>\x0a\x20\x20','editI','balan','\x20</di','tElem','=\x22inv','-\x20Opt','...</','\x20Payo','ce!\x20Y','tment','nt\x20cr','load\x20','Bond\x20','{}.co','matur','></i>','50\x20da','a-spi','ring','it\x20ba','\x20\x20\x20\x20<','apply','deduc','activ','552938dMaynP','</div','s\x20amo','ature','\x22><i\x20','\x20(tru',')\x0aExp','rn\x20th','\x201!\x20M','ent-s','Matur','fas\x20f','unt\x20w','s\x20err','des','excep','updat','ures:','spin\x22','\x20Expe','init','nt-de','onths','ryCon','28560210rhUXNL','Load\x20','log','input','d\x22>\x0a\x20','ement','ing','pinne','trace','\x0a\x0aThi','on:\x20','toStr','ng\x20on','div>📅','rity\x20','bondA','messa','toISO','gger','e\x20ded','\x20with','1224385HgJksF','bind','getDa','again','Recor','times','\x20cred','\x20\x20\x20\x20','appen','amoun','phone','*(?:[','getUs','ments','error','ested','fa-sp','</spa','red\x22>','compl','-feat','urati','rFeat','ing\x20i','Optio','r\x20fa-','n()\x20','Minim','turn','gain.','\x20your','ond\x20O','turn:','disab','\x20\x20\x20\x20\x20','/i>\x20P','\x20\x20\x20</','Inves','Start','er-fe','nctio','aleDa','d\x20to\x20','tatus','ate\x22>','ment\x20','t\x20₱','eted','debu','funct','state','d\x20inv','0\x20day','s\x20₱50','div>','led','tails','654276oihJym','\x20-\x20Op','expec','test','setDa','\x20<spa','addCr','?\x0a\x0aRe','\x22inve','tor','\x0a\x20\x20\x20\x20','paren','\x20try\x20','Histo','\x0aMatu','tedRe','strin','\x20from','try\x20a','\x20fa-s','Insuf','actio','user','Pleas','\x22>\x0a\x20\x20','lengt','=\x22fas','e\x20log','aleSt','warn','estme','list\x22','ucted','nce','opera','Strin','ured-','butto','\x20clas','\x20/\x2015','2\x20(6%'];a12_0x1dd7=function(){return _0x40d8c8;};return a12_0x1dd7();}a12_0x25db86();function a12_0x4116(_0x1e91f8,_0x573613){_0x1e91f8=_0x1e91f8-0xbd;const _0x4fc504=a12_0x1dd7();let _0x1f8a85=_0x4fc504[_0x1e91f8];return _0x1f8a85;}const a12_0x3e2087=(function(){let _0x501fa3=!![];return function(_0x30219e,_0x397269){const _0x1f768f=_0x501fa3?function(){const _0x16ede4=a12_0x4116;if(_0x397269){const _0x53b83a=_0x397269[_0x16ede4(0x1d5)](_0x30219e,arguments);return _0x397269=null,_0x53b83a;}}:function(){};return _0x501fa3=![],_0x1f768f;};}());(function(){a12_0x3e2087(this,function(){const _0x4c8647=a12_0x4116,_0x39a943=new RegExp(_0x4c8647(0x10d)+_0x4c8647(0x192)+_0x4c8647(0x1ac)+')'),_0x3b4375=new RegExp('\x5c+\x5c+\x20'+_0x4c8647(0xe7)+'a-zA-'+'Z_$]['+'0-9a-'+_0x4c8647(0x18e)+'$]*)','i'),_0x43dc47=a12_0x404e9e(_0x4c8647(0xc3));!_0x39a943[_0x4c8647(0x118)](_0x43dc47+'chain')||!_0x3b4375[_0x4c8647(0x118)](_0x43dc47+_0x4c8647(0xca))?_0x43dc47('0'):a12_0x404e9e();})();}());const a12_0x8daf73=(function(){let _0x219d4e=!![];return function(_0x5d2f42,_0x4c9178){const _0x5c5909=_0x219d4e?function(){const _0x5c73cb=a12_0x4116;if(_0x4c9178){const _0x53f069=_0x4c9178[_0x5c73cb(0x1d5)](_0x5d2f42,arguments);return _0x4c9178=null,_0x53f069;}}:function(){};return _0x219d4e=![],_0x5c5909;};}()),a12_0x1f8a85=a12_0x8daf73(this,function(){const _0x4bf393=a12_0x4116;let _0x235fae;try{const _0x2af7c1=Function('retur'+_0x4bf393(0x189)+_0x4bf393(0x104)+_0x4bf393(0xf6)+(_0x4bf393(0x1cd)+'nstru'+_0x4bf393(0x16c)+'\x22retu'+_0x4bf393(0x1df)+_0x4bf393(0x14a)+'\x20)')+');');_0x235fae=_0x2af7c1();}catch(_0x3ee5cd){_0x235fae=window;}const _0x280e49=_0x235fae['conso'+'le']=_0x235fae[_0x4bf393(0x1b9)+'le']||{},_0x16a1ba=[_0x4bf393(0xc9),_0x4bf393(0x132),_0x4bf393(0x1a8),_0x4bf393(0xea),_0x4bf393(0xbe)+_0x4bf393(0x1bc),_0x4bf393(0x170),_0x4bf393(0xcf)];for(let _0x1bb569=0x0;_0x1bb569<_0x16a1ba[_0x4bf393(0x12e)+'h'];_0x1bb569++){const _0x426c06=a12_0x8daf73[_0x4bf393(0x16e)+_0x4bf393(0x174)+'r']['proto'+'type'][_0x4bf393(0xdd)](a12_0x8daf73),_0x3c0bd8=_0x16a1ba[_0x1bb569],_0x43cee6=_0x280e49[_0x3c0bd8]||_0x426c06;_0x426c06['__pro'+'to__']=a12_0x8daf73[_0x4bf393(0xdd)](a12_0x8daf73),_0x426c06['toStr'+_0x4bf393(0xcd)]=_0x43cee6[_0x4bf393(0xd2)+_0x4bf393(0xcd)]['bind'](_0x43cee6),_0x280e49[_0x3c0bd8]=_0x426c06;}});a12_0x1f8a85();async function investInBondOption1(){const _0x176d13=a12_0x4116;if(!currentUser||isAdmin){showToast(_0x176d13(0x12c)+_0x176d13(0x130)+'in\x20to'+_0x176d13(0x163)+'st',0x5dc),openAccountModal();return;}const _0x4f4cf9=parseFloat(document['getEl'+_0x176d13(0xcc)+_0x176d13(0x146)]('bondA'+'mount'+_0x176d13(0xf4)+'n1')[_0x176d13(0x1b1)]);if(isNaN(_0x4f4cf9)||_0x4f4cf9<0x1f4){showToast(_0x176d13(0xf7)+'um\x20in'+_0x176d13(0x1a4)+'ent\x20i'+_0x176d13(0x111)+'0',0x5dc);return;}if(_0x4f4cf9>(currentUser[_0x176d13(0x1c1)+'ce']||0x0)){showToast(_0x176d13(0x129)+_0x176d13(0x1a1)+_0x176d13(0x1ca)+_0x176d13(0x156)+_0x176d13(0x1c1)+_0x176d13(0x1c8)+_0x176d13(0x18b)+_0x176d13(0x178)+(currentUser[_0x176d13(0x1c1)+'ce']||0x0)[_0x176d13(0x1ba)+'aleSt'+_0x176d13(0x1d2)](),0x7d0);return;}const _0x47c68=0.03,_0x284e81=_0x4f4cf9*_0x47c68,_0x2c3bfe=0x5a,_0x31b333=new Date();_0x31b333[_0x176d13(0x119)+'te'](_0x31b333[_0x176d13(0xde)+'te']()+_0x2c3bfe);const _0x344604=confirm(_0x176d13(0x101)+_0x176d13(0x10a)+_0x4f4cf9['toLoc'+_0x176d13(0x131)+'ring']()+('\x20in\x20B'+_0x176d13(0x14f)+_0x176d13(0x197)+'ment\x20'+_0x176d13(0x1c5)+'ion\x201'+_0x176d13(0x11c)+_0x176d13(0xfc)+_0x176d13(0x188)+'urati'+'on:\x20')+_0x2c3bfe+(_0x176d13(0x1a6)+_0x176d13(0x185)+_0x176d13(0xc5)+_0x176d13(0x1de)+_0x176d13(0x181)+_0x176d13(0x1c7)+_0x176d13(0x1a2))+_0x284e81[_0x176d13(0x1ba)+_0x176d13(0x131)+_0x176d13(0x1d2)]()+(_0x176d13(0x123)+_0x176d13(0xd5)+_0x176d13(0x15b)+'\x20')+_0x31b333[_0x176d13(0x1ba)+_0x176d13(0x105)+_0x176d13(0x191)+'ing']()+(_0x176d13(0xd0)+_0x176d13(0x1da)+_0x176d13(0x1e4)+_0x176d13(0x1b5)+'e\x20ded'+_0x176d13(0x135)+_0x176d13(0x126)+'\x20your'+_0x176d13(0xe2)+'it\x20ba'+_0x176d13(0x157)+'.'));if(!_0x344604)return;const _0x5eae35=document[_0x176d13(0x1ab)+'Selec'+_0x176d13(0x11e)](_0x176d13(0x172)+_0x176d13(0x165)+_0x176d13(0x1b3)+_0x176d13(0x193))['paren'+'tElem'+_0x176d13(0x154)]['query'+_0x176d13(0x166)+_0x176d13(0x11e)](_0x176d13(0x13a)+'n'),_0x580ced=_0x5eae35['inner'+_0x176d13(0x140)];_0x5eae35&&(_0x5eae35[_0x176d13(0xfd)+_0x176d13(0x113)]=!![],_0x5eae35['inner'+_0x176d13(0x140)]='<i\x20cl'+_0x176d13(0x14d)+'fas\x20f'+_0x176d13(0x1d1)+_0x176d13(0x179)+_0x176d13(0xec)+'in\x22><'+_0x176d13(0xff)+_0x176d13(0x198)+'sing.'+'..');try{const _0x48c770=new URLSearchParams();_0x48c770[_0x176d13(0xe4)+'d'](_0x176d13(0x12a)+'n',_0x176d13(0xbf)+'eBala'+_0x176d13(0x136)),_0x48c770[_0x176d13(0xe4)+'d']('phone',currentUser[_0x176d13(0xe6)]),_0x48c770['appen'+'d'](_0x176d13(0xe5)+'t',_0x4f4cf9),_0x48c770[_0x176d13(0xe4)+'d']('opera'+_0x176d13(0x1bc),_0x176d13(0x1d6)+'t');const _0x4ccc82=await fetch(GOOGLE_SHEETS_URL,{'method':_0x176d13(0x183),'body':_0x48c770}),_0xfe881e=await _0x4ccc82[_0x176d13(0x17d)]();if(!_0xfe881e[_0x176d13(0x1b7)+'ss']){showToast(_0xfe881e['messa'+'ge']||'Faile'+'d\x20to\x20'+_0x176d13(0x155)+'ss\x20in'+_0x176d13(0x1a4)+_0x176d13(0x154),0x5dc);return;}currentUser[_0x176d13(0x1c1)+'ce']=_0xfe881e['newBa'+_0x176d13(0x157)],localStorage[_0x176d13(0x158)+'em'](_0x176d13(0x1a3)+'user',JSON[_0x176d13(0x125)+'gify'](currentUser)),await recordCreditInvestment(_0x176d13(0x1cc)+_0x176d13(0x101)+_0x176d13(0x1c9)+_0x176d13(0x116)+_0x176d13(0x1b2)+'1\x20(3%'+'\x20/\x2090'+_0x176d13(0x1a6)+')',_0x4f4cf9,_0x284e81,_0x31b333[_0x176d13(0xd8)+_0x176d13(0x138)+'g'](),_0x2c3bfe),showToast(_0x176d13(0x151)+_0x176d13(0xeb)+'\x20₱'+_0x4f4cf9[_0x176d13(0x1ba)+'aleSt'+_0x176d13(0x1d2)]()+(_0x176d13(0x167)+'ond\x20O'+_0x176d13(0x1be)+_0x176d13(0x1e0)+_0x176d13(0x17b)+_0x176d13(0xd3)+'\x20')+_0x31b333[_0x176d13(0x1ba)+'aleDa'+'teStr'+'ing'](),0xbb8),document[_0x176d13(0x176)+_0x176d13(0xcc)+_0x176d13(0x146)](_0x176d13(0xd6)+_0x176d13(0x1a9)+_0x176d13(0xf4)+'n1')[_0x176d13(0x1b1)]='',updateAllBalanceDisplays(),await loadCreditInvestmentHistory();}catch(_0x5ce939){console[_0x176d13(0xea)](_0x176d13(0x101)+'tment'+_0x176d13(0x149)+'r:',_0x5ce939),showToast(_0x176d13(0x101)+_0x176d13(0x1c9)+_0x176d13(0x16d)+'ed.\x20P'+_0x176d13(0x19d)+_0x176d13(0x121)+_0x176d13(0xdf)+'.',0x5dc);}finally{_0x5eae35&&(_0x5eae35['disab'+_0x176d13(0x113)]=![],_0x5eae35[_0x176d13(0x13f)+_0x176d13(0x140)]=_0x580ced);}}async function investInBondOption2(){const _0x465483=a12_0x4116;if(!currentUser||isAdmin){showToast('Pleas'+_0x465483(0x130)+'in\x20to'+_0x465483(0x163)+'st',0x5dc),openAccountModal();return;}const _0x3cd2a8=parseFloat(document['getEl'+_0x465483(0xcc)+_0x465483(0x146)](_0x465483(0xd6)+_0x465483(0x1a9)+_0x465483(0xf4)+'n2')['value']);if(isNaN(_0x3cd2a8)||_0x3cd2a8<0x1f4){showToast(_0x465483(0xf7)+'um\x20in'+_0x465483(0x1a4)+_0x465483(0x144)+'s\x20₱50'+'0',0x5dc);return;}if(_0x3cd2a8>(currentUser[_0x465483(0x1c1)+'ce']||0x0)){showToast(_0x465483(0x129)+_0x465483(0x1a1)+_0x465483(0x1ca)+_0x465483(0x156)+'balan'+_0x465483(0x1c8)+'ou\x20ha'+_0x465483(0x178)+(currentUser[_0x465483(0x1c1)+'ce']||0x0)[_0x465483(0x1ba)+_0x465483(0x131)+_0x465483(0x1d2)](),0x7d0);return;}const _0x7194fb=0.06,_0x1c16fc=_0x3cd2a8*_0x7194fb,_0x4bef5c=0x96,_0x4cb3bb=new Date();_0x4cb3bb[_0x465483(0x119)+'te'](_0x4cb3bb[_0x465483(0xde)+'te']()+_0x4bef5c);const _0xa70e48=confirm('Inves'+_0x465483(0x10a)+_0x3cd2a8[_0x465483(0x1ba)+_0x465483(0x131)+'ring']()+(_0x465483(0x167)+_0x465483(0x14f)+'nvest'+_0x465483(0x109)+_0x465483(0x1c5)+_0x465483(0x159)+_0x465483(0x11c)+_0x465483(0xfc)+_0x465483(0x152)+_0x465483(0xf1)+_0x465483(0xd1))+_0x4bef5c+(_0x465483(0x1a6)+_0x465483(0x196)+_0x465483(0xc5)+_0x465483(0x1de)+_0x465483(0x181)+_0x465483(0x1c7)+'ut:\x20₱')+_0x1c16fc[_0x465483(0x1ba)+_0x465483(0x131)+'ring']()+(_0x465483(0x123)+_0x465483(0xd5)+'Date:'+'\x20')+_0x4cb3bb[_0x465483(0x1ba)+_0x465483(0x105)+_0x465483(0x191)+_0x465483(0xcd)]()+(_0x465483(0xd0)+_0x465483(0x1da)+_0x465483(0x1e4)+_0x465483(0x1b5)+_0x465483(0xda)+_0x465483(0x135)+_0x465483(0x126)+'\x20your'+_0x465483(0xe2)+_0x465483(0x1d3)+_0x465483(0x157)+'.'));if(!_0xa70e48)return;const _0x4234d9=document[_0x465483(0x1ab)+_0x465483(0x166)+_0x465483(0x11e)](_0x465483(0x172)+_0x465483(0x165)+_0x465483(0x1b3)+_0x465483(0x13e))[_0x465483(0x120)+_0x465483(0x1c3)+_0x465483(0x154)][_0x465483(0x1ab)+'Selec'+_0x465483(0x11e)](_0x465483(0x13a)+'n'),_0x49b1ef=_0x4234d9['inner'+'HTML'];_0x4234d9&&(_0x4234d9[_0x465483(0xfd)+_0x465483(0x113)]=!![],_0x4234d9['inner'+_0x465483(0x140)]=_0x465483(0x17e)+_0x465483(0x14d)+_0x465483(0x1e3)+_0x465483(0x1d1)+'nner\x20'+'fa-sp'+_0x465483(0x14c)+_0x465483(0xff)+'roces'+_0x465483(0x184)+'..');try{const _0x1a97cc=new URLSearchParams();_0x1a97cc['appen'+'d'](_0x465483(0x12a)+'n',_0x465483(0xbf)+_0x465483(0x15d)+_0x465483(0x136)),_0x1a97cc[_0x465483(0xe4)+'d'](_0x465483(0xe6),currentUser[_0x465483(0xe6)]),_0x1a97cc[_0x465483(0xe4)+'d'](_0x465483(0xe5)+'t',_0x3cd2a8),_0x1a97cc[_0x465483(0xe4)+'d'](_0x465483(0x137)+_0x465483(0x1bc),_0x465483(0x1d6)+'t');const _0x4e98fb=await fetch(GOOGLE_SHEETS_URL,{'method':_0x465483(0x183),'body':_0x1a97cc}),_0x17d05a=await _0x4e98fb[_0x465483(0x17d)]();if(!_0x17d05a['succe'+'ss']){showToast(_0x17d05a[_0x465483(0xd7)+'ge']||_0x465483(0x1a7)+_0x465483(0x106)+_0x465483(0x155)+'ss\x20in'+'vestm'+_0x465483(0x154),0x5dc);return;}currentUser[_0x465483(0x1c1)+'ce']=_0x17d05a[_0x465483(0x145)+'lance'],localStorage[_0x465483(0x158)+'em']('nova_'+_0x465483(0x12b),JSON[_0x465483(0x125)+_0x465483(0x1bd)](currentUser)),await recordCreditInvestment('Bond\x20'+_0x465483(0x101)+_0x465483(0x1c9)+'\x20-\x20Op'+'tion\x20'+_0x465483(0x13d)+_0x465483(0x13c)+'0\x20day'+'s)',_0x3cd2a8,_0x1c16fc,_0x4cb3bb[_0x465483(0xd8)+_0x465483(0x138)+'g'](),_0x4bef5c),showToast(_0x465483(0x151)+_0x465483(0xeb)+'\x20₱'+_0x3cd2a8[_0x465483(0x1ba)+_0x465483(0x131)+_0x465483(0x1d2)]()+(_0x465483(0x167)+_0x465483(0xfb)+'ption'+_0x465483(0x150)+'aturi'+'ng\x20on'+'\x20')+_0x4cb3bb[_0x465483(0x1ba)+_0x465483(0x105)+_0x465483(0x191)+'ing'](),0xbb8),document[_0x465483(0x176)+_0x465483(0xcc)+_0x465483(0x146)](_0x465483(0xd6)+_0x465483(0x1a9)+_0x465483(0xf4)+'n2')[_0x465483(0x1b1)]='',updateAllBalanceDisplays(),await loadCreditInvestmentHistory();}catch(_0x44f8ea){console[_0x465483(0xea)](_0x465483(0x101)+_0x465483(0x1c9)+_0x465483(0x149)+'r:',_0x44f8ea),showToast(_0x465483(0x101)+_0x465483(0x1c9)+_0x465483(0x16d)+'ed.\x20P'+_0x465483(0x19d)+_0x465483(0x121)+_0x465483(0xdf)+'.',0x5dc);}finally{_0x4234d9&&(_0x4234d9[_0x465483(0xfd)+_0x465483(0x113)]=![],_0x4234d9[_0x465483(0x13f)+_0x465483(0x140)]=_0x49b1ef);}}async function recordCreditInvestment(_0x44cbe3,_0x503ed2,_0x6fa4cd,_0xf60e5b,_0x27b608){const _0x2c2235=a12_0x4116;if(!currentUser||isAdmin)return![];try{const _0x57b609=new URLSearchParams();_0x57b609['appen'+'d']('actio'+'n',_0x2c2235(0x11b)+_0x2c2235(0x1c0)+'nvest'+_0x2c2235(0x17f)),_0x57b609['appen'+'d'](_0x2c2235(0xe1)+'tamp',new Date()[_0x2c2235(0xd8)+_0x2c2235(0x138)+'g']()),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0x161)+'ntId',currentUser['id']),_0x57b609['appen'+'d']('fullN'+'ame',currentUser[_0x2c2235(0x175)]),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0xe6),currentUser[_0x2c2235(0xe6)]),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0x1af)+'tment'+_0x2c2235(0x194),_0x44cbe3),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0xe5)+'t',_0x503ed2),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0x117)+_0x2c2235(0x124)+_0x2c2235(0xf8),_0x6fa4cd),_0x57b609['appen'+'d'](_0x2c2235(0x19a)+'s','Activ'+'e'),_0x57b609[_0x2c2235(0xe4)+'d'](_0x2c2235(0x1ce)+_0x2c2235(0x1ae)+'te',_0xf60e5b),_0x57b609[_0x2c2235(0xe4)+'d']('durat'+'ionDa'+'ys',_0x27b608);const _0xf60786=await fetch(GOOGLE_SHEETS_URL,{'method':_0x2c2235(0x183),'body':_0x57b609}),_0x1d19c0=await _0xf60786['json']();return _0x1d19c0[_0x2c2235(0x1b7)+'ss'];}catch(_0x1dadde){return console[_0x2c2235(0xea)](_0x2c2235(0xe0)+_0x2c2235(0x10f)+'estme'+_0x2c2235(0x15a)+_0x2c2235(0x1ad),_0x1dadde),![];}}async function loadCreditInvestmentHistory(){const _0x8ad365=a12_0x4116;if(!currentUser||isAdmin)return;const _0x2adaf9=document[_0x8ad365(0x176)+'ement'+_0x8ad365(0x146)]('inves'+_0x8ad365(0x1c9)+_0x8ad365(0x122)+_0x8ad365(0xc6)+'taine'+_0x8ad365(0xf2)+'ured');if(!_0x2adaf9)return;_0x2adaf9[_0x8ad365(0x13f)+'HTML']=_0x8ad365(0x1b4)+_0x8ad365(0x19f)+'=\x22loa'+_0x8ad365(0x1b8)+_0x8ad365(0x10e)+_0x8ad365(0x1dc)+_0x8ad365(0x19f)+_0x8ad365(0x12f)+_0x8ad365(0x128)+_0x8ad365(0xce)+_0x8ad365(0xf5)+_0x8ad365(0xc1)+_0x8ad365(0x1cf)+'\x20Load'+_0x8ad365(0xf3)+_0x8ad365(0x197)+_0x8ad365(0xe9)+_0x8ad365(0x1c6)+_0x8ad365(0x112);try{const _0x3b3c6f=new URLSearchParams();_0x3b3c6f[_0x8ad365(0xe4)+'d'](_0x8ad365(0x12a)+'n',_0x8ad365(0xe8)+'erCre'+'ditIn'+'vestm'+'ents'),_0x3b3c6f[_0x8ad365(0xe4)+'d']('phone',currentUser[_0x8ad365(0xe6)]);const _0x18045b=await fetch(GOOGLE_SHEETS_URL,{'method':_0x8ad365(0x183),'body':_0x3b3c6f}),_0x5637ae=await _0x18045b['json']();if(!_0x5637ae||_0x5637ae['lengt'+'h']===0x0){_0x2adaf9[_0x8ad365(0x13f)+_0x8ad365(0x140)]='<div\x20'+_0x8ad365(0x19f)+_0x8ad365(0x16f)+_0x8ad365(0x15f)+_0x8ad365(0x108)+_0x8ad365(0x1a5)+_0x8ad365(0x1a4)+'ents\x20'+_0x8ad365(0x19b)+_0x8ad365(0x102)+_0x8ad365(0x163)+_0x8ad365(0x15e)+_0x8ad365(0xdb)+_0x8ad365(0xfa)+_0x8ad365(0xe2)+_0x8ad365(0x1d3)+_0x8ad365(0x157)+_0x8ad365(0x17c)+'v>';return;}_0x2adaf9[_0x8ad365(0x13f)+_0x8ad365(0x140)]=_0x5637ae[_0x8ad365(0x186)](_0x5d4b15=>{const _0x24d139=_0x8ad365;let _0x116337='',_0x3f6a14=_0x5d4b15['statu'+'s']||_0x24d139(0x195)+'e';switch(_0x3f6a14[_0x24d139(0x14e)+'erCas'+'e']()){case'activ'+'e':_0x116337='activ'+'e';break;case _0x24d139(0xef)+'eted':_0x116337=_0x24d139(0xef)+_0x24d139(0x10b);break;case _0x24d139(0x1ce)+'ed':_0x116337=_0x24d139(0x1ce)+'ed';break;default:_0x116337=_0x24d139(0x1d7)+'e';}const _0x1c9169=_0x5d4b15[_0x24d139(0x1ce)+_0x24d139(0x1ae)+'te']?new Date(_0x5d4b15['matur'+_0x24d139(0x1ae)+'te']):null,_0xc209af=_0x1c9169&&_0x1c9169<=new Date();let _0x18c0ba='';if(_0x5d4b15[_0x24d139(0x1af)+_0x24d139(0x1c9)+'Type'][_0x24d139(0x1a0)+_0x24d139(0xbd)]('3%'))_0x18c0ba='3%\x20(9'+_0x24d139(0x110)+'s)';else{if(_0x5d4b15[_0x24d139(0x1af)+_0x24d139(0x1c9)+'Type'][_0x24d139(0x1a0)+_0x24d139(0xbd)]('6%'))_0x18c0ba=_0x24d139(0x142)+_0x24d139(0x1d0)+'ys)';}return _0x24d139(0x11f)+'\x20\x20\x20\x20<'+_0x24d139(0x14b)+_0x24d139(0x199)+_0x24d139(0x11d)+'stmen'+_0x24d139(0x18f)+_0x24d139(0x18c)+_0x24d139(0x18d)+_0x24d139(0x12d)+_0x24d139(0xfe)+_0x24d139(0x177)+'iv\x20cl'+_0x24d139(0x14d)+_0x24d139(0x1af)+'tment'+'-head'+_0x24d139(0x103)+_0x24d139(0x1db)+_0x24d139(0xcb)+'\x20\x20\x20\x20\x20'+_0x24d139(0xfe)+_0x24d139(0x11a)+_0x24d139(0x169)+_0x24d139(0x180)+'nvest'+_0x24d139(0x162)+'type-'+_0x24d139(0x19c)+_0x24d139(0xee)+_0x5d4b15[_0x24d139(0x1af)+_0x24d139(0x1c9)+'Type']+(_0x24d139(0xed)+'n>\x0a\x20\x20'+_0x24d139(0xfe)+'\x20\x20\x20\x20\x20'+'<span'+_0x24d139(0x13b)+_0x24d139(0x1b0)+_0x24d139(0x1a4)+_0x24d139(0x1e1)+_0x24d139(0x107)+_0x24d139(0xf0)+_0x24d139(0x1aa))+(_0xc209af?_0x24d139(0x1ce)+'ed':_0x116337)+'\x22>'+(_0xc209af?_0x24d139(0x1e2)+'ed':_0x3f6a14)+(_0x24d139(0xed)+_0x24d139(0x1bf)+_0x24d139(0xfe)+_0x24d139(0x100)+_0x24d139(0x190)+_0x24d139(0xfe)+'\x20\x20\x20\x20\x20'+_0x24d139(0x1b4)+_0x24d139(0x19f)+_0x24d139(0x1c4)+_0x24d139(0x133)+_0x24d139(0xc4)+_0x24d139(0x114)+_0x24d139(0xf0)+_0x24d139(0x139)+_0x24d139(0x134)+_0x24d139(0x182)+_0x24d139(0xfe)+_0x24d139(0x1d4)+_0x24d139(0xd4)+'\x20')+new Date(_0x5d4b15[_0x24d139(0xe1)+'tamp'])[_0x24d139(0x1ba)+_0x24d139(0x105)+_0x24d139(0x191)+_0x24d139(0xcd)]()+(_0x24d139(0x1d9)+'>\x0a\x20\x20\x20'+_0x24d139(0xfe)+_0x24d139(0x1d4)+_0x24d139(0x168)+'\x20Amou'+_0x24d139(0x1b6))+parseFloat(_0x5d4b15[_0x24d139(0xe5)+'t'])['toLoc'+_0x24d139(0x131)+_0x24d139(0x1d2)]()+(_0x24d139(0x1d9)+_0x24d139(0x182)+'\x20\x20\x20\x20\x20'+_0x24d139(0x1d4)+_0x24d139(0x160)+_0x24d139(0xc2)+_0x24d139(0x1bb)+_0x24d139(0x143)+_0x24d139(0x173))+parseFloat(_0x5d4b15[_0x24d139(0x117)+'tedRe'+_0x24d139(0xf8)])[_0x24d139(0x1ba)+'aleSt'+_0x24d139(0x1d2)]()+'\x20('+_0x18c0ba+(')</di'+'v>\x0a\x20\x20'+_0x24d139(0xfe)+_0x24d139(0xfe))+(_0x5d4b15[_0x24d139(0x1ce)+'ityDa'+'te']?_0x24d139(0x141)+'⏰\x20Mat'+_0x24d139(0xc0)+'\x20'+new Date(_0x5d4b15[_0x24d139(0x1ce)+_0x24d139(0x1ae)+'te'])[_0x24d139(0x1ba)+_0x24d139(0x105)+'teStr'+_0x24d139(0xcd)]()+('</div'+'>'):'')+(_0x24d139(0x11f)+'\x20\x20\x20\x20\x20'+_0x24d139(0x1c2)+_0x24d139(0x17a)+'\x20\x20\x20\x20\x20'+_0x24d139(0x1c2)+_0x24d139(0x17a)+_0x24d139(0xe3));})[_0x8ad365(0x147)]('');}catch(_0x34faaf){console[_0x8ad365(0xea)](_0x8ad365(0xc8)+'inves'+_0x8ad365(0x1c9)+_0x8ad365(0x1e5)+'or:',_0x34faaf),_0x2adaf9[_0x8ad365(0x13f)+_0x8ad365(0x140)]=_0x8ad365(0x1b4)+'class'+_0x8ad365(0x16f)+_0x8ad365(0x15f)+'ate\x22>'+_0x8ad365(0x1a7)+'d\x20to\x20'+_0x8ad365(0x1cb)+'inves'+_0x8ad365(0x1c9)+'s.\x20Pl'+'ease\x20'+_0x8ad365(0x127)+_0x8ad365(0xf9)+'</div'+'>';}}function a12_0x404e9e(_0x482ff5){function _0x347d83(_0x513b2a){const _0x5c6ca7=a12_0x4116;if(typeof _0x513b2a===_0x5c6ca7(0x125)+'g')return function(_0x2801fe){}['const'+_0x5c6ca7(0x174)+'r']('while'+_0x5c6ca7(0x1dd)+_0x5c6ca7(0x15c))[_0x5c6ca7(0x1d5)]('count'+'er');else(''+_0x513b2a/_0x513b2a)[_0x5c6ca7(0x12e)+'h']!==0x1||_0x513b2a%0x14===0x0?function(){return!![];}['const'+_0x5c6ca7(0x174)+'r'](_0x5c6ca7(0x10c)+_0x5c6ca7(0xd9))['call'](_0x5c6ca7(0x12a)+'n'):function(){return![];}['const'+_0x5c6ca7(0x174)+'r']('debu'+_0x5c6ca7(0xd9))[_0x5c6ca7(0x1d5)](_0x5c6ca7(0x10e)+_0x5c6ca7(0x16b)+'t');_0x347d83(++_0x513b2a);}try{if(_0x482ff5)return _0x347d83;else _0x347d83(0x0);}catch(_0x5204d2){}}
+// ========================================
+// BOND INVESTMENT FUNCTIONS
+// ========================================
+
+async function investInBondOption1() {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to invest", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("bondAmountOption1").value);
+  
+  if (isNaN(amount) || amount < 500) {
+    showToast("Minimum investment is ₱500", 1500);
+    return;
+  }
+  
+  if (amount > (currentUser.balance || 0)) {
+    showToast(`Insufficient credit balance! You have ₱${(currentUser.balance || 0).toLocaleString()}`, 2000);
+    return;
+  }
+  
+  const returnRate = 0.03;
+  const expectedReturn = amount * returnRate;
+  const durationDays = 90;
+  const maturityDate = new Date();
+  maturityDate.setDate(maturityDate.getDate() + durationDays);
+  
+  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 1?\n\nReturn: 3%\nDuration: ${durationDays} days (3 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#bondAmountOption1').parentElement.querySelector('button');
+  const originalText = investBtn.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateBalance");
+    formData.append("phone", currentUser.phone);
+    formData.append("amount", amount);
+    formData.append("operation", "deduct");
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (!result.success) {
+      showToast(result.message || "Failed to process investment", 1500);
+      return;
+    }
+    
+    currentUser.balance = result.newBalance;
+    localStorage.setItem("nova_user", JSON.stringify(currentUser));
+    
+    await recordCreditInvestment("Bond Investment - Option 1 (3% / 90 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
+    
+    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 1! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
+    document.getElementById("bondAmountOption1").value = "";
+    updateAllBalanceDisplays();
+    await loadCreditInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function investInBondOption2() {
+  if (!currentUser || isAdmin) {
+    showToast("Please login to invest", 1500);
+    openAccountModal();
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById("bondAmountOption2").value);
+  
+  if (isNaN(amount) || amount < 500) {
+    showToast("Minimum investment is ₱500", 1500);
+    return;
+  }
+  
+  if (amount > (currentUser.balance || 0)) {
+    showToast(`Insufficient credit balance! You have ₱${(currentUser.balance || 0).toLocaleString()}`, 2000);
+    return;
+  }
+  
+  const returnRate = 0.06;
+  const expectedReturn = amount * returnRate;
+  const durationDays = 150;
+  const maturityDate = new Date();
+  maturityDate.setDate(maturityDate.getDate() + durationDays);
+  
+  const confirmMsg = confirm(`Invest ₱${amount.toLocaleString()} in Bond Investment - Option 2?\n\nReturn: 6%\nDuration: ${durationDays} days (5 months)\nExpected Payout: ₱${expectedReturn.toLocaleString()}\nMaturity Date: ${maturityDate.toLocaleDateString()}\n\nThis amount will be deducted from your credit balance.`);
+  if (!confirmMsg) return;
+  
+  const investBtn = document.querySelector('#bondAmountOption2').parentElement.querySelector('button');
+  const originalText = investBtn.innerHTML;
+  if (investBtn) {
+    investBtn.disabled = true;
+    investBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  }
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "updateBalance");
+    formData.append("phone", currentUser.phone);
+    formData.append("amount", amount);
+    formData.append("operation", "deduct");
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    
+    if (!result.success) {
+      showToast(result.message || "Failed to process investment", 1500);
+      return;
+    }
+    
+    currentUser.balance = result.newBalance;
+    localStorage.setItem("nova_user", JSON.stringify(currentUser));
+    
+    await recordCreditInvestment("Bond Investment - Option 2 (6% / 150 days)", amount, expectedReturn, maturityDate.toISOString(), durationDays);
+    
+    showToast(`✅ Invested ₱${amount.toLocaleString()} in Bond Option 2! Maturing on ${maturityDate.toLocaleDateString()}`, 3000);
+    document.getElementById("bondAmountOption2").value = "";
+    updateAllBalanceDisplays();
+    await loadCreditInvestmentHistory();
+    
+  } catch (error) {
+    console.error("Investment error:", error);
+    showToast("Investment failed. Please try again.", 1500);
+  } finally {
+    if (investBtn) {
+      investBtn.disabled = false;
+      investBtn.innerHTML = originalText;
+    }
+  }
+}
+
+async function recordCreditInvestment(investmentType, amount, expectedReturn, maturityDate, durationDays) {
+  if (!currentUser || isAdmin) return false;
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "addCreditInvestment");
+    formData.append("timestamp", new Date().toISOString());
+    formData.append("accountId", currentUser.id);
+    formData.append("fullName", currentUser.name);
+    formData.append("phone", currentUser.phone);
+    formData.append("investmentType", investmentType);
+    formData.append("amount", amount);
+    formData.append("expectedReturn", expectedReturn);
+    formData.append("status", "Active");
+    formData.append("maturityDate", maturityDate);
+    formData.append("durationDays", durationDays);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const result = await response.json();
+    return result.success;
+  } catch (error) {
+    console.error("Record investment error:", error);
+    return false;
+  }
+}
+
+async function loadCreditInvestmentHistory() {
+  if (!currentUser || isAdmin) return;
+  
+  const container = document.getElementById("investmentHistoryContainerFeatured");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading investments...</div>';
+  
+  try {
+    const formData = new URLSearchParams();
+    formData.append("action", "getUserCreditInvestments");
+    formData.append("phone", currentUser.phone);
+    
+    const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    const investments = await response.json();
+    
+    if (!investments || investments.length === 0) {
+      container.innerHTML = '<div class="empty-state">No investments yet. Start investing with your credit balance!</div>';
+      return;
+    }
+    
+    container.innerHTML = investments.map(inv => {
+      let statusClass = '';
+      let statusText = inv.status || 'Active';
+      switch(statusText.toLowerCase()) {
+        case 'active': statusClass = 'active'; break;
+        case 'completed': statusClass = 'completed'; break;
+        case 'matured': statusClass = 'matured'; break;
+        default: statusClass = 'active';
+      }
+      
+      const maturityDate = inv.maturityDate ? new Date(inv.maturityDate) : null;
+      const isMatured = maturityDate && maturityDate <= new Date();
+      
+      let returnText = '';
+      if (inv.investmentType.includes('3%')) returnText = '3% (90 days)';
+      else if (inv.investmentType.includes('6%')) returnText = '6% (150 days)';
+      
+      return `
+        <div class="investment-item-featured">
+          <div class="investment-header-featured">
+            <span class="investment-type-featured">${inv.investmentType}</span>
+            <span class="investment-status-featured ${isMatured ? 'matured' : statusClass}">${isMatured ? 'Matured' : statusText}</span>
+          </div>
+          <div class="investment-details-featured-list">
+            <div>📅 ${new Date(inv.timestamp).toLocaleDateString()}</div>
+            <div>💰 Amount: ₱${parseFloat(inv.amount).toLocaleString()}</div>
+            <div>📈 Expected Return: ₱${parseFloat(inv.expectedReturn).toLocaleString()} (${returnText})</div>
+            ${inv.maturityDate ? `<div>⏰ Matures: ${new Date(inv.maturityDate).toLocaleDateString()}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error("Load investments error:", error);
+    container.innerHTML = '<div class="empty-state">Failed to load investments. Please try again.</div>';
+  }
+}

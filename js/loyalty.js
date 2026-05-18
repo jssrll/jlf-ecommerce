@@ -1,1 +1,362 @@
-(function(_0x4be5c5,_0x14fb3b){const _0x105bd0=a19_0x437e,_0x39c58e=_0x4be5c5();while(!![]){try{const _0xc618cc=parseInt(_0x105bd0(0x266))/0x1+parseInt(_0x105bd0(0x2ef))/0x2*(parseInt(_0x105bd0(0x2c6))/0x3)+parseInt(_0x105bd0(0x2c0))/0x4+-parseInt(_0x105bd0(0x328))/0x5+parseInt(_0x105bd0(0x2b4))/0x6*(parseInt(_0x105bd0(0x1f9))/0x7)+-parseInt(_0x105bd0(0x261))/0x8*(-parseInt(_0x105bd0(0x2c8))/0x9)+parseInt(_0x105bd0(0x1ff))/0xa*(-parseInt(_0x105bd0(0x29c))/0xb);if(_0xc618cc===_0x14fb3b)break;else _0x39c58e['push'](_0x39c58e['shift']());}catch(_0x599205){_0x39c58e['push'](_0x39c58e['shift']());}}}(a19_0x360e,0xa584a));const a19_0x3f93c7=(function(){let _0xf85295=!![];return function(_0x4fd48b,_0x2f5877){const _0x5caaa0=_0xf85295?function(){if(_0x2f5877){const _0x2db7ec=_0x2f5877['apply'](_0x4fd48b,arguments);return _0x2f5877=null,_0x2db7ec;}}:function(){};return _0xf85295=![],_0x5caaa0;};}()),a19_0x3d5bba=a19_0x3f93c7(this,function(){const _0x4841fc=a19_0x437e;return a19_0x3d5bba['toStr'+_0x4841fc(0x2f4)]()[_0x4841fc(0x22d)+'h'](_0x4841fc(0x2e3)+')+)+)'+'+$')[_0x4841fc(0x1ef)+_0x4841fc(0x2f4)]()[_0x4841fc(0x2fd)+'ructo'+'r'](a19_0x3d5bba)[_0x4841fc(0x22d)+'h'](_0x4841fc(0x2e3)+_0x4841fc(0x303)+'+$');});a19_0x3d5bba();const a19_0x318d17=(function(){let _0x625452=!![];return function(_0x8c920f,_0x48f41e){const _0x201a26=_0x625452?function(){const _0x16c9b8=a19_0x437e;if(_0x48f41e){const _0x5b21d6=_0x48f41e[_0x16c9b8(0x2a6)](_0x8c920f,arguments);return _0x48f41e=null,_0x5b21d6;}}:function(){};return _0x625452=![],_0x201a26;};}());(function(){a19_0x318d17(this,function(){const _0x552549=a19_0x437e,_0x3c2648=new RegExp('funct'+'ion\x20*'+_0x552549(0x323)+')'),_0x43ca89=new RegExp(_0x552549(0x2d5)+_0x552549(0x2d7)+_0x552549(0x31f)+_0x552549(0x283)+_0x552549(0x241)+'zA-Z_'+_0x552549(0x340),'i'),_0xe48dc0=a19_0x47414a('init');!_0x3c2648[_0x552549(0x32f)](_0xe48dc0+_0x552549(0x20c))||!_0x43ca89['test'](_0xe48dc0+'input')?_0xe48dc0('0'):a19_0x47414a();})();}());const a19_0x54266c=(function(){let _0x253371=!![];return function(_0x4a39c0,_0x1fc9e8){const _0x367cd8=_0x253371?function(){if(_0x1fc9e8){const _0x1af338=_0x1fc9e8['apply'](_0x4a39c0,arguments);return _0x1fc9e8=null,_0x1af338;}}:function(){};return _0x253371=![],_0x367cd8;};}()),a19_0x23bf6d=a19_0x54266c(this,function(){const _0x28b669=a19_0x437e,_0xa1672e=function(){const _0x3e18e0=a19_0x437e;let _0x206c06;try{_0x206c06=Function('retur'+'n\x20(fu'+_0x3e18e0(0x299)+_0x3e18e0(0x330)+(_0x3e18e0(0x1f4)+_0x3e18e0(0x337)+_0x3e18e0(0x2db)+_0x3e18e0(0x2a1)+_0x3e18e0(0x317)+_0x3e18e0(0x1fc)+'\x20)')+');')();}catch(_0x31e766){_0x206c06=window;}return _0x206c06;},_0xf95405=_0xa1672e(),_0x3c5ffc=_0xf95405[_0x28b669(0x2f5)+'le']=_0xf95405['conso'+'le']||{},_0x7dada7=['log','warn',_0x28b669(0x288),_0x28b669(0x341),'excep'+'tion',_0x28b669(0x240),_0x28b669(0x22b)];for(let _0x1102ab=0x0;_0x1102ab<_0x7dada7[_0x28b669(0x321)+'h'];_0x1102ab++){const _0x5b9df3=a19_0x54266c['const'+_0x28b669(0x220)+'r'][_0x28b669(0x25f)+'type']['bind'](a19_0x54266c),_0x58a69c=_0x7dada7[_0x1102ab],_0x3eeacf=_0x3c5ffc[_0x58a69c]||_0x5b9df3;_0x5b9df3[_0x28b669(0x2de)+_0x28b669(0x312)]=a19_0x54266c['bind'](a19_0x54266c),_0x5b9df3[_0x28b669(0x1ef)+'ing']=_0x3eeacf['toStr'+_0x28b669(0x2f4)][_0x28b669(0x316)](_0x3eeacf),_0x3c5ffc[_0x58a69c]=_0x5b9df3;}});a19_0x23bf6d();async function generateUserQRCode(){const _0xe84ab0=a19_0x437e;if(!currentUser||isAdmin)return;const _0x5bcb47=document['getEl'+_0xe84ab0(0x237)+'ById'](_0xe84ab0(0x30f)+_0xe84ab0(0x32c)+'ainer');if(!_0x5bcb47)return;const _0xd307bf=currentUser['id']+'_'+currentUser[_0xe84ab0(0x310)];_0x5bcb47[_0xe84ab0(0x2fc)+_0xe84ab0(0x224)]='';try{if(typeof QRCode!=='undef'+_0xe84ab0(0x25d))new QRCode(_0x5bcb47,{'text':_0xd307bf,'width':0xb4,'height':0xb4,'colorDark':_0xe84ab0(0x347)+'1f','colorLight':_0xe84ab0(0x2b9)+'ff','correctLevel':QRCode[_0xe84ab0(0x265)+'ctLev'+'el']['H']});else{const _0x5d3d91='https'+_0xe84ab0(0x1fd)+'art.g'+_0xe84ab0(0x200)+'apis.'+_0xe84ab0(0x209)+_0xe84ab0(0x1f7)+_0xe84ab0(0x2bb)+'80x18'+_0xe84ab0(0x269)+_0xe84ab0(0x24a)+_0xe84ab0(0x207)+encodeURIComponent(_0xd307bf)+(_0xe84ab0(0x2ee)+'=UTF-'+'8');_0x5bcb47['inner'+_0xe84ab0(0x224)]=_0xe84ab0(0x278)+_0xe84ab0(0x1f2)+_0x5d3d91+(_0xe84ab0(0x2c9)+_0xe84ab0(0x27e)+_0xe84ab0(0x33b)+_0xe84ab0(0x23f)+_0xe84ab0(0x1fe)+_0xe84ab0(0x22f)+'80px;'+_0xe84ab0(0x284)+_0xe84ab0(0x1f5)+_0xe84ab0(0x2bc));}}catch(_0x3f8269){console[_0xe84ab0(0x341)](_0xe84ab0(0x255)+_0xe84ab0(0x263)+_0xe84ab0(0x286)+_0xe84ab0(0x274),_0x3f8269),_0x5bcb47[_0xe84ab0(0x2fc)+_0xe84ab0(0x224)]='<div\x20'+_0xe84ab0(0x1eb)+_0xe84ab0(0x1ec)+_0xe84ab0(0x24f)+_0xe84ab0(0x31b)+_0xe84ab0(0x2ff)+'gener'+_0xe84ab0(0x24b)+'\x20QR\x20c'+'ode</'+_0xe84ab0(0x201);}}async function loadUserLoyalty(){const _0x4771a5=a19_0x437e;if(!currentUser||isAdmin)return;try{const _0x3c57f5=await fetch(GOOGLE_SHEETS_URL+('?acti'+_0x4771a5(0x30a)+'tUser'+_0x4771a5(0x208)+_0x4771a5(0x22e)+_0x4771a5(0x2f6))+currentUser['phone']),_0x4fb290=await _0x3c57f5['json']();let _0x174bec=0x0;if(_0x4fb290[_0x4771a5(0x306)+'ss']&&_0x4fb290['marks']!==undefined)_0x174bec=_0x4fb290[_0x4771a5(0x25c)];else{const _0x2bdeac=await fetch(GOOGLE_SHEETS_URL+(_0x4771a5(0x291)+_0x4771a5(0x342)+_0x4771a5(0x315)+_0x4771a5(0x2d9)+_0x4771a5(0x228)+_0x4771a5(0x310)+'=')+currentUser[_0x4771a5(0x310)]),_0x16d654=await _0x2bdeac['json']();!_0x16d654[_0x4771a5(0x223)+'s']?(await createUserLoyalty(),_0x174bec=0x0):_0x174bec=_0x16d654['marks']||0x0;}return updateLoyaltyDisplay(_0x174bec),_0x174bec;}catch(_0x28ded7){return console['error'](_0x4771a5(0x296)+'loyal'+_0x4771a5(0x2a8)+_0x4771a5(0x2f3),_0x28ded7),0x0;}}function a19_0x437e(_0x36b815,_0x2a3a10){_0x36b815=_0x36b815-0x1e9;const _0x4f56b9=a19_0x360e();let _0x23bf6d=_0x4f56b9[_0x36b815];return _0x23bf6d;}function a19_0x360e(){const _0x53e978=['{}.co','t:180','p><st','hart?','s\x22>\x0a\x20','3410736KkGdnC','sult\x20','ById','is\x22)(','://ch','e=\x22wi','10yEXXGc','oogle','div>','map','URL','targe','d\x20cla','gger','hl=','Loyal','com/c','a-gif','getUs','chain','cent\x20','>\x0a\x20\x20\x20','eache','acks','actio','p>\x0a\x20\x20','count','ase\x20c','rgba(','files','=\x22loa','scan-','ject','=\x22emp','Objec','toDat','\x20\x20</d','Creat','essin','ructo','tamp','s=\x22sc','exist','HTML','eUser','/div>','rBtn','alty&','\x0a\x20\x20\x20\x20','\x20\x20\x20\x20\x20','trace','\x27ve\x20r','searc','ty&ph','dth:1','Scan','r\x20fa-','accou','tyMar','can-s','sData','sCont','ement','newMa','im\x20yo','ul!</','\x20\x20\x20<d','scans','conta','eElem','\x20styl','table','0-9a-','qrSca','e\x20loy','=\x22loy','Width','!\x20Cla','can-h','src','pinne','=qr&c','ating','\x20<div','nd.','Camer','loadi','getIm','ntext','ageDa','/png','start','QR\x20ge','empty','entLi','\x20libr','tRece','appen','getEl','marks','ined','json','proto','\x20Load','1928nEDLTz','faile','nerat','e-blo','Corre','1200471lCRYWz','width','List','0&cht','\x20\x20<p>','<p>Ne','messa','iv\x20cl','ty-st','iv>\x0a\x20','Strin','times','onmen','</i>\x20','rror:','name','.\x20Ple','ksCon','<img\x20','onloa','d\x2012\x20','g\x20sca','\x22><i\x20','total','=\x22QR\x20','QrSca','ass=\x22','ns&li','<p>Ph','Z_$][','heigh','Canno','ion\x20e','t\x20acc','info','ame','\x20scan','profi','g></p','click','ard!\x20','qrVid','erBtn','?acti','t\x22></','User:','recen','stene','Load\x20','resul','fas\x20f','nctio','dClai','then','26636621ZrcEQt','catch','n\x20Suc','mage','gain.','\x22retu','eInpu','Heigh','video','story','apply','edBy','ty\x20er','=\x22fas','debu','v\x20cla','\x20\x20\x20\x20<','d\x20to\x20','amera','earne','istor','ntId','cessf','canva','6RamGbi','alty\x20','or:','255,2','d\x20in\x20','#ffff','rks','chs=1','px;\x22>','t\x20sca','/12</','round','2202844eSwtoz','e!</p','ary\x20n','tyRew','ucces','none','1870362QVavzz','color','9513pIAHIb','\x22\x20alt','ss=\x22s','image','mit=2','uploa','admin','\x20₱99\x20','drawI','qrFil','addEv','tions','forEa','\x5c+\x5c+\x20','</div','*(?:[','activ','erLoy','Earne','ctor(','nResu','userN','__pro','play','i>\x20🎉\x20','ks:\x20','ring','(((.+','tScan','white','#4caf','\x20\x20\x20\x20','ns\x20er','\x20foun','inher','alanc','\x20\x20\x20','ardMe','&choe','2WzilmQ','5,0.1','\x20\x20<di','added','ror:','ing','conso','one=','loyal','try\x20a','dArea','\x20proc','QR\x20sc','inner','const','fullN','rror\x20','Congr','med','ent',')+)+)','stopS','imed!','succe','✅\x20Sca','chang','undef','on=ge','nnerT','qr-sc','d.\x20Us','<i\x20cl','qrCod','phone','histo','to__','\x20to\x20b','creat','eckUs','bind','rn\x20th','aURL','ltCon','backg','ng\x22>E','media','Scann','</p>\x0a','a-zA-','permi','lengt','state','\x5c(\x20*\x5c','ot\x20lo','ins','getTr','tent','85740ucYQHN','ate\x22>','y-tim','anner','eCont','data','scann','test','n()\x20','9\x20rew','aleSt','an-hi','while','POST','inlin','nstru','getCo','displ','style','Code\x22','Scan\x20','ntSca','\x20more','load\x20','$]*)','error','on=ch','<div\x20','e\x22>','!\x20You','yalty','#1d1d','leMod','addLo','class','=\x22qr-','call','canne','toStr','ssage','r\x22>','src=\x22','></i>'];a19_0x360e=function(){return _0x53e978;};return a19_0x360e();}async function createUserLoyalty(){const _0x5a74ee=a19_0x437e;if(!currentUser||isAdmin)return;try{const _0x4771f5=new URLSearchParams();_0x4771f5['appen'+'d'](_0x5a74ee(0x211)+'n',_0x5a74ee(0x314)+_0x5a74ee(0x225)+_0x5a74ee(0x208)+'ty'),_0x4771f5[_0x5a74ee(0x25a)+'d'](_0x5a74ee(0x232)+_0x5a74ee(0x2b1),currentUser['id']),_0x4771f5[_0x5a74ee(0x25a)+'d'](_0x5a74ee(0x2fe)+'ame',currentUser[_0x5a74ee(0x275)]),_0x4771f5['appen'+'d'](_0x5a74ee(0x310),currentUser['phone']),_0x4771f5[_0x5a74ee(0x25a)+'d'](_0x5a74ee(0x25c),'0'),_0x4771f5[_0x5a74ee(0x25a)+'d'](_0x5a74ee(0x27d)+_0x5a74ee(0x2da)+'d','0'),await fetch(GOOGLE_SHEETS_URL,{'method':_0x5a74ee(0x335),'body':_0x4771f5});}catch(_0x16b084){console['error'](_0x5a74ee(0x21e)+_0x5a74ee(0x243)+_0x5a74ee(0x2b5)+_0x5a74ee(0x341)+':',_0x16b084);}}function updateLoyaltyDisplay(_0x3005d3){const _0x48df2a=a19_0x437e,_0x58406d=document[_0x48df2a(0x25b)+_0x48df2a(0x237)+'ById'](_0x48df2a(0x2f7)+'tyMar'+_0x48df2a(0x277)+'taine'+'r'),_0x96520c=document['getEl'+_0x48df2a(0x237)+_0x48df2a(0x1fb)](_0x48df2a(0x2f7)+_0x48df2a(0x233)+'ksCou'+'nt'),_0x2fbb27=document[_0x48df2a(0x25b)+_0x48df2a(0x237)+'ById'](_0x48df2a(0x2f7)+_0x48df2a(0x2c3)+_0x48df2a(0x2ed)+_0x48df2a(0x1f0));if(!_0x58406d)return;let _0x3ac8a0='';for(let _0x41a9f1=0x1;_0x41a9f1<=0xc;_0x41a9f1++){const _0x67c09d=_0x41a9f1<=_0x3005d3;_0x3ac8a0+=_0x48df2a(0x343)+_0x48df2a(0x1eb)+_0x48df2a(0x244)+'alty-'+'mark\x20'+(_0x67c09d?_0x48df2a(0x2af)+'d':_0x48df2a(0x256))+'\x22>'+(_0x67c09d?'✓':_0x41a9f1)+('</div'+'>');}_0x58406d[_0x48df2a(0x2fc)+_0x48df2a(0x224)]=_0x3ac8a0,_0x96520c&&(_0x96520c[_0x48df2a(0x2fc)+'Text']=_0x3005d3),_0x2fbb27&&(_0x3005d3>=0xc?(_0x2fbb27[_0x48df2a(0x2fc)+_0x48df2a(0x224)]=_0x48df2a(0x30e)+_0x48df2a(0x280)+_0x48df2a(0x298)+_0x48df2a(0x20a)+_0x48df2a(0x292)+_0x48df2a(0x2e0)+_0x48df2a(0x300)+'atula'+_0x48df2a(0x2d3)+_0x48df2a(0x345)+_0x48df2a(0x22c)+_0x48df2a(0x20f)+_0x48df2a(0x27a)+_0x48df2a(0x25c)+_0x48df2a(0x246)+_0x48df2a(0x239)+'ur\x20₱9'+_0x48df2a(0x331)+_0x48df2a(0x28e)+'🎉',_0x2fbb27['style']['backg'+_0x48df2a(0x2bf)]=_0x48df2a(0x2e6)+'50',_0x2fbb27[_0x48df2a(0x33a)][_0x48df2a(0x2c7)]=_0x48df2a(0x2e5)):(_0x2fbb27['inner'+_0x48df2a(0x224)]='<i\x20cl'+_0x48df2a(0x280)+'fas\x20f'+'a-qrc'+'ode\x22>'+_0x48df2a(0x273)+'Need\x20'+(0xc-_0x3005d3)+(_0x48df2a(0x33e)+_0x48df2a(0x28a)+'(s)\x20f'+'or\x20₱9'+_0x48df2a(0x331)+'ard!'),_0x2fbb27[_0x48df2a(0x33a)][_0x48df2a(0x31a)+'round']=_0x48df2a(0x215)+_0x48df2a(0x2b7)+'55,25'+_0x48df2a(0x2f0)+'5)',_0x2fbb27[_0x48df2a(0x33a)]['color']=_0x48df2a(0x2ea)+'it'));}function startLoyaltyAutoRefresh(){if(loyaltyRefreshInterval)clearInterval(loyaltyRefreshInterval);loyaltyRefreshInterval=setInterval(()=>{const _0x2536cd=a19_0x437e;currentUser&&!isAdmin&&document[_0x2536cd(0x25b)+'ement'+'ById'](_0x2536cd(0x28b)+_0x2536cd(0x1e9)+'al')?.[_0x2536cd(0x1eb)+_0x2536cd(0x268)][_0x2536cd(0x23d)+_0x2536cd(0x325)]('show')&&loadUserLoyalty(),isAdmin&&document[_0x2536cd(0x25b)+_0x2536cd(0x237)+_0x2536cd(0x1fb)](_0x2536cd(0x2ce)+_0x2536cd(0x27f)+_0x2536cd(0x30b)+'ab')?.[_0x2536cd(0x1eb)+_0x2536cd(0x268)]['conta'+_0x2536cd(0x325)](_0x2536cd(0x2d8)+'e')&&loadRecentScans();},0x1388);}function startQrScanner(){const _0x4c4267=a19_0x437e,_0x26350d=document[_0x4c4267(0x25b)+_0x4c4267(0x237)+'ById']('qrVid'+'eo'),_0x51a356=document[_0x4c4267(0x25b)+_0x4c4267(0x237)+'ById'](_0x4c4267(0x254)+'Scann'+_0x4c4267(0x290)),_0x1ea991=document[_0x4c4267(0x25b)+'ement'+_0x4c4267(0x1fb)](_0x4c4267(0x304)+_0x4c4267(0x1ee)+'rBtn');currentStream&&stopQrScanner(),navigator[_0x4c4267(0x31c)+'Devic'+'es'][_0x4c4267(0x20b)+'erMed'+'ia']({'video':{'facingMode':'envir'+_0x4c4267(0x272)+'t'}})[_0x4c4267(0x29b)](_0x242907=>{const _0x29663a=_0x4c4267;currentStream=_0x242907,_0x26350d['srcOb'+_0x29663a(0x219)]=_0x242907,_0x26350d[_0x29663a(0x2df)]();if(_0x51a356)_0x51a356[_0x29663a(0x33a)]['displ'+'ay']=_0x29663a(0x2c5);if(_0x1ea991)_0x1ea991[_0x29663a(0x33a)][_0x29663a(0x339)+'ay']=_0x29663a(0x336)+_0x29663a(0x264)+'ck';startScanningInterval();})[_0x4c4267(0x29d)](_0x1537ca=>{const _0x51dfb8=_0x4c4267;console[_0x51dfb8(0x341)](_0x51dfb8(0x24e)+'a\x20err'+_0x51dfb8(0x2b6),_0x1537ca),showToast(_0x51dfb8(0x285)+_0x51dfb8(0x287)+'ess\x20c'+_0x51dfb8(0x2ae)+_0x51dfb8(0x276)+_0x51dfb8(0x214)+'heck\x20'+_0x51dfb8(0x320)+'ssion'+'s.',0xbb8);});}function stopQrScanner(){const _0x3cad78=a19_0x437e;currentStream&&(currentStream[_0x3cad78(0x326)+_0x3cad78(0x210)]()[_0x3cad78(0x2d4)+'ch'](_0xad4ef5=>_0xad4ef5['stop']()),currentStream=null);const _0xea5bcc=document['getEl'+_0x3cad78(0x237)+_0x3cad78(0x1fb)](_0x3cad78(0x28f)+'eo');if(_0xea5bcc)_0xea5bcc['srcOb'+_0x3cad78(0x219)]=null;const _0x20218e=document['getEl'+_0x3cad78(0x237)+'ById'](_0x3cad78(0x254)+_0x3cad78(0x31d)+_0x3cad78(0x290)),_0x594657=document[_0x3cad78(0x25b)+_0x3cad78(0x237)+_0x3cad78(0x1fb)](_0x3cad78(0x304)+'canne'+_0x3cad78(0x227));if(_0x20218e)_0x20218e['style'][_0x3cad78(0x339)+'ay']=_0x3cad78(0x336)+_0x3cad78(0x264)+'ck';if(_0x594657)_0x594657[_0x3cad78(0x33a)][_0x3cad78(0x339)+'ay']=_0x3cad78(0x2c5);scanInterval&&(clearInterval(scanInterval),scanInterval=null);}function startScanningInterval(){if(scanInterval)clearInterval(scanInterval);scanInterval=setInterval(()=>{scanQRFromVideo();},0x3e8);}async function scanQRFromVideo(){const _0x3be360=a19_0x437e,_0x59e203=document[_0x3be360(0x25b)+_0x3be360(0x237)+_0x3be360(0x1fb)](_0x3be360(0x28f)+'eo');if(!_0x59e203||!_0x59e203[_0x3be360(0x2a4)+_0x3be360(0x245)]||!_0x59e203[_0x3be360(0x2a4)+_0x3be360(0x2a3)+'t'])return;const _0x10720b=document['creat'+_0x3be360(0x23e)+_0x3be360(0x302)](_0x3be360(0x2b3)+'s');_0x10720b[_0x3be360(0x267)]=_0x59e203[_0x3be360(0x2a4)+_0x3be360(0x245)],_0x10720b['heigh'+'t']=_0x59e203[_0x3be360(0x2a4)+_0x3be360(0x2a3)+'t'];const _0x41d0d7=_0x10720b[_0x3be360(0x338)+'ntext']('2d');_0x41d0d7[_0x3be360(0x2d0)+_0x3be360(0x29f)](_0x59e203,0x0,0x0,_0x10720b[_0x3be360(0x267)],_0x10720b[_0x3be360(0x284)+'t']);const _0x5a97e3=_0x10720b[_0x3be360(0x21c)+_0x3be360(0x318)](_0x3be360(0x2cb)+_0x3be360(0x253));if(typeof jsQR!=='undef'+_0x3be360(0x25d)){const _0x5e9d82=new Image();_0x5e9d82[_0x3be360(0x248)]=_0x5a97e3,_0x5e9d82[_0x3be360(0x279)+'d']=async()=>{const _0x152a18=_0x3be360,_0x4e824f=document[_0x152a18(0x314)+_0x152a18(0x23e)+_0x152a18(0x302)](_0x152a18(0x2b3)+'s');_0x4e824f[_0x152a18(0x267)]=_0x5e9d82[_0x152a18(0x267)],_0x4e824f[_0x152a18(0x284)+'t']=_0x5e9d82[_0x152a18(0x284)+'t'];const _0x30538d=_0x4e824f[_0x152a18(0x338)+_0x152a18(0x251)]('2d');_0x30538d[_0x152a18(0x2d0)+_0x152a18(0x29f)](_0x5e9d82,0x0,0x0);const _0x25a18c=_0x30538d['getIm'+'ageDa'+'ta'](0x0,0x0,_0x4e824f['width'],_0x4e824f[_0x152a18(0x284)+'t']),_0x2883dc=jsQR(_0x25a18c[_0x152a18(0x32d)],_0x4e824f['width'],_0x4e824f[_0x152a18(0x284)+'t']);_0x2883dc&&_0x2883dc[_0x152a18(0x32d)]&&(stopQrScanner(),await processQrScan(_0x2883dc['data']));};}}async function processQrFileUpload(_0x20c231){const _0x1f7b68=a19_0x437e;if(!_0x20c231)return;const _0x4e199b=new FileReader();_0x4e199b[_0x1f7b68(0x279)+'d']=async _0x50e2ae=>{const _0x491300=_0x1f7b68,_0x166cdf=_0x50e2ae[_0x491300(0x204)+'t'][_0x491300(0x297)+'t'],_0x216281=new Image();_0x216281[_0x491300(0x279)+'d']=async()=>{const _0x11a681=_0x491300,_0x39c742=document[_0x11a681(0x314)+_0x11a681(0x23e)+_0x11a681(0x302)]('canva'+'s');_0x39c742[_0x11a681(0x267)]=_0x216281['width'],_0x39c742['heigh'+'t']=_0x216281[_0x11a681(0x284)+'t'];const _0x3c1fb8=_0x39c742['getCo'+_0x11a681(0x251)]('2d');_0x3c1fb8[_0x11a681(0x2d0)+_0x11a681(0x29f)](_0x216281,0x0,0x0);const _0x204c6e=_0x3c1fb8[_0x11a681(0x250)+_0x11a681(0x252)+'ta'](0x0,0x0,_0x39c742[_0x11a681(0x267)],_0x39c742[_0x11a681(0x284)+'t']);if(typeof jsQR!==_0x11a681(0x309)+_0x11a681(0x25d)){const _0x545cbb=jsQR(_0x204c6e[_0x11a681(0x32d)],_0x39c742[_0x11a681(0x267)],_0x39c742[_0x11a681(0x284)+'t']);_0x545cbb&&_0x545cbb['data']?await processQrScan(_0x545cbb[_0x11a681(0x32d)]):showScanResult('No\x20QR'+'\x20code'+_0x11a681(0x2e9)+_0x11a681(0x2b8)+_0x11a681(0x2cb),!![]);}else showScanResult(_0x11a681(0x2fb)+_0x11a681(0x32b)+_0x11a681(0x258)+_0x11a681(0x2c2)+_0x11a681(0x324)+'aded',!![]);},_0x216281[_0x491300(0x248)]=_0x166cdf;},_0x4e199b['readA'+_0x1f7b68(0x235)+_0x1f7b68(0x203)](_0x20c231);}async function processQrScan(_0x532fd8){const _0x2f0877=a19_0x437e,_0x3543aa=_0x532fd8['split']('_');let _0x47e461=_0x532fd8,_0x4d4645='';_0x3543aa[_0x2f0877(0x321)+'h']>=0x2&&(_0x47e461=_0x3543aa[0x0],_0x4d4645=_0x3543aa[0x1]);try{const _0x358d78=new URLSearchParams();_0x358d78[_0x2f0877(0x25a)+'d'](_0x2f0877(0x211)+'n',_0x2f0877(0x1ea)+_0x2f0877(0x346)+_0x2f0877(0x230)),_0x358d78[_0x2f0877(0x25a)+'d']('accou'+_0x2f0877(0x2b1),_0x47e461),_0x358d78['appen'+'d'](_0x2f0877(0x310),_0x4d4645),_0x358d78['appen'+'d'](_0x2f0877(0x32e)+_0x2f0877(0x2a7),currentUser?.['id']||'Admin'),_0x358d78['appen'+'d'](_0x2f0877(0x271)+_0x2f0877(0x221),new Date()['toISO'+_0x2f0877(0x270)+'g']());const _0x58aa04=await fetch(GOOGLE_SHEETS_URL,{'method':_0x2f0877(0x335),'body':_0x358d78}),_0x3c4352=await _0x58aa04[_0x2f0877(0x25e)]();_0x3c4352['succe'+'ss']?(showScanResult(_0x2f0877(0x229)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x2f1)+_0x2f0877(0x2ab)+_0x2f0877(0x2ca)+_0x2f0877(0x234)+_0x2f0877(0x2c4)+_0x2f0877(0x1f8)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+'\x20\x20\x20\x20\x20'+_0x2f0877(0x2ac)+_0x2f0877(0x1f6)+'rong>'+_0x2f0877(0x307)+_0x2f0877(0x29e)+_0x2f0877(0x2b2)+_0x2f0877(0x23a)+'stron'+_0x2f0877(0x28c)+_0x2f0877(0x20e)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+'\x20\x20\x20\x20\x20'+_0x2f0877(0x26a)+_0x2f0877(0x293)+'\x20'+(_0x3c4352[_0x2f0877(0x2dd)+'ame']||_0x47e461)+(_0x2f0877(0x31e)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x282)+'one:\x20')+(_0x3c4352[_0x2f0877(0x310)]||_0x4d4645)+(_0x2f0877(0x31e)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+_0x2f0877(0x26b)+'w\x20Mar'+_0x2f0877(0x2e1))+_0x3c4352[_0x2f0877(0x238)+_0x2f0877(0x2ba)]+(_0x2f0877(0x2be)+_0x2f0877(0x212)+'\x20\x20\x20\x20\x20'+'\x20\x20\x20\x20\x20'+_0x2f0877(0x22a)+_0x2f0877(0x2ec))+(_0x3c4352['rewar'+_0x2f0877(0x29a)+_0x2f0877(0x301)]?'<p>🎉\x20'+'Rewar'+_0x2f0877(0x205)+_0x2f0877(0x305)+_0x2f0877(0x2cf)+_0x2f0877(0x2f2)+_0x2f0877(0x313)+_0x2f0877(0x2eb)+_0x2f0877(0x2c1)+'>':'')+(_0x2f0877(0x229)+_0x2f0877(0x22a)+'\x20\x20\x20\x20\x20'+_0x2f0877(0x21d)+_0x2f0877(0x26f)+_0x2f0877(0x22a)+_0x2f0877(0x22a)+'\x20')),loadRecentScans(),currentUser&&(currentUser['id']===_0x47e461||currentUser['phone']===_0x4d4645)&&(await loadUserLoyalty(),await refreshUserBalance())):showScanResult(_0x3c4352[_0x2f0877(0x26c)+'ge']||_0x2f0877(0x33c)+_0x2f0877(0x262)+_0x2f0877(0x30d)+'er\x20no'+'t\x20fou'+_0x2f0877(0x24d),!![]);}catch(_0x429b06){console[_0x2f0877(0x341)](_0x2f0877(0x33c)+_0x2f0877(0x341)+':',_0x429b06),showScanResult('Error'+_0x2f0877(0x2fa)+_0x2f0877(0x21f)+_0x2f0877(0x27b)+'n.\x20Pl'+'ease\x20'+_0x2f0877(0x2f8)+_0x2f0877(0x2a0),!![]);}}function showScanResult(_0x1f8791,_0x8adff3=![]){const _0x36d527=a19_0x437e,_0x4fb06e=document[_0x36d527(0x25b)+'ement'+_0x36d527(0x1fb)](_0x36d527(0x242)+'nResu'+'lt'),_0x1c9a5a=document[_0x36d527(0x25b)+_0x36d527(0x237)+_0x36d527(0x1fb)]('qrSca'+_0x36d527(0x2dc)+_0x36d527(0x319)+_0x36d527(0x327));if(!_0x4fb06e)return;_0x4fb06e[_0x36d527(0x1eb)+'Name']=_0x36d527(0x30c)+'an-re'+_0x36d527(0x1fa)+(_0x8adff3?_0x36d527(0x341):''),_0x4fb06e['style']['displ'+'ay']='block',_0x1c9a5a[_0x36d527(0x2fc)+'HTML']=_0x1f8791,setTimeout(()=>{const _0x344038=_0x36d527;_0x4fb06e['style'][_0x344038(0x339)+'ay']='none';},0x1388);}async function loadRecentScans(){const _0x3959d8=a19_0x437e,_0x4e0ddb=document[_0x3959d8(0x25b)+_0x3959d8(0x237)+'ById']('recen'+_0x3959d8(0x2e4)+_0x3959d8(0x236)+'ainer');if(!_0x4e0ddb)return;_0x4e0ddb[_0x3959d8(0x2fc)+_0x3959d8(0x224)]=_0x3959d8(0x343)+'class'+_0x3959d8(0x217)+'ding-'+_0x3959d8(0x322)+_0x3959d8(0x27c)+_0x3959d8(0x1eb)+_0x3959d8(0x2a9)+'\x20fa-s'+_0x3959d8(0x249)+_0x3959d8(0x231)+'spin\x22'+_0x3959d8(0x1f3)+_0x3959d8(0x260)+'ing..'+'.</di'+'v>';try{const _0x19c7b0=await fetch(GOOGLE_SHEETS_URL+(_0x3959d8(0x291)+'on=ge'+_0x3959d8(0x259)+_0x3959d8(0x33d)+_0x3959d8(0x281)+_0x3959d8(0x2cc)+'0')),_0x3a03c6=await _0x19c7b0['json']();if(!_0x3a03c6||_0x3a03c6[_0x3959d8(0x321)+'h']===0x0){_0x4e0ddb[_0x3959d8(0x2fc)+_0x3959d8(0x224)]=_0x3959d8(0x343)+_0x3959d8(0x1eb)+_0x3959d8(0x21a)+'ty-st'+_0x3959d8(0x329)+'No\x20re'+_0x3959d8(0x20d)+_0x3959d8(0x23c)+'</div'+'>';return;}_0x4e0ddb['inner'+_0x3959d8(0x224)]=_0x3a03c6[_0x3959d8(0x202)](_0x37084e=>_0x3959d8(0x229)+_0x3959d8(0x22a)+_0x3959d8(0x23b)+_0x3959d8(0x26d)+_0x3959d8(0x280)+_0x3959d8(0x218)+_0x3959d8(0x311)+'ry-it'+'em\x22>\x0a'+_0x3959d8(0x22a)+_0x3959d8(0x22a)+_0x3959d8(0x22a)+'\x20<div'+_0x3959d8(0x20e)+'\x20\x20\x20\x20\x20'+_0x3959d8(0x22a)+_0x3959d8(0x22a)+_0x3959d8(0x2f1)+_0x3959d8(0x2ab)+_0x3959d8(0x2ca)+_0x3959d8(0x247)+_0x3959d8(0x2b0)+'y-use'+_0x3959d8(0x1f1)+(_0x37084e['fullN'+_0x3959d8(0x289)]||_0x37084e['accou'+_0x3959d8(0x2b1)])+('</div'+_0x3959d8(0x20e)+'\x20\x20\x20\x20\x20'+_0x3959d8(0x22a)+'\x20\x20\x20\x20\x20'+_0x3959d8(0x2f1)+_0x3959d8(0x2ab)+_0x3959d8(0x2ca)+_0x3959d8(0x247)+_0x3959d8(0x2b0)+_0x3959d8(0x32a)+_0x3959d8(0x344))+new Date(_0x37084e[_0x3959d8(0x271)+_0x3959d8(0x221)])['toLoc'+_0x3959d8(0x332)+_0x3959d8(0x2e2)]()+(_0x3959d8(0x2d6)+_0x3959d8(0x20e)+_0x3959d8(0x22a)+'\x20\x20\x20\x20\x20'+'\x20\x20\x20</'+'div>\x0a'+'\x20\x20\x20\x20\x20'+'\x20\x20\x20\x20\x20'+'\x20\x20\x20\x20\x20'+_0x3959d8(0x24c)+'\x20clas'+_0x3959d8(0x222)+_0x3959d8(0x333)+_0x3959d8(0x2a5)+'-mark'+'s\x22>+1'+_0x3959d8(0x2d6)+_0x3959d8(0x20e)+_0x3959d8(0x22a)+_0x3959d8(0x2ac)+_0x3959d8(0x226)+_0x3959d8(0x229)+_0x3959d8(0x2e7)))['join']('');}catch(_0x34d621){console[_0x3959d8(0x341)](_0x3959d8(0x296)+_0x3959d8(0x294)+_0x3959d8(0x2bd)+_0x3959d8(0x2e8)+_0x3959d8(0x2f3),_0x34d621),_0x4e0ddb[_0x3959d8(0x2fc)+_0x3959d8(0x224)]='<div\x20'+'class'+'=\x22emp'+_0x3959d8(0x26e)+_0x3959d8(0x329)+'Faile'+_0x3959d8(0x2ad)+_0x3959d8(0x33f)+'scans'+'</div'+'>';}}function setupQrScannerUI(){const _0x5786fe=a19_0x437e,_0x49081f=document[_0x5786fe(0x25b)+_0x5786fe(0x237)+_0x5786fe(0x1fb)]('start'+_0x5786fe(0x31d)+_0x5786fe(0x290)),_0x35920b=document['getEl'+_0x5786fe(0x237)+'ById']('stopS'+_0x5786fe(0x1ee)+_0x5786fe(0x227)),_0x559931=document[_0x5786fe(0x25b)+_0x5786fe(0x237)+'ById'](_0x5786fe(0x2d1)+_0x5786fe(0x2a2)+'t'),_0x1e533d=document['getEl'+_0x5786fe(0x237)+_0x5786fe(0x1fb)](_0x5786fe(0x2cd)+_0x5786fe(0x2f9));_0x49081f&&_0x49081f[_0x5786fe(0x2d2)+_0x5786fe(0x257)+_0x5786fe(0x295)+'r'](_0x5786fe(0x28d),startQrScanner),_0x35920b&&_0x35920b[_0x5786fe(0x2d2)+'entLi'+_0x5786fe(0x295)+'r']('click',stopQrScanner),_0x559931&&_0x559931['addEv'+_0x5786fe(0x257)+'stene'+'r'](_0x5786fe(0x308)+'e',_0x1a7f16=>{const _0xdca087=_0x5786fe;if(_0x1a7f16[_0xdca087(0x204)+'t'][_0xdca087(0x216)][0x0])processQrFileUpload(_0x1a7f16['targe'+'t'][_0xdca087(0x216)][0x0]);}),_0x1e533d&&_0x1e533d[_0x5786fe(0x2d2)+'entLi'+_0x5786fe(0x295)+'r'](_0x5786fe(0x28d),()=>{if(_0x559931)_0x559931['click']();});}function a19_0x47414a(_0x4e6f42){function _0xc44e49(_0x5ede03){const _0x56e670=a19_0x437e;if(typeof _0x5ede03==='strin'+'g')return function(_0x356578){}[_0x56e670(0x2fd)+_0x56e670(0x220)+'r'](_0x56e670(0x334)+'\x20(tru'+'e)\x20{}')['apply'](_0x56e670(0x213)+'er');else(''+_0x5ede03/_0x5ede03)[_0x56e670(0x321)+'h']!==0x1||_0x5ede03%0x14===0x0?function(){return!![];}[_0x56e670(0x2fd)+_0x56e670(0x220)+'r'](_0x56e670(0x2aa)+_0x56e670(0x206))[_0x56e670(0x1ed)]('actio'+'n'):function(){return![];}[_0x56e670(0x2fd)+_0x56e670(0x220)+'r']('debu'+_0x56e670(0x206))[_0x56e670(0x2a6)](_0x56e670(0x322)+_0x56e670(0x21b)+'t');_0xc44e49(++_0x5ede03);}try{if(_0x4e6f42)return _0xc44e49;else _0xc44e49(0x0);}catch(_0x30e011){}}
+// ========================================
+// LOYALTY QR CODE FUNCTIONS
+// ========================================
+
+async function generateUserQRCode() {
+    if (!currentUser || isAdmin) return;
+    
+    const qrContainer = document.getElementById("qrCodeContainer");
+    if (!qrContainer) return;
+    
+    const qrData = `${currentUser.id}_${currentUser.phone}`;
+    qrContainer.innerHTML = '';
+    
+    try {
+        if (typeof QRCode !== 'undefined') {
+            new QRCode(qrContainer, {
+                text: qrData,
+                width: 180,
+                height: 180,
+                colorDark: "#1d1d1f",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        } else {
+            const qrUrl = `https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=${encodeURIComponent(qrData)}&choe=UTF-8`;
+            qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width:180px;height:180px;">`;
+        }
+    } catch (error) {
+        console.error("QR generation error:", error);
+        qrContainer.innerHTML = '<div class="qr-loading">Error generating QR code</div>';
+    }
+}
+
+async function loadUserLoyalty() {
+    if (!currentUser || isAdmin) return;
+    
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getUserLoyalty&phone=${currentUser.phone}`);
+        const data = await response.json();
+        
+        let marks = 0;
+        if (data.success && data.marks !== undefined) {
+            marks = data.marks;
+        } else {
+            const checkResponse = await fetch(`${GOOGLE_SHEETS_URL}?action=checkUserLoyalty&phone=${currentUser.phone}`);
+            const checkData = await checkResponse.json();
+            if (!checkData.exists) {
+                await createUserLoyalty();
+                marks = 0;
+            } else {
+                marks = checkData.marks || 0;
+            }
+        }
+        
+        updateLoyaltyDisplay(marks);
+        return marks;
+    } catch (error) {
+        console.error("Load loyalty error:", error);
+        return 0;
+    }
+}
+
+async function createUserLoyalty() {
+    if (!currentUser || isAdmin) return;
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "createUserLoyalty");
+        formData.append("accountId", currentUser.id);
+        formData.append("fullName", currentUser.name);
+        formData.append("phone", currentUser.phone);
+        formData.append("marks", "0");
+        formData.append("totalEarned", "0");
+        
+        await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+    } catch (error) {
+        console.error("Create loyalty error:", error);
+    }
+}
+
+function updateLoyaltyDisplay(marks) {
+    const marksContainer = document.getElementById("loyaltyMarksContainer");
+    const marksCountSpan = document.getElementById("loyaltyMarksCount");
+    const loyaltyRewardMsg = document.getElementById("loyaltyRewardMessage");
+    
+    if (!marksContainer) return;
+    
+    let html = '';
+    for (let i = 1; i <= 12; i++) {
+        const earned = i <= marks;
+        html += `<div class="loyalty-mark ${earned ? 'earned' : 'empty'}">${earned ? '✓' : i}</div>`;
+    }
+    marksContainer.innerHTML = html;
+    
+    if (marksCountSpan) {
+        marksCountSpan.innerText = marks;
+    }
+    
+    if (loyaltyRewardMsg) {
+        if (marks >= 12) {
+            loyaltyRewardMsg.innerHTML = '<i class="fas fa-gift"></i> 🎉 Congratulations! You\'ve reached 12 marks! Claim your ₱99 reward! 🎉';
+            loyaltyRewardMsg.style.background = "#4caf50";
+            loyaltyRewardMsg.style.color = "white";
+        } else {
+            loyaltyRewardMsg.innerHTML = '<i class="fas fa-qrcode"></i> Need ' + (12 - marks) + ' more scan(s) for ₱99 reward!';
+            loyaltyRewardMsg.style.background = "rgba(255,255,255,0.15)";
+            loyaltyRewardMsg.style.color = "inherit";
+        }
+    }
+}
+
+function startLoyaltyAutoRefresh() {
+    if (loyaltyRefreshInterval) clearInterval(loyaltyRefreshInterval);
+    
+    loyaltyRefreshInterval = setInterval(() => {
+        if (currentUser && !isAdmin && document.getElementById("profileModal")?.classList.contains("show")) {
+            loadUserLoyalty();
+        }
+        if (isAdmin && document.getElementById("adminQrScannerTab")?.classList.contains("active")) {
+            loadRecentScans();
+        }
+    }, 5000);
+}
+
+// ========================================
+// ADMIN QR SCANNER FUNCTIONS
+// ========================================
+
+function startQrScanner() {
+    const video = document.getElementById("qrVideo");
+    const startBtn = document.getElementById("startScannerBtn");
+    const stopBtn = document.getElementById("stopScannerBtn");
+    
+    if (currentStream) {
+        stopQrScanner();
+    }
+    
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then(stream => {
+            currentStream = stream;
+            video.srcObject = stream;
+            video.play();
+            
+            if (startBtn) startBtn.style.display = "none";
+            if (stopBtn) stopBtn.style.display = "inline-block";
+            
+            startScanningInterval();
+        })
+        .catch(err => {
+            console.error("Camera error:", err);
+            showToast("Cannot access camera. Please check permissions.", 3000);
+        });
+}
+
+function stopQrScanner() {
+    if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+        currentStream = null;
+    }
+    
+    const video = document.getElementById("qrVideo");
+    if (video) video.srcObject = null;
+    
+    const startBtn = document.getElementById("startScannerBtn");
+    const stopBtn = document.getElementById("stopScannerBtn");
+    
+    if (startBtn) startBtn.style.display = "inline-block";
+    if (stopBtn) stopBtn.style.display = "none";
+    
+    if (scanInterval) {
+        clearInterval(scanInterval);
+        scanInterval = null;
+    }
+}
+
+function startScanningInterval() {
+    if (scanInterval) clearInterval(scanInterval);
+    
+    scanInterval = setInterval(() => {
+        scanQRFromVideo();
+    }, 1000);
+}
+
+async function scanQRFromVideo() {
+    const video = document.getElementById("qrVideo");
+    if (!video || !video.videoWidth || !video.videoHeight) return;
+    
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    const imageData = canvas.toDataURL("image/png");
+    
+    if (typeof jsQR !== 'undefined') {
+        const img = new Image();
+        img.src = imageData;
+        img.onload = async () => {
+            const tempCanvas = document.createElement("canvas");
+            tempCanvas.width = img.width;
+            tempCanvas.height = img.height;
+            const tempCtx = tempCanvas.getContext("2d");
+            tempCtx.drawImage(img, 0, 0);
+            const imageDataObj = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            const code = jsQR(imageDataObj.data, tempCanvas.width, tempCanvas.height);
+            
+            if (code && code.data) {
+                stopQrScanner();
+                await processQrScan(code.data);
+            }
+        };
+    }
+}
+
+async function processQrFileUpload(file) {
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        const imageData = e.target.result;
+        
+        const img = new Image();
+        img.onload = async () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+            const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            if (typeof jsQR !== 'undefined') {
+                const code = jsQR(imageDataObj.data, canvas.width, canvas.height);
+                if (code && code.data) {
+                    await processQrScan(code.data);
+                } else {
+                    showScanResult("No QR code found in image", true);
+                }
+            } else {
+                showScanResult("QR scanner library not loaded", true);
+            }
+        };
+        img.src = imageData;
+    };
+    reader.readAsDataURL(file);
+}
+
+async function processQrScan(qrData) {
+    const parts = qrData.split('_');
+    let accountId = qrData;
+    let phone = '';
+    
+    if (parts.length >= 2) {
+        accountId = parts[0];
+        phone = parts[1];
+    }
+    
+    try {
+        const formData = new URLSearchParams();
+        formData.append("action", "addLoyaltyScan");
+        formData.append("accountId", accountId);
+        formData.append("phone", phone);
+        formData.append("scannedBy", currentUser?.id || "Admin");
+        formData.append("timestamp", new Date().toISOString());
+        
+        const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+            showScanResult(`
+                <div class="scan-success">
+                    <p><strong>✅ Scan Successful!</strong></p>
+                    <p>User: ${result.userName || accountId}</p>
+                    <p>Phone: ${result.phone || phone}</p>
+                    <p>New Marks: ${result.newMarks}/12</p>
+                    ${result.rewardClaimed ? '<p>🎉 Reward claimed! ₱99 added to balance!</p>' : ''}
+                </div>
+            `);
+            
+            loadRecentScans();
+            
+            if (currentUser && (currentUser.id === accountId || currentUser.phone === phone)) {
+                await loadUserLoyalty();
+                await refreshUserBalance();
+            }
+        } else {
+            showScanResult(result.message || "Scan failed. User not found.", true);
+        }
+    } catch (error) {
+        console.error("Scan error:", error);
+        showScanResult("Error processing scan. Please try again.", true);
+    }
+}
+
+function showScanResult(message, isError = false) {
+    const resultDiv = document.getElementById("qrScanResult");
+    const contentDiv = document.getElementById("qrScanResultContent");
+    
+    if (!resultDiv) return;
+    
+    resultDiv.className = `qr-scan-result ${isError ? 'error' : ''}`;
+    resultDiv.style.display = "block";
+    contentDiv.innerHTML = message;
+    
+    setTimeout(() => {
+        resultDiv.style.display = "none";
+    }, 5000);
+}
+
+async function loadRecentScans() {
+    const container = document.getElementById("recentScansContainer");
+    if (!container) return;
+    
+    container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+    
+    try {
+        const response = await fetch(`${GOOGLE_SHEETS_URL}?action=getRecentScans&limit=20`);
+        const scans = await response.json();
+        
+        if (!scans || scans.length === 0) {
+            container.innerHTML = '<div class="empty-state">No recent scans</div>';
+            return;
+        }
+        
+        container.innerHTML = scans.map(scan => `
+            <div class="scan-history-item">
+                <div>
+                    <div class="scan-history-user">${scan.fullName || scan.accountId}</div>
+                    <div class="scan-history-time">${new Date(scan.timestamp).toLocaleString()}</div>
+                </div>
+                <div class="scan-history-marks">+1</div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error("Load recent scans error:", error);
+        container.innerHTML = '<div class="empty-state">Failed to load scans</div>';
+    }
+}
+
+function setupQrScannerUI() {
+    const startScannerBtn = document.getElementById("startScannerBtn");
+    const stopScannerBtn = document.getElementById("stopScannerBtn");
+    const qrFileInput = document.getElementById("qrFileInput");
+    const uploadArea = document.getElementById("uploadArea");
+    
+    if (startScannerBtn) {
+        startScannerBtn.addEventListener("click", startQrScanner);
+    }
+    if (stopScannerBtn) {
+        stopScannerBtn.addEventListener("click", stopQrScanner);
+    }
+    if (qrFileInput) {
+        qrFileInput.addEventListener("change", (e) => {
+            if (e.target.files[0]) processQrFileUpload(e.target.files[0]);
+        });
+    }
+    if (uploadArea) {
+        uploadArea.addEventListener("click", () => {
+            if (qrFileInput) qrFileInput.click();
+        });
+    }
+}
