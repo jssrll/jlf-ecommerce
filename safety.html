@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>JLF Fireworks - Firework Safety</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .safety-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .safety-header::before {
+            content: "🎆";
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            bottom: -40px;
+            right: -40px;
+            pointer-events: none;
+        }
+
+        .safety-header::after {
+            content: "🧨";
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.05;
+            top: -30px;
+            left: -30px;
+            pointer-events: none;
+        }
+
+        .safety-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .safety-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-3px);
+        }
+
+        /* Container */
+        .safety-container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 24px;
+        }
+
+        /* Safety Cards Grid */
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .safety-card {
+            background: white;
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .safety-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e63946, #ff6a3d);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .safety-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .safety-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .safety-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .safety-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .safety-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #e63946;
+            font-weight: bold;
+        }
+
+        /* Rules Section */
+        .rules-section {
+            background: white;
+            border-radius: 28px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .rules-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rules-section h2 i {
+            color: #e63946;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .rule-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 20px;
+            border-left: 4px solid #e63946;
+        }
+
+        .rule-item h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .rule-item p {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Dos and Donts */
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .dos-card, .donts-card {
+            border-radius: 28px;
+            padding: 30px;
+            transition: transform 0.3s;
+        }
+
+        .dos-card {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+
+        .donts-card {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+        }
+
+        .dos-card h3, .donts-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dos-card ul, .donts-card ul {
+            list-style: none;
+        }
+
+        .dos-card li, .donts-card li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .dos-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .donts-card li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #c62828;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Emergency Section */
+        .emergency-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            border-radius: 28px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .emergency-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .emergency-section p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .emergency-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .emergency-number {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .emergency-number i {
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        .safety-footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #e9e9ef;
+            color: #86868b;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .safety-header h1 {
+                font-size: 2rem;
+            }
+
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
+
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rules-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="safety-header">
+        <button class="back-btn" onclick="window.location.href='/'">
+            <i class="fas fa-arrow-left"></i> Back to Shop
+        </button>
+        <h1><i class="fas fa-shield-alt"></i> Firework Safety Guide</h1>
+        <p>Enjoy fireworks responsibly. Follow these essential safety guidelines for a memorable and safe celebration.</p>
+    </div>
+
+    <div class="safety-container">
+        <!-- Main Safety Cards -->
+        <div class="safety-grid">
+            <div class="safety-card">
+                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                <h2>Before Lighting</h2>
+                <p>Proper preparation is key to a safe fireworks display:</p>
+                <ul>
+                    <li>Read all labels and instructions carefully</li>
+                    <li>Keep a bucket of water or hose nearby</li>
+                    <li>Wear safety glasses when handling fireworks</li>
+                    <li>Ensure adequate spacing from buildings and people</li>
+                    <li>Check wind direction before lighting</li>
+                </ul>
+            </div>
+
+            <div class="safety-card">
+                <div class="card-icon"><i class="fas fa-fire"></i></div>
+                <h2>During Display</h2>
+                <p>Follow these rules while lighting fireworks:</p>
+                <ul>
+                    <li>Light one firework at a time</li>
+                    <li>Never relight a "dud" firework - wait 20 minutes</li>
+                    <li>Stand back immediately after lighting</li>
+                    <li>Keep spectators at a safe distance</li>
+                    <li>Never point fireworks at people or animals</li>
+                </ul>
+            </div>
+
+            <div class="safety-card">
+                <div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h2>After Display</h2>
+                <p>Proper disposal ensures safety:</p>
+                <ul>
+                    <li>Wait 20 minutes after display to approach</li>
+                    <li>Soak used fireworks in water before disposal</li>
+                    <li>Check area for unexploded fireworks</li>
+                    <li>Dispose in metal trash can if possible</li>
+                    <li>Never put fireworks in regular trash immediately</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Rules Section -->
+        <div class="rules-section">
+            <h2><i class="fas fa-clipboard-list"></i> Golden Rules of Firework Safety</h2>
+            <div class="rules-grid">
+                <div class="rule-item">
+                    <h3>👤 Adult Supervision Required</h3>
+                    <p>Children should never handle fireworks. Always have a responsible adult present during any fireworks activity.</p>
+                </div>
+                <div class="rule-item">
+                    <h3>🍺 No Alcohol or Drugs</h3>
+                    <p>Never use fireworks while under the influence of alcohol or drugs. Stay alert and focused.</p>
+                </div>
+                <div class="rule-item">
+                    <h3>🏠 Safe Distance</h3>
+                    <p>Maintain a minimum safe distance of 50 feet from spectators and 100 feet from buildings.</p>
+                </div>
+                <div class="rule-item">
+                    <h3>📱 Emergency Ready</h3>
+                    <p>Keep your phone nearby with emergency numbers ready. Know the location of the nearest hospital.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dos and Donts -->
+        <div class="dos-donts">
+            <div class="dos-card">
+                <h3><i class="fas fa-check-circle" style="color:#2e7d32;"></i> DO's</h3>
+                <ul>
+                    <li>Buy fireworks from licensed dealers only</li>
+                    <li>Use fireworks in open, clear areas</li>
+                    <li>Keep water source readily available</li>
+                    <li>Wear protective eyewear</li>
+                    <li>Light fireworks on a flat, stable surface</li>
+                    <li>Keep unused fireworks away from ignition source</li>
+                    <li>Supervise pets and keep them indoors</li>
+                </ul>
+            </div>
+            <div class="donts-card">
+                <h3><i class="fas fa-times-circle" style="color:#c62828;"></i> DON'Ts</h3>
+                <ul>
+                    <li>Don't point fireworks at anyone</li>
+                    <li>Don't carry fireworks in pockets</li>
+                    <li>Don't shoot fireworks from metal or glass containers</li>
+                    <li>Don't experiment with homemade fireworks</li>
+                    <li>Don't relight malfunctioning fireworks</li>
+                    <li>Don't use fireworks near dry grass or vegetation</li>
+                    <li>Don't give sparklers to young children</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sparkler Safety -->
+        <div class="safety-card" style="margin-bottom: 50px;">
+            <div class="card-icon" style="background: linear-gradient(135deg, #ff9800, #ff5722);"><i class="fas fa-star"></i></div>
+            <h2>Sparkler Safety Tips</h2>
+            <p>Sparklers burn at very high temperatures (up to 2,000°F) and require special attention:</p>
+            <ul>
+                <li>Always wear gloves when holding sparklers</li>
+                <li>Hold sparklers at arm's length away from body</li>
+                <li>Never wave sparklers near others</li>
+                <li>Drop used sparklers in a bucket of water immediately</li>
+                <li>Children under 12 should not use sparklers without direct supervision</li>
+                <li>Consider glow sticks as a safer alternative for young children</li>
+            </ul>
+        </div>
+
+        <!-- Emergency Section -->
+        <div class="emergency-section">
+            <h2><i class="fas fa-phone-alt"></i> In Case of Emergency</h2>
+            <p>If an injury occurs, seek medical attention immediately. For fire-related emergencies, call your local fire department.</p>
+            <div class="emergency-numbers">
+                <div class="emergency-number"><i class="fas fa-ambulance"></i> Emergency: 911</div>
+                <div class="emergency-number"><i class="fas fa-fire-extinguisher"></i> Fire Dept: Local Number</div>
+                <div class="emergency-number"><i class="fas fa-hospital"></i> Poison Control: 1-800-222-1222</div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div style="background: #f5f5f7; border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px;">
+            <i class="fas fa-info-circle" style="color: #e63946; font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
+            <p style="font-size: 0.85rem; color: #666;">
+                <strong>Disclaimer:</strong> JLF Fireworks promotes responsible fireworks use. Always check local laws and regulations regarding fireworks in your area. Some fireworks may be restricted or prohibited in certain locations. Follow all local ordinances.
+            </p>
+        </div>
+    </div>
+
+    <div class="safety-footer">
+        <p>© 2026 JLF Fireworks - Safety First, Celebrate Responsibly</p>
+    </div>
+
+    <script>
+        // Add any interactive features if needed
+        console.log("Firework Safety Page Loaded");
+    </script>
+</body>
+</html>

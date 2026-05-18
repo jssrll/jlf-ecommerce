@@ -1,3 +1,7 @@
+// ========================================
+// AUTHENTICATION SYSTEM
+// ========================================
+
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -61,6 +65,7 @@ function stopRealTimeBalanceCheck() {
   }
 }
 
+// Updated: Balance check every 5 seconds to maximize sheets quota
 function startRealTimeBalanceCheck() {
   if (balanceCheckInterval) {
     clearInterval(balanceCheckInterval);
@@ -69,13 +74,14 @@ function startRealTimeBalanceCheck() {
   
   if (currentUser && !isAdmin) {
     refreshUserBalance();
+    // Changed from 1000ms to 5000ms (5 seconds)
     balanceCheckInterval = setInterval(() => {
       if (currentUser && !isAdmin) {
         refreshUserBalance();
       } else if (!currentUser || isAdmin) {
         stopRealTimeBalanceCheck();
       }
-    }, 1000);
+    }, 5000); // 5 seconds
   }
 }
 
@@ -97,14 +103,24 @@ async function refreshUserBalance() {
         
         if (newBalance > oldBalance) {
           showToast(`💰 +₱${(newBalance - oldBalance).toLocaleString()} added!`, 3000);
+          // Haptic feedback on balance change
+          if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
         } else if (newBalance < oldBalance) {
           showToast(`💸 -₱${(oldBalance - newBalance).toLocaleString()} deducted.`, 3000);
         }
         
         updateAllBalanceDisplays();
+        
+        // Refresh transaction history if on orders page
+        const ordersPage = document.getElementById("ordersPage");
+        if (ordersPage && ordersPage.classList.contains("active") && typeof loadTransactionHistory === 'function') {
+          loadTransactionHistory();
+        }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error("Balance refresh error:", error);
+  }
 }
 
 function updateAllBalanceDisplays() {
@@ -126,6 +142,7 @@ function updateAllBalanceDisplays() {
 // ========================================
 function doAdminLogin(loginBtn) {
   stopRealTimeBalanceCheck();
+  stopBalanceWatcher();
   isAdmin = true;
   currentUser = null;
   localStorage.removeItem("nova_user");
@@ -133,6 +150,9 @@ function doAdminLogin(loginBtn) {
   if (typeof updateCartBadge === 'function') updateCartBadge();
   if (typeof saveCartToLocal === 'function') saveCartToLocal();
   if (typeof renderCartUI === 'function') renderCartUI();
+  
+  // Clear transaction history for admin
+  if (typeof clearTransactionHistory === 'function') clearTransactionHistory();
   
   showToast("Welcome Admin! 👑", 2000);
   closeAccountModal();
@@ -145,8 +165,10 @@ function doAdminLogin(loginBtn) {
   if (typeof loadAdminData === 'function') loadAdminData();
   if (typeof switchPage === 'function') switchPage('admin');
   
-  loginBtn.disabled = false;
-  loginBtn.innerHTML = "Login";
+  if (loginBtn) {
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = "Login";
+  }
 }
 
 // ========================================
@@ -200,6 +222,7 @@ async function handleLogin(event) {
         loginBtn.innerHTML = "Login";
       }
     } catch(e) {
+      console.error("2FA error:", e);
       showToast("2FA error. Check connection.", 1500);
       loginBtn.disabled = false;
       loginBtn.innerHTML = "Login";
@@ -241,10 +264,14 @@ async function handleLogin(event) {
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
+      
+      // Haptic feedback on successful login
+      if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
     } else {
       showToast(result.message || "Invalid phone number or password", 1500);
     }
   } catch (error) {
+    console.error("Login error:", error);
     showToast("Login failed. Please try again.", 1500);
   } finally {
     loginBtn.disabled = false;
@@ -320,10 +347,14 @@ async function handleRegister(event) {
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
+      
+      // Haptic feedback on successful registration
+      if (navigator.vibrate) navigator.vibrate([50, 100, 50, 100, 50]);
     } else {
       showToast(result.message || "Registration failed.", 1500);
     }
   } catch (error) {
+    console.error("Registration error:", error);
     showToast("Registration failed. Please try again.", 1500);
   } finally {
     registerBtn.disabled = false;
@@ -332,22 +363,79 @@ async function handleRegister(event) {
   }
 }
 
+// ========================================
+// LOGOUT FUNCTION - UPDATED
+// ========================================
 function logout() {
+  // Stop all intervals
   stopRealTimeBalanceCheck();
+  if (typeof stopBalanceWatcher === 'function') stopBalanceWatcher();
+  
+  // Clear user data
   currentUser = null;
   isAdmin = false;
   localStorage.removeItem("nova_user");
   document.getElementById("userNameDisplay").innerText = "";
+  
+  // Close modals
   closeProfileModal();
+  
   showToast("Logged out successfully", 1500);
+  
+  // Clear cart
   cart = [];
   if (typeof updateCartBadge === 'function') updateCartBadge();
   if (typeof saveCartToLocal === 'function') saveCartToLocal();
   if (typeof renderCartUI === 'function') renderCartUI();
   
+  // Clear transaction history
+  if (typeof clearTransactionHistory === 'function') clearTransactionHistory();
+  
+  // Reset navigation links visibility
   document.querySelectorAll('.nav-link').forEach(link => {
     link.style.display = 'block';
   });
   
+  // Refresh current page view if on transactions page
+  const ordersPage = document.getElementById("ordersPage");
+  if (ordersPage && ordersPage.classList.contains("active")) {
+    if (typeof loadTransactionHistory === 'function') loadTransactionHistory();
+  }
+  
+  // Switch to home page
   if (typeof switchPage === 'function') switchPage('home');
+  
+  // Haptic feedback on logout
+  if (navigator.vibrate) navigator.vibrate(50);
 }
+
+// ========================================
+// BALANCE WATCHER FUNCTION (for quota optimization)
+// ========================================
+let balanceWatcherInterval = null;
+
+function startBalanceWatcher() {
+  if (balanceWatcherInterval) {
+    clearInterval(balanceWatcherInterval);
+    balanceWatcherInterval = null;
+  }
+  
+  if (currentUser && !isAdmin) {
+    balanceWatcherInterval = setInterval(() => {
+      if (currentUser && !isAdmin) {
+        refreshUserBalance();
+      }
+    }, 5000); // 5 seconds
+  }
+}
+
+function stopBalanceWatcher() {
+  if (balanceWatcherInterval) {
+    clearInterval(balanceWatcherInterval);
+    balanceWatcherInterval = null;
+  }
+}
+
+// Export for use in other files
+window.startBalanceWatcher = startBalanceWatcher;
+window.stopBalanceWatcher = stopBalanceWatcher;

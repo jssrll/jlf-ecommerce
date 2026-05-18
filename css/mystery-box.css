@@ -1,0 +1,203 @@
+/* ========================================
+   UPGRADES CSS v2 - Additional Styles
+   ======================================== */
+
+/* Safety Section on Featured Page */
+.safety-section-featured {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.btn-safety-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 980px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-safety-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #16213e, #1a1a2e);
+}
+
+/* Copy Account ID Button */
+.copy-id-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 20px;
+    transition: 0.2s;
+    font-size: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #86868b;
+    margin-left: 8px;
+}
+
+.copy-id-btn:hover {
+    background: #e9e9ef;
+    color: #e63946;
+}
+
+.copy-id-btn.copied {
+    background: #4caf50;
+    color: white;
+}
+
+/* Haptic feedback simulation (visual indicator) */
+.haptic-feedback {
+    animation: hapticPulse 0.2s ease-in-out;
+}
+
+@keyframes hapticPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+/* Balance Watcher Indicator */
+.balance-watcher-indicator {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.6rem;
+    font-family: monospace;
+    z-index: 99;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.balance-watcher-indicator.show {
+    opacity: 1;
+}
+
+/* Product Images - Uniform styling */
+.product-img-apple img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Toast with haptic feedback */
+.toast-msg.haptic {
+    animation: hapticToast 0.3s ease;
+}
+
+@keyframes hapticToast {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+/* Offline indicator */
+.offline-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #e63946;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.7rem;
+    z-index: 1000;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+}
+
+.offline-indicator.show {
+    transform: translateY(0);
+}
+
+/* Transaction History Filters - Enhanced */
+.transaction-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid #e9e9ef;
+    padding: 8px 16px;
+    border-radius: 980px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.filter-btn:hover {
+    background: #f5f5f7;
+}
+
+.filter-btn.active {
+    background: #1d1d1f;
+    color: white;
+    border-color: #1d1d1f;
+}
+
+/* Dark mode support for new features */
+body.dark .copy-id-btn {
+    color: #a1a1a6;
+}
+
+body.dark .copy-id-btn:hover {
+    background: #3a3a3c;
+    color: #e63946;
+}
+
+body.dark .transaction-id {
+    background: #3a3a3c;
+    color: #a1a1a6;
+}
+
+body.dark .order-again-btn {
+    border-color: #3a3a3c;
+    color: #e5e5ea;
+}
+
+body.dark .order-again-btn:hover {
+    background: #e63946;
+    border-color: #e63946;
+    color: white;
+}
+
+body.dark .filter-btn {
+    color: #e5e5ea;
+    border-color: #3a3a3c;
+}
+
+body.dark .filter-btn:hover {
+    background: #3a3a3c;
+}
+
+body.dark .filter-btn.active {
+    background: #e63946;
+    border-color: #e63946;
+}
+
+body.dark .safety-section-featured .btn-safety-link {
+    background: linear-gradient(135deg, #2a2a3e, #26263e);
+}
+
+body.dark .safety-section-featured .btn-safety-link:hover {
+    background: linear-gradient(135deg, #26263e, #2a2a3e);
+}
