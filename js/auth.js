@@ -1,3 +1,5 @@
+let pendingCheckout = false; // Track if checkout was waiting for login
+
 function openAccountModal() {
   const modal = document.getElementById("accountModal");
   modal.classList.add("show");
@@ -13,6 +15,7 @@ function openAccountModal() {
 }
 
 function closeAccountModal() {
+  pendingCheckout = false; // Clear pending checkout when modal closed manually
   const modal = document.getElementById("accountModal");
   modal.classList.remove("show");
 }
@@ -238,6 +241,9 @@ async function handleLogin(event) {
       closeAccountModal();
       if (typeof renderCartUI === 'function') renderCartUI();
       
+      // CHECK PENDING CHECKOUT AFTER LOGIN
+      if (typeof checkPendingCheckout === 'function') checkPendingCheckout();
+      
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -317,6 +323,9 @@ async function handleRegister(event) {
       closeAccountModal();
       document.getElementById("registerForm").reset();
       
+      // CHECK PENDING CHECKOUT AFTER REGISTRATION
+      if (typeof checkPendingCheckout === 'function') checkPendingCheckout();
+      
       startRealTimeBalanceCheck();
       
       if (typeof switchPage === 'function') switchPage('home');
@@ -329,6 +338,16 @@ async function handleRegister(event) {
     registerBtn.disabled = false;
     registerBtn.innerHTML = "Create Account";
     loadingIndicator.style.display = "none";
+  }
+}
+
+// Check if a checkout was pending (after login/register)
+function checkPendingCheckout() {
+  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
+    pendingCheckout = false;
+    setTimeout(() => {
+      if (typeof placeOrder === 'function') placeOrder();
+    }, 300);
   }
 }
 

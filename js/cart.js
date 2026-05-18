@@ -119,8 +119,10 @@ function renderCartUI() {
 }
 
 // ========================================
-// CART DRAWER
+// CART DRAWER - FIXED
 // ========================================
+let isCartClosing = false; // Prevent race condition
+
 function initCartDrawer() {
   const cartIcon = document.getElementById('cartIconBtn');
   const overlay = document.getElementById('cartOverlay');
@@ -128,11 +130,35 @@ function initCartDrawer() {
   const closeBtn = document.getElementById('closeCartBtn');
   const checkoutBtn = document.getElementById('checkoutBtn');
   
-  function openDrawer() { overlay.classList.add('open'); drawer.classList.add('open'); renderCartUI(); }
-  function closeDrawer() { overlay.classList.remove('open'); drawer.classList.remove('open'); }
+  function openDrawer() { 
+    isCartClosing = false;
+    overlay.classList.add('open'); 
+    drawer.classList.add('open'); 
+    renderCartUI(); 
+  }
+  
+  function closeDrawer() { 
+    if (isCartClosing) return; // Prevent double-firing
+    isCartClosing = true;
+    
+    overlay.classList.remove('open'); 
+    drawer.classList.remove('open');
+    
+    // Force remove after transition ends (safety cleanup)
+    setTimeout(() => {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      isCartClosing = false;
+    }, 350);
+  }
   
   if (cartIcon) cartIcon.addEventListener('click', openDrawer);
-  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Stop click from reaching overlay
+      closeDrawer();
+    });
+  }
   if (overlay) overlay.addEventListener('click', closeDrawer);
   
   if (checkoutBtn) {
@@ -145,11 +171,15 @@ function initCartDrawer() {
 }
 
 // ========================================
-// PLACE ORDER FUNCTION
+// PLACE ORDER FUNCTION - FIXED
 // ========================================
+let pendingCheckout = false; // Track if checkout was waiting for login
+
 async function placeOrder() {
+  // Check if user is logged in
   if (!currentUser || isAdmin) {
     showToast("Please login to place order", 1500);
+    pendingCheckout = true; // Mark that we're waiting for login
     openAccountModal();
     return false;
   }
@@ -213,6 +243,7 @@ async function placeOrder() {
       saveCartToLocal();
       renderCartUI();
       
+      pendingCheckout = false;
       showToast(`✅ Order placed successfully! Total: ₱${total}. Remaining balance: ₱${currentUser.balance}`, 3000);
       updateAllBalanceDisplays();
       
@@ -235,5 +266,16 @@ async function placeOrder() {
   } finally {
     checkoutBtn.disabled = false;
     checkoutBtn.innerHTML = originalBtnText;
+  }
+}
+
+// Auto-retry checkout after login if pending
+function checkPendingCheckout() {
+  if (pendingCheckout && currentUser && !isAdmin && cart.length > 0) {
+    pendingCheckout = false;
+    // Small delay to let the modal close first
+    setTimeout(() => {
+      placeOrder();
+    }, 300);
   }
 }
