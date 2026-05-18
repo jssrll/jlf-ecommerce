@@ -7,6 +7,21 @@
     document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
     document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
   </script>
+  
+  <!-- ============================================= -->
+  <!-- CONTENT SECURITY POLICY FIX - ADDED -->
+  <!-- ============================================= -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    connect-src 'self' https://script.google.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://ik.imagekit.io;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;
+    img-src 'self' data: https: https://ik.imagekit.io;
+    frame-src 'self';
+    worker-src 'self';
+  ">
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>JLF | Pyrotechnics</title>
@@ -35,6 +50,17 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="JLF Fireworks">
+  
+  <!-- Fallback styles in case Font Awesome fails -->
+  <style>
+    /* Emergency fallback if Font Awesome doesn't load */
+    .fas.fa-user-circle:before, .fa-user-circle:before { content: "👤"; font-family: sans-serif; }
+    .fas.fa-bag-shopping:before, .fa-bag-shopping:before { content: "🛒"; font-family: sans-serif; }
+    .fas.fa-cog:before, .fa-cog:before { content: "⚙️"; font-family: sans-serif; }
+    .fas.fa-bell:before, .fa-bell:before { content: "🔔"; font-family: sans-serif; }
+    .fas.fa-wallet:before, .fa-wallet:before { content: "👛"; font-family: sans-serif; }
+    .fas.fa-money-bill-wave:before, .fa-money-bill-wave:before { content: "💰"; font-family: sans-serif; }
+  </style>
 </head>
 <body>
 
@@ -805,6 +831,15 @@
 <!-- Main App -->
 <script src="js/app.js"></script>
 
-<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(r=>console.log('✅ Service Worker registered')).catch(e=>console.log('❌ Service Worker failed'))});}</script>
+<script>
+// MODIFIED SERVICE WORKER REGISTRATION WITH ERROR HANDLING
+if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('/sw.js')
+            .then(r => console.log('✅ Service Worker registered'))
+            .catch(e => console.log('⚠️ Service Worker registration skipped:', e.message));
+    });
+}
+</script>
 </body>
 </html>
