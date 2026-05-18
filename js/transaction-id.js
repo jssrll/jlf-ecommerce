@@ -1,17 +1,15 @@
 // ========================================
 // TRANSACTION ID GENERATOR
-// Formats: JLF-ORDER #XXXXXXXX, JLF-RECHARGE #XXXXXXXX, etc.
 // ========================================
 
-// Generate a unique transaction ID
-function generateTransactionId(type, timestamp = null) {
-    const ts = timestamp ? new Date(timestamp) : new Date();
-    const year = ts.getFullYear();
-    const month = String(ts.getMonth() + 1).padStart(2, '0');
-    const day = String(ts.getDate()).padStart(2, '0');
-    const hours = String(ts.getHours()).padStart(2, '0');
-    const minutes = String(ts.getMinutes()).padStart(2, '0');
-    const seconds = String(ts.getSeconds()).padStart(2, '0');
+function generateTransactionId(type, timestamp) {
+    const date = timestamp ? new Date(timestamp) : new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
     
     // Generate random 6-digit number
     const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
@@ -78,7 +76,7 @@ function generateShortTransactionId(type, timestamp = null) {
 // Copy transaction ID to clipboard
 async function copyTransactionId(transactionId, buttonElement) {
     if (!transactionId) {
-        showToast("No transaction ID to copy", 1500);
+        if (typeof showToast === 'function') showToast("No transaction ID to copy", 1500);
         return;
     }
     
@@ -106,14 +104,14 @@ async function copyTransactionId(transactionId, buttonElement) {
             }, 2000);
         }
         
-        showToast(`✅ Copied: ${transactionId}`, 1500);
+        if (typeof showToast === 'function') showToast(`✅ Copied: ${transactionId}`, 1500);
         
         // Haptic feedback
         if (navigator.vibrate) navigator.vibrate(50);
         
     } catch (error) {
         console.error("Copy failed:", error);
-        showToast("Copy failed. Please try manually.", 1500);
+        if (typeof showToast === 'function') showToast("Copy failed. Please try manually.", 1500);
     }
 }
 

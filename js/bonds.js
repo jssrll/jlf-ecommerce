@@ -1,242 +1,170 @@
-// ============================================
-// JLF FIREWORKS - INVESTMENT MODULE
-// Readable, unminified version
-// ============================================
+// ========================================
+// BOND INVESTMENT FUNCTIONS
+// ========================================
 
-// Investment configuration
-const INVESTMENT_CONFIG = {
-    returnRate: 0.05,      // 5% return
-    durationDays: 180,     // 6 months
-    minAmount: 500,
-    name: 'Investment Option'
-};
-
-// Initialize investments from localStorage
 function loadInvestments() {
-    const investments = loadFromLocalStorage('jlf_investments', []);
-    AppState.investments = investments;
-    return investments;
+    const saved = localStorage.getItem('jlf_investments');
+    if (saved) {
+        try {
+            investments = JSON.parse(saved);
+        } catch(e) { investments = []; }
+    } else {
+        investments = [];
+    }
 }
 
-// Save investments to localStorage
-function saveInvestments(investments) {
-    saveToLocalStorage('jlf_investments', investments);
-    AppState.investments = investments;
+function saveInvestments() {
+    localStorage.setItem('jlf_investments', JSON.stringify(investments));
 }
 
-// Invest in investment option
-async function investInInvestmentOption() {
-    // Check if user is logged in
-    if (!isLoggedIn()) {
-        showToast('Please login first to invest');
-        openAccountModal();
+function checkMaturedInvestments() {
+    const now = new Date();
+    let anyMatured = false;
+    investments.forEach(inv => {
+        if (inv.status === 'Active' && new Date(inv.maturityDate) <= now) {
+            inv.status = 'Matured';
+            if (typeof addUserCredit === 'function') {
+                addUserCredit(inv.expectedReturn);
+            }
+            if (typeof showToast === 'function') {
+                showToast(`🎉 Investment matured! You received ₱${inv.expectedReturn}`, 3000);
+            }
+            anyMatured = true;
+        }
+    });
+    if (anyMatured) {
+        saveInvestments();
+        if (typeof loadTransactionHistory === 'function') loadTransactionHistory();
+    }
+}
+
+async function investInBondOption1() {
+    if (!currentUser || isAdmin) {
+        if (typeof showToast === 'function') showToast("Please login first", 1500);
+        if (typeof openAccountModal === 'function') openAccountModal();
         return;
     }
     
     const amountInput = document.getElementById('investmentAmount');
-    const amount = parseFloat(amountInput?.value);
+    const amount = amountInput ? parseFloat(amountInput.value) : 0;
     
-    // Validation
-    if (!amount || amount < INVESTMENT_CONFIG.minAmount) {
-        showToast(`Minimum investment amount is ₱${INVESTMENT_CONFIG.minAmount}`);
+    if (isNaN(amount) || amount < 500) {
+        if (typeof showToast === 'function') showToast("Minimum investment is ₱500", 1500);
         return;
     }
     
-    const currentUser = getCurrentUser();
-    const userBalance = currentUser.creditBalance || 0;
-    
-    if (amount > userBalance) {
-        showToast(`Insufficient balance. Your current balance is ${formatCurrency(userBalance)}`);
+    if (amount > (currentUser.balance || 0)) {
+        if (typeof showToast === 'function') showToast("Insufficient balance", 1500);
         return;
     }
     
-    // Calculate returns
-    const returnAmount = amount * INVESTMENT_CONFIG.returnRate;
-    const totalReturn = amount + returnAmount;
+    const expectedReturn = amount * 0.05;
     const maturityDate = new Date();
-    maturityDate.setDate(maturityDate.getDate() + INVESTMENT_CONFIG.durationDays);
+    maturityDate.setDate(maturityDate.getDate() + 180);
     
-    // Create investment record
-    const investment = {
-        id: generateId(),
-        userId: currentUser.accountId,
-        userName: currentUser.fullName,
-        amount: amount,
-        returnRate: INVESTMENT_CONFIG.returnRate,
-        returnAmount: returnAmount,
-        totalReturn: totalReturn,
-        startDate: new Date().toISOString(),
-        maturityDate: maturityDate.toISOString(),
-        durationDays: INVESTMENT_CONFIG.durationDays,
-        status: 'active', // active, matured, withdrawn
-        createdAt: new Date().toISOString()
-    };
-    
-    // Confirm investment
-    const confirmMsg = `Confirm Investment:
-    
-Amount: ${formatCurrency(amount)}
-Return Rate: ${INVESTMENT_CONFIG.returnRate * 100}%
-Return Amount: ${formatCurrency(returnAmount)}
-Total Return: ${formatCurrency(totalReturn)}
-Duration: ${INVESTMENT_CONFIG.durationDays} days
-Maturity Date: ${maturityDate.toLocaleDateString()}
-
-Investment will be deducted from your balance now.
-Returns will be credited at maturity.
-
-Proceed?`;
-    
-    if (!confirm(confirmMsg)) {
-        return;
-    }
-    
-    // Disable button and show loading
-    const button = event?.target;
-    const originalText = button?.innerHTML;
-    if (button) {
-        button.disabled = true;
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    const btn = event ? event.target : null;
+    const originalText = btn ? btn.innerHTML : 'Invest';
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
     }
     
     try {
-        // Deduct amount from user balance
-        const users = loadFromLocalStorage('jlf_users', []);
-        const userIndex = users.findIndex(u => u.accountId === currentUser.accountId);
+        // Deduct balance first
+        const balanceFormData = new URLSearchParams();
+        balanceFormData.append("action", "updateBalance");
+        balanceFormData.append("phone", currentUser.phone);
+        balanceFormData.append("amount", amount);
+        balanceFormData.append("operation", "deduct");
         
-        if (userIndex !== -1) {
-            users[userIndex].creditBalance = (users[userIndex].creditBalance || 0) - amount;
-            saveToLocalStorage('jlf_users', users);
+        const balanceResponse = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: balanceFormData });
+        const balanceResult = await balanceResponse.json();
+        
+        if (!balanceResult.success) {
+            if (typeof showToast === 'function') showToast(balanceResult.message || "Insufficient balance", 1500);
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+            return;
+        }
+        
+        // Record investment
+        const formData = new URLSearchParams();
+        formData.append("action", "addCreditInvestment");
+        formData.append("timestamp", new Date().toISOString());
+        formData.append("accountId", currentUser.id);
+        formData.append("fullName", currentUser.name);
+        formData.append("phone", currentUser.phone);
+        formData.append("investmentType", "5% Bond - 180 days");
+        formData.append("amount", amount);
+        formData.append("expectedReturn", expectedReturn);
+        formData.append("maturityDate", maturityDate.toISOString());
+        formData.append("status", "Active");
+        formData.append("durationDays", "180");
+        
+        const response = await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+            // Update local user balance
+            currentUser.balance = balanceResult.newBalance;
+            localStorage.setItem("nova_user", JSON.stringify(currentUser));
+            if (typeof updateAllBalanceDisplays === 'function') updateAllBalanceDisplays();
             
-            // Update current user
-            const updatedUser = users[userIndex];
-            localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-            AppState.currentUser = updatedUser;
-            
-            // Save investment
-            const investments = loadInvestments();
-            investments.push(investment);
-            saveInvestments(investments);
-            
-            // Add transaction record
-            addTransaction({
-                type: 'investment',
-                action: 'invest',
+            // Add to local investments array
+            investments.push({
+                type: '5% Bond',
                 amount: amount,
-                returnRate: INVESTMENT_CONFIG.returnRate,
-                maturityDate: investment.maturityDate,
-                investmentId: investment.id,
-                date: new Date().toISOString()
+                expectedReturn: expectedReturn,
+                maturityDate: maturityDate,
+                status: 'Active',
+                timestamp: new Date().toISOString()
             });
+            saveInvestments();
             
-            showToast(`Investment successful! ₱${amount.toFixed(2)} invested.`, 3000);
+            if (typeof showToast === 'function') {
+                showToast(`✅ Invested ₱${amount.toLocaleString()}! Expected return: ₱${expectedReturn.toLocaleString()}`, 4000);
+            }
             
             // Clear input
             if (amountInput) amountInput.value = '';
             
-            // Update UI
-            updateUserDisplay();
-            if (typeof updateProfileModal === 'function') updateProfileModal();
+            // Refresh transaction history
+            if (typeof loadTransactionHistory === 'function') setTimeout(loadTransactionHistory, 1000);
+        } else {
+            // Refund if investment recording failed
+            const refundFormData = new URLSearchParams();
+            refundFormData.append("action", "updateBalance");
+            refundFormData.append("phone", currentUser.phone);
+            refundFormData.append("amount", amount);
+            refundFormData.append("operation", "add");
+            await fetch(GOOGLE_SHEETS_URL, { method: "POST", body: refundFormData });
             
-            // Refresh orders page if open
-            if (document.getElementById('ordersPage')?.classList.contains('active')) {
-                if (typeof loadOrders === 'function') loadOrders();
-            }
+            if (typeof showToast === 'function') showToast("Investment failed. Please try again.", 2000);
         }
     } catch (error) {
-        console.error('Investment error:', error);
-        showToast('Investment failed. Please try again.');
+        console.error("Investment error:", error);
+        if (typeof showToast === 'function') showToast("Investment failed. Please try again.", 2000);
     } finally {
-        if (button) {
-            button.disabled = false;
-            button.innerHTML = originalText || 'Invest Now';
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
         }
     }
 }
 
-// Check for matured investments and process returns
-function checkMaturedInvestments() {
-    const investments = loadInvestments();
-    const users = loadFromLocalStorage('jlf_users', []);
-    let hasUpdates = false;
-    const now = new Date();
-    
-    for (const investment of investments) {
-        if (investment.status === 'active') {
-            const maturityDate = new Date(investment.maturityDate);
-            if (maturityDate <= now) {
-                // Investment has matured - add returns to user balance
-                const userIndex = users.findIndex(u => u.accountId === investment.userId);
-                if (userIndex !== -1) {
-                    users[userIndex].creditBalance = (users[userIndex].creditBalance || 0) + investment.totalReturn;
-                    investment.status = 'matured';
-                    investment.maturedDate = now.toISOString();
-                    hasUpdates = true;
-                    
-                    // Add transaction record for returns
-                    addTransaction({
-                        type: 'investment',
-                        action: 'matured',
-                        amount: investment.totalReturn,
-                        investmentId: investment.id,
-                        originalAmount: investment.amount,
-                        returnAmount: investment.returnAmount,
-                        date: now.toISOString()
-                    });
-                }
-            }
-        }
-    }
-    
-    if (hasUpdates) {
-        saveToLocalStorage('jlf_users', users);
-        saveInvestments(investments);
-        
-        // Update current user if logged in
-        const currentUser = getCurrentUser();
-        if (currentUser) {
-            const updatedUser = users.find(u => u.accountId === currentUser.accountId);
-            if (updatedUser) {
-                localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-                updateUserDisplay();
-            }
-        }
-        
-        showToast('You have matured investments! Returns have been added to your balance.', 5000);
-    }
+function investInInvestmentOption() {
+    investInBondOption1();
 }
 
-// Get user's active investments
-function getUserActiveInvestments(userId) {
-    const investments = loadInvestments();
-    return investments.filter(i => i.userId === userId && i.status === 'active');
-}
+// Initialize
+loadInvestments();
+setInterval(checkMaturedInvestments, 86400000); // Check daily
 
-// Get user's investment history
-function getUserInvestmentHistory(userId) {
-    const investments = loadInvestments();
-    return investments.filter(i => i.userId === userId).sort((a, b) => 
-        new Date(b.createdAt) - new Date(a.createdAt)
-    );
-}
-
-// Add transaction helper
-function addTransaction(transaction) {
-    const transactions = loadFromLocalStorage('jlf_transactions', []);
-    transactions.unshift({
-        ...transaction,
-        id: generateId(),
-        timestamp: new Date().toISOString()
-    });
-    saveToLocalStorage('jlf_transactions', transactions);
-}
-
-// Run maturity check on page load
-setTimeout(() => {
-    checkMaturedInvestments();
-}, 1000);
-
-// Run maturity check every hour
-setInterval(() => {
-    checkMaturedInvestments();
-}, 3600000);
+// Make functions global
+window.investInBondOption1 = investInBondOption1;
+window.investInInvestmentOption = investInInvestmentOption;
+window.loadInvestments = loadInvestments;
+window.saveInvestments = saveInvestments;
+window.checkMaturedInvestments = checkMaturedInvestments;

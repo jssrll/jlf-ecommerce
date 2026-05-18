@@ -128,21 +128,18 @@ function startLoyaltyAutoRefresh() {
 // ADMIN QR SCANNER FUNCTIONS - FIXED
 // ========================================
 
-let currentStream = null;
-let scanInterval = null;
-
 function startQrScanner() {
     const video = document.getElementById("qrVideo");
     const startBtn = document.getElementById("startScannerBtn");
     const stopBtn = document.getElementById("stopScannerBtn");
     
-    if (currentStream) {
+    if (qrCurrentStream) {
         stopQrScanner();
     }
     
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
         .then(stream => {
-            currentStream = stream;
+            qrCurrentStream = stream;
             video.srcObject = stream;
             video.play();
             
@@ -150,18 +147,18 @@ function startQrScanner() {
             if (stopBtn) stopBtn.style.display = "inline-block";
             
             startScanningInterval();
-            showToast("Camera started. Point at QR code.", 2000);
+            if (typeof showToast === 'function') showToast("Camera started. Point at QR code.", 2000);
         })
         .catch(err => {
             console.error("Camera error:", err);
-            showToast("Cannot access camera. Please check permissions.", 3000);
+            if (typeof showToast === 'function') showToast("Cannot access camera. Please check permissions.", 3000);
         });
 }
 
 function stopQrScanner() {
-    if (currentStream) {
-        currentStream.getTracks().forEach(track => track.stop());
-        currentStream = null;
+    if (qrCurrentStream) {
+        qrCurrentStream.getTracks().forEach(track => track.stop());
+        qrCurrentStream = null;
     }
     
     const video = document.getElementById("qrVideo");
@@ -173,16 +170,16 @@ function stopQrScanner() {
     if (startBtn) startBtn.style.display = "inline-block";
     if (stopBtn) stopBtn.style.display = "none";
     
-    if (scanInterval) {
-        clearInterval(scanInterval);
-        scanInterval = null;
+    if (qrScanInterval) {
+        clearInterval(qrScanInterval);
+        qrScanInterval = null;
     }
 }
 
 function startScanningInterval() {
-    if (scanInterval) clearInterval(scanInterval);
+    if (qrScanInterval) clearInterval(qrScanInterval);
     
-    scanInterval = setInterval(() => {
+    qrScanInterval = setInterval(() => {
         scanQRFromVideo();
     }, 1000);
 }
@@ -224,7 +221,7 @@ async function scanQRFromVideo() {
 async function processQrFileUpload(file) {
     if (!file) return;
     if (isProcessingScan) {
-        showToast("Please wait, processing previous scan...", 1500);
+        if (typeof showToast === 'function') showToast("Please wait, processing previous scan...", 1500);
         return;
     }
     
@@ -302,7 +299,7 @@ async function processQrScan(qrData) {
             
             if (currentUser && (currentUser.id === accountId || currentUser.phone === phone)) {
                 await loadUserLoyalty();
-                await refreshUserBalance();
+                if (typeof refreshUserBalance === 'function') refreshUserBalance();
             }
         } else {
             showScanResult(result.message || "Scan failed. User not found.", true);
@@ -365,6 +362,7 @@ function setupQrScannerUI() {
     const stopScannerBtn = document.getElementById("stopScannerBtn");
     const qrFileInput = document.getElementById("qrFileInput");
     const uploadArea = document.getElementById("uploadArea");
+    const chooseFileBtn = document.getElementById("chooseFileBtn");
     
     if (startScannerBtn) {
         startScannerBtn.removeEventListener('click', startQrScanner);
@@ -382,6 +380,10 @@ function setupQrScannerUI() {
         uploadArea.removeEventListener('click', handleUploadClick);
         uploadArea.addEventListener('click', handleUploadClick);
     }
+    if (chooseFileBtn) {
+        chooseFileBtn.removeEventListener('click', handleChooseFileClick);
+        chooseFileBtn.addEventListener('click', handleChooseFileClick);
+    }
 }
 
 function handleFileChange(e) {
@@ -393,9 +395,24 @@ function handleUploadClick() {
     if (qrFileInput) qrFileInput.click();
 }
 
+function handleChooseFileClick() {
+    const qrFileInput = document.getElementById("qrFileInput");
+    if (qrFileInput) qrFileInput.click();
+}
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         setupQrScannerUI();
     }, 500);
 });
+
+// Make functions global
+window.generateUserQRCode = generateUserQRCode;
+window.loadUserLoyalty = loadUserLoyalty;
+window.startLoyaltyAutoRefresh = startLoyaltyAutoRefresh;
+window.startQrScanner = startQrScanner;
+window.stopQrScanner = stopQrScanner;
+window.processQrFileUpload = processQrFileUpload;
+window.loadRecentScans = loadRecentScans;
+window.setupQrScannerUI = setupQrScannerUI;

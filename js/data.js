@@ -31,5 +31,11 @@ const products = [
   { id: 20, name: "dyn", category: "Others", price: 69, image: "🌊", description: "1 pcs per order" },
   { id: 21, name: "kbs", category: "Others", price: 69, image: "🌊", description: "1 pcs per order" },
   { id: 22, name: "el", category: "Others", price: 79, image: "🌊", description: "1 pcs per order" },
-  { id: 23, name: "al", category: "Others", price: 159, image: "🌊", description: "1 pcs per order" }
+  { id: 23, name: "al", category: "Others", price: 159, image: "🌊", description: "1 pcs per order" },
+  
+  // Mystery Box
+  { id: 9999, name: "🎁 Mystery Box", category: "Mystery", price: 499, image: "🎁", description: "Random product from our collection!" }
 ];
+
+// Make products available globally
+window.products = products;

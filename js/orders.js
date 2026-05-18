@@ -6,7 +6,39 @@
 let allTransactionsCache = [];
 let currentFilteredTransactions = [];
 
-// Load all transaction histories
+// ========================================
+// TRANSACTION ID HELPER (must be first)
+// ========================================
+
+function generateTransactionId(type, timestamp) {
+    const date = timestamp ? new Date(timestamp) : new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+    const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    const sequential = `${year}${month}${day}${hours}${minutes}${seconds}`;
+    
+    let prefix = '';
+    switch(type) {
+        case 'order': prefix = 'JLF-ORDER'; break;
+        case 'withdrawal': prefix = 'JLF-WITHDRAW'; break;
+        case 'recharge': prefix = 'JLF-RECHARGE'; break;
+        case 'investment': prefix = 'JLF-INVESTMENT'; break;
+        case 'redemption': prefix = 'JLF-REDEEM'; break;
+        default: prefix = 'JLF-TXN';
+    }
+    
+    return `${prefix}#${sequential}${randomNum.slice(0, 2)}`;
+}
+
+// ========================================
+// LOAD TRANSACTION HISTORY
+// ========================================
+
 async function loadTransactionHistory() {
     if (!currentUser || isAdmin) {
         // Clear transactions when logged out
@@ -183,18 +215,22 @@ async function loadTransactionHistory() {
         
         // Add filter functionality
         document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                filterTransactions(filter);
-            });
+            btn.removeEventListener('click', handleFilterClick);
+            btn.addEventListener('click', handleFilterClick);
         });
         
     } catch (error) {
         console.error("Load transaction history error:", error);
         container.innerHTML = `<div class="empty-orders"><i class="fas fa-exclamation-circle" style="font-size: 4rem; color: #e63946;"></i><p>Failed to load transactions. Error: ${error.message}</p><button class="btn-primary-apple" onclick="loadTransactionHistory()">Try Again</button></div>`;
     }
+}
+
+function handleFilterClick(e) {
+    const btn = e.currentTarget;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.getAttribute('data-filter');
+    filterTransactions(filter);
 }
 
 // Initialize virtual scrolling for transactions
@@ -246,8 +282,7 @@ function renderTransactionCard(t) {
     // Add Order Again button for completed orders
     let orderAgainHtml = '';
     if (t.type === 'order' && t.status === 'Completed' && t.orderList) {
-        // Escape the orderList for JSON
-        const orderListEscaped = t.orderList.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        const orderListEscaped = (t.orderList || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
         orderAgainHtml = `
             <button class="order-again-btn" onclick="orderAgainFromHistory('${orderListEscaped}', ${t.rawAmount || 0})">
                 <i class="fas fa-redo-alt"></i> Order Again
@@ -285,13 +320,13 @@ function renderTransactionCard(t) {
 // Order again from transaction history
 async function orderAgainFromHistory(orderListStr, totalAmount) {
     if (!currentUser || isAdmin) {
-        showToast("Please login to reorder", 1500);
-        openAccountModal();
+        if (typeof showToast === 'function') showToast("Please login to reorder", 1500);
+        if (typeof openAccountModal === 'function') openAccountModal();
         return;
     }
     
     if (!orderListStr) {
-        showToast("Cannot reorder: Order data missing", 1500);
+        if (typeof showToast === 'function') showToast("Cannot reorder: Order data missing", 1500);
         return;
     }
     
@@ -327,12 +362,12 @@ async function orderAgainFromHistory(orderListStr, totalAmount) {
         }
     } catch (e) {
         console.error("Error parsing order list:", e);
-        showToast("Cannot reorder: Invalid order format", 1500);
+        if (typeof showToast === 'function') showToast("Cannot reorder: Invalid order format", 1500);
         return;
     }
     
     if (itemsToAdd.length === 0) {
-        showToast("No items found to reorder", 1500);
+        if (typeof showToast === 'function') showToast("No items found to reorder", 1500);
         return;
     }
     
@@ -363,7 +398,7 @@ async function orderAgainFromHistory(orderListStr, totalAmount) {
     // Haptic feedback
     if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
     
-    showToast(`✅ Added ${addedCount} item(s) to cart!`, 2000);
+    if (typeof showToast === 'function') showToast(`✅ Added ${addedCount} item(s) to cart!`, 2000);
     
     // Open cart drawer to show items
     setTimeout(() => {
@@ -396,7 +431,7 @@ function filterTransactions(type) {
     initVirtualScroll(currentFilteredTransactions);
 }
 
-// Clear transaction history on logout (called from auth.js logout)
+// Clear transaction history on logout
 function clearTransactionHistory() {
     allTransactionsCache = [];
     currentFilteredTransactions = [];
@@ -445,3 +480,10 @@ function escapeHtml(str) {
         return m;
     });
 }
+
+// Make functions global
+window.loadTransactionHistory = loadTransactionHistory;
+window.clearTransactionHistory = clearTransactionHistory;
+window.orderAgainFromHistory = orderAgainFromHistory;
+window.filterTransactions = filterTransactions;
+window.generateTransactionId = generateTransactionId;
