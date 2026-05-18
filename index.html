@@ -813,16 +813,14 @@ function showToast(message) {
 
 function closeCartDrawer() {
     document.getElementById('cartDrawer').classList.remove('open');
-    document.getElementById('cartOverlay').classList.remove('active');
+    document.getElementById('cartOverlay').classList.remove('open');
 }
 
 function checkout() {
-    if(localStorage.getItem('loggedInUser')) {
-        if(typeof window.processCheckout === 'function') window.processCheckout();
-        else showToast('Checkout feature coming soon');
+    if (typeof placeOrder === 'function') {
+        placeOrder();
     } else {
-        showToast('Please login first');
-        openAccountModal();
+        showToast('Checkout unavailable. Please refresh.');
     }
 }
 
