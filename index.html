@@ -281,7 +281,6 @@
     </div>
     
     <div class="settings-container">
-      <!-- Account Settings -->
       <div class="settings-section">
         <div class="settings-section-header">
           <i class="fas fa-user-cog"></i>
@@ -296,7 +295,6 @@
             </div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
-          
           <div class="settings-item" onclick="openUpdateProfile()">
             <div class="settings-item-icon"><i class="fas fa-user-edit"></i></div>
             <div class="settings-item-content">
@@ -308,7 +306,6 @@
         </div>
       </div>
 
-      <!-- Notification Settings -->
       <div class="settings-section">
         <div class="settings-section-header">
           <i class="fas fa-bell"></i>
@@ -328,7 +325,6 @@
               </label>
             </div>
           </div>
-          
           <div class="settings-item toggle-item">
             <div class="settings-item-icon"><i class="fas fa-envelope"></i></div>
             <div class="settings-item-content">
@@ -345,7 +341,6 @@
         </div>
       </div>
 
-      <!-- App Settings -->
       <div class="settings-section">
         <div class="settings-section-header">
           <i class="fas fa-mobile-alt"></i>
@@ -360,7 +355,6 @@
             </div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
-          
           <div class="settings-item" onclick="openAboutPage()">
             <div class="settings-item-icon"><i class="fas fa-info-circle"></i></div>
             <div class="settings-item-content">
@@ -369,7 +363,6 @@
             </div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
-          
           <div class="settings-item" onclick="reportBug()">
             <div class="settings-item-icon"><i class="fas fa-bug"></i></div>
             <div class="settings-item-content">
@@ -381,7 +374,6 @@
         </div>
       </div>
 
-      <!-- Privacy & Security -->
       <div class="settings-section">
         <div class="settings-section-header">
           <i class="fas fa-shield-alt"></i>
@@ -396,7 +388,6 @@
             </div>
             <div class="settings-item-arrow"><i class="fas fa-chevron-right"></i></div>
           </div>
-          
           <div class="settings-item" onclick="openTermsOfService()">
             <div class="settings-item-icon"><i class="fas fa-file-contract"></i></div>
             <div class="settings-item-content">
@@ -408,7 +399,6 @@
         </div>
       </div>
 
-      <!-- Danger Zone -->
       <div class="settings-section danger-zone">
         <div class="settings-section-header">
           <i class="fas fa-exclamation-triangle"></i>
@@ -428,7 +418,7 @@
     </div>
   </div>
 
-  <!-- ADMIN PAGE (condensed for brevity - same as before) -->
+  <!-- ADMIN PAGE -->
   <div id="adminPage" class="page">
     <div class="page-hero">
       <h1><i class="fas fa-code"></i> Admin Dashboard</h1>
@@ -469,7 +459,8 @@
       <div class="support-card-apple"><i class="fas fa-envelope"></i><h3>Email Support</h3><p>jlfworks.official@gmail.com</p><button class="btn-secondary-apple" onclick="sendEmail()">Send Email</button></div>
     </div>
 
-    <div class="faq-section-apple"><h2>Frequently Asked Questions</h2>
+    <div class="faq-section-apple">
+      <h2>Frequently Asked Questions</h2>
       <div class="faq-list-apple">
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I place an order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">To place an order, simply browse our Shop page, add your desired fireworks to the cart, and proceed to checkout.</div></div>
         <div class="faq-item-apple"><div class="faq-question-apple" onclick="toggleFAQ(this)"><span>How do I track my order?</span><i class="fas fa-chevron-down"></i></div><div class="faq-answer-apple">You can track your order in the Orders page after logging into your account.</div></div>
@@ -481,20 +472,108 @@
 
 <footer><p>© 2024 JLF Fireworks — Quality Is Our Top Priority</p></footer>
 
-<!-- All Modals (Account, Profile, Announcement, Recharge, Withdraw) -->
-<!-- Same modal structures as before - removed inline styles -->
+<!-- MODALS -->
+<div id="accountModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><h2>Account</h2><button class="close-modal" onclick="closeAccountModal()">&times;</button></div>
+    <div class="modal-tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('register')">Create Account</button>
+    </div>
+    <div id="loginTab" class="tab-content active">
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" placeholder="9XXXXXXXXX" required></div>
+        <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter your password" required></div>
+        <button type="submit" class="btn-primary-apple full-width">Login</button>
+      </form>
+    </div>
+    <div id="registerTab" class="tab-content">
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group"><label>Full Name</label><input type="text" id="regFullName" placeholder="Enter your full name" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="regPhone" placeholder="9XXXXXXXXX" required></div>
+        <div class="form-group"><label>Password</label><input type="password" id="regPassword" placeholder="Create a password" required></div>
+        <div class="form-group"><label>Confirm Password</label><input type="password" id="regConfirmPassword" placeholder="Confirm your password" required></div>
+        <button type="submit" class="btn-primary-apple full-width">Create Account</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-<div id="accountModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>Account</h2><button class="close-modal" onclick="closeAccountModal()">&times;</button></div><div class="modal-tabs"><button class="tab-btn active" onclick="switchTab('login')">Login</button><button class="tab-btn" onclick="switchTab('register')">Create Account</button></div><div id="loginTab" class="tab-content active"><form id="loginForm" onsubmit="handleLogin(event)"><div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" placeholder="9XXXXXXXXX" required></div><div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter your password" required></div><button type="submit" class="btn-primary-apple full-width">Login</button></form></div><div id="registerTab" class="tab-content"><form id="registerForm" onsubmit="handleRegister(event)"><div class="form-group"><label>Full Name</label><input type="text" id="regFullName" placeholder="Enter your full name" required></div><div class="form-group"><label>Phone Number</label><input type="tel" id="regPhone" placeholder="9XXXXXXXXX" required></div><div class="form-group"><label>Password</label><input type="password" id="regPassword" placeholder="Create a password" required></div><div class="form-group"><label>Confirm Password</label><input type="password" id="regConfirmPassword" placeholder="Confirm your password" required></div><button type="submit" class="btn-primary-apple full-width">Create Account</button></form></div></div></div>
+<div id="profileModal" class="modal">
+  <div class="modal-content profile-modal">
+    <div class="modal-header"><h2><i class="fas fa-user-circle"></i> My Profile</h2><button class="close-modal" onclick="closeProfileModal()">&times;</button></div>
+    <div class="profile-content">
+      <div class="profile-avatar"><i class="fas fa-user-circle"></i></div>
+      <div class="profile-info">
+        <div class="info-row"><span class="info-label">Full Name:</span><span class="info-value" id="profileName">-</span></div>
+        <div class="info-row"><span class="info-label">Account ID:</span><span class="info-value" id="profileId">-</span></div>
+        <div class="info-row"><span class="info-label">Phone Number:</span><span class="info-value" id="profilePhone">-</span></div>
+        <div class="info-row"><span class="info-label">Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div>
+      </div>
+      <div class="loyalty-section">
+        <div class="loyalty-header"><i class="fas fa-qrcode"></i><h3>My Loyalty QR Code</h3></div>
+        <div id="qrCodeContainer" class="qr-code-container"></div>
+      </div>
+      <button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+</div>
 
-<div id="profileModal" class="modal"><div class="modal-content profile-modal"><div class="modal-header"><h2><i class="fas fa-user-circle"></i> My Profile</h2><button class="close-modal" onclick="closeProfileModal()">&times;</button></div><div class="profile-content"><div class="profile-avatar"><i class="fas fa-user-circle"></i></div><div class="profile-info"><div class="info-row"><span class="info-label">Full Name:</span><span class="info-value" id="profileName">-</span></div><div class="info-row"><span class="info-label">Account ID:</span><span class="info-value" id="profileId">-</span></div><div class="info-row"><span class="info-label">Phone Number:</span><span class="info-value" id="profilePhone">-</span></div><div class="info-row"><span class="info-label">Credit Balance:</span><span class="info-value" id="profileBalance">₱0</span></div></div><div class="loyalty-section"><div class="loyalty-header"><i class="fas fa-qrcode"></i><h3>My Loyalty QR Code</h3></div><div id="qrCodeContainer" class="qr-code-container"></div></div><button class="btn-secondary-apple logout-profile-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></div></div>
+<div id="announcementModal" class="modal">
+  <div class="modal-content announcement-modal">
+    <div class="modal-header"><h2><i class="fas fa-bullhorn"></i> Announcements</h2><button class="close-modal" onclick="closeAnnouncementModal()">&times;</button></div>
+    <div class="announcement-container" id="announcementContainer"></div>
+  </div>
+</div>
 
-<div id="announcementModal" class="modal"><div class="modal-content announcement-modal"><div class="modal-header"><h2><i class="fas fa-bullhorn"></i> Announcements</h2><button class="close-modal" onclick="closeAnnouncementModal()">&times;</button></div><div class="announcement-container" id="announcementContainer"></div></div></div>
+<div id="rechargeModal" class="modal">
+  <div class="modal-content recharge-modal">
+    <div class="modal-header"><h2><i class="fas fa-wallet"></i> Recharge Balance</h2><button class="close-modal" onclick="closeRechargeModal()">&times;</button></div>
+    <div class="recharge-content">
+      <div class="recharge-tabs">
+        <button class="recharge-tab-btn active" onclick="switchRechargeTab('gcash')">GCash</button>
+        <button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button>
+      </div>
+      <div id="gcashTab" class="recharge-tab active">
+        <div class="qr-container">
+          <img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code">
+        </div>
+        <div class="recharge-form">
+          <button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button>
+        </div>
+      </div>
+      <div id="cashTab" class="recharge-tab">
+        <div class="recharge-form">
+          <button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div id="rechargeModal" class="modal"><div class="modal-content recharge-modal"><div class="modal-header"><h2><i class="fas fa-wallet"></i> Recharge Balance</h2><button class="close-modal" onclick="closeRechargeModal()">&times;</button></div><div class="recharge-content"><div class="recharge-tabs"><button class="recharge-tab-btn active" onclick="switchRechargeTab('gcash')">GCash</button><button class="recharge-tab-btn" onclick="switchRechargeTab('cash')">Cash</button></div><div id="gcashTab" class="recharge-tab active"><div class="qr-container"><img src="https://ik.imagekit.io/0sf7uub8b/Ecommerce/JLF/GCash%20QR%20Code?updatedAt=1774973526486" alt="GCash QR Code" class="qr-code"></div><div class="recharge-form"><button class="btn-primary-apple full-width" onclick="submitRecharge('gcash')">Submit Recharge Request</button></div></div><div id="cashTab" class="recharge-tab"><div class="recharge-form"><button class="btn-primary-apple full-width" onclick="submitRecharge('cash')">Submit Recharge Request</button></div></div></div></div></div>
+<div id="withdrawModal" class="modal">
+  <div class="modal-content withdraw-modal">
+    <div class="modal-header"><h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2><button class="close-modal" onclick="closeWithdrawModal()">&times;</button></div>
+    <div class="withdraw-content">
+      <div class="withdraw-tabs">
+        <button class="withdraw-tab-btn active" onclick="switchWithdrawTab('gcash')">GCash</button>
+        <button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button>
+      </div>
+      <div id="withdrawGcashTab" class="withdraw-tab active">
+        <div class="withdraw-form">
+          <button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button>
+        </div>
+      </div>
+      <div id="withdrawCashTab" class="withdraw-tab">
+        <div class="withdraw-form">
+          <button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div id="withdrawModal" class="modal"><div class="modal-content withdraw-modal"><div class="modal-header"><h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2><button class="close-modal" onclick="closeWithdrawModal()">&times;</button></div><div class="withdraw-content"><div class="withdraw-tabs"><button class="withdraw-tab-btn active" onclick="switchWithdrawTab('gcash')">GCash</button><button class="withdraw-tab-btn" onclick="switchWithdrawTab('cash')">Cash</button></div><div id="withdrawGcashTab" class="withdraw-tab active"><div class="withdraw-form"><button class="btn-primary-apple full-width" onclick="submitWithdraw('gcash')">Submit Withdrawal Request</button></div></div><div id="withdrawCashTab" class="withdraw-tab"><div class="withdraw-form"><button class="btn-primary-apple full-width" onclick="submitWithdraw('cash')">Submit Withdrawal Request</button></div></div></div></div></div>
-
-<!-- Cart Sidebar -->
+<!-- CART SIDEBAR -->
 <div id="cartOverlay" class="cart-overlay" onclick="closeCartDrawer()"></div>
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-header">
@@ -516,9 +595,16 @@
 </div>
 
 <div id="toastMsg" class="toast-msg">Item added to cart</div>
-<div id="downloadPopup" class="download-popup" style="display: none;"><div class="download-popup-content"><button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button><div class="download-popup-icon"><i class="fas fa-fire"></i></div><h3>Install JLF Fireworks App</h3><button class="download-btn-primary" id="installAppBtn"><i class="fas fa-download"></i> Install App</button></div></div>
+<div id="downloadPopup" class="download-popup" style="display: none;">
+  <div class="download-popup-content">
+    <button class="download-popup-close" onclick="closeDownloadPopup()">&times;</button>
+    <div class="download-popup-icon"><i class="fas fa-fire"></i></div>
+    <h3>Install JLF Fireworks App</h3>
+    <button class="download-btn-primary" id="installAppBtn"><i class="fas fa-download"></i> Install App</button>
+  </div>
+</div>
 
-<!-- Scripts -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 
@@ -550,44 +636,131 @@
 <script src="js/app.js"></script>
 
 <script>
-// Settings page JavaScript functions
-function openChangePassword() { showToast('Password change feature coming soon'); }
-function openUpdateProfile() { showToast('Profile update feature coming soon'); }
-function clearAppCache() {
-    if('caches' in window) { caches.keys().then(function(names) { for(let name of names) caches.delete(name); }); }
-    localStorage.clear();
-    showToast('Cache cleared successfully');
-    setTimeout(() => location.reload(), 1500);
-}
-function openAboutPage() { showToast('JLF Fireworks v1.0.0'); }
-function reportBug() { showToast('Report a bug - Contact support at jlfworks.official@gmail.com'); }
-function openPrivacyPolicy() { showToast('Privacy policy available on request'); }
-function openTermsOfService() { showToast('Terms of service available on request'); }
-function confirmDeleteAccount() {
-    if(confirm('⚠️ WARNING: This action is permanent! Are you sure?')) {
-        let confirmation = prompt('Type "CONFIRM" to delete your account:');
-        if(confirmation === 'CONFIRM') { showToast('Account deletion request submitted to admin'); }
+// ============================================
+// ACCOUNT/PROFILE CLICK FIX
+// ============================================
+(function() {
+    window.openAccountModal = function() {
+        const modal = document.getElementById('accountModal');
+        if (modal) modal.style.display = 'flex';
+    };
+    
+    window.openProfileModal = function() {
+        const modal = document.getElementById('profileModal');
+        if (modal) modal.style.display = 'flex';
+    };
+    
+    window.loadUserProfile = function() {
+        try {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser && currentUser !== 'undefined') {
+                const user = JSON.parse(currentUser);
+                const nameEl = document.getElementById('profileName');
+                const idEl = document.getElementById('profileId');
+                const phoneEl = document.getElementById('profilePhone');
+                const balanceEl = document.getElementById('profileBalance');
+                
+                if (nameEl) nameEl.textContent = user.fullName || user.name || '-';
+                if (idEl) idEl.textContent = user.accountId || user.id || '-';
+                if (phoneEl) phoneEl.textContent = user.phone || '-';
+                if (balanceEl) balanceEl.textContent = '₱' + (user.balance || 0).toLocaleString();
+            }
+        } catch(e) { console.log('Profile load error:', e); }
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const accountIcon = document.getElementById('accountIcon');
+        if (accountIcon) {
+            const newIcon = accountIcon.cloneNode(true);
+            accountIcon.parentNode.replaceChild(newIcon, accountIcon);
+            
+            newIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Account icon clicked');
+                const currentUser = localStorage.getItem('currentUser');
+                if (currentUser && currentUser !== 'undefined') {
+                    try {
+                        const user = JSON.parse(currentUser);
+                        if (user && user.accountId) {
+                            window.loadUserProfile();
+                            window.openProfileModal();
+                        } else {
+                            window.openAccountModal();
+                        }
+                    } catch(e) { window.openAccountModal(); }
+                } else {
+                    window.openAccountModal();
+                }
+            });
+        }
+        
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        if (userNameDisplay) {
+            userNameDisplay.style.cursor = 'pointer';
+            userNameDisplay.addEventListener('click', function() {
+                const icon = document.getElementById('accountIcon');
+                if (icon) icon.click();
+            });
+        }
+    });
+})();
+
+// Modal close functions
+function closeAccountModal() { const m = document.getElementById('accountModal'); if(m) m.style.display = 'none'; }
+function closeProfileModal() { const m = document.getElementById('profileModal'); if(m) m.style.display = 'none'; }
+function closeAnnouncementModal() { const m = document.getElementById('announcementModal'); if(m) m.style.display = 'none'; }
+function closeRechargeModal() { const m = document.getElementById('rechargeModal'); if(m) m.style.display = 'none'; }
+function closeWithdrawModal() { const m = document.getElementById('withdrawModal'); if(m) m.style.display = 'none'; }
+
+document.addEventListener('click', function(e) {
+    if (e.target.classList && e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
     }
-}
-function showToast(message) {
+});
+
+// Utility functions
+function showToast(msg) {
     let toast = document.getElementById('toastMsg');
     if(!toast) { toast = document.createElement('div'); toast.id = 'toastMsg'; toast.className = 'toast-msg'; document.body.appendChild(toast); }
-    toast.textContent = message;
+    toast.textContent = msg;
     toast.style.display = 'block';
     setTimeout(() => toast.style.display = 'none', 3000);
 }
+
 function closeCartDrawer() {
     document.getElementById('cartDrawer')?.classList.remove('open');
     document.getElementById('cartOverlay')?.classList.remove('active');
 }
+
 function checkout() { showToast('Please login to checkout'); }
+
+function openChangePassword() { showToast('Password change feature coming soon'); }
+function openUpdateProfile() { showToast('Profile update feature coming soon'); }
+function openAboutPage() { showToast('JLF Fireworks v1.0.0'); }
+function reportBug() { showToast('Contact support: jlfworks.official@gmail.com'); }
+function openPrivacyPolicy() { showToast('Privacy policy available on request'); }
+function openTermsOfService() { showToast('Terms of service available on request'); }
+
+function clearAppCache() {
+    if('caches' in window) { caches.keys().then(names => { for(let name of names) caches.delete(name); }); }
+    localStorage.clear();
+    showToast('Cache cleared');
+    setTimeout(() => location.reload(), 1500);
+}
+
+function confirmDeleteAccount() {
+    if(confirm('⚠️ Permanently delete your account?')) {
+        if(prompt('Type "CONFIRM" to delete:') === 'CONFIRM') showToast('Account deletion requested');
+    }
+}
 
 // Save notification preferences
 document.addEventListener('DOMContentLoaded', function() {
     const pushToggle = document.getElementById('pushNotificationsToggle');
     const emailToggle = document.getElementById('emailNotificationsToggle');
-    if(pushToggle) { pushToggle.addEventListener('change', function() { localStorage.setItem('pushNotifications', this.checked); showToast(this.checked ? 'Push notifications enabled' : 'Push notifications disabled'); }); }
-    if(emailToggle) { emailToggle.addEventListener('change', function() { localStorage.setItem('emailNotifications', this.checked); showToast(this.checked ? 'Email notifications enabled' : 'Email notifications disabled'); }); }
+    if(pushToggle) pushToggle.addEventListener('change', function() { localStorage.setItem('pushNotifications', this.checked); showToast(this.checked ? 'Push notifications enabled' : 'Push notifications disabled'); });
+    if(emailToggle) emailToggle.addEventListener('change', function() { localStorage.setItem('emailNotifications', this.checked); showToast(this.checked ? 'Email notifications enabled' : 'Email notifications disabled'); });
 });
 
 // QR Scanner tab fix
@@ -608,6 +781,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })();
 
+// Service Worker
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('/sw.js').catch(e => console.log('SW skip:', e.message)); }); }
 </script>
 </body>
